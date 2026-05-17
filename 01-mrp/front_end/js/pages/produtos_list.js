@@ -44,6 +44,12 @@ function buildAtaFiltroKey(produto) {
     return `${arpKey}__${ataKey}`;
 }
 
+function buildOrigemAtaLabel(produto) {
+    const origem = produto.ata_origem || produto.origem_ata || produto.cliente || produto.orgao || "";
+    const ataLabel = `${produto.arp || ""} ${produto.ata_numero || ""}`.trim();
+    return origem ? `${ataLabel} (${origem})` : ataLabel;
+}
+
 function initFiltros() {
     const inputPesquisa = document.getElementById("filtroPesquisa");
     const selectAta = document.getElementById("filtroAta");
@@ -104,7 +110,7 @@ function popularFiltros(produtos) {
 
     produtos.forEach((produto) => {
         const ataKey = buildAtaFiltroKey(produto);
-        const ataLabel = `${produto.arp || ""} ${produto.ata_numero || ""}`.trim();
+        const ataLabel = buildOrigemAtaLabel(produto);
         if (ataLabel && !atasMap.has(ataKey)) atasMap.set(ataKey, ataLabel);
 
         if (produto.empresa) empresasSet.add(produto.empresa);
@@ -112,7 +118,7 @@ function popularFiltros(produtos) {
     });
 
     if (selectAta) {
-        setSelectOptions(selectAta, [{ value: "", label: "Todas as ATAs" }].concat(
+        setSelectOptions(selectAta, [{ value: "", label: "Todas as ATAs/Origens" }].concat(
             [...atasMap.entries()].map(([value, label]) => ({ value, label }))
         ));
     }
@@ -152,6 +158,10 @@ function aplicarFiltros(produtos) {
             produto.nome_oficial,
             produto.arp,
             produto.ata_numero,
+            produto.ata_origem,
+            produto.origem_ata,
+            produto.cliente,
+            produto.orgao,
             produto.empresa,
             produto.item_ata,
             produto.produto_key

@@ -38,3 +38,12 @@ MRP_LOCAL será inicialmente uma camada visual, organizacional e futura camada d
 ```
 
 Status da estrutura: DEFINIDO em v0.1.002.
+
+## Atualizacao v0.1.027
+
+- Dominio de empresas corrigido para: JPL, AÇO e TCR.
+- GOV. RIO reclassificado para dominio de ATA/origem/cliente/orgao.
+- TCR mantido como empresa valida futura, sem dados operacionais.
+- Nenhum backend criado.
+- Nenhuma persistencia real implementada.
+- Alteracao restrita ao CRM visual/seed/config/documentacao.

@@ -141,3 +141,9 @@ config/perfis/PRODUCAO_TRABALHO.json
 ```
 
 Motores futuros devem ficar desacoplados de interface e infraestrutura.
+
+## Dominio de dados operacionais
+
+- EMPRESA representa somente dominio interno operacional: `JPL`, `AÇO`, `TCR`.
+- `GOV. RIO` nao pertence ao dominio EMPRESA; deve ficar em campos de cliente/orgao/origem de ata.
+- Filtros de interface devem manter separacao entre `EMPRESA` e `ATA/ORIGEM`.

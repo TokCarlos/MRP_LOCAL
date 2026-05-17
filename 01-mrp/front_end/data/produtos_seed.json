@@ -1,4 +1,4 @@
-﻿[
+[
     {
         "id":  1,
         "produto_key":  "JPL__CIM_JEQUI__07_2023__ITEM_001",
@@ -2941,9 +2941,9 @@
     },
     {
         "id":  148,
-        "produto_key":  "GOV_RIO__ATA_GOV_RIO__114443801_2025__ITEM_1_1",
-        "empresa":  "GOV. RIO",
-        "empresa_key":  "gov_rio",
+        "produto_key":  "ACO__ATA_GOV_RIO__114443801_2025__ITEM_1_1",
+        "empresa":  "AÇO",
+        "empresa_key":  "aco",
         "arp":  "ATA GOV. RIO",
         "arp_key":  "ata_gov_rio",
         "ata_numero":  "114443801/2025",
@@ -2957,13 +2957,21 @@
                        "preview":  "assets/produtos/gov_rio/ata_gov_rio/safe/gov_rio_1_1_central_multipla_inox.png",
                        "status":  "REAL_ATA"
                    },
-        "status":  "ATIVO"
+        "status":  "ATIVO",
+        "ata_origem_key":  "gov_rio",
+        "cliente_key":  "gov_rio",
+        "origem_ata_key":  "gov_rio",
+        "origem_ata":  "GOV. RIO",
+        "orgao":  "GOV. RIO",
+        "cliente":  "GOV. RIO",
+        "ata_origem":  "GOV. RIO",
+        "orgao_key":  "gov_rio"
     },
     {
         "id":  149,
-        "produto_key":  "GOV_RIO__ATA_GOV_RIO__114443801_2025__ITEM_1_2",
-        "empresa":  "GOV. RIO",
-        "empresa_key":  "gov_rio",
+        "produto_key":  "ACO__ATA_GOV_RIO__114443801_2025__ITEM_1_2",
+        "empresa":  "AÇO",
+        "empresa_key":  "aco",
         "arp":  "ATA GOV. RIO",
         "arp_key":  "ata_gov_rio",
         "ata_numero":  "114443801/2025",
@@ -2977,13 +2985,21 @@
                        "preview":  "assets/produtos/gov_rio/ata_gov_rio/safe/gov_rio_1_2_prancha_abdominal_inox.png",
                        "status":  "REAL_ATA"
                    },
-        "status":  "ATIVO"
+        "status":  "ATIVO",
+        "ata_origem_key":  "gov_rio",
+        "cliente_key":  "gov_rio",
+        "origem_ata_key":  "gov_rio",
+        "origem_ata":  "GOV. RIO",
+        "orgao":  "GOV. RIO",
+        "cliente":  "GOV. RIO",
+        "ata_origem":  "GOV. RIO",
+        "orgao_key":  "gov_rio"
     },
     {
         "id":  150,
-        "produto_key":  "GOV_RIO__ATA_GOV_RIO__114443801_2025__ITEM_1_3",
-        "empresa":  "GOV. RIO",
-        "empresa_key":  "gov_rio",
+        "produto_key":  "ACO__ATA_GOV_RIO__114443801_2025__ITEM_1_3",
+        "empresa":  "AÇO",
+        "empresa_key":  "aco",
         "arp":  "ATA GOV. RIO",
         "arp_key":  "ata_gov_rio",
         "ata_numero":  "114443801/2025",
@@ -2997,13 +3013,21 @@
                        "preview":  "assets/produtos/gov_rio/ata_gov_rio/safe/gov_rio_1_3_bicicletario_inox.png",
                        "status":  "REAL_ATA"
                    },
-        "status":  "ATIVO"
+        "status":  "ATIVO",
+        "ata_origem_key":  "gov_rio",
+        "cliente_key":  "gov_rio",
+        "origem_ata_key":  "gov_rio",
+        "origem_ata":  "GOV. RIO",
+        "orgao":  "GOV. RIO",
+        "cliente":  "GOV. RIO",
+        "ata_origem":  "GOV. RIO",
+        "orgao_key":  "gov_rio"
     },
     {
         "id":  151,
-        "produto_key":  "GOV_RIO__ATA_GOV_RIO__114443801_2025__ITEM_2_1",
-        "empresa":  "GOV. RIO",
-        "empresa_key":  "gov_rio",
+        "produto_key":  "ACO__ATA_GOV_RIO__114443801_2025__ITEM_2_1",
+        "empresa":  "AÇO",
+        "empresa_key":  "aco",
         "arp":  "ATA GOV. RIO",
         "arp_key":  "ata_gov_rio",
         "ata_numero":  "114443801/2025",
@@ -3017,13 +3041,21 @@
                        "preview":  "assets/produtos/gov_rio/ata_gov_rio/safe/gov_rio_2_1_esqui.png",
                        "status":  "REAL_ATA"
                    },
-        "status":  "ATIVO"
+        "status":  "ATIVO",
+        "ata_origem_key":  "gov_rio",
+        "cliente_key":  "gov_rio",
+        "origem_ata_key":  "gov_rio",
+        "origem_ata":  "GOV. RIO",
+        "orgao":  "GOV. RIO",
+        "cliente":  "GOV. RIO",
+        "ata_origem":  "GOV. RIO",
+        "orgao_key":  "gov_rio"
     },
     {
         "id":  152,
-        "produto_key":  "GOV_RIO__ATA_GOV_RIO__114443801_2025__ITEM_2_2",
-        "empresa":  "GOV. RIO",
-        "empresa_key":  "gov_rio",
+        "produto_key":  "ACO__ATA_GOV_RIO__114443801_2025__ITEM_2_2",
+        "empresa":  "AÇO",
+        "empresa_key":  "aco",
         "arp":  "ATA GOV. RIO",
         "arp_key":  "ata_gov_rio",
         "ata_numero":  "114443801/2025",
@@ -3037,13 +3069,21 @@
                        "preview":  "assets/produtos/gov_rio/ata_gov_rio/safe/gov_rio_2_2_caminhada.png",
                        "status":  "REAL_ATA"
                    },
-        "status":  "ATIVO"
+        "status":  "ATIVO",
+        "ata_origem_key":  "gov_rio",
+        "cliente_key":  "gov_rio",
+        "origem_ata_key":  "gov_rio",
+        "origem_ata":  "GOV. RIO",
+        "orgao":  "GOV. RIO",
+        "cliente":  "GOV. RIO",
+        "ata_origem":  "GOV. RIO",
+        "orgao_key":  "gov_rio"
     },
     {
         "id":  153,
-        "produto_key":  "GOV_RIO__ATA_GOV_RIO__114443801_2025__ITEM_2_3",
-        "empresa":  "GOV. RIO",
-        "empresa_key":  "gov_rio",
+        "produto_key":  "ACO__ATA_GOV_RIO__114443801_2025__ITEM_2_3",
+        "empresa":  "AÇO",
+        "empresa_key":  "aco",
         "arp":  "ATA GOV. RIO",
         "arp_key":  "ata_gov_rio",
         "ata_numero":  "114443801/2025",
@@ -3057,13 +3097,21 @@
                        "preview":  "assets/produtos/gov_rio/ata_gov_rio/safe/gov_rio_2_3_multi.png",
                        "status":  "REAL_ATA"
                    },
-        "status":  "ATIVO"
+        "status":  "ATIVO",
+        "ata_origem_key":  "gov_rio",
+        "cliente_key":  "gov_rio",
+        "origem_ata_key":  "gov_rio",
+        "origem_ata":  "GOV. RIO",
+        "orgao":  "GOV. RIO",
+        "cliente":  "GOV. RIO",
+        "ata_origem":  "GOV. RIO",
+        "orgao_key":  "gov_rio"
     },
     {
         "id":  154,
-        "produto_key":  "GOV_RIO__ATA_GOV_RIO__114443801_2025__ITEM_2_4",
-        "empresa":  "GOV. RIO",
-        "empresa_key":  "gov_rio",
+        "produto_key":  "ACO__ATA_GOV_RIO__114443801_2025__ITEM_2_4",
+        "empresa":  "AÇO",
+        "empresa_key":  "aco",
         "arp":  "ATA GOV. RIO",
         "arp_key":  "ata_gov_rio",
         "ata_numero":  "114443801/2025",
@@ -3077,13 +3125,21 @@
                        "preview":  "assets/produtos/gov_rio/ata_gov_rio/safe/gov_rio_2_4_transport.png",
                        "status":  "REAL_ATA"
                    },
-        "status":  "ATIVO"
+        "status":  "ATIVO",
+        "ata_origem_key":  "gov_rio",
+        "cliente_key":  "gov_rio",
+        "origem_ata_key":  "gov_rio",
+        "origem_ata":  "GOV. RIO",
+        "orgao":  "GOV. RIO",
+        "cliente":  "GOV. RIO",
+        "ata_origem":  "GOV. RIO",
+        "orgao_key":  "gov_rio"
     },
     {
         "id":  155,
-        "produto_key":  "GOV_RIO__ATA_GOV_RIO__114443801_2025__ITEM_2_5",
-        "empresa":  "GOV. RIO",
-        "empresa_key":  "gov_rio",
+        "produto_key":  "ACO__ATA_GOV_RIO__114443801_2025__ITEM_2_5",
+        "empresa":  "AÇO",
+        "empresa_key":  "aco",
         "arp":  "ATA GOV. RIO",
         "arp_key":  "ata_gov_rio",
         "ata_numero":  "114443801/2025",
@@ -3097,13 +3153,21 @@
                        "preview":  "assets/produtos/gov_rio/ata_gov_rio/safe/gov_rio_2_5_alongador.png",
                        "status":  "REAL_ATA"
                    },
-        "status":  "ATIVO"
+        "status":  "ATIVO",
+        "ata_origem_key":  "gov_rio",
+        "cliente_key":  "gov_rio",
+        "origem_ata_key":  "gov_rio",
+        "origem_ata":  "GOV. RIO",
+        "orgao":  "GOV. RIO",
+        "cliente":  "GOV. RIO",
+        "ata_origem":  "GOV. RIO",
+        "orgao_key":  "gov_rio"
     },
     {
         "id":  156,
-        "produto_key":  "GOV_RIO__ATA_GOV_RIO__114443801_2025__ITEM_2_6",
-        "empresa":  "GOV. RIO",
-        "empresa_key":  "gov_rio",
+        "produto_key":  "ACO__ATA_GOV_RIO__114443801_2025__ITEM_2_6",
+        "empresa":  "AÇO",
+        "empresa_key":  "aco",
         "arp":  "ATA GOV. RIO",
         "arp_key":  "ata_gov_rio",
         "ata_numero":  "114443801/2025",
@@ -3117,13 +3181,21 @@
                        "preview":  "assets/produtos/gov_rio/ata_gov_rio/safe/gov_rio_2_6_trave.png",
                        "status":  "REAL_ATA"
                    },
-        "status":  "ATIVO"
+        "status":  "ATIVO",
+        "ata_origem_key":  "gov_rio",
+        "cliente_key":  "gov_rio",
+        "origem_ata_key":  "gov_rio",
+        "origem_ata":  "GOV. RIO",
+        "orgao":  "GOV. RIO",
+        "cliente":  "GOV. RIO",
+        "ata_origem":  "GOV. RIO",
+        "orgao_key":  "gov_rio"
     },
     {
         "id":  157,
-        "produto_key":  "GOV_RIO__ATA_GOV_RIO__114443801_2025__ITEM_2_7",
-        "empresa":  "GOV. RIO",
-        "empresa_key":  "gov_rio",
+        "produto_key":  "ACO__ATA_GOV_RIO__114443801_2025__ITEM_2_7",
+        "empresa":  "AÇO",
+        "empresa_key":  "aco",
         "arp":  "ATA GOV. RIO",
         "arp_key":  "ata_gov_rio",
         "ata_numero":  "114443801/2025",
@@ -3137,13 +3209,21 @@
                        "preview":  "assets/produtos/gov_rio/ata_gov_rio/safe/gov_rio_2_7_totem.png",
                        "status":  "REAL_ATA"
                    },
-        "status":  "ATIVO"
+        "status":  "ATIVO",
+        "ata_origem_key":  "gov_rio",
+        "cliente_key":  "gov_rio",
+        "origem_ata_key":  "gov_rio",
+        "origem_ata":  "GOV. RIO",
+        "orgao":  "GOV. RIO",
+        "cliente":  "GOV. RIO",
+        "ata_origem":  "GOV. RIO",
+        "orgao_key":  "gov_rio"
     },
     {
         "id":  158,
-        "produto_key":  "GOV_RIO__ATA_GOV_RIO__114443801_2025__ITEM_3_1",
-        "empresa":  "GOV. RIO",
-        "empresa_key":  "gov_rio",
+        "produto_key":  "ACO__ATA_GOV_RIO__114443801_2025__ITEM_3_1",
+        "empresa":  "AÇO",
+        "empresa_key":  "aco",
         "arp":  "ATA GOV. RIO",
         "arp_key":  "ata_gov_rio",
         "ata_numero":  "114443801/2025",
@@ -3157,13 +3237,21 @@
                        "preview":  "assets/produtos/gov_rio/ata_gov_rio/safe/gov_rio_3_1_balanco_infantil.png",
                        "status":  "REAL_ATA"
                    },
-        "status":  "ATIVO"
+        "status":  "ATIVO",
+        "ata_origem_key":  "gov_rio",
+        "cliente_key":  "gov_rio",
+        "origem_ata_key":  "gov_rio",
+        "origem_ata":  "GOV. RIO",
+        "orgao":  "GOV. RIO",
+        "cliente":  "GOV. RIO",
+        "ata_origem":  "GOV. RIO",
+        "orgao_key":  "gov_rio"
     },
     {
         "id":  159,
-        "produto_key":  "GOV_RIO__ATA_GOV_RIO__114443801_2025__ITEM_3_2",
-        "empresa":  "GOV. RIO",
-        "empresa_key":  "gov_rio",
+        "produto_key":  "ACO__ATA_GOV_RIO__114443801_2025__ITEM_3_2",
+        "empresa":  "AÇO",
+        "empresa_key":  "aco",
         "arp":  "ATA GOV. RIO",
         "arp_key":  "ata_gov_rio",
         "ata_numero":  "114443801/2025",
@@ -3177,13 +3265,21 @@
                        "preview":  "assets/produtos/gov_rio/ata_gov_rio/safe/gov_rio_3_2_balanco_juvenil.png",
                        "status":  "REAL_ATA"
                    },
-        "status":  "ATIVO"
+        "status":  "ATIVO",
+        "ata_origem_key":  "gov_rio",
+        "cliente_key":  "gov_rio",
+        "origem_ata_key":  "gov_rio",
+        "origem_ata":  "GOV. RIO",
+        "orgao":  "GOV. RIO",
+        "cliente":  "GOV. RIO",
+        "ata_origem":  "GOV. RIO",
+        "orgao_key":  "gov_rio"
     },
     {
         "id":  160,
-        "produto_key":  "GOV_RIO__ATA_GOV_RIO__114443801_2025__ITEM_3_3",
-        "empresa":  "GOV. RIO",
-        "empresa_key":  "gov_rio",
+        "produto_key":  "ACO__ATA_GOV_RIO__114443801_2025__ITEM_3_3",
+        "empresa":  "AÇO",
+        "empresa_key":  "aco",
         "arp":  "ATA GOV. RIO",
         "arp_key":  "ata_gov_rio",
         "ata_numero":  "114443801/2025",
@@ -3197,13 +3293,21 @@
                        "preview":  "assets/produtos/gov_rio/ata_gov_rio/safe/gov_rio_3_3_balanco_quadruplo.png",
                        "status":  "REAL_ATA"
                    },
-        "status":  "ATIVO"
+        "status":  "ATIVO",
+        "ata_origem_key":  "gov_rio",
+        "cliente_key":  "gov_rio",
+        "origem_ata_key":  "gov_rio",
+        "origem_ata":  "GOV. RIO",
+        "orgao":  "GOV. RIO",
+        "cliente":  "GOV. RIO",
+        "ata_origem":  "GOV. RIO",
+        "orgao_key":  "gov_rio"
     },
     {
         "id":  161,
-        "produto_key":  "GOV_RIO__ATA_GOV_RIO__114443801_2025__ITEM_3_4",
-        "empresa":  "GOV. RIO",
-        "empresa_key":  "gov_rio",
+        "produto_key":  "ACO__ATA_GOV_RIO__114443801_2025__ITEM_3_4",
+        "empresa":  "AÇO",
+        "empresa_key":  "aco",
         "arp":  "ATA GOV. RIO",
         "arp_key":  "ata_gov_rio",
         "ata_numero":  "114443801/2025",
@@ -3217,13 +3321,21 @@
                        "preview":  "assets/produtos/gov_rio/ata_gov_rio/safe/gov_rio_3_4_multi_play_pequeno.png",
                        "status":  "REAL_ATA"
                    },
-        "status":  "ATIVO"
+        "status":  "ATIVO",
+        "ata_origem_key":  "gov_rio",
+        "cliente_key":  "gov_rio",
+        "origem_ata_key":  "gov_rio",
+        "origem_ata":  "GOV. RIO",
+        "orgao":  "GOV. RIO",
+        "cliente":  "GOV. RIO",
+        "ata_origem":  "GOV. RIO",
+        "orgao_key":  "gov_rio"
     },
     {
         "id":  162,
-        "produto_key":  "GOV_RIO__ATA_GOV_RIO__114443801_2025__ITEM_3_5",
-        "empresa":  "GOV. RIO",
-        "empresa_key":  "gov_rio",
+        "produto_key":  "ACO__ATA_GOV_RIO__114443801_2025__ITEM_3_5",
+        "empresa":  "AÇO",
+        "empresa_key":  "aco",
         "arp":  "ATA GOV. RIO",
         "arp_key":  "ata_gov_rio",
         "ata_numero":  "114443801/2025",
@@ -3237,13 +3349,21 @@
                        "preview":  "assets/produtos/gov_rio/ata_gov_rio/safe/gov_rio_3_5_multi_play_grande.png",
                        "status":  "REAL_ATA"
                    },
-        "status":  "ATIVO"
+        "status":  "ATIVO",
+        "ata_origem_key":  "gov_rio",
+        "cliente_key":  "gov_rio",
+        "origem_ata_key":  "gov_rio",
+        "origem_ata":  "GOV. RIO",
+        "orgao":  "GOV. RIO",
+        "cliente":  "GOV. RIO",
+        "ata_origem":  "GOV. RIO",
+        "orgao_key":  "gov_rio"
     },
     {
         "id":  163,
-        "produto_key":  "GOV_RIO__ATA_GOV_RIO__114443801_2025__ITEM_3_6",
-        "empresa":  "GOV. RIO",
-        "empresa_key":  "gov_rio",
+        "produto_key":  "ACO__ATA_GOV_RIO__114443801_2025__ITEM_3_6",
+        "empresa":  "AÇO",
+        "empresa_key":  "aco",
         "arp":  "ATA GOV. RIO",
         "arp_key":  "ata_gov_rio",
         "ata_numero":  "114443801/2025",
@@ -3257,13 +3377,21 @@
                        "preview":  "assets/produtos/gov_rio/ata_gov_rio/safe/gov_rio_3_6_haste_gaiola_labirinto.png",
                        "status":  "REAL_ATA"
                    },
-        "status":  "ATIVO"
+        "status":  "ATIVO",
+        "ata_origem_key":  "gov_rio",
+        "cliente_key":  "gov_rio",
+        "origem_ata_key":  "gov_rio",
+        "origem_ata":  "GOV. RIO",
+        "orgao":  "GOV. RIO",
+        "cliente":  "GOV. RIO",
+        "ata_origem":  "GOV. RIO",
+        "orgao_key":  "gov_rio"
     },
     {
         "id":  164,
-        "produto_key":  "GOV_RIO__ATA_GOV_RIO__114443801_2025__ITEM_4_1",
-        "empresa":  "GOV. RIO",
-        "empresa_key":  "gov_rio",
+        "produto_key":  "ACO__ATA_GOV_RIO__114443801_2025__ITEM_4_1",
+        "empresa":  "AÇO",
+        "empresa_key":  "aco",
         "arp":  "ATA GOV. RIO",
         "arp_key":  "ata_gov_rio",
         "ata_numero":  "114443801/2025",
@@ -3277,13 +3405,21 @@
                        "preview":  "assets/produtos/gov_rio/ata_gov_rio/safe/gov_rio_4_1_conjunto_pic_nic.png",
                        "status":  "REAL_ATA"
                    },
-        "status":  "ATIVO"
+        "status":  "ATIVO",
+        "ata_origem_key":  "gov_rio",
+        "cliente_key":  "gov_rio",
+        "origem_ata_key":  "gov_rio",
+        "origem_ata":  "GOV. RIO",
+        "orgao":  "GOV. RIO",
+        "cliente":  "GOV. RIO",
+        "ata_origem":  "GOV. RIO",
+        "orgao_key":  "gov_rio"
     },
     {
         "id":  165,
-        "produto_key":  "GOV_RIO__ATA_GOV_RIO__114443801_2025__ITEM_4_2",
-        "empresa":  "GOV. RIO",
-        "empresa_key":  "gov_rio",
+        "produto_key":  "ACO__ATA_GOV_RIO__114443801_2025__ITEM_4_2",
+        "empresa":  "AÇO",
+        "empresa_key":  "aco",
         "arp":  "ATA GOV. RIO",
         "arp_key":  "ata_gov_rio",
         "ata_numero":  "114443801/2025",
@@ -3297,13 +3433,21 @@
                        "preview":  "assets/produtos/gov_rio/ata_gov_rio/safe/gov_rio_4_2_bicicletario_5_lugares.png",
                        "status":  "REAL_ATA"
                    },
-        "status":  "ATIVO"
+        "status":  "ATIVO",
+        "ata_origem_key":  "gov_rio",
+        "cliente_key":  "gov_rio",
+        "origem_ata_key":  "gov_rio",
+        "origem_ata":  "GOV. RIO",
+        "orgao":  "GOV. RIO",
+        "cliente":  "GOV. RIO",
+        "ata_origem":  "GOV. RIO",
+        "orgao_key":  "gov_rio"
     },
     {
         "id":  166,
-        "produto_key":  "GOV_RIO__ATA_GOV_RIO__114443801_2025__ITEM_5_1",
-        "empresa":  "GOV. RIO",
-        "empresa_key":  "gov_rio",
+        "produto_key":  "ACO__ATA_GOV_RIO__114443801_2025__ITEM_5_1",
+        "empresa":  "AÇO",
+        "empresa_key":  "aco",
         "arp":  "ATA GOV. RIO",
         "arp_key":  "ata_gov_rio",
         "ata_numero":  "114443801/2025",
@@ -3317,13 +3461,21 @@
                        "preview":  "assets/produtos/gov_rio/ata_gov_rio/safe/gov_rio_5_1_ping_pong.png",
                        "status":  "REAL_ATA"
                    },
-        "status":  "ATIVO"
+        "status":  "ATIVO",
+        "ata_origem_key":  "gov_rio",
+        "cliente_key":  "gov_rio",
+        "origem_ata_key":  "gov_rio",
+        "origem_ata":  "GOV. RIO",
+        "orgao":  "GOV. RIO",
+        "cliente":  "GOV. RIO",
+        "ata_origem":  "GOV. RIO",
+        "orgao_key":  "gov_rio"
     },
     {
         "id":  167,
-        "produto_key":  "GOV_RIO__ATA_GOV_RIO__114443801_2025__ITEM_6_1",
-        "empresa":  "GOV. RIO",
-        "empresa_key":  "gov_rio",
+        "produto_key":  "ACO__ATA_GOV_RIO__114443801_2025__ITEM_6_1",
+        "empresa":  "AÇO",
+        "empresa_key":  "aco",
         "arp":  "ATA GOV. RIO",
         "arp_key":  "ata_gov_rio",
         "ata_numero":  "114443801/2025",
@@ -3337,6 +3489,14 @@
                        "preview":  "assets/produtos/gov_rio/ata_gov_rio/safe/gov_rio_6_1_fut_mesa.png",
                        "status":  "REAL_ATA"
                    },
-        "status":  "ATIVO"
+        "status":  "ATIVO",
+        "ata_origem_key":  "gov_rio",
+        "cliente_key":  "gov_rio",
+        "origem_ata_key":  "gov_rio",
+        "origem_ata":  "GOV. RIO",
+        "orgao":  "GOV. RIO",
+        "cliente":  "GOV. RIO",
+        "ata_origem":  "GOV. RIO",
+        "orgao_key":  "gov_rio"
     }
 ]

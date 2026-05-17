@@ -450,3 +450,29 @@ config/perfis/PRODUCAO_TRABALHO.json
 ```
 
 Motores futuros devem ficar desacoplados de interface e infraestrutura.
+## Regra de dominio - Empresa x ATA/Cliente/Orgao
+
+EMPRESA e um dominio fechado e representa somente empresas internas/reais do sistema.
+
+Empresas validas:
+- JPL
+- AÇO
+- TCR
+
+Situacao atual:
+- JPL: ativa com dados.
+- AÇO: ativa com dados.
+- TCR: valida para uso futuro, sem dados operacionais nesta fase.
+
+GOV. RIO nao e empresa.
+GOV. RIO deve ser tratado como cliente, orgao, origem de ata ou ata de referencia.
+
+E proibido:
+- usar GOV. RIO no campo empresa;
+- usar gov_rio no campo empresa_key;
+- criar produtos artificiais para TCR antes da entrada real de dados;
+- misturar filtro de empresa com filtro de ATA/origem.
+
+Filtros:
+- filtro EMPRESA deve trabalhar com JPL, AÇO e futuramente TCR;
+- filtro ATA/ORIGEM deve trabalhar com GOV. RIO, SEHIS - GOV. RJ e outras atas/clientes/orgaos.

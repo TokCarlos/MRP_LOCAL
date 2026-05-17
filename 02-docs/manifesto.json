@@ -1,8 +1,8 @@
 {
   "projeto": "MRP_LOCAL",
-  "versao_documental": "v0.1.000",
+  "versao_documental": "v0.1.027",
   "data": "2026-05-17",
-  "status": "BASE_DOCUMENTAL_NAO_HOMOLOGADA",
+  "status": "DOMINIO_EMPRESA_ATA_ORIGEM_CORRIGIDO",
   "fase_atual": "INTERFACE_UI_CONCEITUAL",
   "servidor_teste_atual": "\\\\HOME-MACHINE",
   "regras_chave": [

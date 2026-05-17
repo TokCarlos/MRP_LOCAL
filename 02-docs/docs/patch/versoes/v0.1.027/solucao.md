@@ -1,0 +1,23 @@
+# v0.1.027 - solucao
+
+- Corrigidos produtos da ATA GOV. RIO em `01-mrp/front_end/data/produtos_seed.json`:
+  - `empresa` ajustada para `AÇO`.
+  - `empresa_key` ajustada para `aco`.
+  - `produto_key` ajustada de prefixo `GOV_RIO__` para `ACO__`.
+  - adicionados campos de classificacao de origem:
+    - `cliente`, `cliente_key`
+    - `orgao`, `orgao_key`
+    - `origem_ata`, `origem_ata_key`
+    - `ata_origem`, `ata_origem_key`
+- Criado dominio explicito em `01-mrp/front_end/data/dominios_seed.json` com empresas validas:
+  - JPL
+  - AÇO
+  - TCR (reservada sem dados operacionais)
+- Ajustada tela Produtos:
+  - placeholder de busca passa a citar `ata/origem`.
+  - filtro de ATA renomeado para `Todas as ATAs/Origens`.
+  - texto de busca inclui `ata_origem`, `origem_ata`, `cliente`, `orgao`.
+  - label de opcoes de ATA inclui origem em formato `ARP + ATA (origem)`.
+- Criado script de validacao de dominio:
+  - `03-vs/scripts/validar_dominio_empresas.ps1`
+  - bloqueia GOV como empresa, bloqueia TCR com dados operacionais e valida valores permitidos.
