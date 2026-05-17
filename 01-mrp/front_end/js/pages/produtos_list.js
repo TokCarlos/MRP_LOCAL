@@ -38,7 +38,7 @@ async function loadProdutos() {
                 <img class="produto-preview" src="${preview}" alt="Preview demo" width="56" height="32" loading="lazy" onerror="this.onerror=null;this.src='${PLACEHOLDER}';">
             </td>
             <td class="col-ata-numero">${ataNumero}</td>
-            <td class="col-item-ata">${itemAta}</td>
+            <td class="col-item" data-label="ITEM">${itemAta}</td>
             <td class="col-produto">${nome}</td>
             <td class="col-empresa">${empresa}</td>
             <td class="col-acao"><button class="btn-row-action" type="button" onclick="alert('Futuro: editar')">Editar</button></td>

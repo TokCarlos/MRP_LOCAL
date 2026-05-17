@@ -114,27 +114,157 @@
     .produtos-table {
         width: 100%;
         max-width: 100%;
-        table-layout: fixed;
+        table-layout: auto;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: transparent;
+    }
+
+    .produtos-table thead {
+        display: none;
+    }
+
+    .produtos-table,
+    .produtos-table tbody,
+    .produtos-table tr,
+    .produtos-table td {
+        display: block;
+    }
+
+    .produtos-table tbody {
+        display: grid;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .produtos-table tr {
+        display: grid;
+        grid-template-columns: 64px minmax(0, 1fr) auto;
+        grid-template-areas:
+            "preview produto acao"
+            "preview ata acao"
+            "preview item empresa"
+            "preview id empresa";
+        column-gap: 10px;
+        row-gap: 4px;
+        align-items: center;
+        width: 100%;
+        max-width: 100%;
+        padding: 10px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.72);
+        color: #111;
+        box-sizing: border-box;
+        overflow: hidden;
     }
 
     .produtos-table th,
     .produtos-table td {
-        padding-left: 4px;
-        padding-right: 4px;
-        font-size: 12px;
+        padding: 0;
+        border: 0;
+        color: #111;
+        min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
         white-space: normal;
-        overflow-wrap: anywhere;
+        text-align: left;
+        box-sizing: border-box;
+    }
+
+    .produtos-table .col-preview {
+        grid-area: preview;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .produtos-table .produto-preview {
-        width: 44px;
-        max-width: 44px;
-        height: 32px;
+        width: 56px;
+        max-width: 56px;
+        height: 42px;
+        object-fit: contain;
+        display: block;
+    }
+
+    .produtos-table .col-produto {
+        grid-area: produto;
+        font-size: 13px;
+        line-height: 1.25;
+        font-weight: 700;
+        text-align: left;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        word-break: normal;
+        overflow-wrap: normal;
+        hyphens: none;
+    }
+
+    .produtos-table .col-ata-numero {
+        grid-area: ata;
+        font-size: 12px;
+        line-height: 1.2;
+        font-weight: 600;
+        text-align: left;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        word-break: normal;
+        overflow-wrap: normal;
+        hyphens: none;
+    }
+
+    .produtos-table .col-id,
+    .produtos-table .col-item,
+    .produtos-table .col-empresa {
+        font-size: 12px;
+        line-height: 1.2;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .produtos-table .col-id {
+        grid-area: id;
+        text-align: left;
+    }
+
+    .produtos-table .col-item {
+        grid-area: item;
+        text-align: left;
+    }
+
+    .produtos-table .col-empresa {
+        grid-area: empresa;
+        text-align: right;
+    }
+
+    .produtos-table .col-acao {
+        grid-area: acao;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .produtos-table .btn-row-action {
-        padding-left: 8px;
-        padding-right: 8px;
+        padding: 8px 10px;
         font-size: 12px;
+        line-height: 1.1;
+        white-space: nowrap;
+        max-width: 72px;
+    }
+}
+
+@media (max-width: 480px) {
+    .produtos-table .col-id {
+        display: none;
+    }
+
+    .produtos-table tr {
+        grid-template-areas:
+            "preview produto acao"
+            "preview ata acao"
+            "preview item empresa";
     }
 }
