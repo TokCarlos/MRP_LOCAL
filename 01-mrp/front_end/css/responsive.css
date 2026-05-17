@@ -257,6 +257,30 @@ main {
         margin-top: var(--header-height);
         padding-top: 1rem;
     }
+
+    .table-responsive {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .preview-table {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        table-layout: fixed;
+    }
+
+    .preview-table th,
+    .preview-table td {
+        overflow-wrap: anywhere;
+        word-break: normal;
+    }
+
+    .preview-table .btn-row-action {
+        max-width: 100%;
+        white-space: normal;
+    }
 }
 
 @media (max-width: 480px) {
@@ -278,7 +302,9 @@ main {
     }
 
     .preview-table {
-        width: max(100%, 32rem);
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
     }
 
     .login-body {
