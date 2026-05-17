@@ -23,15 +23,28 @@
     width: 100%;
     max-width: 100%;
     table-layout: fixed;
+    background: rgba(255, 255, 255, 0.70);
+    color: #111;
+    border-collapse: collapse;
+}
+
+.produtos-table thead {
+    background: rgba(255, 255, 255, 0.82);
 }
 
 .produtos-table th,
 .produtos-table td {
+    color: #111;
     text-align: center;
     vertical-align: middle;
     white-space: normal;
     overflow-wrap: anywhere;
     word-break: normal;
+}
+
+.produtos-table th {
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 .produtos-table .col-produto {
@@ -63,6 +76,7 @@
 .produtos-table .btn-row-action {
     max-width: 100%;
     white-space: normal;
+    color: #fff;
 }
 
 .btn-add {

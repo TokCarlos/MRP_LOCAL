@@ -12,6 +12,9 @@
 - `Nº Item` usa `item_ata` e nao usa `id`.
 - Produto com alinhamento a esquerda e quebra de texto.
 - Colunas demais centralizadas com quebra.
+- Cabecalhos em caixa alta conforme padrao solicitado.
+- Tabela com fundo branco translucido para ganho de legibilidade.
+- Fundo da pagina escurecido em ~20% sem alterar arquivo de imagem.
 
 ## Observacao
 
