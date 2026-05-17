@@ -10,13 +10,11 @@
 
 html {
     min-width: 320px;
-    width: 100%;
     text-size-adjust: 100%;
 }
 
 body {
     min-width: 320px;
-    width: 100%;
     overflow-x: hidden;
 }
 
@@ -139,16 +137,13 @@ main {
 }
 
 .table-responsive {
-    display: block;
     width: 100%;
-    max-width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 }
 
 .preview-table {
-    width: max(100%, 36rem);
-    min-width: 0;
+    min-width: 36rem;
 }
 
 .preview-table th,
@@ -275,10 +270,6 @@ main {
 
     .btn-add {
         width: 100%;
-    }
-
-    .preview-table {
-        width: max(100%, 32rem);
     }
 
     .login-body {
