@@ -1,0 +1,15 @@
+﻿node_modules/
+__pycache__/
+*.pyc
+.env
+.env.*
+*.log
+*.tmp
+*.bak
+*.db
+*.sqlite
+runtime/
+logs/
+cache/
+.DS_Store
+Thumbs.db

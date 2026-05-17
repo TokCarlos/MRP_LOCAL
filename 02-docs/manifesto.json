@@ -1,0 +1,49 @@
+{
+  "projeto": "MRP_LOCAL",
+  "versao_documental": "v0.1.000",
+  "data": "2026-05-17",
+  "status": "BASE_DOCUMENTAL_NAO_HOMOLOGADA",
+  "fase_atual": "INTERFACE_UI_CONCEITUAL",
+  "servidor_teste_atual": "\\\\HOME-MACHINE",
+  "regras_chave": [
+    "documentacao_antes_do_codigo",
+    "versionamento_obrigatorio",
+    "modulos_separados",
+    "preservar_implementacoes_funcionais",
+    "alteracao_funcional_exige_aviso",
+    "interface_visual_primeiro",
+    "dados_mockados_permitidos_na_fase_visual",
+    "postgresql_preparado_mas_nao_prioritario_agora",
+    "excel_vba_legado_preservado",
+    "rede_work_como_modulo_proprio",
+    "encoding_e_caminhos_como_requisito_obrigatorio"
+  ],
+  "modulos": [
+    "00_base_do_sistema",
+    "01_interface_ui",
+    "02_login_usuarios",
+    "03_dashboard",
+    "04_cadastros",
+    "05_produtos",
+    "06_estoque",
+    "07_producao",
+    "08_compras",
+    "09_requisicoes",
+    "10_ordem_de_compra",
+    "11_medicoes_contratos",
+    "12_rede_work",
+    "13_relatorios",
+    "14_configuracoes",
+    "15_logs_auditoria"
+  ],
+  "arquivos_principais": [
+    "LEIA_PRIMEIRO.md",
+    "docs/geral/regras_do_projeto.md",
+    "docs/geral/arquitetura.md",
+    "docs/geral/roadmap.md",
+    "docs/geral/status_geral.md",
+    "docs/geral/log_geral.md",
+    "codex/INSTRUCOES_PARA_CODEX.md",
+    "codex/PROMPT_BASE_PARA_CODEX.md"
+  ]
+}

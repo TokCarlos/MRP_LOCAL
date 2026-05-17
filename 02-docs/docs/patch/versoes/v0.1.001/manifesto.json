@@ -1,0 +1,29 @@
+{
+  "projeto": "MRP_LOCAL",
+  "versao": "v0.1.001",
+  "data": "2026-05-17",
+  "status": "GERADO_PARA_REVISAO",
+  "escopo": "Organizacao inicial do workspace e incorporacao da documentacao base em 02-docs.",
+  "pastas_raiz": [
+    "01-mrp",
+    "02-docs",
+    "03-vs"
+  ],
+  "decisoes": [
+    "Usar 02-docs sem acento como nome fisico por seguranca de encoding.",
+    "Nao incorporar mrp-main.zip ao sistema funcional antes de triagem.",
+    "Manter 01-mrp limpo, apenas com estrutura funcional prevista."
+  ],
+  "fontes": {
+    "documentacao_base": {
+      "arquivo": "MRP_LOCAL_Documentacao_Base_v0.1.000.zip",
+      "status": "INCORPORADO_EM_02_DOCUMENTACAO",
+      "sha256": "08b74fc8b9eafa507e43ddd9a53fa212a165fc22fb1dc560f1b209ed6017b18f"
+    },
+    "mrp_main": {
+      "arquivo": "mrp-main.zip",
+      "status": "INVENTARIADO_NAO_INCORPORADO",
+      "sha256": "1c7b714a52e02257496e88d07706eb9f28043bffaadf5c52ab4a04dc2e26ee9d"
+    }
+  }
+}

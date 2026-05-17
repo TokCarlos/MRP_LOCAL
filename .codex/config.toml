@@ -1,0 +1,13 @@
+[mcp_servers.mrp_docs_fs]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-filesystem", "X:/02-docs", "X:/03-vs"]
+enabled = true
+required = false
+startup_timeout_sec = 20
+tool_timeout_sec = 60
+
+[mcp_servers.mrp_docs_fs.tools.edit_file]
+approval_mode = "approve"
+
+[mcp_servers.mrp_docs_fs.tools.create_directory]
+approval_mode = "approve"

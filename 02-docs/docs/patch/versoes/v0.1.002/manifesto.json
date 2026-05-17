@@ -1,0 +1,14 @@
+{
+  "versao": "v0.1.002",
+  "tipo": "organizacao_estrutural",
+  "status": "APLICADO",
+  "escopo": "Padronizacao das pastas raiz para 01-mrp, 02-docs e 03-vs.",
+  "pastas_oficiais": [
+    "01-mrp",
+    "02-docs",
+    "03-vs"
+  ],
+  "codigo_funcional_alterado": false,
+  "fontes_incorporadas_ao_sistema": false,
+  "observacao": "mrp-main.zip permanece apenas inventariado."
+}
