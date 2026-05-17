@@ -12,6 +12,11 @@
     --color-text: #ffffff;
     --color-text-muted: #cccccc;
     --color-panel: rgba(0, 0, 0, 0.55);
+
+    /* Aliases legados para compatibilidade sem alterar visual */
+    --cor-painel: var(--color-panel);
+    --cor-subtexto: var(--color-text-muted);
+    --cor-botao: var(--color-accent);
 }
 
 *,
