@@ -1,18 +1,100 @@
-﻿node_modules/
-__pycache__/
-*.pyc
-.env
-.env.*
-*.log
-*.tmp
-*.bak
-*.db
-*.sqlite
-runtime/
-logs/
-cache/
-.DS_Store
-Thumbs.db
-# Codex local settings/state
+﻿# =========================================================
+# MRP_LOCAL - Git ignore
+# =========================================================
+
+# Codex local
 .codex/
 .codex/**
+
+# Secrets / ambiente
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.pfx
+*.crt
+*.cer
+secrets.*
+credentials.*
+token.*
+auth.json
+
+# Python
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Node / frontend
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.next/
+.nuxt/
+.cache/
+.parcel-cache/
+.vite/
+dist/
+build/
+
+# Banco local / runtime
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+*.bak
+*.backup
+
+# PostgreSQL local / dados reais
+pgdata/
+postgres_data/
+database/data/
+database/backups/
+
+# Logs / runtime / temporarios
+logs/
+runtime/
+cache/
+temp/
+tmp/
+*.log
+*.tmp
+*.temp
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Office temporarios
+~$*.doc*
+~$*.xls*
+~$*.ppt*
+*.tmp
+
+# Backups locais
+backup/
+backups/
+_bkp/
+*.old
+*.orig
+
+# IDE
+.vscode/settings.json
+.vscode/.ropeproject/
+.idea/
+
+# Arquivos compactados pesados gerados
+*.7z
+*.rar
