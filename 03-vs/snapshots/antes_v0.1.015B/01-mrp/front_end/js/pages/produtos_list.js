@@ -23,7 +23,7 @@ async function loadProdutos() {
         tr.innerHTML = `
             <td>${p.id}</td>
             <td>${p.nome}</td>
-            <td><button class="btn-row-action" onclick="alert('Futuro: editar')">Editar</button></td>
+            <td><button onclick="alert('Futuro: editar')">Editar</button></td>
         `;
 
         tbody.appendChild(tr);

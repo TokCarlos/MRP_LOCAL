@@ -249,6 +249,10 @@ nav ul {
         margin-left: 0;
     }
 
+    main {
+        margin-top: 120px; /* header maior em mobile */
+        padding: 20px 16px;
+    }
 }
 
 /* ======================================================
