@@ -11,26 +11,26 @@ const seedData = {
         {
             id: 1,
             codigo: "PRD-001",
-            nome: "Produto Exemplo A",
+            nome: "TRIPLO SIMULADOR DE ESTIMULAÇÃO PARA TODOS OS MEMBROS E CERVICAL",
             unidade: "UN",
-            categoria: "Linha A",
+            categoria: "ATI",
             status: "ATIVO"
         },
         {
             id: 2,
             codigo: "PRD-002",
-            nome: "Produto Exemplo B",
+            nome: "DUPLO SIMULADOR PARA ESTIMULAÇÃO DE QUADRIL E PERNAS",
             unidade: "UN",
-            categoria: "Linha B",
+            categoria: "ATI",
             status: "ATIVO"
         },
         {
             id: 3,
             codigo: "PRD-003",
-            nome: "Produto Exemplo C",
-            unidade: "CJ",
-            categoria: "Linha C",
-            status: "REVISAO"
+            nome: "SIMULADOR QUADRUPLO PARA FORTALECIMENTO DE TODOS OS MEMBROS",
+            unidade: "UN",
+            categoria: "ATI",
+            status: "ATIVO"
         }
     ],
     ordens_producao: [
