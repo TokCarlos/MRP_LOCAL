@@ -2,6 +2,22 @@
 
 <button class="btn-add" id="btnAddProd">+ Novo Produto</button>
 
+<div class="produtos-filtros">
+    <input id="filtroPesquisa" type="text" placeholder="Pesquisar produto, ATA, item ou empresa...">
+    <select id="filtroAta">
+        <option value="">Todas as ATAs</option>
+    </select>
+    <select id="filtroEmpresa">
+        <option value="">Todas as Empresas</option>
+    </select>
+    <select id="filtroCategoria">
+        <option value="">Todas as Categorias</option>
+    </select>
+    <button id="btnLimparFiltros" class="btn-row-action" type="button">Limpar</button>
+</div>
+
+<div id="produtosContador" class="produtos-contador">Exibindo 0 de 0 produtos</div>
+
 <div class="table-responsive">
     <table class="preview-table produtos-table" id="tblProdutos">
         <thead>

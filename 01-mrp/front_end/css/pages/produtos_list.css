@@ -89,6 +89,49 @@
     margin-bottom: 14px;
 }
 
+.produtos-filtros {
+    display: grid;
+    grid-template-columns: minmax(220px, 1.6fr) repeat(3, minmax(140px, 1fr)) auto;
+    gap: 10px;
+    align-items: center;
+    margin: 18px 0 12px;
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.70);
+    box-sizing: border-box;
+}
+
+.produtos-filtros input,
+.produtos-filtros select {
+    width: 100%;
+    min-width: 0;
+    padding: 9px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    background: rgba(255, 255, 255, 0.92);
+    color: #111;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.produtos-filtros button {
+    white-space: nowrap;
+}
+
+.produtos-contador {
+    margin: 0 0 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
+}
+
+.produtos-empty-msg {
+    text-align: center !important;
+    font-weight: 600;
+    padding: 14px 10px !important;
+}
+
 .modal {
     position: fixed;
     top: 0;
@@ -111,6 +154,22 @@
 .hidden { display: none; }
 
 @media (max-width: 768px) {
+    .produtos-filtros {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 10px;
+        margin-left: 0;
+        margin-right: 0;
+        max-width: 100%;
+    }
+
+    .produtos-filtros input,
+    .produtos-filtros select,
+    .produtos-filtros button {
+        width: 100%;
+        max-width: 100%;
+    }
+
     .produtos-table {
         width: 100%;
         max-width: 100%;
@@ -135,6 +194,10 @@
         display: grid;
         gap: 12px;
         width: 100%;
+    }
+
+    .produtos-table tr.produtos-empty-row {
+        display: block;
     }
 
     .produtos-table tr {
