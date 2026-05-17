@@ -1,11 +1,16 @@
 # Registro v0.1.014 - MRP_LOCAL
 
 Data do registro: 2026-05-17
-Status: `PROTOCOLO_FECHAMENTO_TAREFA_PERSISTIDO`
+Status: `FECHAMENTO_AUTOMATICO_PADRAO_PERSISTIDO`
 
 ## Objetivo
 
-Persistir o protocolo obrigatorio de fechamento de tarefa para que o Codex sempre documente, verifique arquivos indevidos, prepare commit versionado, crie tag e envie para GitHub quando uma tarefa do projeto `MRP_LOCAL` for concluida.
+Persistir a regra operacional obrigatoria de fechamento automatico Git para toda tarefa concluida pelo Codex no projeto `MRP_LOCAL`.
+
+## Regra central
+
+- `AUTO_COMMIT_E_PUSH` = padrao obrigatorio.
+- `FECHAMENTO_MANUAL` = excecao somente quando solicitado explicitamente pelo usuario.
 
 ## Arquivos criados ou atualizados
 
@@ -15,15 +20,24 @@ Persistir o protocolo obrigatorio de fechamento de tarefa para que o Codex sempr
 - `02-docs/docs/patch/versoes/v0.1.014/registro.md`.
 - `03-vs/scripts/git_fechar_versao.ps1`.
 
-## Regra registrada
+## Conteudo registrado em AGENTS.md
 
-Toda tarefa deve terminar com:
+- Toda tarefa concluida pelo Codex deve terminar com fechamento automatico Git.
+- O Codex nao deve perguntar se deve commitar quando uma tarefa for concluida.
+- Fechamento manual so ocorre quando o usuario pedir explicitamente.
+- Toda versao deve ter registro em `02-docs/docs/patch/versoes/v0.1.XXX`.
+- Se nao houver alteracao real, nao criar commit vazio.
+- Se houver arquivo proibido versionavel, parar e avisar.
+- Se tag ja existir, nao recriar; informar e tentar enviar a tag existente.
+- Se `git pull --rebase` gerar conflito, parar e avisar.
 
-1. Documentacao em `02-docs`.
-2. Versao propria.
-3. Registro em `02-docs/docs/patch/versoes`.
-4. Verificacao de arquivos proibidos.
-5. Fechamento Git quando houver alteracao real.
+## Frases que ativam excecao manual
+
+- `nao commita`.
+- `nao de push`.
+- `vou commitar manualmente`.
+- `fechamento manual`.
+- `nao fechar versao`.
 
 ## Fluxo oficial registrado
 
@@ -36,7 +50,15 @@ GitHub guarda
 
 ## Arquivos proibidos antes de commit
 
-Se encontrar item proibido, parar e avisar. Nao fazer commit.
+A validacao deve respeitar `.gitignore` e verificar somente arquivos versionaveis:
+
+```powershell
+git ls-files -o --exclude-standard
+git diff --name-only
+git diff --cached --name-only
+```
+
+Itens proibidos versionaveis:
 
 - `.env`
 - `.venv`
@@ -47,9 +69,11 @@ Se encontrar item proibido, parar e avisar. Nao fazer commit.
 - `*.log` pesado
 - arquivos temporarios
 - credenciais
-- `.codex`
+- `.codex`, quando versionavel
 
-## Script criado
+A pasta `.codex` ignorada nao deve bloquear.
+
+## Script atualizado
 
 `03-vs/scripts/git_fechar_versao.ps1`
 
@@ -57,32 +81,28 @@ Parametros:
 
 - `Versao`.
 - `Mensagem`.
+- `Auto`.
 
-Comando padrao:
+Comando automatico padrao:
 
 ```powershell
-.\03-vs\scripts\git_fechar_versao.ps1 -Versao "vX.Y.Z" -Mensagem "descricao curta"
+powershell -ExecutionPolicy Bypass -File "X:\03-vs\scripts\git_fechar_versao.ps1" -Versao "v0.1.014" -Mensagem "persistir fechamento automatico padrao" -Auto
 ```
 
-## Comportamento do script
+## Ordem do script
 
-- Executa `Set-Location X:\`.
-- Executa `git status`.
-- Executa `git pull --rebase`.
-- Verifica arquivos proibidos.
-- Para se encontrar arquivo proibido.
-- Nao cria commit vazio.
-- Executa `git add .`.
-- Executa `git commit -m "$Versao - $Mensagem"`.
-- Cria tag se ela ainda nao existir.
-- Nao recria tag existente.
-- Executa `git push`.
-- Executa `git push origin $Versao` quando a tag for criada.
-- Executa `git status` final.
-
-## Observacao desta tarefa
-
-Commit nao foi executado automaticamente nesta tarefa, conforme solicitado pelo usuario.
+1. `Set-Location X:\`.
+2. `git status`.
+3. Validar arquivos proibidos versionaveis.
+4. `git add .`.
+5. Verificar se ha staged changes.
+6. Se nao houver staged changes: informar `Nada para commitar` e sair sem commit/tag.
+7. `git commit -m "$Versao - $Mensagem"`.
+8. `git pull --rebase`.
+9. Se tag nao existir: `git tag $Versao`.
+10. `git push`.
+11. `git push origin $Versao`.
+12. `git status` final.
 
 ## Controle de escopo
 
@@ -92,3 +112,11 @@ Commit nao foi executado automaticamente nesta tarefa, conforme solicitado pelo 
 - Banco criado: NAO.
 - Layout alterado: NAO.
 - Apenas regra, documentacao e script: SIM.
+
+## Fechamento desta tarefa
+
+Por regra definida nesta tarefa, o fechamento automatico deve ser executado ao final usando:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File "X:\03-vs\scripts\git_fechar_versao.ps1" -Versao "v0.1.014" -Mensagem "persistir fechamento automatico padrao" -Auto
+```

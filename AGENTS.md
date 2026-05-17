@@ -21,9 +21,14 @@ Status atual:
 - Versao: v0.1.003
 - Fase: configuracao inicial MCP/IA
 
-## PROTOCOLO OBRIGATORIO DE FECHAMENTO DE TAREFA
+## PROTOCOLO OBRIGATORIO DE FECHAMENTO AUTOMATICO
 
-A partir da v0.1.014, toda tarefa do projeto MRP_LOCAL deve terminar com o protocolo de fechamento abaixo.
+A partir da v0.1.014, toda tarefa concluida pelo Codex no projeto MRP_LOCAL deve terminar com fechamento automatico Git.
+
+Regra central:
+
+- AUTO_COMMIT_E_PUSH = padrao obrigatorio.
+- FECHAMENTO_MANUAL = excecao somente quando solicitado explicitamente pelo usuario.
 
 Fluxo oficial:
 
@@ -37,10 +42,20 @@ Regras obrigatorias:
 1. Toda tarefa deve terminar com documentacao em 02-docs.
 2. Toda tarefa deve ter versao.
 3. Toda tarefa deve ser registrada em 02-docs/docs/patch/versoes.
-4. Ao concluir, deve executar fechamento Git quando houver alteracao real.
+4. Ao concluir, deve executar fechamento Git automatico quando houver alteracao real.
 5. Se nao houver alteracao real, nao criar commit vazio.
-6. Se a tag ja existir, nao recriar; apenas informar.
+6. Se a tag ja existir, nao recriar; informar e tentar enviar a tag existente.
 7. O GitHub e o cofre de historico do projeto.
+8. O Codex nao deve perguntar se deve commitar quando uma tarefa for concluida.
+9. Se git pull --rebase gerar conflito, parar e avisar.
+
+O Codex so deve evitar commit/push quando o usuario disser explicitamente:
+
+- "nao commita"
+- "nao de push"
+- "vou commitar manualmente"
+- "fechamento manual"
+- "nao fechar versao"
 
 Antes de commitar, verificar se existem arquivos proibidos:
 
@@ -53,12 +68,12 @@ Antes de commitar, verificar se existem arquivos proibidos:
 - *.log pesado
 - arquivos temporarios
 - credenciais
-- .codex
+- .codex, quando versionavel
 
 Se encontrar arquivo proibido, parar e avisar. Nao fazer commit.
 
-Fechamento Git padrao:
+Fechamento Git automatico padrao:
 
 ```powershell
-.\03-vs\scripts\git_fechar_versao.ps1 -Versao "vX.Y.Z" -Mensagem "descricao curta"
+.\03-vs\scripts\git_fechar_versao.ps1 -Versao "vX.Y.Z" -Mensagem "descricao curta" -Auto
 ```

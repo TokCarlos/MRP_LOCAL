@@ -1,12 +1,29 @@
-# Protocolo Obrigatorio de Fechamento de Tarefa - MRP_LOCAL
+# Protocolo Obrigatorio de Fechamento Automatico - MRP_LOCAL
 
 Versao de referencia: v0.1.014
 Data do registro: 2026-05-17
-Status: `PROTOCOLO_FECHAMENTO_TAREFA_PERSISTIDO`
+Status: `FECHAMENTO_AUTOMATICO_PADRAO_PERSISTIDO`
 
 ## Objetivo
 
 Persistir o protocolo obrigatorio que o Codex deve seguir ao concluir tarefas do projeto `MRP_LOCAL`.
+
+## Regra central
+
+- `AUTO_COMMIT_E_PUSH` = padrao obrigatorio.
+- `FECHAMENTO_MANUAL` = excecao somente quando solicitado explicitamente pelo usuario.
+
+O Codex nao deve perguntar se deve commitar quando uma tarefa for concluida.
+
+## Quando nao fechar automaticamente
+
+O Codex so deve evitar commit/push quando o usuario disser explicitamente:
+
+- `nao commita`
+- `nao de push`
+- `vou commitar manualmente`
+- `fechamento manual`
+- `nao fechar versao`
 
 ## Fluxo oficial
 
@@ -17,32 +34,40 @@ Persistir o protocolo obrigatorio que o Codex deve seguir ao concluir tarefas do
 GitHub guarda
 ```
 
+GitHub e o cofre de historico do projeto.
+
 ## Regras obrigatorias
 
 - Toda tarefa deve terminar com documentacao em `02-docs`.
-- Toda tarefa deve ter versao.
-- Toda tarefa deve ser registrada em `02-docs/docs/patch/versoes`.
-- Ao concluir, deve executar fechamento Git quando houver alteracao real.
+- Toda tarefa deve ter versao clara no formato `v0.1.XXX`.
+- Toda tarefa deve ser registrada em `02-docs/docs/patch/versoes/v0.1.XXX`.
+- Ao concluir, deve executar fechamento Git automatico quando houver alteracao real.
 - Se nao houver alteracao real, nao criar commit vazio.
-- Se a tag ja existir, nao recriar; apenas informar.
-- O GitHub e o cofre de historico do projeto.
+- Se a tag ja existir, nao recriar; informar e tentar enviar a tag existente.
+- Se `git pull --rebase` gerar conflito, parar e avisar.
 
-## Protocolo de encerramento
+## Fechamento automatico inclui
 
-1. Documentar a alteracao em `02-docs`.
-2. Verificar arquivos indevidos antes de versionar.
-3. Executar `git status`.
-4. Executar `git pull --rebase`.
-5. Executar `git add .`.
-6. Executar `git commit -m "<Versao> - <Mensagem>"` somente se houver alteracao real.
-7. Criar tag da versao, se ainda nao existir.
-8. Enviar commit para GitHub.
-9. Enviar tag para GitHub.
-10. Executar `git status` final.
+1. Atualizar documentacao em `02-docs`.
+2. Validar arquivos proibidos respeitando `.gitignore`.
+3. Executar `git add .`.
+4. Criar commit versionado.
+5. Criar tag da versao.
+6. Executar `git push`.
+7. Executar `git push origin <versao>`.
+8. Executar `git status` final.
 
 ## Arquivos proibidos antes de commit
 
-Se qualquer item proibido for encontrado, parar e avisar. Nao fazer commit.
+Validar somente arquivos versionaveis:
+
+```powershell
+git ls-files -o --exclude-standard
+git diff --name-only
+git diff --cached --name-only
+```
+
+Se qualquer item proibido versionavel for encontrado, parar e avisar. Nao fazer commit.
 
 Itens proibidos:
 
@@ -55,7 +80,9 @@ Itens proibidos:
 - `*.log` pesado
 - arquivos temporarios
 - credenciais
-- `.codex`
+- `.codex`, quando versionavel
+
+A pasta `.codex` ignorada por `.gitignore` nao deve bloquear o fechamento.
 
 ## Script oficial
 
@@ -65,19 +92,26 @@ Script:
 03-vs/scripts/git_fechar_versao.ps1
 ```
 
-Comando padrao:
+Comando padrao automatico:
 
 ```powershell
-.\03-vs\scripts\git_fechar_versao.ps1 -Versao "vX.Y.Z" -Mensagem "descricao curta"
+.\03-vs\scripts\git_fechar_versao.ps1 -Versao "vX.Y.Z" -Mensagem "descricao curta" -Auto
 ```
 
-## Observacoes
+## Ordem operacional do script
 
-- O script nao substitui a revisao tecnica do Codex.
-- O script deve parar se encontrar arquivo proibido.
-- O script nao deve criar commit vazio.
-- O script deve informar se a tag ja existir.
-- GitHub guarda o historico, mas nao substitui `03-vs`.
+1. `Set-Location X:\`.
+2. `git status`.
+3. Validar arquivos proibidos versionaveis.
+4. `git add .`.
+5. Verificar se ha staged changes.
+6. Se nao houver staged changes: informar `Nada para commitar` e sair sem commit/tag.
+7. `git commit -m "$Versao - $Mensagem"`.
+8. `git pull --rebase`.
+9. Se tag nao existir: `git tag $Versao`.
+10. `git push`.
+11. `git push origin $Versao`.
+12. `git status` final.
 
 ## Controle de escopo desta etapa
 
