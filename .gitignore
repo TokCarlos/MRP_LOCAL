@@ -13,3 +13,6 @@ logs/
 cache/
 .DS_Store
 Thumbs.db
+# Codex local settings/state
+.codex/
+.codex/**
