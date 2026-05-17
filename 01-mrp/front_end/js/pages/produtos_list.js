@@ -26,14 +26,22 @@ async function loadProdutos() {
         const nome = p.nome_oficial || p.nome || "";
         const id = p.id ?? index + 1;
         const preview = p?.imagem?.preview || PLACEHOLDER;
+        const arp = p.arp || "";
+        const ataNumeroRaw = p.ata_numero || p.ata || "";
+        const ataNumero = `${arp} ${ataNumeroRaw}`.trim();
+        const itemAta = `${p.item_ata ?? ""}`;
+        const empresa = p.empresa || "";
 
         tr.innerHTML = `
-            <td>
-                <img src="${preview}" alt="Preview demo" width="56" height="32" loading="lazy" onerror="this.onerror=null;this.src='${PLACEHOLDER}';">
+            <td class="col-id">${id}</td>
+            <td class="col-preview">
+                <img class="produto-preview" src="${preview}" alt="Preview demo" width="56" height="32" loading="lazy" onerror="this.onerror=null;this.src='${PLACEHOLDER}';">
             </td>
-            <td>${id}</td>
-            <td>${nome}</td>
-            <td><button class="btn-row-action" type="button" onclick="alert('Futuro: editar')">Editar</button></td>
+            <td class="col-ata-numero">${ataNumero}</td>
+            <td class="col-item-ata">${itemAta}</td>
+            <td class="col-produto">${nome}</td>
+            <td class="col-empresa">${empresa}</td>
+            <td class="col-acao"><button class="btn-row-action" type="button" onclick="alert('Futuro: editar')">Editar</button></td>
         `;
         tbody.appendChild(tr);
     });
