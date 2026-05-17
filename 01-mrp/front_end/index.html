@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>MRP – Sistema JPL</title>
+
+    <!-- CSS GLOBAL -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- CSS DAS PÁGINAS -->
+    <link rel="stylesheet" href="css/pages/dashboard.css" />
+</head>
+
+<body>
+
+<header class="main-header">
+    <div class="logo-area">
+        <img src="img/logo_jpl.png" alt="Logo">
+        <span class="system-title">MRP – Sistema Interno</span>
+    </div>
+
+    <nav class="menu">
+        <a href="#" data-module="dashboard">Dashboard</a>
+        <a href="#" data-module="produtos_list">Produtos</a>
+        <a href="#" data-module="processos_list">Processos</a>
+        <a href="#" data-module="estoque_list">Estoque</a>
+        <a href="#" data-module="ordens_list">Ordens</a>
+        <button id="btnLogout" class="logout-btn">Sair</button>
+    </nav>
+</header>
+
+<main id="app" class="dashboard-container">
+    <!-- Conteúdo SPA -->
+</main>
+
+<script type="module" src="js/security.js"></script>
+<script type="module" src="js/spa.js"></script>
+
+</body>
+</html>
