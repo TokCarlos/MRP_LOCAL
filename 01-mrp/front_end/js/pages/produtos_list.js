@@ -13,6 +13,8 @@ const produtosState = {
     }
 };
 
+let lightboxBound = false;
+
 export async function init() {
     const addBtn = document.getElementById("btnAddProd");
     if (addBtn) {
@@ -23,6 +25,7 @@ export async function init() {
 
     produtosState.produtos = await loadProdutosSeed();
     initFiltros();
+    initLightbox();
     popularFiltros(produtosState.produtos);
     renderProdutosFiltrados();
 }
@@ -210,7 +213,7 @@ function renderTabela(produtos) {
         tr.innerHTML = `
             <td class="col-id" data-label="ID">${id}</td>
             <td class="col-preview" data-label="PREVIEW">
-                <img class="produto-preview" src="${preview}" alt="Preview demo" width="56" height="32" loading="lazy" onerror="this.onerror=null;this.src='${PLACEHOLDER}';">
+                <img class="produto-preview js-produto-preview" src="${preview}" alt="Preview demo" width="56" height="32" loading="lazy" onerror="this.onerror=null;this.src='${PLACEHOLDER}';">
             </td>
             <td class="col-ata-numero" data-label="ATA+Nº">${ataNumero}</td>
             <td class="col-item" data-label="Nº ITEM">${itemAta}</td>
@@ -220,6 +223,47 @@ function renderTabela(produtos) {
         `;
         tbody.appendChild(tr);
     });
+}
+
+function initLightbox() {
+    const lightbox = document.getElementById("produtoLightbox");
+    const closeBtn = document.getElementById("produtoLightboxClose");
+    const lightboxImg = document.getElementById("produtoLightboxImg");
+    const tbody = document.querySelector("#tblProdutos tbody");
+    if (!lightbox || !closeBtn || !lightboxImg || !tbody || lightboxBound) return;
+
+    tbody.addEventListener("click", (event) => {
+        const target = event.target;
+        if (!(target instanceof HTMLElement)) return;
+        const img = target.closest(".js-produto-preview");
+        if (!(img instanceof HTMLImageElement)) return;
+        openLightbox(img.currentSrc || img.src || PLACEHOLDER, img.alt || "Preview ampliado do produto");
+    });
+
+    closeBtn.addEventListener("click", closeLightbox);
+
+    lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeLightbox();
+    });
+
+    function openLightbox(src, alt) {
+        lightboxImg.src = src || PLACEHOLDER;
+        lightboxImg.alt = alt;
+        lightbox.classList.remove("hidden");
+        lightbox.setAttribute("aria-hidden", "false");
+    }
+
+    function closeLightbox() {
+        lightbox.classList.add("hidden");
+        lightbox.setAttribute("aria-hidden", "true");
+        lightboxImg.src = "";
+    }
+
+    lightboxBound = true;
 }
 
 async function loadProdutosSeed() {

@@ -57,15 +57,17 @@
 .produtos-table .col-preview {
     text-align: center;
     vertical-align: middle;
+    min-height: 164px;
 }
 
 .produtos-table .produto-preview {
-    width: 64px;
-    max-width: 64px;
-    height: 40px;
+    width: 96px;
+    max-width: 96px;
+    height: 64px;
     object-fit: contain;
     display: block;
     margin: 0 auto;
+    cursor: pointer;
 }
 
 .produtos-table .col-acao {
@@ -130,6 +132,55 @@
     text-align: center !important;
     font-weight: 600;
     padding: 14px 10px !important;
+}
+
+.produto-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.78);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.produto-lightbox.hidden {
+    display: none;
+}
+
+.produto-lightbox-content {
+    max-width: 88vw;
+    max-height: 84vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.produto-lightbox-img {
+    max-width: 88vw;
+    max-height: 84vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.96);
+}
+
+.produto-lightbox-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
 }
 
 .modal {
@@ -239,12 +290,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        min-height: 140px;
     }
 
     .produtos-table .produto-preview {
-        width: 56px;
-        max-width: 56px;
-        height: 42px;
+        width: 82px;
+        max-width: 82px;
+        height: 58px;
         object-fit: contain;
         display: block;
     }
@@ -316,6 +368,12 @@
         line-height: 1.1;
         white-space: nowrap;
         max-width: 72px;
+    }
+
+    .produto-lightbox-content,
+    .produto-lightbox-img {
+        max-width: 94vw;
+        max-height: 80vh;
     }
 }
 
