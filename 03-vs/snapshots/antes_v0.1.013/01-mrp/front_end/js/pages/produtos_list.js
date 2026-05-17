@@ -1,4 +1,4 @@
-import { localGET, localINSERT } from "../api.js";
+import { neonGET, neonINSERT } from "../api.js";
 
 export async function init() {
     loadProdutos();
@@ -7,13 +7,13 @@ export async function init() {
         const nome = prompt("Nome do produto:");
         if (!nome) return;
 
-        await localINSERT("produtos", { nome });
+        await neonINSERT("produtos", { nome });
         loadProdutos();
     });
 }
 
 async function loadProdutos() {
-    const data = await localGET("produtos");
+    const data = await neonGET("produtos");
     const tbody = document.querySelector("#tblProdutos tbody");
     tbody.innerHTML = "";
 

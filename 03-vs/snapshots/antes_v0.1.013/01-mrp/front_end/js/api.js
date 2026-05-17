@@ -2,9 +2,7 @@
 // ADAPTADOR LOCAL TEMPORARIO - DADOS MOCKADOS
 // =======================================================
 
-import { APP_CONFIG } from "./config.js";
-
-const STORAGE_KEY = APP_CONFIG.mockStorageKey;
+const STORAGE_KEY = "mrp_local_mock_db";
 
 const seedData = {
     produtos: [
@@ -56,13 +54,15 @@ function applyParams(rows, params) {
     return rows.filter(row => entries.every(([key, value]) => String(row[key]) === String(value)));
 }
 
-export async function localGET(table, params = {}) {
+// Nome legado mantido para preservar as telas existentes nesta etapa.
+export async function neonGET(table, params = {}) {
     const db = loadDb();
     const rows = Array.isArray(db[table]) ? db[table] : [];
     return clone(applyParams(rows, params));
 }
 
-export async function localINSERT(table, data) {
+// Nome legado mantido para preservar as telas existentes nesta etapa.
+export async function neonINSERT(table, data) {
     const db = loadDb();
     const rows = Array.isArray(db[table]) ? db[table] : [];
     const nextId = rows.reduce((max, row) => Math.max(max, Number(row.id) || 0), 0) + 1;
@@ -72,4 +72,12 @@ export async function localINSERT(table, data) {
     saveDb(db);
 
     return clone(record);
+}
+
+export async function localGET(table, params = {}) {
+    return neonGET(table, params);
+}
+
+export async function localINSERT(table, data) {
+    return neonINSERT(table, data);
 }

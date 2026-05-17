@@ -1,34 +1,37 @@
 # Acesso Local e Tailscale - MRP_LOCAL
 
-Versao de referencia: v0.1.010
+Versao de referencia: v0.1.011
 Data do registro: 2026-05-17
-Status: `ACESSO_MOBILE_TAILSCALE_VALIDADO`
+Status: `AMBIENTES_TESTE_E_PRODUCAO_REGISTRADOS`
 
 ## Objetivo
 
-Registrar o procedimento validado para acessar o front-end do `MRP_LOCAL` pela rede Tailscale.
+Registrar o procedimento validado para acessar o front-end do `MRP_LOCAL` pela rede Tailscale no ambiente `TESTE_HOME` e separar esse teste da futura operacao em `PRODUCAO_TRABALHO`.
 
-## Estrutura usada
+## Ambiente atual
 
-- Sistema principal: `X:\01-mrp\front_end`.
+O ambiente atual e de teste, nao producao.
+
+## TESTE_HOME
+
+Uso: desenvolvimento, testes, validacao mobile e interface.
+
+- Servidor atual: `HOME-MACHINE`.
+- Pasta de rede: `\\HOME-MACHINE\system_jpl`.
+- Unidade local usada: `X:\`.
+- Sistema principal servido no teste: `X:\01-mrp\front_end`.
 - Servidor local: Python HTTP server.
-- PC/SERVIDOR: `home-machine`.
 - IP Tailscale do PC: `100.108.26.10`.
-- Telefone testado: `m15-de-carlos-alberto`.
+- Telefone validado: `m15-de-carlos-alberto`.
 - IP Tailscale do telefone: `100.90.190.4`.
+- URL validada: `http://100.108.26.10:8000/login.html`.
 
-## Comando oficial no PC
+## Comando oficial no TESTE_HOME
 
 Executar no PC/SERVIDOR:
 
 ```powershell
 py -m http.server 8000 --bind 100.108.26.10 --directory "X:\01-mrp\front_end"
-```
-
-## URL para acessar pelo telefone
-
-```text
-http://100.108.26.10:8000/login.html
 ```
 
 ## Resultado validado
@@ -45,7 +48,38 @@ Motivo: o telefone acessou diretamente o IP Tailscale do PC (`100.108.26.10`) na
 
 O problema anterior era que o telefone aparecia offline no Tailscale. Depois que o telefone ficou online, o acesso funcionou.
 
-## Checklist rapido
+## PRODUCAO_TRABALHO
+
+O acesso principal deve ocorrer pela rede local da empresa.
+
+Regras previstas:
+
+- Dispositivos devem acessar conectados ao Wi-Fi corporativo ou cabo de rede.
+- Tailscale nao deve ser dependencia obrigatoria da operacao.
+- Tailscale pode ser usado futuramente apenas como acesso tecnico remoto opcional.
+- O servidor real devera ter IP local fixo ou nome de maquina confiavel.
+- A URL final devera apontar para o servidor local da empresa.
+
+## Perfis de ambiente previstos
+
+O projeto deve aceitar perfis de ambiente:
+
+- `TESTE_HOME`
+- `PRODUCAO_TRABALHO`
+- `FUTURO_HOMOLOGACAO`
+
+## Regra de configuracao
+
+Configuracoes de ambiente nao devem ficar fixas no codigo.
+
+Devem ser configuraveis:
+
+- IPs.
+- Nomes de servidor.
+- Portas.
+- Caminhos.
+
+## Checklist rapido para TESTE_HOME
 
 - [ ] Confirmar que o PC esta online no Tailscale.
 - [ ] Confirmar que o telefone esta online no Tailscale.

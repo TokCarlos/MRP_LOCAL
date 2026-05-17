@@ -2,16 +2,14 @@
 // AUTENTICACAO LOCAL TEMPORARIA - MRP_LOCAL
 // =======================================================
 
-import { APP_CONFIG } from "./config.js";
-
-const SESSION_KEY = APP_CONFIG.sessionKey;
-const LOCAL_USER = APP_CONFIG.login.usuario;
-const LOCAL_PASSWORD = APP_CONFIG.login.senha;
+const SESSION_KEY = "mrp_local_session";
+const LOCAL_USER = "admin";
+const LOCAL_PASSWORD = "admin";
 
 function buildSession() {
     return {
         user: LOCAL_USER,
-        mode: APP_CONFIG.authMode,
+        mode: "LOCAL_TEMPORARIO",
         createdAt: new Date().toISOString()
     };
 }
@@ -45,7 +43,7 @@ export async function loginUser(user, password) {
         return {
             ok: true,
             user: LOCAL_USER,
-            mode: APP_CONFIG.authMode
+            mode: "LOCAL_TEMPORARIO"
         };
     }
 

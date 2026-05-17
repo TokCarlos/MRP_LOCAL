@@ -399,3 +399,54 @@ O projeto deve evoluir por etapas pequenas, documentadas, versionadas e reversí
 Tudo que estiver funcional deve ser preservado.
 
 Tudo que for alterado deve ter motivo, registro e teste.
+
+## 20. Configuracao, motor e adaptadores
+
+Regra central:
+
+```text
+Tudo que depende do ambiente deve ser configuravel.
+Tudo que e regra de negocio deve ficar isolado em motor desacoplado.
+Tudo que conecta o motor ao mundo externo deve ser adaptador.
+```
+
+O sistema deve funcionar em `TESTE_HOME` e `PRODUCAO_TRABALHO` sem mudar regra de negocio.
+
+Proibido travar no codigo valores como:
+
+```text
+HOME-MACHINE
+X:\
+100.108.26.10
+portas
+caminhos
+nomes de servidor
+```
+
+O projeto deve aceitar perfis de ambiente:
+
+```text
+TESTE_HOME
+PRODUCAO_TRABALHO
+FUTURO_HOMOLOGACAO
+```
+
+Principio:
+
+```text
+O ambiente muda.
+O adaptador muda.
+A regra central nao muda.
+```
+
+Exemplo: `2 + 2 = 4` independente de telefone, calculadora, computador, papel ou sistema. No `MRP_LOCAL`, regra de negocio deve ser igualmente independente do meio.
+
+Configuracoes futuras devem ficar em arquivos proprios, por exemplo:
+
+```text
+config/ambiente.json
+config/perfis/TESTE_HOME.json
+config/perfis/PRODUCAO_TRABALHO.json
+```
+
+Motores futuros devem ficar desacoplados de interface e infraestrutura.
