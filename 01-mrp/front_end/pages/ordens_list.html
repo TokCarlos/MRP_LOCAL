@@ -1,17 +1,33 @@
-<h2>Ordens de Producao</h2>
+<h2>Ordens de Produção</h2>
+
+<button class="btn-add page-list-actions" id="btnAddOrdem">+ Nova OP</button>
+
+<div class="page-filtros">
+    <input id="filtroOrdemPesquisa" type="text" placeholder="Pesquisar OP, produto ou status...">
+    <select id="filtroOrdemStatus">
+        <option value="">Todos os Status</option>
+    </select>
+    <select id="filtroOrdemPrioridade">
+        <option value="">Todas as Prioridades</option>
+    </select>
+    <div></div>
+    <button id="btnLimparFiltrosOrdem" class="btn-row-action" type="button">Limpar</button>
+</div>
+
+<div id="contadorOrdens" class="page-contador">Exibindo 0 de 0 ordens de produção</div>
 
 <div class="table-responsive">
-    <table class="preview-table" id="tblOrdens">
+    <table class="preview-table sistema-table" id="tblOrdens">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Numero</th>
-                <th>Produto</th>
-                <th>Quantidade</th>
-                <th>Status</th>
-                <th>Prioridade</th>
-                <th>Data Prevista</th>
-                <th>Acoes</th>
+                <th>Nº OP</th>
+                <th>PRODUTO</th>
+                <th>QTD</th>
+                <th>PRIORIDADE</th>
+                <th>STATUS</th>
+                <th>PREVISÃO</th>
+                <th>AÇÃO</th>
             </tr>
         </thead>
         <tbody></tbody>

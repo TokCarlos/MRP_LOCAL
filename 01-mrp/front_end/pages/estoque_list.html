@@ -1,16 +1,35 @@
 <h2>Estoque</h2>
 
+<button class="btn-add page-list-actions" id="btnAddEstoque">+ Novo Registro</button>
+
+<div class="page-filtros">
+    <input id="filtroEstoquePesquisa" type="text" placeholder="Pesquisar produto, local ou status...">
+    <select id="filtroEstoqueLocal">
+        <option value="">Todos os Locais</option>
+    </select>
+    <select id="filtroEstoqueStatus">
+        <option value="">Todos os Status</option>
+    </select>
+    <select id="filtroEstoqueUnidade">
+        <option value="">Todas as Unidades</option>
+    </select>
+    <button id="btnLimparFiltrosEstoque" class="btn-row-action" type="button">Limpar</button>
+</div>
+
+<div id="contadorEstoque" class="page-contador">Exibindo 0 de 0 registros de estoque</div>
+
 <div class="table-responsive">
-    <table class="preview-table" id="tblEstoque">
+    <table class="preview-table sistema-table" id="tblEstoque">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Produto</th>
-                <th>Local</th>
-                <th>Quantidade</th>
-                <th>Minimo</th>
-                <th>Unidade</th>
-                <th>Status</th>
+                <th>PRODUTO</th>
+                <th>LOCAL</th>
+                <th>QTD</th>
+                <th>MÍNIMO</th>
+                <th>UNIDADE</th>
+                <th>STATUS</th>
+                <th>AÇÃO</th>
             </tr>
         </thead>
         <tbody></tbody>
