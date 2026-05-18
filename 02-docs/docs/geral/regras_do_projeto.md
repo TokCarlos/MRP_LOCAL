@@ -544,7 +544,7 @@ Regras:
 - Nomes visuais podem e devem usar acento correto.
 - empresa_key usa `aco`.
 - empresa visual usa `AÇO`.
-- Qualquer ocorrencia de mojibake como `AÃ‡O` e bloqueador de commit.
+- Qualquer ocorrencia de texto visual com mojibake e bloqueador de commit.
 - Scripts que escrevem arquivos devem declarar encoding explicitamente.
 - E proibido salvar ou gerar JSON/MD/CSV com mojibake.
 

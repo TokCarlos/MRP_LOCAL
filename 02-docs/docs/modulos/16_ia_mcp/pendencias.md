@@ -1,4 +1,4 @@
-﻿# Pendencias — Modulo 16 IA MCP
+# Pendencias — Modulo 16 IA MCP
 
 - Validar se Codex reconhece X:\.codex\config.toml.
 - Validar se Node/npm/npx estao instalados.

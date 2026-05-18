@@ -1,4 +1,4 @@
-﻿# AGENTS.md — MRP_LOCAL
+# AGENTS.md — MRP_LOCAL
 
 Estrutura oficial:
 
@@ -18,8 +18,8 @@ Regras obrigatorias:
 
 Status atual:
 
-- Versao: v0.1.003
-- Fase: configuracao inicial MCP/IA
+- Versao: v0.1.033
+- Fase: frontend visual em MOCK_LOCAL / correção preventiva / sem backend real
 
 ## PROTOCOLO OBRIGATORIO DE FECHAMENTO AUTOMATICO
 
@@ -77,3 +77,7 @@ Fechamento Git automatico padrao:
 ```powershell
 .\03-vs\scripts\git_fechar_versao.ps1 -Versao "vX.Y.Z" -Mensagem "descricao curta" -Auto
 ```
+
+## Excecao ativa desta entrega
+
+Na entrega v0.1.033, o usuario solicitou commit manual. Portanto, nao executar fechamento automatico para este pacote.

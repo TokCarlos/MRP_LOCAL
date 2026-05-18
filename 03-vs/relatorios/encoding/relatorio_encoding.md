@@ -1,4 +1,4 @@
-﻿# Relatorio de Encoding
+# Relatorio de Encoding
 
 - Status: OK
 - Arquivos analisados: 235

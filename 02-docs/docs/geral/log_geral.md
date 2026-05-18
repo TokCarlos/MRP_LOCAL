@@ -58,3 +58,31 @@ Alteração:
 Motivo: reduzir nomes, manter padrão físico curto, minúsculo e seguro para CMD, BAT, PowerShell, Python, ZIP, Git e caminhos de rede.
 
 Status: APLICADO.
+
+---
+
+## 2026-05-17 — v0.1.033
+
+### Tipo
+
+Correção preventiva e limpeza controlada sem commit automático.
+
+### Descrição
+
+Corrigidos riscos de caminho legado em produtos, catálogo ATA com imagens inexistentes, falso positivo de encoding, auditoria presa em `X:\` e renderização de tabela com HTML não escapado.
+
+### Resultado
+
+```text
+PRECHECK_OK
+JSON_OK
+JS_SYNTAX_OK
+REFERENCIAS_ATIVAS_QUEBRADAS=0
+COMMIT_MANUAL_SOLICITADO_PELO_USUARIO
+```
+
+### Status
+
+```text
+PREPARADO PARA COMMIT MANUAL
+```

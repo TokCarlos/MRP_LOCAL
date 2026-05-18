@@ -9,7 +9,10 @@ $Exts = @(".json", ".js", ".css", ".html", ".md", ".ps1", ".csv", ".txt")
 $IgnorePathRegex = "\\.git(\\|$)|node_modules(\\|$)|03-vs\\patches(\\|$)|03-vs\\snapshots(\\|$)|03-vs\\quarentena(\\|$)|03-vs\\relatorios\\encoding(\\|$)"
 
 $BadPatterns = @(
-  "AÃ‡O", "AÃ§O", "DESCRIÃ‡", "FAMÃ", "NÃº", "NÃš", "CÃ³", "CÃ“", "INFORMAÃ‡", "SITUAÃ‡", "MEDIÃ‡", "OPÃ‡", "REVISÃ", "ATENÃ‡", "MARICÃ", "Âº", "Âª", "â€“"
+  "AÃ‡O", "AÃ§O", "DESCRIÃ‡", "FAMÃ", "NÃº", "NÃš", "CÃ³", "CÃ“",
+  "INFORMAÃ‡", "SITUAÃ‡", "MEDIÃ‡", "OPÃ‡", "REVISÃƒ", "PREVISÃƒ",
+  "ATENÃ‡", "MARICÃ", "NÃ£", "NÃ¡", "NÃ©", "NÃª", "NÃ³", "NÃµ", "NÃº",
+  "Âº", "Âª", "â€“", "â€”", "â€œ", "â€", "â€˜", "â€™"
 )
 
 function Read-Utf8([string]$Path) {
@@ -32,7 +35,7 @@ function Normalize-Text([string]$Value) {
 }
 
 $files = Get-ChildItem -Path $RepoRoot -Recurse -File -Force -ErrorAction SilentlyContinue |
-    Where-Object { $Exts -contains $_.Extension.ToLower() -and $_.FullName -notmatch $IgnorePathRegex }
+    Where-Object { $Exts -contains $_.Extension.ToLower() -and $_.FullName -notmatch $IgnorePathRegex -and $_.FullName -ne $MyInvocation.MyCommand.Path }
 
 $issues = New-Object System.Collections.Generic.List[object]
 $scanned = 0
@@ -71,7 +74,7 @@ foreach ($f in $files) {
                 if ($empresaKey -eq "aco" -and $empresaNorm -ne "ACO") {
                     $issues.Add([pscustomobject]@{ tipo = "EMPRESA_VISUAL_INVALIDA"; arquivo = $f.FullName; detalhe = "id=$($p.id) empresa='$empresa' key='$empresaKey'"; risco = "ALTO_RISCO" })
                 }
-                if ($empresaKey -eq "AÇO" -or $empresaKey -eq "AÃ‡O") {
+                if ($empresaKey -eq "AÇO") {
                     $issues.Add([pscustomobject]@{ tipo = "EMPRESA_KEY_INVALIDA"; arquivo = $f.FullName; detalhe = "id=$($p.id) empresa_key='$empresaKey'"; risco = "ALTO_RISCO" })
                 }
                 if ($empresa -match "GOV|SEHIS" -or $empresaKey -match "gov_rio|sehis") {

@@ -1,4 +1,4 @@
-﻿# MRP_LOCAL
+# MRP_LOCAL
 
 Projeto local MRP_LOCAL.
 
@@ -60,3 +60,16 @@ Nesta etapa nao foram criados backend, banco ou frontend, e `01-mrp` nao foi alt
 - `GOV. RIO` nao e empresa; deve ser tratado como `cliente/orgao/origem de ata`.
 - Filtros de `EMPRESA` e `ATA/ORIGEM` devem permanecer separados.
 - Nome canonico da ATA/origem GOV/SEHIS: `SEHIS - GOV. RIO` (`sehis_gov_rio`).
+
+## Status v0.1.033
+
+Correção preventiva aplicada sem commit automático.
+
+- Frontend permanece em `MOCK_LOCAL`.
+- Backend real ainda não iniciado.
+- Banco real ainda não iniciado.
+- Produtos ativos: 147.
+- Empresas operacionais com dados: JPL e AÇO.
+- TCR permanece reservado para uso futuro, sem dados operacionais.
+- Validação v0.1.033: OK.
+- Fechamento Git: manual por solicitação do usuário.

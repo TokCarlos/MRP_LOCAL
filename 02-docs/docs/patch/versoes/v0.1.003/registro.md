@@ -1,4 +1,4 @@
-﻿# Registro de Patch — v0.1.003
+# Registro de Patch — v0.1.003
 
 ## Escopo
 

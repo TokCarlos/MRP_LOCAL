@@ -1,4 +1,4 @@
-﻿# Modulo 16 — IA MCP
+# Modulo 16 — IA MCP
 
 Status: PLANEJADO / CONFIGURADO_PARCIALMENTE
 

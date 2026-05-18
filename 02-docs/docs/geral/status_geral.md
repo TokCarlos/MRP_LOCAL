@@ -92,7 +92,19 @@ Status da estrutura: DEFINIDO em v0.1.002.
 ## Atualizacao v0.1.032
 
 - Erro de encoding detectado em textos visuais (mojibake).
-- Nome visual da empresa corrigido de `AÃ‡O` para `AÇO` nos dados ativos.
+- Nome visual da empresa corrigido para `AÇO` nos dados ativos, removendo mojibake.
 - Regra absoluta de encoding documentada como bloqueadora de commit.
 - Validacao obrigatoria de encoding criada em `03-vs/scripts/validar_encoding.ps1`.
 - Relatorios de encoding gerados em `03-vs/relatorios/encoding`.
+
+## Atualizacao v0.1.033
+
+- Correção preventiva executada sem backend e sem banco real.
+- `produtos_seed.json` permanece com 147 produtos ativos: JPL 53, AÇO 94, TCR 0.
+- `imagem.preview` e `imagem.pasta` alinhados para `img/produtos`.
+- `catalogo_ata_gov_rio.json` corrigido para caminhos físicos existentes.
+- Validador de encoding ajustado para evitar falso positivo e não validar o próprio script.
+- Auditoria de limpeza ajustada para raiz dinâmica, sem dependência fixa de `X:\`.
+- Tabela de produtos protegida contra injeção HTML básica antes de futura API/banco.
+- Relatórios v0.1.033 gerados em `03-vs/relatorios/precheck` e `03-vs/relatorios/limpeza`.
+- Commit automático não executado por pedido do usuário; fechamento manual.

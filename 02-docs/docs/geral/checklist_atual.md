@@ -1,6 +1,6 @@
 # Checklist Atual - MRP_LOCAL
 
-Versao de referencia: v0.1.004
+Versao de referencia: v0.1.033
 Data do registro: 2026-05-17
 
 ## Estrutura local
@@ -50,15 +50,16 @@ Data do registro: 2026-05-17
 
 ## Sistema funcional
 
-- [x] Backend nao iniciado.
-- [x] Banco nao iniciado.
-- [x] Frontend nao iniciado.
-- [x] Sistema funcional ainda nao implementado.
-- [x] `01-mrp` nao alterado nesta tarefa.
+- [x] Frontend visual iniciado em modo `MOCK_LOCAL`.
+- [x] Produtos, Dashboard, Processos, Estoque e Ordens de Produção existem como interface/teste.
+- [x] Backend real nao iniciado.
+- [x] Banco real nao iniciado.
+- [x] Sistema ainda nao substitui Excel/VBA.
+- [x] `01-mrp` alterado apenas de forma controlada para correções de dados/imagens/segurança preventiva.
 
 ## Proximos passos
 
 - [ ] Revisar politica de `.gitignore` para o projeto.
-- [ ] Inventariar conteudo atual de `01-mrp`, `02-docs` e `03-vs` antes do primeiro commit tecnico.
+- [x] Inventario e precheck executados em v0.1.033.
 - [ ] Definir criterio de snapshot/backup antes de promocao para `01-mrp`.
 - [ ] Criar rotina de registro de mudancas em `02-docs` para cada versao.

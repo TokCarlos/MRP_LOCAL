@@ -1,12 +1,13 @@
 {
   "workspace": "MRP_Workspace",
-  "versao": "v0.1.002",
+  "versao": "v0.1.033",
   "pastas": {
     "01-mrp": "Sistema funcional. Somente arquivos usados pelo sistema, agora ou futuramente.",
     "02-docs": "Documentacao, regras, historico, roadmap, inventarios e progresso.",
     "03-vs": "Pacotes, patches, historico e versoes geradas a partir do sistema funcional."
   },
   "padrao_nomes": "Pastas raiz curtas, minusculas e ASCII para reduzir risco em CMD, BAT, PowerShell, Python, Git, ZIP e caminhos de rede.",
-  "status": "BASE_DOCUMENTAL_ORGANIZADA",
-  "alteracao_v0_1_002": "Renomeadas as pastas raiz para 01-mrp, 02-docs e 03-vs conforme decisao do usuario."
+  "status": "CORRECAO_PREVENTIVA_PRE_COMMIT_MANUAL",
+  "alteracao_v0_1_002": "Renomeadas as pastas raiz para 01-mrp, 02-docs e 03-vs conforme decisao do usuario.",
+  "alteracao_v0_1_033": "Corrigidos caminhos ativos de imagens, catalogo ATA, validacao de encoding, auditoria de limpeza e escape HTML preventivo em Produtos."
 }

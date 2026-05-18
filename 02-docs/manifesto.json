@@ -1,9 +1,9 @@
 {
   "projeto": "MRP_LOCAL",
-  "versao_documental": "v0.1.027",
+  "versao_documental": "v0.1.033",
   "data": "2026-05-17",
-  "status": "DOMINIO_EMPRESA_ATA_ORIGEM_CORRIGIDO",
-  "fase_atual": "INTERFACE_UI_CONCEITUAL",
+  "status": "CORRECAO_PREVENTIVA_PRE_COMMIT_MANUAL",
+  "fase_atual": "INTERFACE_UI_CONCEITUAL_MOCK_LOCAL",
   "servidor_teste_atual": "\\\\HOME-MACHINE",
   "regras_chave": [
     "documentacao_antes_do_codigo",
@@ -16,7 +16,8 @@
     "postgresql_preparado_mas_nao_prioritario_agora",
     "excel_vba_legado_preservado",
     "rede_work_como_modulo_proprio",
-    "encoding_e_caminhos_como_requisito_obrigatorio"
+    "encoding_e_caminhos_como_requisito_obrigatorio",
+    "validacao_pre_commit_manual"
   ],
   "modulos": [
     "00_base_do_sistema",

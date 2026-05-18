@@ -227,15 +227,23 @@ function renderTabela(produtos) {
         const itemAta = `${p.item_ata ?? ""}`;
         const empresa = p.empresa || "";
 
+        const safeId = escapeHtml(id);
+        const safePreview = escapeHtml(preview);
+        const safePlaceholder = escapeHtml(PLACEHOLDER);
+        const safeAtaNumero = escapeHtml(ataNumero);
+        const safeItemAta = escapeHtml(itemAta);
+        const safeNome = escapeHtml(nome);
+        const safeEmpresa = escapeHtml(empresa);
+
         tr.innerHTML = `
-            <td class="col-id" data-label="ID">${id}</td>
+            <td class="col-id" data-label="ID">${safeId}</td>
             <td class="col-preview" data-label="PREVIEW">
-                <img class="produto-preview js-produto-preview" src="${preview}" alt="Preview demo" width="56" height="32" loading="lazy" onerror="this.onerror=null;this.src='${PLACEHOLDER}';">
+                <img class="produto-preview js-produto-preview" src="${safePreview}" alt="Preview demo" width="56" height="32" loading="lazy" onerror="this.onerror=null;this.src='${safePlaceholder}';">
             </td>
-            <td class="col-ata-numero" data-label="ATA+Nº">${ataNumero}</td>
-            <td class="col-item" data-label="Nº ITEM">${itemAta}</td>
-            <td class="col-produto" data-label="PRODUTO">${nome}</td>
-            <td class="col-empresa" data-label="EMPRESA">${empresa}</td>
+            <td class="col-ata-numero" data-label="ATA+Nº">${safeAtaNumero}</td>
+            <td class="col-item" data-label="Nº ITEM">${safeItemAta}</td>
+            <td class="col-produto" data-label="PRODUTO">${safeNome}</td>
+            <td class="col-empresa" data-label="EMPRESA">${safeEmpresa}</td>
             <td class="col-acao" data-label="AÇÃO"><button class="btn-row-action" type="button" onclick="alert('Futuro: editar')">Editar</button></td>
         `;
         tbody.appendChild(tr);

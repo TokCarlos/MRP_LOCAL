@@ -1,4 +1,4 @@
-﻿# Testes — Modulo 16 IA MCP
+# Testes — Modulo 16 IA MCP
 
 ## Teste 1 — Estrutura
 

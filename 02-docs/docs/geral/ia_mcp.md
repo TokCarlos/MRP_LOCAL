@@ -1,4 +1,4 @@
-﻿# IA e MCP no MRP_LOCAL
+# IA e MCP no MRP_LOCAL
 
 MCP sera usado como camada auxiliar para IA/Codex.
 

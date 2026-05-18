@@ -1,4 +1,4 @@
-﻿# Historico — Modulo 16 IA MCP
+# Historico — Modulo 16 IA MCP
 
 ## v0.1.003
 

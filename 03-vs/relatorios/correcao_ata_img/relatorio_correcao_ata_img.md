@@ -1,4 +1,4 @@
-﻿# Relatorio Correcao ATA/Imagem - v0.1.031
+# Relatorio Correcao ATA/Imagem - v0.1.031
 
 - ATA oficial: SEHIS - GOV. RIO 114443801/2025
 - Key ATA: sehis_gov_rio
