@@ -536,6 +536,18 @@ Regras:
 - empresa continua dominio fechado: JPL, ACO e TCR
 - GOV. RIO e SEHIS nao podem ser empresa
 
+## Regra absoluta de encoding
+
+- Texto visual e dados exibidos devem ser UTF-8 correto.
+- Codigo, identificadores, keys tecnicas, nomes tecnicos e logica devem ser ASCII-safe.
+- Chaves tecnicas nao usam acento.
+- Nomes visuais podem e devem usar acento correto.
+- empresa_key usa `aco`.
+- empresa visual usa `AÇO`.
+- Qualquer ocorrencia de mojibake como `AÃ‡O` e bloqueador de commit.
+- Scripts que escrevem arquivos devem declarar encoding explicitamente.
+- E proibido salvar ou gerar JSON/MD/CSV com mojibake.
+
 Exemplo:
 
 `img/produtos/aco/atas/sehis_gov_rio/item_2_1_esqui.png`

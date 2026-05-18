@@ -88,3 +88,11 @@ Status da estrutura: DEFINIDO em v0.1.002.
 - Duplicidade de `produto_key` removida do seed ativo.
 - Dominio de empresa preservado: JPL, ACO, TCR (TCR sem dados operacionais).
 - Sem backend e sem banco.
+
+## Atualizacao v0.1.032
+
+- Erro de encoding detectado em textos visuais (mojibake).
+- Nome visual da empresa corrigido de `AÃ‡O` para `AÇO` nos dados ativos.
+- Regra absoluta de encoding documentada como bloqueadora de commit.
+- Validacao obrigatoria de encoding criada em `03-vs/scripts/validar_encoding.ps1`.
+- Relatorios de encoding gerados em `03-vs/relatorios/encoding`.

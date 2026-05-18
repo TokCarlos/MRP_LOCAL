@@ -1,4 +1,4 @@
-﻿[
+[
     {
         "id":  1,
         "produto_key":  "JPL__CIM_JEQUI__07_2023__ITEM_001",
@@ -10,7 +10,7 @@
         "ata_key":  "07_2023",
         "item_ata":  "1",
         "item_key":  "item_001",
-        "nome_oficial":  "TRIPLO SIMULADOR DE ESTIMULAÃ‡ÃƒO PARA TODOS OS MEMBROS E CERVICAL",
+        "nome_oficial":  "TRIPLO SIMULADOR DE ESTIMULAÇÃO PARA TODOS OS MEMBROS E CERVICAL",
         "categoria":  "ATI",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/cim_jequi/07_2023/item_001/",
@@ -30,7 +30,7 @@
         "ata_key":  "07_2023",
         "item_ata":  "2",
         "item_key":  "item_002",
-        "nome_oficial":  "DUPLO SIMULADOR PARA ESTIMULAÃ‡ÃƒO DE QUADRIL E PERNAS",
+        "nome_oficial":  "DUPLO SIMULADOR PARA ESTIMULAÇÃO DE QUADRIL E PERNAS",
         "categoria":  "ATI",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/cim_jequi/07_2023/item_002/",
@@ -110,7 +110,7 @@
         "ata_key":  "07_2023",
         "item_ata":  "6",
         "item_key":  "item_006",
-        "nome_oficial":  "ARTEFATO DE EQUILÃBRIO",
+        "nome_oficial":  "ARTEFATO DE EQUILÍBRIO",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/cim_jequi/07_2023/item_006/",
@@ -130,7 +130,7 @@
         "ata_key":  "07_2023",
         "item_ata":  "7",
         "item_key":  "item_007",
-        "nome_oficial":  "BALANÃ‡O COM HASTES DUPLO ASSENTO JÃšNIOR",
+        "nome_oficial":  "BALANÇO COM HASTES DUPLO ASSENTO JÚNIOR",
         "categoria":  "MOBILIARIO",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/cim_jequi/07_2023/item_007/",
@@ -150,7 +150,7 @@
         "ata_key":  "07_2023",
         "item_ata":  "8",
         "item_key":  "item_008",
-        "nome_oficial":  "BALANÃ‡O COM HASTES DUPLOS ASSENTO INFANTIL",
+        "nome_oficial":  "BALANÇO COM HASTES DUPLOS ASSENTO INFANTIL",
         "categoria":  "MOBILIARIO",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/cim_jequi/07_2023/item_008/",
@@ -170,7 +170,7 @@
         "ata_key":  "07_2023",
         "item_ata":  "9",
         "item_key":  "item_009",
-        "nome_oficial":  "BALANÃ‡O COM HASTES QUÃDRUPLOS KIDS",
+        "nome_oficial":  "BALANÇO COM HASTES QUÁDRUPLOS KIDS",
         "categoria":  "PLAYGROUND",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/cim_jequi/07_2023/item_009/",
@@ -250,7 +250,7 @@
         "ata_key":  "07_2023",
         "item_ata":  "13",
         "item_key":  "item_013",
-        "nome_oficial":  "BALANÃ‡O MAMÃƒE BEBÃŠ",
+        "nome_oficial":  "BALANÇO MAMÃE BEBÊ",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/cim_jequi/07_2023/item_013/",
@@ -270,7 +270,7 @@
         "ata_key":  "07_2023",
         "item_ata":  "14",
         "item_key":  "item_014",
-        "nome_oficial":  "BALANÃ‡O VAI E VEM INCLUSIVO",
+        "nome_oficial":  "BALANÇO VAI E VEM INCLUSIVO",
         "categoria":  "PLAYGROUND",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/cim_jequi/07_2023/item_014/",
@@ -310,7 +310,7 @@
         "ata_key":  "07_2023",
         "item_ata":  "16",
         "item_key":  "item_016",
-        "nome_oficial":  "GUIAS DE EXTENSÃƒO DE BRAÃ‡OS E TRAVE SUSPENSA INCLINADA",
+        "nome_oficial":  "GUIAS DE EXTENSÃO DE BRAÇOS E TRAVE SUSPENSA INCLINADA",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/cim_jequi/07_2023/item_016/",
@@ -470,7 +470,7 @@
         "ata_key":  "07_2023",
         "item_ata":  "24",
         "item_key":  "item_024",
-        "nome_oficial":  "ASSENTO PÃšBLICO",
+        "nome_oficial":  "ASSENTO PÚBLICO",
         "categoria":  "MOBILIARIO",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/cim_jequi/07_2023/item_024/",
@@ -490,7 +490,7 @@
         "ata_key":  "07_2023",
         "item_ata":  "25",
         "item_key":  "item_025",
-        "nome_oficial":  "BANCO COM ENCOSTO P/ LOCAIS PÃšBLICOS",
+        "nome_oficial":  "BANCO COM ENCOSTO P/ LOCAIS PÚBLICOS",
         "categoria":  "MOBILIARIO",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/cim_jequi/07_2023/item_025/",
@@ -550,7 +550,7 @@
         "ata_key":  "07_2023",
         "item_ata":  "28",
         "item_key":  "item_028",
-        "nome_oficial":  "GRADIL ÃREAS PÃšBLICA",
+        "nome_oficial":  "GRADIL ÁREAS PÚBLICA",
         "categoria":  "MOBILIARIO",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/cim_jequi/07_2023/item_028/",
@@ -570,7 +570,7 @@
         "ata_key":  "028_2023",
         "item_ata":  "1",
         "item_key":  "item_001",
-        "nome_oficial":  "REFÃšGIO DE APOIO Ã€ MOBILIDADE URBANA -TIPO I",
+        "nome_oficial":  "REFÚGIO DE APOIO À MOBILIDADE URBANA -TIPO I",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/cim_jequi/028_2023/item_001/",
@@ -590,7 +590,7 @@
         "ata_key":  "028_2023",
         "item_ata":  "2",
         "item_key":  "item_002",
-        "nome_oficial":  "REFÃšGIO DE APOIO Ã€ MOBILIDADE URBANA -TIPO II",
+        "nome_oficial":  "REFÚGIO DE APOIO À MOBILIDADE URBANA -TIPO II",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/cim_jequi/028_2023/item_002/",
@@ -610,7 +610,7 @@
         "ata_key":  "028_2023",
         "item_ata":  "3",
         "item_key":  "item_003",
-        "nome_oficial":  "ESTRUTURA DEORIENTAÃ‡ÃƒO DEVIAS PÃšBLICASâ€“ TIPO I",
+        "nome_oficial":  "ESTRUTURA DEORIENTAÇÃO DEVIAS PÚBLICAS– TIPO I",
         "categoria":  "MOBILIARIO",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/cim_jequi/028_2023/item_003/",
@@ -630,7 +630,7 @@
         "ata_key":  "028_2023",
         "item_ata":  "4",
         "item_key":  "item_004",
-        "nome_oficial":  "ESTRUTURA DEORIENTAÃ‡ÃƒO DEVIAS PÃšBLICASâ€“ TIPO II",
+        "nome_oficial":  "ESTRUTURA DEORIENTAÇÃO DEVIAS PÚBLICAS– TIPO II",
         "categoria":  "MOBILIARIO",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/cim_jequi/028_2023/item_004/",
@@ -644,13 +644,13 @@
         "produto_key":  "JPL__SOMAR_MARICA__011_2025__ITEM_001",
         "empresa":  "JPL",
         "empresa_key":  "jpl",
-        "arp":  "SOMAR-MARICÃ",
+        "arp":  "SOMAR-MARICÁ",
         "arp_key":  "somar_marica",
         "ata_numero":  "011/2025",
         "ata_key":  "011_2025",
         "item_ata":  "1",
         "item_key":  "item_001",
-        "nome_oficial":  "TRIPLO SIMULADOR DE ESTIMULAÃ‡ÃƒO PARA TODOS OS MEMBROS E CERVICAL",
+        "nome_oficial":  "TRIPLO SIMULADOR DE ESTIMULAÇÃO PARA TODOS OS MEMBROS E CERVICAL",
         "categoria":  "ATI",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/somar_marica/011_2025/item_001/",
@@ -664,13 +664,13 @@
         "produto_key":  "JPL__SOMAR_MARICA__011_2025__ITEM_002",
         "empresa":  "JPL",
         "empresa_key":  "jpl",
-        "arp":  "SOMAR-MARICÃ",
+        "arp":  "SOMAR-MARICÁ",
         "arp_key":  "somar_marica",
         "ata_numero":  "011/2025",
         "ata_key":  "011_2025",
         "item_ata":  "2",
         "item_key":  "item_002",
-        "nome_oficial":  "DUPLO SIMULADOR PARA ESTIMULAÃ‡ÃƒO DE QUADRIL E PERNAS",
+        "nome_oficial":  "DUPLO SIMULADOR PARA ESTIMULAÇÃO DE QUADRIL E PERNAS",
         "categoria":  "ATI",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/somar_marica/011_2025/item_002/",
@@ -684,7 +684,7 @@
         "produto_key":  "JPL__SOMAR_MARICA__011_2025__ITEM_003",
         "empresa":  "JPL",
         "empresa_key":  "jpl",
-        "arp":  "SOMAR-MARICÃ",
+        "arp":  "SOMAR-MARICÁ",
         "arp_key":  "somar_marica",
         "ata_numero":  "011/2025",
         "ata_key":  "011_2025",
@@ -704,7 +704,7 @@
         "produto_key":  "JPL__SOMAR_MARICA__011_2025__ITEM_004",
         "empresa":  "JPL",
         "empresa_key":  "jpl",
-        "arp":  "SOMAR-MARICÃ",
+        "arp":  "SOMAR-MARICÁ",
         "arp_key":  "somar_marica",
         "ata_numero":  "011/2025",
         "ata_key":  "011_2025",
@@ -724,7 +724,7 @@
         "produto_key":  "JPL__SOMAR_MARICA__011_2025__ITEM_005",
         "empresa":  "JPL",
         "empresa_key":  "jpl",
-        "arp":  "SOMAR-MARICÃ",
+        "arp":  "SOMAR-MARICÁ",
         "arp_key":  "somar_marica",
         "ata_numero":  "011/2025",
         "ata_key":  "011_2025",
@@ -744,13 +744,13 @@
         "produto_key":  "JPL__SOMAR_MARICA__011_2025__ITEM_006",
         "empresa":  "JPL",
         "empresa_key":  "jpl",
-        "arp":  "SOMAR-MARICÃ",
+        "arp":  "SOMAR-MARICÁ",
         "arp_key":  "somar_marica",
         "ata_numero":  "011/2025",
         "ata_key":  "011_2025",
         "item_ata":  "6",
         "item_key":  "item_006",
-        "nome_oficial":  "ARTEFATO DE EQUILÃBRIO",
+        "nome_oficial":  "ARTEFATO DE EQUILÍBRIO",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/somar_marica/011_2025/item_006/",
@@ -764,13 +764,13 @@
         "produto_key":  "JPL__SOMAR_MARICA__011_2025__ITEM_007",
         "empresa":  "JPL",
         "empresa_key":  "jpl",
-        "arp":  "SOMAR-MARICÃ",
+        "arp":  "SOMAR-MARICÁ",
         "arp_key":  "somar_marica",
         "ata_numero":  "011/2025",
         "ata_key":  "011_2025",
         "item_ata":  "7",
         "item_key":  "item_007",
-        "nome_oficial":  "ESTRUTURA COM ORIENTAÃ‡ÃƒO PARA UTILIZAÃ‡ÃƒO DOS ARTEFATOS",
+        "nome_oficial":  "ESTRUTURA COM ORIENTAÇÃO PARA UTILIZAÇÃO DOS ARTEFATOS",
         "categoria":  "MOBILIARIO",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/somar_marica/011_2025/item_007/",
@@ -784,13 +784,13 @@
         "produto_key":  "JPL__SOMAR_MARICA__011_2025__ITEM_008",
         "empresa":  "JPL",
         "empresa_key":  "jpl",
-        "arp":  "SOMAR-MARICÃ",
+        "arp":  "SOMAR-MARICÁ",
         "arp_key":  "somar_marica",
         "ata_numero":  "011/2025",
         "ata_key":  "011_2025",
         "item_ata":  "8",
         "item_key":  "item_008",
-        "nome_oficial":  "BALANÃ‡O COM HASTES DUPLO ASSENTO JÃšNIOR",
+        "nome_oficial":  "BALANÇO COM HASTES DUPLO ASSENTO JÚNIOR",
         "categoria":  "MOBILIARIO",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/somar_marica/011_2025/item_008/",
@@ -804,13 +804,13 @@
         "produto_key":  "JPL__SOMAR_MARICA__011_2025__ITEM_009",
         "empresa":  "JPL",
         "empresa_key":  "jpl",
-        "arp":  "SOMAR-MARICÃ",
+        "arp":  "SOMAR-MARICÁ",
         "arp_key":  "somar_marica",
         "ata_numero":  "011/2025",
         "ata_key":  "011_2025",
         "item_ata":  "9",
         "item_key":  "item_009",
-        "nome_oficial":  "BALANÃ‡O COM HASTES DUPLOS ASSENTO INFANTIL",
+        "nome_oficial":  "BALANÇO COM HASTES DUPLOS ASSENTO INFANTIL",
         "categoria":  "MOBILIARIO",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/somar_marica/011_2025/item_009/",
@@ -824,7 +824,7 @@
         "produto_key":  "JPL__SOMAR_MARICA__011_2025__ITEM_010",
         "empresa":  "JPL",
         "empresa_key":  "jpl",
-        "arp":  "SOMAR-MARICÃ",
+        "arp":  "SOMAR-MARICÁ",
         "arp_key":  "somar_marica",
         "ata_numero":  "011/2025",
         "ata_key":  "011_2025",
@@ -844,7 +844,7 @@
         "produto_key":  "JPL__SOMAR_MARICA__011_2025__ITEM_012",
         "empresa":  "JPL",
         "empresa_key":  "jpl",
-        "arp":  "SOMAR-MARICÃ",
+        "arp":  "SOMAR-MARICÁ",
         "arp_key":  "somar_marica",
         "ata_numero":  "011/2025",
         "ata_key":  "011_2025",
@@ -864,13 +864,13 @@
         "produto_key":  "JPL__SOMAR_MARICA__011_2025__ITEM_013",
         "empresa":  "JPL",
         "empresa_key":  "jpl",
-        "arp":  "SOMAR-MARICÃ",
+        "arp":  "SOMAR-MARICÁ",
         "arp_key":  "somar_marica",
         "ata_numero":  "011/2025",
         "ata_key":  "011_2025",
         "item_ata":  "13",
         "item_key":  "item_013",
-        "nome_oficial":  "CENTRAL MÃšLTIPLA EM AÃ‡O INOX (APARELHO) + (BICICLETÃRIO) + (PRANCHA ABDOMINAL)",
+        "nome_oficial":  "CENTRAL MÚLTIPLA EM AÇO INOX (APARELHO) + (BICICLETÁRIO) + (PRANCHA ABDOMINAL)",
         "categoria":  "ATI",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/somar_marica/011_2025/item_013/",
@@ -884,7 +884,7 @@
         "produto_key":  "JPL__SOMAR_MARICA__011_2025__ITEM_014",
         "empresa":  "JPL",
         "empresa_key":  "jpl",
-        "arp":  "SOMAR-MARICÃ",
+        "arp":  "SOMAR-MARICÁ",
         "arp_key":  "somar_marica",
         "ata_numero":  "011/2025",
         "ata_key":  "011_2025",
@@ -904,7 +904,7 @@
         "produto_key":  "JPL__SOMAR_MARICA__011_2025__ITEM_015",
         "empresa":  "JPL",
         "empresa_key":  "jpl",
-        "arp":  "SOMAR-MARICÃ",
+        "arp":  "SOMAR-MARICÁ",
         "arp_key":  "somar_marica",
         "ata_numero":  "011/2025",
         "ata_key":  "011_2025",
@@ -924,7 +924,7 @@
         "produto_key":  "JPL__SOMAR_MARICA__011_2025__ITEM_016",
         "empresa":  "JPL",
         "empresa_key":  "jpl",
-        "arp":  "SOMAR-MARICÃ",
+        "arp":  "SOMAR-MARICÁ",
         "arp_key":  "somar_marica",
         "ata_numero":  "011/2025",
         "ata_key":  "011_2025",
@@ -944,13 +944,13 @@
         "produto_key":  "JPL__SOMAR_MARICA__011_2025__ITEM_017",
         "empresa":  "JPL",
         "empresa_key":  "jpl",
-        "arp":  "SOMAR-MARICÃ",
+        "arp":  "SOMAR-MARICÁ",
         "arp_key":  "somar_marica",
         "ata_numero":  "011/2025",
         "ata_key":  "011_2025",
         "item_ata":  "17",
         "item_key":  "item_017",
-        "nome_oficial":  "ASSENTO PÃšBLICO",
+        "nome_oficial":  "ASSENTO PÚBLICO",
         "categoria":  "MOBILIARIO",
         "imagem":  {
                        "pasta":  "assets/produtos/jpl/somar_marica/011_2025/item_017/",
@@ -964,7 +964,7 @@
         "produto_key":  "JPL__SOMAR_MARICA__011_2025__ITEM_018",
         "empresa":  "JPL",
         "empresa_key":  "jpl",
-        "arp":  "SOMAR-MARICÃ",
+        "arp":  "SOMAR-MARICÁ",
         "arp_key":  "somar_marica",
         "ata_numero":  "011/2025",
         "ata_key":  "011_2025",
@@ -984,7 +984,7 @@
         "produto_key":  "JPL__SOMAR_MARICA__011_2025__ITEM_019",
         "empresa":  "JPL",
         "empresa_key":  "jpl",
-        "arp":  "SOMAR-MARICÃ",
+        "arp":  "SOMAR-MARICÁ",
         "arp_key":  "somar_marica",
         "ata_numero":  "011/2025",
         "ata_key":  "011_2025",
@@ -1004,7 +1004,7 @@
         "produto_key":  "JPL__SOMAR_MARICA__011_2025__ITEM_021",
         "empresa":  "JPL",
         "empresa_key":  "jpl",
-        "arp":  "SOMAR-MARICÃ",
+        "arp":  "SOMAR-MARICÁ",
         "arp_key":  "somar_marica",
         "ata_numero":  "011/2025",
         "ata_key":  "011_2025",
@@ -1024,7 +1024,7 @@
         "produto_key":  "JPL__SOMAR_MARICA__011_2025__ITEM_022",
         "empresa":  "JPL",
         "empresa_key":  "jpl",
-        "arp":  "SOMAR-MARICÃ",
+        "arp":  "SOMAR-MARICÁ",
         "arp_key":  "somar_marica",
         "ata_numero":  "011/2025",
         "ata_key":  "011_2025",
@@ -1044,7 +1044,7 @@
         "produto_key":  "JPL__SOMAR_MARICA__011_2025__ITEM_023",
         "empresa":  "JPL",
         "empresa_key":  "jpl",
-        "arp":  "SOMAR-MARICÃ",
+        "arp":  "SOMAR-MARICÁ",
         "arp_key":  "somar_marica",
         "ata_numero":  "011/2025",
         "ata_key":  "011_2025",
@@ -1062,7 +1062,7 @@
     {
         "id":  54,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_001",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1070,7 +1070,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "1",
         "item_key":  "item_001",
-        "nome_oficial":  "SIMULADOR TRIPLO DE ESTIMULAÃ‡ÃƒO PARA TODOS OS MEMBROS E CERVICAL",
+        "nome_oficial":  "SIMULADOR TRIPLO DE ESTIMULAÇÃO PARA TODOS OS MEMBROS E CERVICAL",
         "categoria":  "ATI",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_001/",
@@ -1082,7 +1082,7 @@
     {
         "id":  55,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_002",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1090,7 +1090,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "2",
         "item_key":  "item_002",
-        "nome_oficial":  "SIMULADOR TRIPLO PARA ESTIMULAÃ‡ÃƒO DE QUADRIL E PERNAS",
+        "nome_oficial":  "SIMULADOR TRIPLO PARA ESTIMULAÇÃO DE QUADRIL E PERNAS",
         "categoria":  "ATI",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_002/",
@@ -1102,7 +1102,7 @@
     {
         "id":  56,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_003",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1110,7 +1110,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "3",
         "item_key":  "item_003",
-        "nome_oficial":  "SIMULADOR DUPLO DE OPERAÃ‡Ã•ES 1 PARA TODOS OS MEMBROS",
+        "nome_oficial":  "SIMULADOR DUPLO DE OPERAÇÕES 1 PARA TODOS OS MEMBROS",
         "categoria":  "ATI",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_003/",
@@ -1122,7 +1122,7 @@
     {
         "id":  57,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_004",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1130,7 +1130,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "4",
         "item_key":  "item_004",
-        "nome_oficial":  "SIMULADOR DUPLO DE OPERAÃ‡Ã•ES 2 PARA TODOS OS MEMBROS",
+        "nome_oficial":  "SIMULADOR DUPLO DE OPERAÇÕES 2 PARA TODOS OS MEMBROS",
         "categoria":  "ATI",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_004/",
@@ -1142,7 +1142,7 @@
     {
         "id":  58,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_005",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1162,7 +1162,7 @@
     {
         "id":  59,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_006",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1182,7 +1182,7 @@
     {
         "id":  60,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_007",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1190,7 +1190,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "7",
         "item_key":  "item_007",
-        "nome_oficial":  "SIMULADOR DE EQUILÃBRIO",
+        "nome_oficial":  "SIMULADOR DE EQUILÍBRIO",
         "categoria":  "ATI",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_007/",
@@ -1202,7 +1202,7 @@
     {
         "id":  61,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_008",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1222,7 +1222,7 @@
     {
         "id":  62,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_009",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1230,7 +1230,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "9",
         "item_key":  "item_009",
-        "nome_oficial":  "CENTRAL CALISTÃŠNICA MÃšLTIPLA",
+        "nome_oficial":  "CENTRAL CALISTÊNICA MÚLTIPLA",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_009/",
@@ -1242,7 +1242,7 @@
     {
         "id":  63,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_010",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1262,7 +1262,7 @@
     {
         "id":  64,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_011",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1282,7 +1282,7 @@
     {
         "id":  65,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_012",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1290,7 +1290,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "12",
         "item_key":  "item_012",
-        "nome_oficial":  "BALANÃ‡O ESTAIADO COM HASTES MAMÃƒE BEBÃŠ",
+        "nome_oficial":  "BALANÇO ESTAIADO COM HASTES MAMÃE BEBÊ",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_012/",
@@ -1302,7 +1302,7 @@
     {
         "id":  66,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_013",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1310,7 +1310,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "13",
         "item_key":  "item_013",
-        "nome_oficial":  "BALANÃ‡O ESTAIADO COM HASTES DUPLO INFANTIL",
+        "nome_oficial":  "BALANÇO ESTAIADO COM HASTES DUPLO INFANTIL",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_013/",
@@ -1322,7 +1322,7 @@
     {
         "id":  67,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_014",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1330,7 +1330,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "14",
         "item_key":  "item_014",
-        "nome_oficial":  "BALANÃ‡O ESTAIADO COM HASTES DUPLO JUVENIL",
+        "nome_oficial":  "BALANÇO ESTAIADO COM HASTES DUPLO JUVENIL",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_014/",
@@ -1342,7 +1342,7 @@
     {
         "id":  68,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_015",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1362,7 +1362,7 @@
     {
         "id":  69,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_016",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1370,7 +1370,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "16",
         "item_key":  "item_016",
-        "nome_oficial":  "BALANÃ‡O VAI E VEM ACESSÃVEL",
+        "nome_oficial":  "BALANÇO VAI E VEM ACESSÍVEL",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_016/",
@@ -1382,7 +1382,7 @@
     {
         "id":  70,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_017",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1390,7 +1390,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "17",
         "item_key":  "item_017",
-        "nome_oficial":  "ARTEFATO PARA ACESSÃBILIDADE 1",
+        "nome_oficial":  "ARTEFATO PARA ACESSÍBILIDADE 1",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_017/",
@@ -1402,7 +1402,7 @@
     {
         "id":  71,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_018",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1410,7 +1410,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "18",
         "item_key":  "item_018",
-        "nome_oficial":  "ARTEFATO PARA ACESSÃBILIDADE 2",
+        "nome_oficial":  "ARTEFATO PARA ACESSÍBILIDADE 2",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_018/",
@@ -1422,7 +1422,7 @@
     {
         "id":  72,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_019",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1442,7 +1442,7 @@
     {
         "id":  73,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_020",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1462,7 +1462,7 @@
     {
         "id":  74,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_021",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1482,7 +1482,7 @@
     {
         "id":  75,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_022",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1502,7 +1502,7 @@
     {
         "id":  76,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_023",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1522,7 +1522,7 @@
     {
         "id":  77,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_024",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1542,7 +1542,7 @@
     {
         "id":  78,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_025",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1562,7 +1562,7 @@
     {
         "id":  79,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_026",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1570,7 +1570,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "26",
         "item_key":  "item_026",
-        "nome_oficial":  "SIMULADOR TRIPLO DE ESTIMULAÃ‡ÃƒO PARA TODOS OS MEMBROS E CERVICAL INOX",
+        "nome_oficial":  "SIMULADOR TRIPLO DE ESTIMULAÇÃO PARA TODOS OS MEMBROS E CERVICAL INOX",
         "categoria":  "ATI",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_026/",
@@ -1582,7 +1582,7 @@
     {
         "id":  80,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_027",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1590,7 +1590,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "27",
         "item_key":  "item_027",
-        "nome_oficial":  "SIMULADOR TRIPLO PARA ESTIMULAÃ‡ÃƒO DE QUADRIL E PERNAS INOX",
+        "nome_oficial":  "SIMULADOR TRIPLO PARA ESTIMULAÇÃO DE QUADRIL E PERNAS INOX",
         "categoria":  "ATI",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_027/",
@@ -1602,7 +1602,7 @@
     {
         "id":  81,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_028",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1610,7 +1610,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "28",
         "item_key":  "item_028",
-        "nome_oficial":  "SIMULADOR DUPLO DE OPERAÃ‡Ã•ES 1 PARA TODOS OS MEMBROS INOX",
+        "nome_oficial":  "SIMULADOR DUPLO DE OPERAÇÕES 1 PARA TODOS OS MEMBROS INOX",
         "categoria":  "ATI",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_028/",
@@ -1622,7 +1622,7 @@
     {
         "id":  82,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_029",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1630,7 +1630,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "29",
         "item_key":  "item_029",
-        "nome_oficial":  "SIMULADOR DUPLO DE OPERAÃ‡Ã•ES 2 PARA TODOS OS MEMBROS INOX",
+        "nome_oficial":  "SIMULADOR DUPLO DE OPERAÇÕES 2 PARA TODOS OS MEMBROS INOX",
         "categoria":  "ATI",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_029/",
@@ -1642,7 +1642,7 @@
     {
         "id":  83,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_030",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1662,7 +1662,7 @@
     {
         "id":  84,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_031",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1682,7 +1682,7 @@
     {
         "id":  85,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_032",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1690,7 +1690,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "32",
         "item_key":  "item_032",
-        "nome_oficial":  "SIMULADOR DE EQUILÃBRIO INOX",
+        "nome_oficial":  "SIMULADOR DE EQUILÍBRIO INOX",
         "categoria":  "ATI",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_032/",
@@ -1702,7 +1702,7 @@
     {
         "id":  86,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_033",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1722,7 +1722,7 @@
     {
         "id":  87,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_034",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1730,7 +1730,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "34",
         "item_key":  "item_034",
-        "nome_oficial":  "CENTRAL CALISTÃŠNICA MÃšLTIPLA I NOX",
+        "nome_oficial":  "CENTRAL CALISTÊNICA MÚLTIPLA I NOX",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_034/",
@@ -1742,7 +1742,7 @@
     {
         "id":  88,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_035",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1762,7 +1762,7 @@
     {
         "id":  89,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_036",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1782,7 +1782,7 @@
     {
         "id":  90,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_037",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1790,7 +1790,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "37",
         "item_key":  "item_037",
-        "nome_oficial":  "BALANÃ‡O ESTAIADO COM HASTES MAMÃƒE BEBÃŠ INOX",
+        "nome_oficial":  "BALANÇO ESTAIADO COM HASTES MAMÃE BEBÊ INOX",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_037/",
@@ -1802,7 +1802,7 @@
     {
         "id":  91,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_038",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1810,7 +1810,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "38",
         "item_key":  "item_038",
-        "nome_oficial":  "BALANÃ‡O ESTAIADO COM HASTES DUPLO INFANTIL INOX",
+        "nome_oficial":  "BALANÇO ESTAIADO COM HASTES DUPLO INFANTIL INOX",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_038/",
@@ -1822,7 +1822,7 @@
     {
         "id":  92,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_039",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1830,7 +1830,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "39",
         "item_key":  "item_039",
-        "nome_oficial":  "BALANÃ‡O ESTAIADO COM HASTES DUPLO JUVENIL INOX",
+        "nome_oficial":  "BALANÇO ESTAIADO COM HASTES DUPLO JUVENIL INOX",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_039/",
@@ -1842,7 +1842,7 @@
     {
         "id":  93,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_040",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1862,7 +1862,7 @@
     {
         "id":  94,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_041",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1870,7 +1870,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "41",
         "item_key":  "item_041",
-        "nome_oficial":  "BALANÃ‡O VAI E VEM ACESSÃVEL INOX",
+        "nome_oficial":  "BALANÇO VAI E VEM ACESSÍVEL INOX",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_041/",
@@ -1882,7 +1882,7 @@
     {
         "id":  95,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_042",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1890,7 +1890,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "42",
         "item_key":  "item_042",
-        "nome_oficial":  "ARTEFATO PARA ACESSÃBILIDADE 1 INOX",
+        "nome_oficial":  "ARTEFATO PARA ACESSÍBILIDADE 1 INOX",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_042/",
@@ -1902,7 +1902,7 @@
     {
         "id":  96,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_043",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1910,7 +1910,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "43",
         "item_key":  "item_043",
-        "nome_oficial":  "ARTEFATO PARA ACESSÃBILIDADE 2 INOX",
+        "nome_oficial":  "ARTEFATO PARA ACESSÍBILIDADE 2 INOX",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_043/",
@@ -1922,7 +1922,7 @@
     {
         "id":  97,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_044",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1942,7 +1942,7 @@
     {
         "id":  98,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_045",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1962,7 +1962,7 @@
     {
         "id":  99,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_046",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -1982,7 +1982,7 @@
     {
         "id":  100,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_047",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2002,7 +2002,7 @@
     {
         "id":  101,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_048",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2022,7 +2022,7 @@
     {
         "id":  102,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_049",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2042,7 +2042,7 @@
     {
         "id":  103,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_050",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2062,7 +2062,7 @@
     {
         "id":  104,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_051",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2082,7 +2082,7 @@
     {
         "id":  105,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_052",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2102,7 +2102,7 @@
     {
         "id":  106,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_053",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2122,7 +2122,7 @@
     {
         "id":  107,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_054",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2142,7 +2142,7 @@
     {
         "id":  108,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_055",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2162,7 +2162,7 @@
     {
         "id":  109,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_056",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2170,7 +2170,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "56",
         "item_key":  "item_056",
-        "nome_oficial":  "ESTAÃ‡ÃƒO 5 LUGARES PEDAL PARK INOX",
+        "nome_oficial":  "ESTAÇÃO 5 LUGARES PEDAL PARK INOX",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_056/",
@@ -2182,7 +2182,7 @@
     {
         "id":  110,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_057",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2202,7 +2202,7 @@
     {
         "id":  111,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_058",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2210,7 +2210,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "58",
         "item_key":  "item_058",
-        "nome_oficial":  "COLETOR DE RESÃDUOS DUPLO INOX",
+        "nome_oficial":  "COLETOR DE RESÍDUOS DUPLO INOX",
         "categoria":  "MOBILIARIO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_058/",
@@ -2222,7 +2222,7 @@
     {
         "id":  112,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_059",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2230,7 +2230,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "59",
         "item_key":  "item_059",
-        "nome_oficial":  "COLETOR BASCULANTE - INÃ“X",
+        "nome_oficial":  "COLETOR BASCULANTE - INÓX",
         "categoria":  "MOBILIARIO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_059/",
@@ -2242,7 +2242,7 @@
     {
         "id":  113,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_060",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2250,7 +2250,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "60",
         "item_key":  "item_060",
-        "nome_oficial":  "ARTEFATO DE INDICAÃ‡ÃƒO E ORIENTAÃ‡ÃƒO P/ ÃREAS PÃšBLICAS 1 INOX",
+        "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 1 INOX",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_060/",
@@ -2262,7 +2262,7 @@
     {
         "id":  114,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_061",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2270,7 +2270,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "61",
         "item_key":  "item_061",
-        "nome_oficial":  "ARTEFATO DE INDICAÃ‡ÃƒO E ORIENTAÃ‡ÃƒO P/ ÃREAS PÃšBLICAS 2 INOX",
+        "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 2 INOX",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_061/",
@@ -2282,7 +2282,7 @@
     {
         "id":  115,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_062",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2290,7 +2290,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "62",
         "item_key":  "item_062",
-        "nome_oficial":  "ARTEFATO DE INDICAÃ‡ÃƒO E ORIENTAÃ‡ÃƒO P/ ÃREAS PÃšBLICAS 3 INOX",
+        "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 3 INOX",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_062/",
@@ -2302,7 +2302,7 @@
     {
         "id":  116,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_063",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2310,7 +2310,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "63",
         "item_key":  "item_063",
-        "nome_oficial":  "ARTEFATO DE INDICAÃ‡ÃƒO E ORIENTAÃ‡ÃƒO P/ ÃREAS PÃšBLICAS 4 INOX",
+        "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 4 INOX",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_063/",
@@ -2322,7 +2322,7 @@
     {
         "id":  117,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_064",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2330,7 +2330,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "64",
         "item_key":  "item_064",
-        "nome_oficial":  "ARTEFATO DE INDICAÃ‡ÃƒO E ORIENTAÃ‡ÃƒO P/ ÃREAS PÃšBLICAS 5 INOX",
+        "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 5 INOX",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_064/",
@@ -2342,7 +2342,7 @@
     {
         "id":  118,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_065",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2350,7 +2350,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "65",
         "item_key":  "item_065",
-        "nome_oficial":  "ARTEFATO DE INDICAÃ‡ÃƒO E ORIENTAÃ‡ÃƒO P/ ÃREAS PÃšBLICAS 6 INOX",
+        "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 6 INOX",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_065/",
@@ -2362,7 +2362,7 @@
     {
         "id":  119,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_066",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2370,7 +2370,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "66",
         "item_key":  "item_066",
-        "nome_oficial":  "ARTEFATO DE INDICAÃ‡ÃƒO E ORIENTAÃ‡ÃƒO P/ ÃREAS PÃšBLICAS 7 INOX",
+        "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 7 INOX",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_066/",
@@ -2382,7 +2382,7 @@
     {
         "id":  120,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_067",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2390,7 +2390,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "67",
         "item_key":  "item_067",
-        "nome_oficial":  "ARTEFATO DE INDICAÃ‡ÃƒO E ORIENTAÃ‡ÃƒO P/ ÃREAS PÃšBLICAS 8 INOX",
+        "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 8 INOX",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_067/",
@@ -2402,7 +2402,7 @@
     {
         "id":  121,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_068",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2410,7 +2410,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "68",
         "item_key":  "item_068",
-        "nome_oficial":  "ARTEFATO DE INDICAÃ‡ÃƒO E ORIENTAÃ‡ÃƒO P/ ÃREAS PÃšBLICAS 9 INOX",
+        "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 9 INOX",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_068/",
@@ -2422,7 +2422,7 @@
     {
         "id":  122,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_069",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2430,7 +2430,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "69",
         "item_key":  "item_069",
-        "nome_oficial":  "ARTEFATO DE INDICAÃ‡ÃƒO E ORIENTAÃ‡ÃƒO P/ ÃREAS PÃšBLICAS 10 INOX",
+        "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 10 INOX",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_069/",
@@ -2442,7 +2442,7 @@
     {
         "id":  123,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_070",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2450,7 +2450,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "70",
         "item_key":  "item_070",
-        "nome_oficial":  "ARTEFATO DE INDICAÃ‡ÃƒO E ORIENTAÃ‡ÃƒO P/ ÃREAS PÃšBLICAS 11 INOX",
+        "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 11 INOX",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_070/",
@@ -2462,7 +2462,7 @@
     {
         "id":  124,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_071",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2470,7 +2470,7 @@
         "ata_key":  "029_2025",
         "item_ata":  "71",
         "item_key":  "item_071",
-        "nome_oficial":  "ABRIGO AUTÃ”NOMO DE CONVIVÃŠNCIA E INTERAÃ‡ÃƒO INOX",
+        "nome_oficial":  "ABRIGO AUTÔNOMO DE CONVIVÊNCIA E INTERAÇÃO INOX",
         "categoria":  "MOBILIARIO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/cimasp/029_2025/item_071/",
@@ -2482,7 +2482,7 @@
     {
         "id":  125,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_072",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2502,7 +2502,7 @@
     {
         "id":  126,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_073",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2522,7 +2522,7 @@
     {
         "id":  127,
         "produto_key":  "ACO__CIMASP__029_2025__ITEM_074",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "CIMASP",
         "arp_key":  "cimasp",
@@ -2542,7 +2542,7 @@
     {
         "id":  128,
         "produto_key":  "ACO__SEHIS_GOV_RIO__114443801_2025__ITEM_1_1",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "SEHIS - GOV. RIO 114443801/2025",
         "arp_key":  "sehis_gov_rio",
@@ -2570,7 +2570,7 @@
     {
         "id":  129,
         "produto_key":  "ACO__SEHIS_GOV_RIO__114443801_2025__ITEM_1_2",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "SEHIS - GOV. RIO 114443801/2025",
         "arp_key":  "sehis_gov_rio",
@@ -2598,7 +2598,7 @@
     {
         "id":  130,
         "produto_key":  "ACO__SEHIS_GOV_RIO__114443801_2025__ITEM_1_3",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "SEHIS - GOV. RIO 114443801/2025",
         "arp_key":  "sehis_gov_rio",
@@ -2606,7 +2606,7 @@
         "ata_key":  "114443801_2025",
         "item_ata":  "1.3",
         "item_key":  "item_1_3",
-        "nome_oficial":  "BICICLETÃRIO AÃ‡O INOX",
+        "nome_oficial":  "BICICLETÁRIO AÇO INOX",
         "categoria":  "PENDENTE_CLASSIFICACAO",
         "imagem":  {
                        "pasta":  "assets/produtos/aco/gov_rio/114443801_2025/item_1_3/",
@@ -2626,7 +2626,7 @@
     {
         "id":  131,
         "produto_key":  "ACO__SEHIS_GOV_RIO__114443801_2025__ITEM_2_1",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "SEHIS - GOV. RIO 114443801/2025",
         "arp_key":  "sehis_gov_rio",
@@ -2654,7 +2654,7 @@
     {
         "id":  132,
         "produto_key":  "ACO__SEHIS_GOV_RIO__114443801_2025__ITEM_2_2",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "SEHIS - GOV. RIO 114443801/2025",
         "arp_key":  "sehis_gov_rio",
@@ -2682,7 +2682,7 @@
     {
         "id":  133,
         "produto_key":  "ACO__SEHIS_GOV_RIO__114443801_2025__ITEM_2_3",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "SEHIS - GOV. RIO 114443801/2025",
         "arp_key":  "sehis_gov_rio",
@@ -2710,7 +2710,7 @@
     {
         "id":  134,
         "produto_key":  "ACO__SEHIS_GOV_RIO__114443801_2025__ITEM_2_4",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "SEHIS - GOV. RIO 114443801/2025",
         "arp_key":  "sehis_gov_rio",
@@ -2738,7 +2738,7 @@
     {
         "id":  135,
         "produto_key":  "ACO__SEHIS_GOV_RIO__114443801_2025__ITEM_2_5",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "SEHIS - GOV. RIO 114443801/2025",
         "arp_key":  "sehis_gov_rio",
@@ -2766,7 +2766,7 @@
     {
         "id":  136,
         "produto_key":  "ACO__SEHIS_GOV_RIO__114443801_2025__ITEM_2_6",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "SEHIS - GOV. RIO 114443801/2025",
         "arp_key":  "sehis_gov_rio",
@@ -2794,7 +2794,7 @@
     {
         "id":  137,
         "produto_key":  "ACO__SEHIS_GOV_RIO__114443801_2025__ITEM_2_7",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "SEHIS - GOV. RIO 114443801/2025",
         "arp_key":  "sehis_gov_rio",
@@ -2822,7 +2822,7 @@
     {
         "id":  138,
         "produto_key":  "ACO__SEHIS_GOV_RIO__114443801_2025__ITEM_3_1",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "SEHIS - GOV. RIO 114443801/2025",
         "arp_key":  "sehis_gov_rio",
@@ -2850,7 +2850,7 @@
     {
         "id":  139,
         "produto_key":  "ACO__SEHIS_GOV_RIO__114443801_2025__ITEM_3_2",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "SEHIS - GOV. RIO 114443801/2025",
         "arp_key":  "sehis_gov_rio",
@@ -2878,7 +2878,7 @@
     {
         "id":  140,
         "produto_key":  "ACO__SEHIS_GOV_RIO__114443801_2025__ITEM_3_3",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "SEHIS - GOV. RIO 114443801/2025",
         "arp_key":  "sehis_gov_rio",
@@ -2906,7 +2906,7 @@
     {
         "id":  141,
         "produto_key":  "ACO__SEHIS_GOV_RIO__114443801_2025__ITEM_3_4",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "SEHIS - GOV. RIO 114443801/2025",
         "arp_key":  "sehis_gov_rio",
@@ -2934,7 +2934,7 @@
     {
         "id":  142,
         "produto_key":  "ACO__SEHIS_GOV_RIO__114443801_2025__ITEM_3_5",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "SEHIS - GOV. RIO 114443801/2025",
         "arp_key":  "sehis_gov_rio",
@@ -2962,7 +2962,7 @@
     {
         "id":  143,
         "produto_key":  "ACO__SEHIS_GOV_RIO__114443801_2025__ITEM_3_6",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "SEHIS - GOV. RIO 114443801/2025",
         "arp_key":  "sehis_gov_rio",
@@ -2990,7 +2990,7 @@
     {
         "id":  144,
         "produto_key":  "ACO__SEHIS_GOV_RIO__114443801_2025__ITEM_4_1",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "SEHIS - GOV. RIO 114443801/2025",
         "arp_key":  "sehis_gov_rio",
@@ -3018,7 +3018,7 @@
     {
         "id":  145,
         "produto_key":  "ACO__SEHIS_GOV_RIO__114443801_2025__ITEM_4_2",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "SEHIS - GOV. RIO 114443801/2025",
         "arp_key":  "sehis_gov_rio",
@@ -3046,7 +3046,7 @@
     {
         "id":  146,
         "produto_key":  "ACO__SEHIS_GOV_RIO__114443801_2025__ITEM_5_1",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "SEHIS - GOV. RIO 114443801/2025",
         "arp_key":  "sehis_gov_rio",
@@ -3074,7 +3074,7 @@
     {
         "id":  147,
         "produto_key":  "ACO__SEHIS_GOV_RIO__114443801_2025__ITEM_6_1",
-        "empresa":  "AÃ‡O",
+        "empresa":  "AÇO",
         "empresa_key":  "aco",
         "arp":  "SEHIS - GOV. RIO 114443801/2025",
         "arp_key":  "sehis_gov_rio",
