@@ -151,6 +151,15 @@ function setSelectOptions(select, options) {
     });
 }
 
+function escapeHtml(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
 function aplicarFiltros(produtos) {
     const pesquisa = normalizeSearchText(produtosState.filtros.pesquisa);
     const ata = produtosState.filtros.ata;

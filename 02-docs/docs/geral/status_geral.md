@@ -108,3 +108,13 @@ Status da estrutura: DEFINIDO em v0.1.002.
 - Tabela de produtos protegida contra injeção HTML básica antes de futura API/banco.
 - Relatórios v0.1.033 gerados em `03-vs/relatorios/precheck` e `03-vs/relatorios/limpeza`.
 - Commit automático não executado por pedido do usuário; fechamento manual.
+
+## Atualizacao v0.1.034
+
+- Hotfix aplicado em `01-mrp/front_end/js/pages/produtos_list.js`.
+- Causa: chamada `escapeHtml(...)` sem função auxiliar definida.
+- Efeito anterior: tela de Produtos podia ficar sem renderizar a tabela.
+- Dados preservados: `produtos_seed.json` continua com 147 produtos ativos.
+- Nenhum backend criado.
+- Nenhum banco criado.
+- Commit automático não executado.

@@ -86,3 +86,31 @@ COMMIT_MANUAL_SOLICITADO_PELO_USUARIO
 ```text
 PREPARADO PARA COMMIT MANUAL
 ```
+
+---
+
+## 2026-05-18 — v0.1.034
+
+### Tipo
+
+Hotfix corretivo da tela de Produtos.
+
+### Descrição
+
+Corrigido erro introduzido na v0.1.033: `produtos_list.js` chamava `escapeHtml(...)`, mas a função auxiliar não existia no arquivo. Isso interrompia a renderização da tabela de Produtos.
+
+### Resultado
+
+```text
+PRODUTOS_SEED_PRESERVADO=147
+JS_SYNTAX_OK
+ESCAPE_HTML_PRESENTE=SIM
+DADOS_PERDIDOS=NAO
+COMMIT_AUTOMATICO=NAO
+```
+
+### Status
+
+```text
+HOTFIX PARA COMMIT MANUAL
+```

@@ -9,5 +9,7 @@
   "padrao_nomes": "Pastas raiz curtas, minusculas e ASCII para reduzir risco em CMD, BAT, PowerShell, Python, Git, ZIP e caminhos de rede.",
   "status": "CORRECAO_PREVENTIVA_PRE_COMMIT_MANUAL",
   "alteracao_v0_1_002": "Renomeadas as pastas raiz para 01-mrp, 02-docs e 03-vs conforme decisao do usuario.",
-  "alteracao_v0_1_033": "Corrigidos caminhos ativos de imagens, catalogo ATA, validacao de encoding, auditoria de limpeza e escape HTML preventivo em Produtos."
+  "alteracao_v0_1_033": "Corrigidos caminhos ativos de imagens, catalogo ATA, validacao de encoding, auditoria de limpeza e escape HTML preventivo em Produtos.",
+  "ultima_revisao_chatgpt": "v0.1.034",
+  "status_hotfix": "corrige escapeHtml ausente em produtos_list.js; produtos_seed preservado"
 }
