@@ -47,3 +47,15 @@ Status da estrutura: DEFINIDO em v0.1.002.
 - Nenhum backend criado.
 - Nenhuma persistencia real implementada.
 - Alteracao restrita ao CRM visual/seed/config/documentacao.
+
+## Atualizacao v0.1.028
+
+- ATA GOV RIO / SEHIS GOV RJ normalizada para `SEHIS - GOV. RIO`.
+- Numero da ATA preservado nos registros existentes.
+- GOV. RIO permanece fora do dominio empresa.
+- Empresas validas mantidas: JPL, AÇO e TCR.
+- TCR permanece sem dados operacionais.
+- Imagens reais preservadas sem renomear/mover arquivos.
+- Nenhum backend criado.
+- Nenhum banco criado.
+- Alteracao restrita a seed/config/filtros/documentacao/validacao.

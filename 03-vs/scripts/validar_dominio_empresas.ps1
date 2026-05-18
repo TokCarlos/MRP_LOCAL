@@ -1,6 +1,7 @@
 $ErrorActionPreference = "Stop"
 
-$RepoRoot = "X:\"
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$RepoRoot = Resolve-Path (Join-Path $ScriptDir "..\..")
 $ProdutosPath = Join-Path $RepoRoot "01-mrp\front_end\data\produtos_seed.json"
 
 if (!(Test-Path $ProdutosPath)) {
@@ -10,28 +11,21 @@ if (!(Test-Path $ProdutosPath)) {
 
 function Read-JsonUtf8Safe {
     param([string]$Path)
-
     $bytes = [System.IO.File]::ReadAllBytes($Path)
-
     if ($bytes.Length -ge 3 -and $bytes[0] -eq 0xEF -and $bytes[1] -eq 0xBB -and $bytes[2] -eq 0xBF) {
         $text = [System.Text.Encoding]::UTF8.GetString($bytes, 3, $bytes.Length - 3)
     } else {
         $text = [System.Text.Encoding]::UTF8.GetString($bytes)
     }
-
     return $text | ConvertFrom-Json
 }
 
-$Produtos = Read-JsonUtf8Safe -Path $ProdutosPath
-
-$EmpresaKeysValidas = @("jpl", "aco", "tcr")
-
-$Erros = New-Object System.Collections.Generic.List[string]
-
-$Total = 0
-$PorEmpresa = @{}
-$PorOrigem = @{}
-$GovRioOrigemCount = 0
+function Get-PropText {
+    param([object]$Obj, [string]$Name)
+    if ($null -eq $Obj) { return "" }
+    if ($Obj.PSObject.Properties.Name -contains $Name) { return [string]$Obj.$Name }
+    return ""
+}
 
 function Normalize-Text {
     param([string]$Value)
@@ -40,92 +34,147 @@ function Normalize-Text {
     $sb = New-Object System.Text.StringBuilder
     foreach ($c in $formD.ToCharArray()) {
         $cat = [Globalization.CharUnicodeInfo]::GetUnicodeCategory($c)
-        if ($cat -ne [Globalization.UnicodeCategory]::NonSpacingMark) {
-            [void]$sb.Append($c)
-        }
+        if ($cat -ne [Globalization.UnicodeCategory]::NonSpacingMark) { [void]$sb.Append($c) }
     }
     return $sb.ToString().ToUpperInvariant().Trim()
 }
 
+$Produtos = Read-JsonUtf8Safe -Path $ProdutosPath
+
+$EmpresaKeysValidas = @("jpl", "aco", "tcr")
+
+$AtaCanonica = "SEHIS - GOV. RIO"
+$AtaCanonicaNorm = Normalize-Text $AtaCanonica
+$AtaKeyCanonica = "sehis_gov_rio"
+
+$VariacoesAntigasAta = @(
+    "ATA GOV RIO",
+    "GOV RIO",
+    "GOV. RIO",
+    "ATA SEHIS - GOV. RJ",
+    "SEHIS - GOV. RJ",
+    "SEHIS GOV RJ",
+    "GOV. RJ"
+)
+
+$Erros = New-Object System.Collections.Generic.List[string]
+$Total = 0
+$PorEmpresa = @{}
+$PorAta = @{}
+$ComImagemReal = 0
+
 foreach ($p in $Produtos) {
     $Total++
 
-    $empresa = [string]$p.empresa
-    $empresaKey = [string]$p.empresa_key
+    $id = Get-PropText $p "id"
+    if ([string]::IsNullOrWhiteSpace($id)) { $id = "SEM_ID_$Total" }
+
+    $empresa = Get-PropText $p "empresa"
+    $empresaKey = Get-PropText $p "empresa_key"
+    $empresaNorm = Normalize-Text $empresa
 
     if (-not $EmpresaKeysValidas.Contains($empresaKey)) {
-        $Erros.Add("Produto ID=$($p.id) com empresa_key invalida: '$empresaKey'")
+        $Erros.Add("Produto ID=$id com empresa_key invalida: '$empresaKey'")
     }
 
-    # Se a chave estiver valida, o nome pode variar por encoding em arquivo legado.
-    if ($empresaKey -eq "jpl" -and (Normalize-Text $empresa) -notmatch "^JPL$") {
-        $Erros.Add("Produto ID=$($p.id) com divergencia empresa/empresa_key: empresa='$empresa' empresa_key='$empresaKey'")
+    if ($empresaKey -eq "jpl" -and $empresaNorm -notmatch "^JPL$") {
+        $Erros.Add("Produto ID=$id com divergencia empresa/empresa_key: empresa='$empresa' empresa_key='$empresaKey'")
     }
-    if ($empresaKey -eq "tcr" -and (Normalize-Text $empresa) -notmatch "^TCR$") {
-        $Erros.Add("Produto ID=$($p.id) com divergencia empresa/empresa_key: empresa='$empresa' empresa_key='$empresaKey'")
-    }
-
-    if ($empresa -match "GOV" -or $empresaKey -eq "gov_rio") {
-        $Erros.Add("Produto ID=$($p.id) trata GOV como empresa: empresa='$empresa' empresa_key='$empresaKey'")
+    if ($empresaKey -eq "tcr" -and $empresaNorm -notmatch "^TCR$") {
+        $Erros.Add("Produto ID=$id com divergencia empresa/empresa_key: empresa='$empresa' empresa_key='$empresaKey'")
     }
 
-    if ($empresa -eq "TCR" -or $empresaKey -eq "tcr") {
-        $Erros.Add("Produto ID=$($p.id) usa TCR, mas TCR ainda nao possui dados operacionais nesta fase.")
+    if ($empresaNorm -match "GOV|SEHIS" -or $empresaKey -match "gov|sehis") {
+        $Erros.Add("Produto ID=$id trata GOV/SEHIS como empresa: empresa='$empresa' empresa_key='$empresaKey'")
     }
 
-    if (-not $PorEmpresa.ContainsKey($empresa)) {
-        $PorEmpresa[$empresa] = 0
+    if ($empresaNorm -eq "TCR" -or $empresaKey -eq "tcr") {
+        $Erros.Add("Produto ID=$id esta usando TCR, mas TCR ainda nao possui dados operacionais nesta fase.")
     }
+
+    if (-not $PorEmpresa.ContainsKey($empresa)) { $PorEmpresa[$empresa] = 0 }
     $PorEmpresa[$empresa]++
 
-    $origem = $null
-    if ($p.PSObject.Properties.Name -contains "origem_ata") {
-        $origem = [string]$p.origem_ata
-    } elseif ($p.PSObject.Properties.Name -contains "ata_origem") {
-        $origem = [string]$p.ata_origem
-    } elseif ($p.PSObject.Properties.Name -contains "cliente") {
-        $origem = [string]$p.cliente
-    } elseif ($p.PSObject.Properties.Name -contains "arp") {
-        $origem = [string]$p.arp
-    } else {
-        $origem = "_SEM_ORIGEM_"
+    $origemAta = Get-PropText $p "origem_ata"
+    $origemAtaKey = Get-PropText $p "origem_ata_key"
+    $ataOrigem = Get-PropText $p "ata_origem"
+    $ataOrigemKey = Get-PropText $p "ata_origem_key"
+    $arp = Get-PropText $p "arp"
+    $arpKey = Get-PropText $p "arp_key"
+
+    $camposAta = @($origemAta, $ataOrigem, $arp)
+    $keysAta = @($origemAtaKey, $ataOrigemKey, $arpKey)
+    $textoConcatenado = (($camposAta + $keysAta) -join " ")
+    $textoNorm = Normalize-Text $textoConcatenado
+
+    $pareceAtaGov = $false
+    foreach ($v in $VariacoesAntigasAta) {
+        if ($textoNorm -like ("*" + (Normalize-Text $v) + "*")) {
+            $pareceAtaGov = $true
+            if ((Normalize-Text $origemAta) -ne $AtaCanonicaNorm -and (Normalize-Text $ataOrigem) -ne $AtaCanonicaNorm -and (Normalize-Text $arp) -ne $AtaCanonicaNorm) {
+                $Erros.Add("Produto ID=$id contem variacao antiga de ATA/origem: '$v'. Usar '$AtaCanonica'.")
+            }
+        }
     }
 
-    if (([string]$origem) -match "GOV") {
-        $GovRioOrigemCount++
+    if ($textoNorm -like "*SEHIS_GOV_RIO*" -or $textoNorm -like "*$AtaCanonicaNorm*") {
+        $pareceAtaGov = $true
     }
 
-    if (-not $PorOrigem.ContainsKey($origem)) {
-        $PorOrigem[$origem] = 0
+    if ($pareceAtaGov) {
+        if ($origemAta -ne "" -and (Normalize-Text $origemAta) -ne $AtaCanonicaNorm) {
+            $Erros.Add("Produto ID=$id com origem_ata incorreta: '$origemAta'. Esperado '$AtaCanonica'.")
+        }
+        if ($origemAtaKey -ne "" -and $origemAtaKey -ne $AtaKeyCanonica) {
+            $Erros.Add("Produto ID=$id com origem_ata_key incorreta: '$origemAtaKey'. Esperado '$AtaKeyCanonica'.")
+        }
+        if ($ataOrigem -ne "" -and (Normalize-Text $ataOrigem) -ne $AtaCanonicaNorm) {
+            $Erros.Add("Produto ID=$id com ata_origem incorreta: '$ataOrigem'. Esperado '$AtaCanonica'.")
+        }
+        if ($ataOrigemKey -ne "" -and $ataOrigemKey -ne $AtaKeyCanonica) {
+            $Erros.Add("Produto ID=$id com ata_origem_key incorreta: '$ataOrigemKey'. Esperado '$AtaKeyCanonica'.")
+        }
+        if ($arp -ne "" -and (Normalize-Text $arp) -ne $AtaCanonicaNorm) {
+            $Erros.Add("Produto ID=$id com arp incorreto: '$arp'. Esperado '$AtaCanonica'.")
+        }
+        if ($arpKey -ne "" -and $arpKey -ne $AtaKeyCanonica) {
+            $Erros.Add("Produto ID=$id com arp_key incorreto: '$arpKey'. Esperado '$AtaKeyCanonica'.")
+        }
     }
-    $PorOrigem[$origem]++
+
+    $ataResumo = "_SEM_ATA_"
+    if ($arp -ne "") { $ataResumo = $arp }
+    elseif ($origemAta -ne "") { $ataResumo = $origemAta }
+    elseif ($ataOrigem -ne "") { $ataResumo = $ataOrigem }
+
+    if (-not $PorAta.ContainsKey($ataResumo)) { $PorAta[$ataResumo] = 0 }
+    $PorAta[$ataResumo]++
+
+    if ($p.PSObject.Properties.Name -contains "imagem") {
+        $imgStatus = Get-PropText $p.imagem "status"
+        if ($imgStatus -eq "REAL_ATA") { $ComImagemReal++ }
+    }
 }
 
 Write-Host ""
-Write-Host "VALIDACAO DE DOMINIO - EMPRESAS" -ForegroundColor Cyan
+Write-Host "VALIDACAO DE DOMINIO - EMPRESA / ATA / ORIGEM" -ForegroundColor Cyan
+Write-Host "Arquivo: $ProdutosPath"
 Write-Host "Total de produtos: $Total"
-Write-Host "Produtos GOV. RIO como ATA/origem/cliente: $GovRioOrigemCount"
+Write-Host "Produtos com imagem real: $ComImagemReal"
 Write-Host ""
 Write-Host "Produtos por empresa:"
-foreach ($k in ($PorEmpresa.Keys | Sort-Object)) {
-    Write-Host " - $k : $($PorEmpresa[$k])"
-}
-
+foreach ($k in ($PorEmpresa.Keys | Sort-Object)) { Write-Host " - $k : $($PorEmpresa[$k])" }
 Write-Host ""
-Write-Host "Produtos por origem/ATA/cliente:"
-foreach ($k in ($PorOrigem.Keys | Sort-Object)) {
-    Write-Host " - $k : $($PorOrigem[$k])"
-}
+Write-Host "Produtos por ATA/origem:"
+foreach ($k in ($PorAta.Keys | Sort-Object)) { Write-Host " - $k : $($PorAta[$k])" }
 
 if ($Erros.Count -gt 0) {
     Write-Host ""
     Write-Host "ERROS ENCONTRADOS:" -ForegroundColor Red
-    foreach ($e in $Erros) {
-        Write-Host " - $e" -ForegroundColor Red
-    }
+    foreach ($e in $Erros) { Write-Host " - $e" -ForegroundColor Red }
     exit 1
 }
 
 Write-Host ""
-Write-Host "OK: dominio de empresas valido. GOV. RIO nao esta sendo tratado como empresa. TCR esta reservado sem dados operacionais." -ForegroundColor Green
+Write-Host "OK: dominio valido. GOV/SEHIS nao esta como empresa. ATA normalizada como SEHIS - GOV. RIO. Imagens preservadas." -ForegroundColor Green
 exit 0

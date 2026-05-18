@@ -16,6 +16,14 @@
       "status": "VALIDA_SEM_DADOS"
     }
   ],
+  "atas_origens": [
+    {
+      "nome": "SEHIS - GOV. RIO",
+      "key": "sehis_gov_rio",
+      "status": "ATIVA_COM_DADOS",
+      "observacao": "Normaliza referencias antigas ATA GOV RIO, GOV. RIO, SEHIS - GOV. RJ e variacoes."
+    }
+  ],
   "regras": {
     "empresa_descricao": "Empresa interna/real do dominio operacional. Nao representa cliente, orgao publico ou origem de ata.",
     "empresas_permitidas": [
@@ -31,6 +39,8 @@
       "TCR"
     ],
     "gov_rio_nao_e_empresa": true,
+    "nome_canonico_ata_gov_rio": "SEHIS - GOV. RIO",
+    "key_canonica_ata_gov_rio": "sehis_gov_rio",
     "gov_rio_tipo": [
       "cliente",
       "orgao",

@@ -59,3 +59,4 @@ Nesta etapa nao foram criados backend, banco ou frontend, e `01-mrp` nao foi alt
 - `EMPRESA` e dominio operacional interno: `JPL`, `AÇO`, `TCR`.
 - `GOV. RIO` nao e empresa; deve ser tratado como `cliente/orgao/origem de ata`.
 - Filtros de `EMPRESA` e `ATA/ORIGEM` devem permanecer separados.
+- Nome canonico da ATA/origem GOV/SEHIS: `SEHIS - GOV. RIO` (`sehis_gov_rio`).

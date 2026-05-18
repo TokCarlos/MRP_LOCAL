@@ -476,3 +476,32 @@ E proibido:
 Filtros:
 - filtro EMPRESA deve trabalhar com JPL, AÇO e futuramente TCR;
 - filtro ATA/ORIGEM deve trabalhar com GOV. RIO, SEHIS - GOV. RJ e outras atas/clientes/orgaos.
+
+GOV. RJ nao e empresa.
+SEHIS nao e empresa.
+
+## Regra de normalizacao de ATA - SEHIS / GOV. RIO
+
+As referencias abaixo representam a mesma ATA/origem:
+- ATA GOV RIO
+- GOV. RIO
+- GOV RIO
+- ATA SEHIS - GOV. RJ
+- SEHIS - GOV. RJ
+- SEHIS GOV RJ
+- GOV. RJ
+
+Nome canonico no sistema:
+- SEHIS - GOV. RIO
+
+Key canonica:
+- sehis_gov_rio
+
+O numero da ATA deve ser preservado conforme os registros originais.
+E proibido criar duplicidade de origem/ATA para o mesmo conjunto de produtos.
+
+As imagens fisicas podem continuar em pasta tecnica legada, como:
+- assets/produtos/gov_rio/ata_gov_rio/safe/
+
+O caminho fisico da imagem nao define o nome logico da ATA.
+Renomeacao de pasta de imagem deve ocorrer apenas em patch futuro separado com migracao controlada.
