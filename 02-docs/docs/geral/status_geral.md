@@ -59,3 +59,32 @@ Status da estrutura: DEFINIDO em v0.1.002.
 - Nenhum backend criado.
 - Nenhum banco criado.
 - Alteracao restrita a seed/config/filtros/documentacao/validacao.
+
+## Atualizacao v0.1.030
+
+- Imagens reorganizadas para `01-mrp/front_end/img`.
+- Estrutura oficial aplicada: `img/produtos/{empresa}/atas/{origem}`.
+- `assets/produtos` tratado como legado e movido para quarentena.
+- Produtos 128-147 preservaram nomes e `item_ata`.
+- Previews reais corrigidos para ATA `SEHIS - GOV. RIO`.
+- GOV. RIO removido da estrutura de empresa de imagens.
+- Sem backend.
+- Sem banco.
+- Sem alteracao funcional alem da resolucao correta de imagem.
+
+## Atualizacao v0.1.031
+
+- Auditoria de limpeza estrutural executada (nao destrutiva).
+- Nenhum arquivo removido, movido ou alterado funcionalmente.
+- Relatorios gerados em `03-vs/relatorios/limpeza`.
+- Proxima etapa de limpeza depende de aprovacao manual.
+
+## Atualizacao v0.1.031
+
+- Nome oficial da ATA consolidado para `SEHIS - GOV. RIO 114443801/2025`.
+- Produtos oficiais da ATA mantidos nos IDs 128-147.
+- Previews dos IDs 128-147 migrados para PNG real por pareamento de `item_ata`.
+- IDs 148-167 removidos do seed ativo e enviados para quarentena documental.
+- Duplicidade de `produto_key` removida do seed ativo.
+- Dominio de empresa preservado: JPL, ACO, TCR (TCR sem dados operacionais).
+- Sem backend e sem banco.

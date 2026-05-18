@@ -1,7 +1,7 @@
 import { localGET } from "../api.js";
 
 const SEED_PATH = "data/produtos_seed.json";
-const PLACEHOLDER = "assets/produtos/_placeholder.svg";
+const PLACEHOLDER = "img/ui/placeholders/produto_placeholder.svg";
 
 const produtosState = {
     produtos: [],
@@ -46,8 +46,13 @@ function buildAtaFiltroKey(produto) {
 
 function buildOrigemAtaLabel(produto) {
     const origem = produto.ata_origem || produto.origem_ata || produto.cliente || produto.orgao || "";
-    const ataLabel = `${produto.arp || ""} ${produto.ata_numero || ""}`.trim();
-    return origem ? `${ataLabel} (${origem})` : ataLabel;
+    const arp = String(produto.arp || "").trim();
+    const ataNumero = String(produto.ata_numero || "").trim();
+    const ataLabel = arp.includes(ataNumero) || !ataNumero ? arp : `${arp} ${ataNumero}`.trim();
+    if (!origem) return ataLabel;
+    return normalizeSearchText(origem) === normalizeSearchText(ataLabel)
+        ? ataLabel
+        : `${ataLabel} (${origem})`;
 }
 
 function initFiltros() {
@@ -214,9 +219,11 @@ function renderTabela(produtos) {
         const nome = p.nome_oficial || p.nome || "";
         const id = p.id ?? index + 1;
         const preview = p?.imagem?.preview || PLACEHOLDER;
-        const arp = p.arp || "";
-        const ataNumeroRaw = p.ata_numero || p.ata || "";
-        const ataNumero = `${arp} ${ataNumeroRaw}`.trim();
+        const arp = String(p.arp || "").trim();
+        const ataNumeroRaw = String(p.ata_numero || p.ata || "").trim();
+        const ataNumero = arp.includes(ataNumeroRaw) || !ataNumeroRaw
+            ? arp
+            : `${arp} ${ataNumeroRaw}`.trim();
         const itemAta = `${p.item_ata ?? ""}`;
         const empresa = p.empresa || "";
 

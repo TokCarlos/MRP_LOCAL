@@ -1,51 +1,51 @@
-{
-  "empresas_validas": [
-    {
-      "nome": "JPL",
-      "key": "jpl",
-      "status": "ATIVA_COM_DADOS"
-    },
-    {
-      "nome": "AÇO",
-      "key": "aco",
-      "status": "ATIVA_COM_DADOS"
-    },
-    {
-      "nome": "TCR",
-      "key": "tcr",
-      "status": "VALIDA_SEM_DADOS"
-    }
-  ],
-  "atas_origens": [
-    {
-      "nome": "SEHIS - GOV. RIO",
-      "key": "sehis_gov_rio",
-      "status": "ATIVA_COM_DADOS",
-      "observacao": "Normaliza referencias antigas ATA GOV RIO, GOV. RIO, SEHIS - GOV. RJ e variacoes."
-    }
-  ],
-  "regras": {
-    "empresa_descricao": "Empresa interna/real do dominio operacional. Nao representa cliente, orgao publico ou origem de ata.",
-    "empresas_permitidas": [
-      "JPL",
-      "AÇO",
-      "TCR"
-    ],
-    "empresas_com_dados_atuais": [
-      "JPL",
-      "AÇO"
-    ],
-    "empresas_sem_dados_atuais": [
-      "TCR"
-    ],
-    "gov_rio_nao_e_empresa": true,
-    "nome_canonico_ata_gov_rio": "SEHIS - GOV. RIO",
-    "key_canonica_ata_gov_rio": "sehis_gov_rio",
-    "gov_rio_tipo": [
-      "cliente",
-      "orgao",
-      "origem_ata",
-      "ata_origem"
-    ]
-  }
+﻿{
+    "empresas_validas":  [
+                             {
+                                 "nome":  "JPL",
+                                 "key":  "jpl",
+                                 "status":  "ATIVA_COM_DADOS"
+                             },
+                             {
+                                 "nome":  "AÃ‡O",
+                                 "key":  "aco",
+                                 "status":  "ATIVA_COM_DADOS"
+                             },
+                             {
+                                 "nome":  "TCR",
+                                 "key":  "tcr",
+                                 "status":  "VALIDA_SEM_DADOS"
+                             }
+                         ],
+    "atas_origens":  [
+                         {
+                             "nome":  "SEHIS - GOV. RIO 114443801/2025",
+                             "key":  "sehis_gov_rio",
+                             "status":  "ATIVA_COM_DADOS",
+                             "observacao":  "Normaliza referencias antigas ATA GOV RIO, GOV. RIO, SEHIS - GOV. RJ e variacoes."
+                         }
+                     ],
+    "regras":  {
+                   "empresa_descricao":  "Empresa interna/real do dominio operacional. Nao representa cliente, orgao publico ou origem de ata.",
+                   "empresas_permitidas":  [
+                                               "JPL",
+                                               "AÃ‡O",
+                                               "TCR"
+                                           ],
+                   "empresas_com_dados_atuais":  [
+                                                     "JPL",
+                                                     "AÃ‡O"
+                                                 ],
+                   "empresas_sem_dados_atuais":  [
+                                                     "TCR"
+                                                 ],
+                   "gov_rio_nao_e_empresa":  true,
+                   "nome_canonico_ata_gov_rio":  "SEHIS - GOV. RIO 114443801/2025",
+                   "key_canonica_ata_gov_rio":  "sehis_gov_rio",
+                   "gov_rio_tipo":  [
+                                        "cliente",
+                                        "orgao",
+                                        "origem_ata",
+                                        "ata_origem"
+                                    ]
+               }
 }

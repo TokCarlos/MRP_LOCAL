@@ -505,3 +505,61 @@ As imagens fisicas podem continuar em pasta tecnica legada, como:
 
 O caminho fisico da imagem nao define o nome logico da ATA.
 Renomeacao de pasta de imagem deve ocorrer apenas em patch futuro separado com migracao controlada.
+
+## Regra de imagens do frontend
+
+A pasta oficial para imagens e:
+
+`01-mrp/front_end/img/`
+
+A pasta `assets` nao deve ser usada como raiz de imagens de produtos.
+
+Estrutura oficial:
+
+`img/produtos/{empresa_key}/atas/{origem_ata_key}/{arquivo}`
+
+## Regra permanente da ATA SEHIS - GOV. RIO
+
+Nome oficial da ATA:
+- SEHIS - GOV. RIO 114443801/2025
+
+Key oficial da ATA:
+- sehis_gov_rio
+
+Produtos oficiais desta ATA no seed ativo:
+- IDs 128 ate 147
+
+Regras:
+- produtos 128-147 devem manter nome oficial e item_ata
+- produtos 128-147 devem usar imagem.preview PNG real e imagem.status REAL_ATA
+- IDs 148-167 sao duplicados temporarios e nao devem ficar no seed ativo
+- empresa continua dominio fechado: JPL, ACO e TCR
+- GOV. RIO e SEHIS nao podem ser empresa
+
+Exemplo:
+
+`img/produtos/aco/atas/sehis_gov_rio/item_2_1_esqui.png`
+
+Empresas validas:
+- jpl
+- aco
+- tcr
+
+TCR e reservado para uso futuro e nao deve receber imagens/produtos nesta fase.
+
+GOV. RIO nao e empresa.
+SEHIS nao e empresa.
+SEHIS - GOV. RIO e ATA/origem.
+
+E proibido:
+- criar `img/produtos/gov_rio`;
+- criar `img/produtos/sehis`;
+- criar `assets/produtos` como raiz oficial;
+- usar origem_ata como empresa;
+- usar cliente/orgao como empresa;
+- usar `gov_rio` em `empresa_key`;
+- usar `sehis_gov_rio` em `empresa_key`.
+
+Imagens de produtos devem usar `imagem.preview` com caminho relativo ao front-end:
+
+`img/produtos/{empresa_key}/atas/{origem_ata_key}/{arquivo}`

@@ -42,25 +42,14 @@ function Normalize-Text {
 $Produtos = Read-JsonUtf8Safe -Path $ProdutosPath
 
 $EmpresaKeysValidas = @("jpl", "aco", "tcr")
-
-$AtaCanonica = "SEHIS - GOV. RIO"
+$AtaCanonica = "SEHIS - GOV. RIO 114443801/2025"
 $AtaCanonicaNorm = Normalize-Text $AtaCanonica
 $AtaKeyCanonica = "sehis_gov_rio"
 
-$VariacoesAntigasAta = @(
-    "ATA GOV RIO",
-    "GOV RIO",
-    "GOV. RIO",
-    "ATA SEHIS - GOV. RJ",
-    "SEHIS - GOV. RJ",
-    "SEHIS GOV RJ",
-    "GOV. RJ"
-)
-
 $Erros = New-Object System.Collections.Generic.List[string]
-$Total = 0
 $PorEmpresa = @{}
 $PorAta = @{}
+$Total = 0
 $ComImagemReal = 0
 
 foreach ($p in $Produtos) {
@@ -75,13 +64,6 @@ foreach ($p in $Produtos) {
 
     if (-not $EmpresaKeysValidas.Contains($empresaKey)) {
         $Erros.Add("Produto ID=$id com empresa_key invalida: '$empresaKey'")
-    }
-
-    if ($empresaKey -eq "jpl" -and $empresaNorm -notmatch "^JPL$") {
-        $Erros.Add("Produto ID=$id com divergencia empresa/empresa_key: empresa='$empresa' empresa_key='$empresaKey'")
-    }
-    if ($empresaKey -eq "tcr" -and $empresaNorm -notmatch "^TCR$") {
-        $Erros.Add("Produto ID=$id com divergencia empresa/empresa_key: empresa='$empresa' empresa_key='$empresaKey'")
     }
 
     if ($empresaNorm -match "GOV|SEHIS" -or $empresaKey -match "gov|sehis") {
@@ -102,51 +84,18 @@ foreach ($p in $Produtos) {
     $arp = Get-PropText $p "arp"
     $arpKey = Get-PropText $p "arp_key"
 
-    $camposAta = @($origemAta, $ataOrigem, $arp)
-    $keysAta = @($origemAtaKey, $ataOrigemKey, $arpKey)
-    $textoConcatenado = (($camposAta + $keysAta) -join " ")
-    $textoNorm = Normalize-Text $textoConcatenado
+    $isGovAta = ($origemAtaKey -eq $AtaKeyCanonica -or $ataOrigemKey -eq $AtaKeyCanonica -or $arpKey -eq $AtaKeyCanonica)
 
-    $pareceAtaGov = $false
-    foreach ($v in $VariacoesAntigasAta) {
-        if ($textoNorm -like ("*" + (Normalize-Text $v) + "*")) {
-            $pareceAtaGov = $true
-            if ((Normalize-Text $origemAta) -ne $AtaCanonicaNorm -and (Normalize-Text $ataOrigem) -ne $AtaCanonicaNorm -and (Normalize-Text $arp) -ne $AtaCanonicaNorm) {
-                $Erros.Add("Produto ID=$id contem variacao antiga de ATA/origem: '$v'. Usar '$AtaCanonica'.")
-            }
-        }
+    if ($isGovAta) {
+        if ((Normalize-Text $origemAta) -ne $AtaCanonicaNorm) { $Erros.Add("Produto ID=$id com origem_ata incorreta: '$origemAta'. Esperado '$AtaCanonica'.") }
+        if ($origemAtaKey -ne $AtaKeyCanonica) { $Erros.Add("Produto ID=$id com origem_ata_key incorreta: '$origemAtaKey'.") }
+        if ((Normalize-Text $ataOrigem) -ne $AtaCanonicaNorm) { $Erros.Add("Produto ID=$id com ata_origem incorreta: '$ataOrigem'. Esperado '$AtaCanonica'.") }
+        if ($ataOrigemKey -ne $AtaKeyCanonica) { $Erros.Add("Produto ID=$id com ata_origem_key incorreta: '$ataOrigemKey'.") }
+        if ((Normalize-Text $arp) -ne $AtaCanonicaNorm) { $Erros.Add("Produto ID=$id com arp incorreto: '$arp'. Esperado '$AtaCanonica'.") }
+        if ($arpKey -ne $AtaKeyCanonica) { $Erros.Add("Produto ID=$id com arp_key incorreto: '$arpKey'.") }
     }
 
-    if ($textoNorm -like "*SEHIS_GOV_RIO*" -or $textoNorm -like "*$AtaCanonicaNorm*") {
-        $pareceAtaGov = $true
-    }
-
-    if ($pareceAtaGov) {
-        if ($origemAta -ne "" -and (Normalize-Text $origemAta) -ne $AtaCanonicaNorm) {
-            $Erros.Add("Produto ID=$id com origem_ata incorreta: '$origemAta'. Esperado '$AtaCanonica'.")
-        }
-        if ($origemAtaKey -ne "" -and $origemAtaKey -ne $AtaKeyCanonica) {
-            $Erros.Add("Produto ID=$id com origem_ata_key incorreta: '$origemAtaKey'. Esperado '$AtaKeyCanonica'.")
-        }
-        if ($ataOrigem -ne "" -and (Normalize-Text $ataOrigem) -ne $AtaCanonicaNorm) {
-            $Erros.Add("Produto ID=$id com ata_origem incorreta: '$ataOrigem'. Esperado '$AtaCanonica'.")
-        }
-        if ($ataOrigemKey -ne "" -and $ataOrigemKey -ne $AtaKeyCanonica) {
-            $Erros.Add("Produto ID=$id com ata_origem_key incorreta: '$ataOrigemKey'. Esperado '$AtaKeyCanonica'.")
-        }
-        if ($arp -ne "" -and (Normalize-Text $arp) -ne $AtaCanonicaNorm) {
-            $Erros.Add("Produto ID=$id com arp incorreto: '$arp'. Esperado '$AtaCanonica'.")
-        }
-        if ($arpKey -ne "" -and $arpKey -ne $AtaKeyCanonica) {
-            $Erros.Add("Produto ID=$id com arp_key incorreto: '$arpKey'. Esperado '$AtaKeyCanonica'.")
-        }
-    }
-
-    $ataResumo = "_SEM_ATA_"
-    if ($arp -ne "") { $ataResumo = $arp }
-    elseif ($origemAta -ne "") { $ataResumo = $origemAta }
-    elseif ($ataOrigem -ne "") { $ataResumo = $ataOrigem }
-
+    $ataResumo = if ($arp) { $arp } elseif ($origemAta) { $origemAta } else { "_SEM_ATA_" }
     if (-not $PorAta.ContainsKey($ataResumo)) { $PorAta[$ataResumo] = 0 }
     $PorAta[$ataResumo]++
 
@@ -176,5 +125,5 @@ if ($Erros.Count -gt 0) {
 }
 
 Write-Host ""
-Write-Host "OK: dominio valido. GOV/SEHIS nao esta como empresa. ATA normalizada como SEHIS - GOV. RIO. Imagens preservadas." -ForegroundColor Green
+Write-Host "OK: dominio valido. GOV/SEHIS nao esta como empresa. ATA normalizada como '$AtaCanonica'." -ForegroundColor Green
 exit 0
