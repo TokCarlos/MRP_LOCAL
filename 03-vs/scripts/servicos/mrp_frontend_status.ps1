@@ -1,22 +1,11 @@
 $ErrorActionPreference = "Stop"
 . "$PSScriptRoot\mrp_service_common.ps1"
 $ctx = Get-MrpServiceContext
-$isListening = Test-PortListening -Port $ctx.Port
-$httpOk = Test-MrpHttpOk -Url $ctx.HealthUrl
-
-$ipLocal = (Get-NetIPAddress -AddressFamily IPv4 -ErrorAction SilentlyContinue |
-    Where-Object { $_.IPAddress -notlike "127.*" -and $_.PrefixOrigin -ne "WellKnown" } |
-    Select-Object -First 1 -ExpandProperty IPAddress)
-$ipTail = (Get-NetIPAddress -AddressFamily IPv4 -ErrorAction SilentlyContinue |
-    Where-Object { $_.IPAddress -like "100.*" } |
-    Select-Object -First 1 -ExpandProperty IPAddress)
-
-Write-Host "ROOT=$($ctx.Root)"
-Write-Host "FRONTEND_DIR=$($ctx.FrontendDir)"
-Write-Host "PORTA=$($ctx.Port)"
-Write-Host "BIND=$($ctx.Bind)"
-Write-Host "PORTA_LISTEN=$isListening"
-Write-Host "HTTP_OK=$httpOk"
-Write-Host "URL_LOCALHOST=http://localhost:$($ctx.Port)"
-if ($ipLocal) { Write-Host "URL_LOCAL=http://${ipLocal}:$($ctx.Port)" }
-if ($ipTail) { Write-Host "URL_TAILSCALE=http://${ipTail}:$($ctx.Port)" }
+Write-Host "MRP_LOCAL STATUS"
+Write-Host "Raiz=$($ctx.Root)"
+Write-Host "Frontend=$($ctx.FrontendDir)"
+Write-Host "Porta=$($ctx.Port)"
+Write-Host "HealthUrl=$($ctx.HealthUrl)"
+$pids = @(Get-MrpPortListenerPids -Port $ctx.Port)
+if ($pids.Count -eq 0) { Write-Host "Porta: livre" } else { Write-Host "Porta: ocupada por PID(s): $([string]::Join(', ', $pids))"; foreach ($pid in $pids) { $p=Get-MrpProcessInfo -Pid $pid; if ($p) { Write-Host "PID=$pid Name=$($p.Name) CMD=$($p.CommandLine)" } } }
+if (Test-MrpHttpOk -Url $ctx.HealthUrl -TimeoutSec 2) { Write-Host "HTTP=OK"; exit 0 } else { Write-Host "HTTP=FAIL"; exit 1 }

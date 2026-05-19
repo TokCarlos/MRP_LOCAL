@@ -6,7 +6,7 @@ Overflow horizontal mobile na pagina Produtos, com faixa branca lateral a direit
 
 ## Causa
 
-Arquivo: `01-mrp/front_end/css/responsive.css`
+Arquivo: `01-mrp/front_end/css/responsive.css`  
 Seletor: `.preview-table`
 
 Regras anteriores que forcaram largura maior que viewport mobile:

@@ -1,0 +1,47 @@
+{
+  "status": "OK",
+  "gerado_em": "2026-05-17",
+  "json_ok": [
+    {
+      "arquivo": "01-mrp/front_end/data/catalogo_ata_gov_rio.json",
+      "tipo": "list",
+      "itens": 20
+    },
+    {
+      "arquivo": "01-mrp/front_end/data/dominios_seed.json",
+      "tipo": "dict",
+      "itens": 3
+    },
+    {
+      "arquivo": "01-mrp/front_end/data/mock_data.json",
+      "tipo": "dict",
+      "itens": 4
+    },
+    {
+      "arquivo": "01-mrp/front_end/data/produtos_seed.json",
+      "tipo": "list",
+      "itens": 147
+    }
+  ],
+  "produtos_total": 147,
+  "empresas": {
+    "JPL|jpl": 53,
+    "AÇO|aco": 94
+  },
+  "imagem_status": {
+    "DEMO": 127,
+    "REAL_ATA": 20
+  },
+  "real_ata": 20,
+  "catalogo_ata_total": 20,
+  "issues_total": 0,
+  "issues_alto": 0,
+  "issues": [],
+  "checagens_adicionais": {
+    "node_check": "OK",
+    "json_ativo": "OK",
+    "previews_fisicos": "OK",
+    "git_diff_check": "OK",
+    "commit_push": "NAO_EXECUTADO_USUARIO_FARA_MANUAL"
+  }
+}

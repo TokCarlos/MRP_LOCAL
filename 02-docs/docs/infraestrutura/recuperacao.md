@@ -1,18 +1,33 @@
-# Recuperação — MRP_LOCAL
+# Recuperacao Operacional
 
-## Recuperação atual
+Checklist rapido:
 
-O watchdog executa healthcheck contínuo e tenta reiniciar o frontend quando falha.
-
-Script:
+1. Verificar status:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_watchdog.ps1"
+powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_status.ps1
 ```
 
-## O que precisa ser validado
+2. Validar saude:
 
-- Matar processo manualmente e confirmar reinício.
-- Verificar logs em `01-mrp/logs/servicos`.
-- Confirmar que não há loop agressivo.
-- Confirmar resposta HTTP após recuperação.
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_healthcheck.ps1
+```
+
+3. Iniciar manualmente:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_start.ps1
+```
+
+4. Parar manualmente:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_stop.ps1
+```
+
+5. Instalar tarefa automatica (teste):
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_task_install.ps1
+```

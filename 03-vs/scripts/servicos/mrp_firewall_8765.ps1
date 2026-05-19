@@ -1,11 +1,7 @@
 $ErrorActionPreference = "Stop"
 . "$PSScriptRoot\mrp_service_common.ps1"
 $ctx = Get-MrpServiceContext
-$ruleName = "MRP_LOCAL_FRONTEND_$($ctx.Port)"
-$exists = Get-NetFirewallRule -DisplayName $ruleName -ErrorAction SilentlyContinue
-if ($exists) {
-    Write-Host "Regra ja existe: $ruleName"
-    exit 0
-}
-New-NetFirewallRule -DisplayName $ruleName -Direction Inbound -Profile Private -Action Allow -Protocol TCP -LocalPort $ctx.Port | Out-Null
-Write-Host "Regra criada: $ruleName"
+$rule = "MRP_LOCAL_FRONTEND_$($ctx.Port)"
+try { Get-NetFirewallRule -DisplayName $rule -ErrorAction Stop | Out-Null; Write-Host "Regra ja existe: $rule"; exit 0 } catch {}
+New-NetFirewallRule -DisplayName $rule -Direction Inbound -Protocol TCP -LocalPort $ctx.Port -Action Allow | Out-Null
+Write-Host "Regra de firewall criada: $rule porta $($ctx.Port)"

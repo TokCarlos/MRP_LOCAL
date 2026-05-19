@@ -1,87 +1,22 @@
+MRP_LOCAL - MANUAL DEV COMPLETO
 
-MANUAL_DEV_COMPLETO - MRP_LOCAL
+Status: base recovery reconstruida a partir do X.zip funcional.
+O sistema ainda nao deve ser chamado de blindado sem validacao real em Windows.
 
-STATUS REAL
-- Sistema local-first em fase de saneamento estrutural.
-- Frontend estatico funcional por script.
-- Porta configurada: 8765.
-- Bind configurado: 0.0.0.0.
-- Backend real: nao iniciado.
-- Banco real: nao iniciado.
-- Estado: pronto para retomada de desenvolvimento, mas nao homologado/blindado.
+Raiz: configuravel/detectada pelo local dos scripts.
+Frontend: 01-mrp/front_end
+Porta: 8765
+Menu: MRP_MENU_SISTEMA.bat
+Config: 01-mrp/config/mrp_local.env.json
+Scripts: 03-vs/scripts/servicos
+Logs: 01-mrp/logs/servicos
 
-PASTAS PRINCIPAIS
-- 01-mrp: sistema operacional atual.
-- 01-mrp/front_end: frontend estatico.
-- 01-mrp/config/mrp_local.env.json: configuracao central do ambiente.
-- 01-mrp/logs/servicos: logs operacionais gerados em runtime, fora de commit.
-- 02-docs: documentacao e regras.
-- 03-vs/scripts: scripts de servico, validacao, git e instalador futuro.
+Comandos:
+- iniciar: powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_start.ps1
+- parar: powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_stop.ps1
+- healthcheck: powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_healthcheck.ps1
+- watchdog uma vez: powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_watchdog.ps1 -Once
 
-REGRAS OBRIGATORIAS
-- Ler REGRAS_MRP.txt antes de execucao grande.
-- Nao usar regra de negocio dependente de X:, HOME-MACHINE, usuario Windows ou drive mapeado.
-- UTF-8 sem BOM para texto persistente.
-- Chaves tecnicas ASCII-safe; texto visual pode ter acento.
-- Logs reais nao entram em versionamento.
-- Nada e final/blindado sem validacao real.
+Regra operacional: antes de qualquer execucao grande, ler REGRAS_MRP.txt.
 
-CONFIGURACAO
-Arquivo: 01-mrp/config/mrp_local.env.json
-Campos principais:
-- frontend.relative_dir
-- frontend.port
-- frontend.bind
-- logs.relative_dir
-- windows_task.name
-- watchdog.interval_seconds
-- python.preferred_relative_exe
-
-COMANDOS DE SERVICO
-Status:
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_status.ps1"
-
-Start:
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_start.ps1"
-
-Healthcheck:
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_healthcheck.ps1"
-
-Stop:
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_stop.ps1"
-
-Watchdog continuo:
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_watchdog.ps1"
-
-Instalar tarefa:
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_task_install.ps1" -Schedule ONLOGON
-
-Firewall:
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_firewall_8765.ps1"
-
-VALIDACOES ANTES DE CHAMAR DE BLINDADO
-- Start manual OK.
-- Healthcheck OK.
-- Porta 8765 ouvindo.
-- HTTP local OK.
-- Outro PC na LAN acessa.
-- Tailscale acessa, se usado.
-- Watchdog reinicia apos matar processo.
-- Tarefa inicia apos logoff/logon.
-- Tarefa inicia apos reboot.
-- Comportamento apos queda de energia validado.
-- Logs gerados em UTF-8 sem BOM.
-
-EMPACOTAMENTO FUTURO
-O MRP_LOCAL deve virar programa instalavel/empacotado. Em maquina limpa, o instalador deve:
-1. Executar precheck de Windows/PowerShell/permissoes.
-2. Instalar ou fornecer runtime necessario, preferencialmente Python portable.
-3. Copiar arquivos para destino configuravel.
-4. Gerar configuracao local.
-5. Liberar firewall com consentimento.
-6. Criar tarefa/watchdog.
-7. Executar healthcheck.
-8. Entregar relatorio de instalacao.
-
-OBSERVACAO
-O instalador prepara ambiente. Regra de negocio continua no motor/backend e nao pode depender do instalador ou do caminho fisico.
+Instalador futuro: ver 02-docs/docs/infraestrutura/empacotamento_instalador.md.

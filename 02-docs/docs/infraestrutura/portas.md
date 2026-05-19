@@ -1,13 +1,14 @@
-# Portas — MRP_LOCAL
+# Portas Oficiais
 
-## Porta atual
+Porta descontinuada:
 
-Frontend: `8765`.
+- 8000
 
-## Origem da configuração
+Porta oficial inicial do frontend MRP_LOCAL:
 
-`01-mrp/config/mrp_local.env.json`
+- 8765/TCP
 
-## Regra
+Servidor atual:
 
-A porta não deve ser repetida como regra de negócio. Scripts ativos devem ler a configuração central.
+- Frontend estatico servido por `py -m http.server`
+- Sem backend API ativo nesta etapa.

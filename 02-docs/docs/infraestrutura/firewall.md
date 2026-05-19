@@ -1,17 +1,17 @@
-# Firewall — MRP_LOCAL
+# Firewall Frontend 8765
 
-## Porta
+Script de regra:
 
-Porta configurada atual: `8765`.
+- `X:\03-vs\scripts\servicos\mrp_firewall_8765.ps1`
 
-A porta é lida de `01-mrp/config/mrp_local.env.json`.
+Regra prevista:
 
-## Script
+- Nome: `MRP_LOCAL_FRONTEND_8765`
+- Direcao: entrada
+- Protocolo: TCP
+- Porta: 8765
+- Perfil: Private
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_firewall_8765.ps1"
-```
+Comportamento:
 
-## Regra
-
-Firewall liberado não significa sistema blindado. Ainda é necessário validar porta, HTTP, LAN, Tailscale, watchdog e tarefa.
+- Se a regra ja existir, o script nao duplica.

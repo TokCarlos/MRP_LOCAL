@@ -448,13 +448,13 @@ Abaixo está a lista consolidada para virar regra absoluta do projeto **MRP_LOCA
 
 200. Mojibake é bloqueador.
 
-201. `Versão` é erro.
+201. `VersÃ£o` é erro.
 
-202. `começar` é erro.
+202. `comeÃ§ar` é erro.
 
-203. `AÇO` é erro.
+203. `AÃ‡O` é erro.
 
-204. `CORRIMÃO` é erro.
+204. `CORRIMÃƒO` é erro.
 
 205. Texto visual pode ter acento correto.
 

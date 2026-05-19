@@ -1,18 +1,15 @@
-# Queda de energia — MRP_LOCAL
+# Queda de Energia e Reinicio
 
-## Estado real
+Risco atual:
 
-Ainda não validado.
+- Sem execucao automatica, o frontend para quando o terminal fecha, maquina reinicia ou falta energia.
 
-## Requisitos para considerar estável
+Mitigacao aplicada no patch v0.1.036:
 
-- Windows inicia após retorno de energia.
-- Tarefa Windows dispara corretamente.
-- Watchdog inicia.
-- Frontend volta a responder.
-- Logs registram o ciclo.
-- Acesso local e LAN funcionam.
+- Watchdog em PowerShell.
+- Tarefa agendada `MRP_LOCAL_FRONTEND` no logon.
 
-## Observação
+Observacao:
 
-Se a máquina exigir login manual, a estratégia de tarefa/serviço deve ser ajustada. Não declarar blindagem antes do teste real.
+- Em ambiente de teste com unidade mapeada `X:\`, a tarefa depende do contexto do usuario logado.
+- Em producao futura, usar caminho local de servidor para reduzir fragilidade.

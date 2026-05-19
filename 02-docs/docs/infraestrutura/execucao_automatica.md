@@ -1,33 +1,22 @@
-# Execução automática — MRP_LOCAL
+# Execucao Automatica Frontend
 
-## Estado atual
+Status atual: frontend estatico, sem backend FastAPI e sem PostgreSQL.
 
-A execução automática usa scripts em:
-
-`03-vs/scripts/servicos`
-
-A configuração central fica em:
-
-`01-mrp/config/mrp_local.env.json`
-
-## Tarefa Windows
-
-Instalar tarefa no logon:
+Comando manual antigo (descontinuado para operacao diaria):
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_task_install.ps1" -Schedule ONLOGON
+py -m http.server 8000 --bind 100.108.26.10 --directory "X:\01-mrp\front_end"
 ```
 
-Modo `ONSTART` existe no script, mas pode exigir permissão administrativa e validação específica.
-
-## Watchdog
+Comando operacional novo:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_watchdog.ps1"
+py -m http.server 8765 --bind 0.0.0.0 --directory "X:\01-mrp\front_end"
 ```
 
-O watchdog é contínuo e usa healthcheck antes de reiniciar.
+Execucao automatica em teste:
 
-## Pendente
-
-Validar em Windows real: logoff/logon, reboot, queda de energia e reinício após processo morto.
+- Script watchdog: `X:\03-vs\scripts\servicos\mrp_frontend_watchdog.ps1`
+- Tarefa Windows: `MRP_LOCAL_FRONTEND`
+- Inicio no logon do usuario atual
+- Sem loop infinito: maximo 10 tentativas em janela maxima de 1 minuto por execucao do watchdog.

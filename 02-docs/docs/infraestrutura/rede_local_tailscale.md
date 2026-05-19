@@ -1,18 +1,19 @@
-# Rede local e Tailscale — MRP_LOCAL
+# Rede Local e Tailscale
 
-## LAN
+Modelo atual: local-first.
 
-A LAN é o acesso principal do sistema local.
+- Rede local da empresa e acesso principal.
+- Tailscale e acesso remoto tecnico.
+- MEGA descontinuado na arquitetura.
 
-Validar:
+URLs de referencia:
 
-- `http://localhost:8765` na máquina servidora;
-- `http://IP_DA_MAQUINA:8765` em outro PC da rede.
+- Localhost: `http://localhost:8765`
+- LAN: `http://IP_LOCAL_DO_SERVIDOR:8765`
+- Tailscale: `http://IP_TAILSCALE_DO_SERVIDOR:8765`
 
-## Tailscale
+Bind operacional atual:
 
-Tailscale pode ser usado para acesso remoto seguro. Não usar exposição pública direta nesta fase.
+`0.0.0.0` para atender LAN + Tailscale.
 
-## Regra
-
-Tailscale é adaptador de acesso. Regra de negócio não depende dele.
+Nao abrir porta publica no roteador nesta fase.
