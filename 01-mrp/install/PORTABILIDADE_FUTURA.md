@@ -66,6 +66,22 @@ A tarefa Windows deve iniciar o watchdog ou servico equivalente. Ainda precisa v
 - PostgreSQL ainda nao instalado/configurado pelo sistema;
 - sistema ainda nao pode ser chamado de blindado/homologado.
 
+## Estado real adicional da etapa v0.1.047
+
+- deploy no trabalho validado;
+- acesso por outras maquinas da rede validado;
+- acesso remoto via Tailscale validado;
+- pacote protegido v0.1.046 validado no trabalho;
+- start/stop/status corrigidos e validados.
+
+Area operacional auxiliar:
+
+- pasta `portable` preservada como area oficial de apoio para deploy/teste/acesso externo;
+- `portable\CONFIGURAR_ACESSO_MRP_REDE.bat` usado para alinhamento de clientes e bypass de proxy quando aplicavel;
+- IP LAN de teste: `192.168.1.71`;
+- IP Tailscale de teste: `100.117.224.127`;
+- IPs de teste nao sao regra fixa do sistema.
+
 ## Start, stop e healthcheck
 
 Antes de release, validar:

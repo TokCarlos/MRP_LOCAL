@@ -2,19 +2,25 @@
 
 ## Versao documental atual
 
-`v0.1.045-preparacao-portabilidade-pos-cimasp`
+`v0.1.047-registro-deploy-trabalho-e-teste-dev`
 
 ## Base funcional anterior
 
-`v0.1.044 imagens CIMASP`
+`v0.1.046 pacote protegido validado no trabalho`
 
 Commit base funcional:
 
-`60e5d6e - v0.1.044 - Cataloga imagens CIMASP`
+`173456b - chore: preparar portabilidade pos-cimasp v0.1.045`
 
 ## Estado real atual
 
 - Frontend validado pelo usuario: start OK, porta 8765 OK, healthcheck OK e sistema abrindo corretamente.
+- Deploy no trabalho validado.
+- Acesso local no trabalho validado.
+- Acesso por outras maquinas da rede validado com script auxiliar.
+- Acesso remoto via Tailscale validado.
+- Pacote protegido v0.1.046 validado no trabalho.
+- Start/stop/status corrigidos e validados.
 - O sistema ainda NAO esta blindado.
 - O sistema ainda NAO esta homologado.
 - Ainda nao ha backend FastAPI funcional.
@@ -46,6 +52,32 @@ Ainda precisam validacao real:
 - Acesso remoto: Tailscale.
 - Acesso principal: rede local.
 - MEGA: descontinuado como arquitetura.
+- IP LAN usado no teste operacional: `192.168.1.71`.
+- IP Tailscale usado no teste operacional: `100.117.224.127`.
+- Os IPs de teste nao sao regra fixa do sistema.
+
+## Area portable (preservada)
+
+A pasta `portable` e area oficial de apoio operacional para deploy/teste/acesso em maquinas clientes.
+
+Arquivos chave:
+
+- `portable\CONFIGURAR_ACESSO_MRP_REDE.bat`
+- `portable\COLINHA_EXECUCAO_PC_TRABALHO_MRP_ATUALIZADA.txt`
+- `portable\MRP_TRABALHO_PRECHECK.bat`
+- `portable\MRP_TRABALHO_FIREWALL_ADMIN.bat`
+- `portable\MRP_TRABALHO_STATUS.bat`
+- `portable\MRP_TRABALHO_PROTEGER_PASTA_ADMIN.bat`
+- `portable\MRP_TRABALHO_RESTAURAR_PERMISSOES_ADMIN.bat`
+- `portable\LEIA_INSTALACAO_PC_TRABALHO.txt`
+- `portable\LEIA_SEGURANCA_PC_TRABALHO.txt`
+- `portable\LEIA_FIX_START_STOP_STATUS.txt`
+
+Observacoes:
+
+- `CONFIGURAR_ACESSO_MRP_REDE.bat` e ferramenta operacional auxiliar, nao regra de negocio.
+- Ele testa/acessa o servidor MRP por LAN/Tailscale, ajusta bypass de proxy no usuario e gera log local em `%LOCALAPPDATA%`.
+- O arquivo permanece em `portable` e nao deve ser movido/copiado para a raiz.
 
 ## Portabilidade v0.1.045
 
@@ -86,13 +118,13 @@ A raiz fisica atual de desenvolvimento pode existir em documentacao, config e sc
 - Variacoes de itens registradas com sufixo `-1` quando havia imagem adicional no ZIP.
 - Nomes oficiais preservados a partir dos registros existentes.
 
-## Etapa atual em andamento: v0.1.045
+## Etapa atual em andamento: v0.1.047
 
-- saneamento documental pos-CIMASP;
-- revisao de hardcoded em scripts ativos;
-- preparacao de ganchos para Python portable/FastAPI/PostgreSQL sem ativacao;
-- manutencao do frontend funcional como base oficial.
+- registro de deploy trabalho e testes DEV;
+- preservacao da pasta portable como area auxiliar oficial;
+- limpeza de temporarios .bak e arquivos de analise;
+- alinhamento documental pos-v0.1.046.
 
 ## Status final desta etapa
 
-`PREPARACAO_PORTABILIDADE_POS_CIMASP_EM_EXECUCAO`
+`DEPLOY_TRABALHO_E_TESTE_DEV_REGISTRADO`

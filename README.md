@@ -1,13 +1,16 @@
 # MRP_LOCAL
 
-Sistema local-first em ambiente de teste, com frontend web estatico funcional e etapa de preparacao de portabilidade pos-CIMASP.
+Sistema local-first em ambiente de teste, com frontend web estatico funcional e deploy validado em ambiente de trabalho.
 
 ## Estado atual
 
-- Versao documental: `v0.1.045-preparacao-portabilidade-pos-cimasp`.
-- Base anterior concluida: `v0.1.044 imagens CIMASP`.
-- Commit base da etapa anterior: `60e5d6e - v0.1.044 - Cataloga imagens CIMASP`.
+- Versao documental: `v0.1.047-registro-deploy-trabalho-e-teste-dev`.
+- Base anterior concluida: `v0.1.046 pacote protegido validado no trabalho`.
+- Commit base relevante anterior: `173456b - chore: preparar portabilidade pos-cimasp v0.1.045`.
 - Frontend validado pelo usuario: start OK, porta 8765 OK, healthcheck OK e sistema abrindo corretamente.
+- Deploy no trabalho validado.
+- Acesso por outras maquinas da rede validado.
+- Acesso remoto via Tailscale validado.
 - Backend real: ainda nao criado.
 - Banco real: ainda nao criado.
 - PostgreSQL: ainda nao instalado/configurado pelo sistema.
@@ -43,6 +46,33 @@ Operacao principal:
 - `03-vs/scripts/servicos/mrp_frontend_stop.ps1`
 - `03-vs/scripts/servicos/mrp_frontend_status.ps1`
 - `03-vs/scripts/servicos/mrp_frontend_healthcheck.ps1`
+
+## Area portable
+
+A pasta `portable` e area operacional auxiliar para deploy/teste/acesso em maquinas clientes.
+
+Arquivos operacionais relevantes em `portable`:
+
+- `CONFIGURAR_ACESSO_MRP_REDE.bat`
+- `COLINHA_EXECUCAO_PC_TRABALHO_MRP_ATUALIZADA.txt`
+- `MRP_TRABALHO_PRECHECK.bat`
+- `MRP_TRABALHO_FIREWALL_ADMIN.bat`
+- `MRP_TRABALHO_STATUS.bat`
+- `MRP_TRABALHO_PROTEGER_PASTA_ADMIN.bat`
+- `MRP_TRABALHO_RESTAURAR_PERMISSOES_ADMIN.bat`
+- `LEIA_INSTALACAO_PC_TRABALHO.txt`
+- `LEIA_SEGURANCA_PC_TRABALHO.txt`
+- `LEIA_FIX_START_STOP_STATUS.txt`
+
+`CONFIGURAR_ACESSO_MRP_REDE.bat`:
+
+- ferramenta operacional auxiliar (nao e core de regra de negocio);
+- testa/acessa o servidor MRP por LAN e/ou Tailscale;
+- ajusta excecoes de proxy/bypass no usuario do Windows;
+- gera log local em `%LOCALAPPDATA%`;
+- IP LAN usado no teste: `192.168.1.71`;
+- IP Tailscale usado no teste: `100.117.224.127`;
+- esses IPs sao dados operacionais de teste, nao regra fixa do sistema.
 
 Observacao tecnica:
 

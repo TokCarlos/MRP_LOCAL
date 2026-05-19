@@ -1,0 +1,464 @@
+COLINHA ATUALIZADA - EXECUCAO MRP_LOCAL NO PC DO TRABALHO
+Versao de teste: v0.1.046 TESTE_PROTEGIDO_FIX_START_STOP
+Pacote correto: MRP_LOCAL_PC_TRABALHO_v0.1.046_TESTE_PROTEGIDO_FIX_START_STOP.zip
+
+CAMINHOS POSSIVEIS NO TRABALHO
+
+Cenario A - Caminho UNC direto:
+\\Departamentos\PCP\9_Sistema
+
+Cenario B - Unidade mapeada X: apontando para \\Departamentos\PCP:
+X:\9_Sistema
+
+ATENCAO:
+Se o X: ja aponta para \\Departamentos\PCP, entao o sistema deve ficar em:
+X:\9_Sistema
+
+Nao usar:
+X:\PCP\09_Sistema
+
+porque nesse caso duplicaria o PCP.
+
+IP Tailscale do PC do Trabalho:
+100.117.224.127
+
+Porta do frontend:
+8765
+
+Link remoto esperado de casa:
+http://100.117.224.127:8765/index.html
+
+
+============================================================
+0. REGRA RAPIDA
+============================================================
+
+Se estiver usando UNC direto:
+pushd "\\Departamentos\PCP\9_Sistema"
+
+Se estiver usando X: mapeado:
+X:
+cd \9_Sistema
+
+Se o pacote foi extraido com nome 09_Sistema, usar:
+X:
+cd \09_Sistema
+
+O nome da pasta pode ser 9_Sistema ou 09_Sistema.
+O importante e que dentro dela existam:
+
+MRP_MENU_SISTEMA.bat
+01-mrp
+03-vs
+
+
+============================================================
+1. CONFERIR MAPEAMENTO X:
+============================================================
+
+CMD:
+
+net use X:
+
+Se mostrar:
+Nome remoto    \\Departamentos\PCP
+Status         OK
+
+entao usar:
+
+X:
+cd \9_Sistema
+
+Se X: nao existir ou apontar para outro lugar, pode mapear:
+
+net use X: "\\Departamentos\PCP" /persistent:yes
+
+Depois:
+
+X:
+cd \9_Sistema
+
+
+============================================================
+2. ENTRAR PELO CAMINHO UNC SEM MAPEAR X:
+============================================================
+
+CMD nao entra direto em UNC com cd.
+Use pushd:
+
+pushd "\\Departamentos\PCP\9_Sistema"
+
+O Windows pode mostrar algo como:
+
+Z:\>
+
+Isso e normal.
+O Z: e temporario e criado pelo pushd.
+
+Para sair depois:
+
+popd
+
+
+============================================================
+3. CONFERIR SE A PASTA ESTA CERTA
+============================================================
+
+Dentro da pasta do sistema, rodar:
+
+dir
+dir 01-mrp
+dir 01-mrp\front_end\index.html
+dir 03-vs\scripts\servicos
+dir MRP_MENU_SISTEMA.bat
+
+Tem que existir:
+
+01-mrp\front_end\index.html
+03-vs\scripts\servicos\mrp_frontend_start.ps1
+03-vs\scripts\servicos\mrp_frontend_stop.ps1
+03-vs\scripts\servicos\mrp_frontend_status.ps1
+03-vs\scripts\servicos\mrp_zerar_execucao.ps1
+
+
+============================================================
+4. PRECHECK INICIAL
+============================================================
+
+Dentro da pasta do sistema:
+
+MRP_TRABALHO_PRECHECK.bat
+
+Esse precheck deve validar:
+- estrutura
+- Python
+- frontend/index.html
+- scripts principais
+- porta 8765
+- permissoes basicas
+
+
+============================================================
+5. ZERAR EXECUCAO ANTES DE INICIAR
+============================================================
+
+PowerShell ou CMD dentro da pasta do sistema:
+
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_zerar_execucao.ps1"
+
+Depois conferir:
+
+netstat -ano | findstr :8765
+
+Correto:
+Nao aparecer LISTENING.
+
+Observacao:
+TIME_WAIT pode aparecer. Isso e normal.
+
+
+============================================================
+6. PROTEGER A PASTA DO SISTEMA
+============================================================
+
+Abrir Prompt como Administrador.
+
+Entrar na pasta do sistema:
+
+Se UNC:
+pushd "\\Departamentos\PCP\9_Sistema"
+
+Se X:
+X:
+cd \9_Sistema
+
+Rodar:
+
+MRP_TRABALHO_PROTEGER_PASTA_ADMIN.bat
+
+Objetivo:
+- restringir permissao da pasta
+- manter usuario atual, Administradores e SYSTEM
+- remover grupos amplos quando possivel
+
+Se der problema de permissao, restaurar:
+
+MRP_TRABALHO_RESTAURAR_PERMISSOES_ADMIN.bat
+
+
+============================================================
+7. INICIAR O SISTEMA PELO MENU
+============================================================
+
+Dentro da pasta:
+
+MRP_MENU_SISTEMA.bat
+
+Escolher:
+
+1
+
+Resultado esperado:
+
+Servidor iniciado.
+Porta=8765
+HEALTHCHECK=OK
+
+
+============================================================
+8. TESTE LOCAL NO PC DO TRABALHO
+============================================================
+
+No navegador do PC do Trabalho:
+
+http://127.0.0.1:8765/index.html
+
+Ou no CMD:
+
+curl http://127.0.0.1:8765/index.html
+
+Se abrir o HTML ou a tela do sistema, o frontend esta rodando localmente.
+
+
+============================================================
+9. VALIDAR SE ESTA OUVINDO PARA REDE / TAILSCALE
+============================================================
+
+CMD:
+
+netstat -ano | findstr :8765
+
+O ideal e aparecer:
+
+TCP    0.0.0.0:8765    0.0.0.0:0    LISTENING    PID
+
+Se aparecer apenas:
+
+127.0.0.1:8765
+
+o acesso remoto via Tailscale pode falhar.
+
+
+============================================================
+10. CONFIRMAR IP TAILSCALE DO PC DO TRABALHO
+============================================================
+
+CMD:
+
+tailscale ip -4
+
+IP informado para este teste:
+
+100.117.224.127
+
+
+============================================================
+11. LIBERAR FIREWALL PARA TAILSCALE
+============================================================
+
+Abrir Prompt como Administrador.
+
+Entrar na pasta do sistema:
+
+Se UNC:
+pushd "\\Departamentos\PCP\9_Sistema"
+
+Se X:
+X:
+cd \9_Sistema
+
+Rodar:
+
+MRP_TRABALHO_FIREWALL_ADMIN.bat
+
+Se precisar liberar manualmente apenas para faixa Tailscale:
+
+netsh advfirewall firewall add rule name="MRP_LOCAL_FRONTEND_8765_TAILSCALE" dir=in action=allow protocol=TCP localport=8765 remoteip=100.64.0.0/10
+
+Conferir regra:
+
+netsh advfirewall firewall show rule name="MRP_LOCAL_FRONTEND_8765_TAILSCALE"
+
+
+============================================================
+12. TESTE REMOTO DE CASA VIA TAILSCALE
+============================================================
+
+No PC de casa, navegador:
+
+http://100.117.224.127:8765/index.html
+
+Ou CMD:
+
+curl http://100.117.224.127:8765/index.html
+
+Resultado esperado:
+abrir a interface do MRP_LOCAL.
+
+Se local abre no trabalho, mas remoto nao abre:
+1. conferir firewall
+2. conferir Tailscale conectado
+3. conferir netstat com 0.0.0.0:8765 LISTENING
+4. conferir IP Tailscale 100.117.224.127
+5. testar ping 100.117.224.127
+
+
+============================================================
+13. STATUS DO SISTEMA
+============================================================
+
+Dentro da pasta do sistema:
+
+MRP_TRABALHO_STATUS.bat
+
+Ou direto:
+
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_status.ps1"
+
+
+============================================================
+14. PARAR / DESATIVAR O SISTEMA
+============================================================
+
+Via menu:
+
+MRP_MENU_SISTEMA.bat
+
+Escolher:
+
+2
+
+Ou direto:
+
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_stop.ps1"
+
+Confirmar se parou:
+
+netstat -ano | findstr :8765
+
+Correto:
+Nao pode aparecer LISTENING.
+
+TIME_WAIT e normal.
+
+
+============================================================
+15. REINICIAR O SISTEMA
+============================================================
+
+Via menu:
+
+MRP_MENU_SISTEMA.bat
+
+Escolher:
+
+3
+
+Ou manual:
+
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_stop.ps1"
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_start.ps1"
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_healthcheck.ps1"
+
+
+============================================================
+16. MATAR PROCESSO PRESO NA PORTA 8765
+============================================================
+
+Se a porta ficar presa:
+
+netstat -ano | findstr :8765
+
+Identificar o PID no final da linha LISTENING.
+
+Matar:
+
+taskkill /PID NUMERO_DO_PID /F
+
+Exemplo:
+
+taskkill /PID 12345 /F
+
+Comando automatico para matar processo LISTENING na porta 8765:
+
+for /f "tokens=5" %a in ('netstat -ano ^| findstr :8765 ^| findstr LISTENING') do taskkill /PID %a /F
+
+Ou usar o script pronto:
+
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_zerar_execucao.ps1"
+
+
+============================================================
+17. DIAGNOSTICO PYTHON
+============================================================
+
+Ver Python:
+
+python --version
+
+Se nao funcionar:
+
+py --version
+
+Ver processos Python/http.server:
+
+wmic process where "CommandLine like '%http.server%' or CommandLine like '%8765%'" get ProcessId,Name,CommandLine
+
+
+============================================================
+18. DIAGNOSTICO TAILSCALE
+============================================================
+
+Ver status:
+
+tailscale status
+
+Ver IP:
+
+tailscale ip -4
+
+Testar ping a partir de outro PC com Tailscale:
+
+ping 100.117.224.127
+
+Testar HTTP a partir de casa:
+
+curl http://100.117.224.127:8765/index.html
+
+
+============================================================
+19. CHECKLIST FINAL DO TESTE
+============================================================
+
+[ ] Pasta correta: \\Departamentos\PCP\9_Sistema
+[ ] Ou X: mapeado para \\Departamentos\PCP
+[ ] Se X: mapeado, pasta correta: X:\9_Sistema
+[ ] MRP_MENU_SISTEMA.bat existe
+[ ] 01-mrp\front_end\index.html existe
+[ ] Precheck executado
+[ ] Pasta protegida
+[ ] Sistema inicia pelo menu
+[ ] HEALTHCHECK=OK
+[ ] Abre localmente em http://127.0.0.1:8765/index.html
+[ ] netstat mostra 0.0.0.0:8765 LISTENING
+[ ] Firewall liberado para Tailscale
+[ ] tailscale ip -4 mostra 100.117.224.127
+[ ] Abre de casa em http://100.117.224.127:8765/index.html
+[ ] Stop funciona
+[ ] Depois do stop, netstat nao mostra LISTENING
+[ ] Restart funciona
+
+
+============================================================
+20. OBSERVACOES IMPORTANTES
+============================================================
+
+- Este pacote e de teste operacional protegido, nao e ambiente de desenvolvimento.
+- Nao deve conter .git, .codex, docs tecnicas completas, patches ou relatorios internos.
+- Ainda nao e sistema blindado.
+- Ainda nao tem backend real.
+- Ainda nao tem banco real.
+- Protecao contra copia nao e absoluta se alguem tiver acesso de administrador.
+- Para o teste atual, a protecao e por pacote minimo, permissao NTFS, firewall restrito e Tailscale.
+- O caminho \\Departamentos\PCP\9_Sistema pode ser usado diretamente com pushd.
+- Se usar X:, garanta que X: aponta para \\Departamentos\PCP.

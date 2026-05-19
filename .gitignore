@@ -55,6 +55,7 @@ build/
 *.dump
 *.sql
 *.bak
+*.bak*
 *.backup
 
 # PostgreSQL local / dados reais

@@ -1,0 +1,27 @@
+MRP_LOCAL - PACOTE TESTE PROTEGIDO v0.1.046
+
+Base: v0.1.045 + pacote deploy PC trabalho.
+Objetivo: reduzir risco de copia/clonagem no teste remoto via Tailscale.
+
+Removido deste pacote:
+- .git
+- .codex
+- 00-manual-dev
+- 02-docs
+- 03-vs/patches
+- 03-vs/relatorios
+- scripts de desenvolvimento/auditoria
+- historico/quarentena
+- logs reais
+- caches/temporarios
+
+Mantido:
+- frontend funcional
+- dados/imagens CIMASP
+- config operacional
+- scripts de servico necessarios
+- precheck do trabalho
+- scripts de firewall/status/menu
+- script de protecao NTFS
+
+Status de seguranca: reducao de exposicao, nao anticopia absoluto.

@@ -1,0 +1,68 @@
+MRP_LOCAL - INSTALACAO CONTROLADA NO PC DO TRABALHO
+Versao do pacote: v0.1.046-deploy-trabalho
+Base: v0.1.045-preparacao-portabilidade-pos-cimasp
+Destino planejado: X:\PCP\09_Sistema
+
+OBJETIVO
+Rodar o frontend MRP_LOCAL no PC do Trabalho usando o mesmo fluxo validado no DEV: menu, start, healthcheck, stop e acesso via porta 8765.
+
+O QUE ESTE PACOTE NAO FAZ
+- Nao cria backend real.
+- Nao cria banco real.
+- Nao instala PostgreSQL.
+- Nao baixa Python portable.
+- Nao instala Tailscale.
+- Nao chama o sistema de blindado.
+
+DEPENDENCIAS ATUAIS
+Obrigatorio para rodar localmente:
+- Windows.
+- PowerShell.
+- Python disponivel como py.exe ou python.exe, ou futuramente runtime portable em 01-mrp/runtime/python/python.exe.
+- Porta 8765 livre.
+- Navegador.
+
+Para acesso de outro PC / Tailscale:
+- Firewall liberado para a porta 8765.
+- Tailscale instalado, logado e conectado.
+- IP Tailscale do PC do Trabalho conhecido.
+
+INSTALACAO
+1. Extraia este pacote em X:\PCP\.
+2. O resultado esperado e: X:\PCP\09_Sistema\MRP_MENU_SISTEMA.bat
+3. No PC do Trabalho, abra o Prompt ou PowerShell.
+4. Execute: X:\PCP\09_Sistema\MRP_TRABALHO_PRECHECK.bat
+5. Se o precheck nao tiver erro critico, execute: X:\PCP\09_Sistema\MRP_MENU_SISTEMA.bat
+6. Escolha a opcao 1 - Iniciar Sistema.
+
+VALIDACAO LOCAL
+Abrir no navegador do PC do Trabalho:
+http://127.0.0.1:8765/index.html
+
+VALIDACAO REMOTA VIA TAILSCALE
+No PC de casa, abrir no navegador:
+http://IP_TAILSCALE_DO_PC_TRABALHO:8765/index.html
+
+Se nao abrir remotamente, validar firewall e Tailscale. O sistema local pode estar OK mesmo se o acesso remoto falhar.
+
+COMANDOS RAPIDOS
+Precheck:
+MRP_TRABALHO_PRECHECK.bat
+
+Menu:
+MRP_MENU_SISTEMA.bat
+
+Liberar firewall como Administrador:
+MRP_TRABALHO_FIREWALL_ADMIN.bat
+
+Status:
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_status.ps1"
+
+Healthcheck:
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_healthcheck.ps1"
+
+Parar:
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_stop.ps1"
+
+STATUS REAL
+Pacote preparado para deploy controlado no PC do Trabalho. Ainda exige validacao real de firewall, Tailscale, reboot, watchdog e tarefa automatica no ambiente de destino.

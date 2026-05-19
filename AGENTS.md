@@ -18,9 +18,9 @@ Regras obrigatorias:
 
 Status atual:
 
-- Versao: v0.1.045-preparacao-portabilidade-pos-cimasp
-- Base anterior: v0.1.044 imagens CIMASP (commit 60e5d6e)
-- Fase: frontend funcional preservado / sem backend real / sem banco real / preparacao de portabilidade
+- Versao: v0.1.047-registro-deploy-trabalho-e-teste-dev
+- Base anterior: v0.1.046 pacote protegido validado no trabalho
+- Fase: frontend funcional em DEV casa e deploy trabalho validados / sem backend real / sem banco real
 
 ## PROTOCOLO OBRIGATORIO DE FECHAMENTO AUTOMATICO
 
@@ -90,3 +90,9 @@ Regra de infraestrutura v0.1.036:
 - Bind oficial: 0.0.0.0
 - Tailscale para remoto, LAN como principal
 - Nao usar MEGA na arquitetura
+
+Observacao operacional v0.1.047:
+
+- pasta `portable` e area oficial auxiliar para deploy/teste/acesso externo;
+- `portable\CONFIGURAR_ACESSO_MRP_REDE.bat` permanece em `portable`;
+- nao mover nem copiar `CONFIGURAR_ACESSO_MRP_REDE.bat` para a raiz.

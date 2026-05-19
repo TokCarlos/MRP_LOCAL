@@ -1,14 +1,18 @@
 MRP_LOCAL - RESUMO OPERACIONAL DO SISTEMA
 
-Versao documental: v0.1.045-preparacao-portabilidade-pos-cimasp
-Base anterior concluida: v0.1.044 imagens CIMASP
-Commit base anterior: 60e5d6e - v0.1.044 - Cataloga imagens CIMASP
+Versao documental: v0.1.047-registro-deploy-trabalho-e-teste-dev
+Base anterior concluida: v0.1.046 pacote protegido validado no trabalho
+Commit base relevante anterior: 173456b - chore: preparar portabilidade pos-cimasp v0.1.045
 
 O MRP_LOCAL e um sistema local-first em ambiente de teste. O frontend atual roda como site estatico em 01-mrp/front_end, usando porta 8765.
 
 STATUS REAL
 
 - Frontend validado pelo usuario: start OK, porta 8765 OK, healthcheck OK e sistema abrindo corretamente.
+- Deploy no trabalho validado.
+- Acesso local no trabalho validado.
+- Acesso por outras maquinas da rede validado.
+- Acesso remoto de casa via Tailscale validado.
 - Ainda nao ha backend.
 - Ainda nao ha banco real.
 - Ainda nao ha PostgreSQL instalado pelo sistema.
@@ -73,6 +77,19 @@ Comando py/http.server:
 
 - uso somente para diagnostico tecnico;
 - nao e operacao principal.
+
+AREA PORTABLE
+
+- pasta oficial auxiliar para deploy/teste/acesso em maquinas clientes;
+- `portable\CONFIGURAR_ACESSO_MRP_REDE.bat` permanece em `portable`;
+- nao mover/copiar esse arquivo para raiz;
+- script ajusta proxy bypass no usuario quando aplicavel e registra log em `%LOCALAPPDATA%`.
+
+IPs operacionais de teste:
+
+- LAN: 192.168.1.71
+- Tailscale: 100.117.224.127
+- esses IPs nao sao regra fixa do sistema.
 
 DECISOES
 

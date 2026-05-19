@@ -1,12 +1,15 @@
 MRP_LOCAL - MANUAL DEV COMPLETO
 
-Versao documental: v0.1.045-preparacao-portabilidade-pos-cimasp
-Base anterior concluida: v0.1.044 imagens CIMASP
-Commit base anterior: 60e5d6e - v0.1.044 - Cataloga imagens CIMASP
+Versao documental: v0.1.047-registro-deploy-trabalho-e-teste-dev
+Base anterior concluida: v0.1.046 pacote protegido validado no trabalho
+Commit base relevante anterior: 173456b - chore: preparar portabilidade pos-cimasp v0.1.045
 
 STATUS REAL
 
 - Frontend validado pelo usuario: start OK, porta 8765 OK, healthcheck OK e sistema abrindo corretamente.
+- Deploy no trabalho validado.
+- Acesso no trabalho por outras maquinas da rede validado (script auxiliar).
+- Acesso remoto de casa via Tailscale validado.
 - Sistema ainda NAO esta blindado.
 - Sistema ainda NAO esta homologado.
 - Backend FastAPI ainda NAO existe.
@@ -131,6 +134,33 @@ http://IP_LOCAL_DO_SERVIDOR:8765
 Tailscale:
 
 http://IP_TAILSCALE_DO_SERVIDOR:8765
+
+Dados de teste operacional:
+
+- IP LAN usado no script auxiliar: 192.168.1.71
+- IP Tailscale usado no teste: 100.117.224.127
+- Esses IPs nao sao regra fixa do sistema e devem ser revisados se o servidor mudar.
+
+AREA PORTABLE (APOIO OPERACIONAL)
+
+A pasta `portable` deve permanecer preservada como area oficial de deploy/teste/acesso externo.
+
+Arquivo chave:
+
+- portable\CONFIGURAR_ACESSO_MRP_REDE.bat
+
+Uso:
+
+- ferramenta operacional auxiliar para alinhar PCs clientes da rede;
+- testa/acessa servidor MRP por LAN e/ou Tailscale;
+- ajusta excecoes de proxy/bypass no perfil do usuario Windows;
+- gera log local em `%LOCALAPPDATA%`;
+- nao e core de regra de negocio.
+
+Caminhos de trabalho validados:
+
+- \\Departamentos\PCP\9_Sistema
+- X:\9_Sistema quando X: aponta para \\Departamentos\PCP
 
 DECISOES
 

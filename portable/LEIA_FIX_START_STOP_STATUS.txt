@@ -1,0 +1,29 @@
+MRP_LOCAL - FIX START/STOP/STATUS PARA PC DO TRABALHO
+
+Este pacote ja inclui a correcao aplicada no ambiente DEV para:
+- corrigir conflito PowerShell com variavel automatica PID;
+- desligar o frontend pela porta 8765;
+- evitar que o menu informe desativado com processo ainda em LISTENING;
+- incluir script de zerar execucao: 03-vs\scripts\servicos\mrp_zerar_execucao.ps1.
+
+Arquivos substituidos/adicionados:
+- 03-vs\scripts\servicos\mrp_service_common.ps1
+- 03-vs\scripts\servicos\mrp_frontend_stop.ps1
+- 03-vs\scripts\servicos\mrp_frontend_status.ps1
+- 03-vs\scripts\servicos\mrp_zerar_execucao.ps1
+
+Uso no PC do Trabalho:
+1. Extrair em X:\PCP\ para formar X:\PCP\09_Sistema.
+2. Rodar MRP_TRABALHO_PRECHECK.bat.
+3. Rodar MRP_MENU_SISTEMA.bat.
+4. Iniciar com opcao 1.
+5. Desativar com opcao 2.
+6. Confirmar que netstat -ano | findstr :8765 nao mostra LISTENING.
+
+Para zerar tudo manualmente no PC do Trabalho:
+PowerShell como Administrador:
+Set-Location X:\PCP\09_Sistema
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_zerar_execucao.ps1"
+
+Status real:
+Pacote de teste operacional protegido. Nao e sistema blindado.

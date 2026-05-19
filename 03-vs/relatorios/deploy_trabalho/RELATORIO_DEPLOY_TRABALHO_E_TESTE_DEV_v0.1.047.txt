@@ -1,0 +1,104 @@
+RELATORIO DEPLOY TRABALHO E TESTE DEV
+
+Versao da etapa: v0.1.047-registro-deploy-trabalho-e-teste-dev
+Base anterior: v0.1.046 pacote protegido validado no trabalho
+Commit base relevante: 173456b
+
+Resumo da etapa:
+- consolidacao documental do estado real de deploy e acesso;
+- preservacao integral da pasta portable;
+- limpeza de temporarios operacionais .bak e sobras de analise.
+
+Arquivos alterados:
+- AGENTS.md
+- README.md
+- Readme.txt
+- 00-manual-dev/MANUAL_DEV_COMPLETO.txt
+- 00-manual-dev/RESUMO_OPERACIONAL_DO_SISTEMA.txt
+- 02-docs/docs/geral/status_geral.md
+- 01-mrp/docs_runtime/README.md
+- 01-mrp/install/PORTABILIDADE_FUTURA.md
+- .gitignore
+- 03-vs/scripts/servicos/mrp_frontend_status.ps1
+- 03-vs/scripts/servicos/mrp_frontend_stop.ps1
+- 03-vs/scripts/servicos/mrp_service_common.ps1
+
+Arquivos criados:
+- 03-vs/relatorios/deploy_trabalho/RELATORIO_DEPLOY_TRABALHO_E_TESTE_DEV_v0.1.047.txt
+- portable/CONFIGURAR_ACESSO_MRP_REDE.bat
+- portable/COLINHA_EXECUCAO_PC_TRABALHO_MRP_ATUALIZADA.txt
+- portable/MRP_TRABALHO_PRECHECK.bat
+- portable/MRP_TRABALHO_FIREWALL_ADMIN.bat
+- portable/MRP_TRABALHO_STATUS.bat
+- portable/MRP_TRABALHO_PROTEGER_PASTA_ADMIN.bat
+- portable/MRP_TRABALHO_RESTAURAR_PERMISSOES_ADMIN.bat
+- portable/LEIA_INSTALACAO_PC_TRABALHO.txt
+- portable/LEIA_SEGURANCA_PC_TRABALHO.txt
+- portable/LEIA_FIX_START_STOP_STATUS.txt
+- portable/MRP_MENU_SISTEMA.bat
+- portable/RELATORIO_DEPLOY_PROTEGIDO_PC_TRABALHO_v0.1.046.txt
+- 03-vs/scripts/servicos/mrp_zerar_execucao.ps1
+
+Arquivos removidos:
+- 03-vs/scripts/servicos/mrp_frontend_stop.ps1.bak_before_stop_fix
+- 03-vs/scripts/servicos/mrp_frontend_stop.ps1.bak_parser_fix
+- 03-vs/scripts/servicos/mrp_frontend_stop.ps1.bak_rewrite_stop
+- 03-vs/scripts/servicos/mrp_frontend_stop.ps1.bak_stop_port_fix
+- 03-vs/scripts/servicos/mrp_service_common.ps1.bak_before_stop_fix
+- 03-vs/scripts/servicos/mrp_service_common.ps1.bak_pid_fix
+- 03-vs/scripts/servicos/mrp_service_common.ps1.bak_pid_fix_2
+- tree_X_atual.txt
+- LEIA_SUBSTITUIR_ARQUIVOS.txt
+
+Confirmacoes obrigatorias:
+- pasta portable preservada: SIM
+- CONFIGURAR_ACESSO_MRP_REDE.bat permanece em portable: SIM
+- CONFIGURAR_ACESSO_MRP_REDE.bat nao foi copiado para raiz: SIM
+
+Resultado real do deploy no trabalho:
+- deploy validado no ambiente de trabalho;
+- pacote protegido v0.1.046 validado.
+
+Resultado do acesso por rede:
+- acesso local no trabalho OK;
+- acesso por outras maquinas da rede OK com apoio do script auxiliar.
+
+Resultado do acesso remoto via Tailscale:
+- acesso remoto de casa para ambiente de trabalho validado.
+
+Uso do CONFIGURAR_ACESSO_MRP_REDE.bat:
+- ferramenta operacional auxiliar para alinhar PCs clientes;
+- testa acesso por LAN e/ou Tailscale;
+- ajusta excecoes de proxy/bypass por usuario quando aplicavel;
+- gera log local em %LOCALAPPDATA%;
+- nao e core de regra de negocio.
+
+Dados operacionais de teste:
+- IP LAN usado no script: 192.168.1.71
+- IP Tailscale usado no teste: 100.117.224.127
+- caminhos de trabalho usados:
+  - \\Departamentos\PCP\9_Sistema
+  - X:\9_Sistema quando X: aponta para \\Departamentos\PCP
+- esses dados nao sao regra fixa do sistema.
+
+Pendencias ainda nao validadas:
+- watchdog continuo;
+- tarefa automatica Windows;
+- reboot;
+- queda de rede;
+- queda de energia;
+- recuperacao automatica;
+- politica final de logs;
+- instalador/preparador definitivo.
+
+Riscos:
+- mudanca futura de IP/servidor sem revisao dos scripts auxiliares de acesso;
+- dependencia de validacao operacional continua para chamar o sistema de estavel.
+
+Status final real:
+- etapa v0.1.047 consolidada documentalmente;
+- frontend funcional preservado;
+- nenhum backend criado;
+- nenhum banco criado;
+- nenhuma dependencia instalada;
+- sistema ainda nao blindado.

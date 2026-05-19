@@ -1,11 +1,14 @@
 MRP_LOCAL - LEITURA RAPIDA
 
-Versao documental: v0.1.045-preparacao-portabilidade-pos-cimasp
-Base anterior concluida: v0.1.044 imagens CIMASP
-Commit base anterior: 60e5d6e - v0.1.044 - Cataloga imagens CIMASP
+Versao documental: v0.1.047-registro-deploy-trabalho-e-teste-dev
+Base anterior concluida: v0.1.046 pacote protegido validado no trabalho
+Commit base relevante anterior: 173456b - chore: preparar portabilidade pos-cimasp v0.1.045
 
 Estado real:
 - frontend validado pelo usuario;
+- deploy no trabalho validado;
+- acesso por outras maquinas da rede validado;
+- acesso remoto via Tailscale validado;
 - porta 8765 OK;
 - healthcheck OK;
 - sistema abrindo corretamente;
@@ -26,6 +29,15 @@ Operacao principal:
 Comando py/http.server:
 - apenas diagnostico tecnico;
 - nao usar como operacao principal.
+
+Area portable:
+- pasta oficial auxiliar para deploy/teste/acesso externo;
+- manter conteudo em `portable` sem mover para raiz;
+- `portable\CONFIGURAR_ACESSO_MRP_REDE.bat` usado para alinhar PCs clientes (LAN/Tailscale/proxy bypass quando aplicavel).
+
+IPs de teste operacional (nao sao regra fixa):
+- LAN: 192.168.1.71
+- Tailscale: 100.117.224.127
 
 Scripts:
 - .\03-vs\scripts\servicos\mrp_frontend_start.ps1
