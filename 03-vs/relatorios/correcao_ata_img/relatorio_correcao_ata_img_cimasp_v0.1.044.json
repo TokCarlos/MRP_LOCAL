@@ -1,0 +1,1060 @@
+{
+    "versao":  "v0.1.044",
+    "ata":  "CIMASP",
+    "ata_numero":  "029/2025",
+    "ata_key":  "cimasp",
+    "origem_zip":  "\\\\home-machine\\Users\\carlo\\Desktop\\PCP SERVIDOR\\PCP\\1_ADM\\1.1_MODELOS\\1.1.1_Img\\CIMASP\\CIMASP.zip",
+    "total_png_zip":  90,
+    "total_itens_cimasp":  74,
+    "total_principais_migrados":  74,
+    "total_variacoes_criadas":  16,
+    "migracoes":  [
+                      {
+                          "id":  54,
+                          "item_ata":  "1",
+                          "nome_oficial":  "SIMULADOR TRIPLO DE ESTIMULAÇÃO PARA TODOS OS MEMBROS E CERVICAL",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_1_simulador_triplo_de_estimulacao_para_todos_os_membros_e_cervical.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_1_simulador_triplo_de_estimulacao_para_todos_os_membros_e_cervical.png",
+                          "origem_png":  "1.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  55,
+                          "item_ata":  "2",
+                          "nome_oficial":  "SIMULADOR TRIPLO PARA ESTIMULAÇÃO DE QUADRIL E PERNAS",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_2_simulador_triplo_para_estimulacao_de_quadril_e_pernas.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_2_simulador_triplo_para_estimulacao_de_quadril_e_pernas.png",
+                          "origem_png":  "2.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  56,
+                          "item_ata":  "3",
+                          "nome_oficial":  "SIMULADOR DUPLO DE OPERAÇÕES 1 PARA TODOS OS MEMBROS",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_3_simulador_duplo_de_operacoes_1_para_todos_os_membros.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_3_simulador_duplo_de_operacoes_1_para_todos_os_membros.png",
+                          "origem_png":  "3.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  57,
+                          "item_ata":  "4",
+                          "nome_oficial":  "SIMULADOR DUPLO DE OPERAÇÕES 2 PARA TODOS OS MEMBROS",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_4_simulador_duplo_de_operacoes_2_para_todos_os_membros.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_4_simulador_duplo_de_operacoes_2_para_todos_os_membros.png",
+                          "origem_png":  "4.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  58,
+                          "item_ata":  "5",
+                          "nome_oficial":  "SIMULADOR DUPLO PARA MEMBROS SUPERIORES E INFERIORES",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_5_simulador_duplo_para_membros_superiores_e_inferiores.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_5_simulador_duplo_para_membros_superiores_e_inferiores.png",
+                          "origem_png":  "5.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  59,
+                          "item_ata":  "6",
+                          "nome_oficial":  "SIMULADOR DE ALONGAMENTO",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_6_simulador_de_alongamento.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_6_simulador_de_alongamento.png",
+                          "origem_png":  "6.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  60,
+                          "item_ata":  "7",
+                          "nome_oficial":  "SIMULADOR DE EQUILÍBRIO",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_7_simulador_de_equilibrio.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_7_simulador_de_equilibrio.png",
+                          "origem_png":  "7.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  61,
+                          "item_ata":  "8",
+                          "nome_oficial":  "TOTEM INFORMATIVO",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_8_totem_informativo.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_8_totem_informativo.png",
+                          "origem_png":  "8.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  62,
+                          "item_ata":  "9",
+                          "nome_oficial":  "CENTRAL CALISTÊNICA MÚLTIPLA",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_9_central_calistenica_multipla.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_9_central_calistenica_multipla.png",
+                          "origem_png":  "9.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  63,
+                          "item_ata":  "10",
+                          "nome_oficial":  "ARTEFATO MULT RECREATIVO KIDS 1",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_10_artefato_mult_recreativo_kids_1.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_10_artefato_mult_recreativo_kids_1.png",
+                          "origem_png":  "10.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  64,
+                          "item_ata":  "11",
+                          "nome_oficial":  "ARTEFATO MULT RECREATIVO KIDS 2",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_11_artefato_mult_recreativo_kids_2.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_11_artefato_mult_recreativo_kids_2.png",
+                          "origem_png":  "11.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  65,
+                          "item_ata":  "12",
+                          "nome_oficial":  "BALANÇO ESTAIADO COM HASTES MAMÃE BEBÊ",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_12_balanco_estaiado_com_hastes_mamae_bebe.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_12_balanco_estaiado_com_hastes_mamae_bebe.png",
+                          "origem_png":  "12.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  66,
+                          "item_ata":  "13",
+                          "nome_oficial":  "BALANÇO ESTAIADO COM HASTES DUPLO INFANTIL",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_13_balanco_estaiado_com_hastes_duplo_infantil.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_13_balanco_estaiado_com_hastes_duplo_infantil.png",
+                          "origem_png":  "13.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  67,
+                          "item_ata":  "14",
+                          "nome_oficial":  "BALANÇO ESTAIADO COM HASTES DUPLO JUVENIL",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_14_balanco_estaiado_com_hastes_duplo_juvenil.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_14_balanco_estaiado_com_hastes_duplo_juvenil.png",
+                          "origem_png":  "14.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  68,
+                          "item_ata":  "15",
+                          "nome_oficial":  "GLOBO GAIOLA LABIRINTO",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_15_globo_gaiola_labirinto.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_15_globo_gaiola_labirinto.png",
+                          "origem_png":  "15.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  69,
+                          "item_ata":  "16",
+                          "nome_oficial":  "BALANÇO VAI E VEM ACESSÍVEL",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_16_balanco_vai_e_vem_acessivel.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_16_balanco_vai_e_vem_acessivel.png",
+                          "origem_png":  "16.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  70,
+                          "item_ata":  "17",
+                          "nome_oficial":  "ARTEFATO PARA ACESSÍBILIDADE 1",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_17_artefato_para_acessibilidade_1.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_17_artefato_para_acessibilidade_1.png",
+                          "origem_png":  "17-new.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  71,
+                          "item_ata":  "18",
+                          "nome_oficial":  "ARTEFATO PARA ACESSÍBILIDADE 2",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_18_artefato_para_acessibilidade_2.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_18_artefato_para_acessibilidade_2.png",
+                          "origem_png":  "18-new.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  72,
+                          "item_ata":  "19",
+                          "nome_oficial":  "ARTEFATO INCLUSIVO TEA 1",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_19_artefato_inclusivo_tea_1.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_19_artefato_inclusivo_tea_1.png",
+                          "origem_png":  "19.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  73,
+                          "item_ata":  "20",
+                          "nome_oficial":  "ARTEFATO INCLUSIVO TEA 2",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_20_artefato_inclusivo_tea_2.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_20_artefato_inclusivo_tea_2.png",
+                          "origem_png":  "20.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  74,
+                          "item_ata":  "21",
+                          "nome_oficial":  "ARTEFATO INCLUSIVO TEA 3",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_21_artefato_inclusivo_tea_3.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_21_artefato_inclusivo_tea_3.png",
+                          "origem_png":  "21.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  75,
+                          "item_ata":  "22",
+                          "nome_oficial":  "BOUGAINVILLE FUNCIONAL 1",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_22_bougainville_funcional_1.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_22_bougainville_funcional_1.png",
+                          "origem_png":  "22.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  76,
+                          "item_ata":  "23",
+                          "nome_oficial":  "BOUGAINVILLE FUNCIONAL 2",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_23_bougainville_funcional_2.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_23_bougainville_funcional_2.png",
+                          "origem_png":  "23.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  77,
+                          "item_ata":  "24",
+                          "nome_oficial":  "BOUGAINVILLE FUNCIONAL 3",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_24_bougainville_funcional_3.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_24_bougainville_funcional_3.png",
+                          "origem_png":  "24.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  78,
+                          "item_ata":  "25",
+                          "nome_oficial":  "TABLADO INTERATIVO",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_25_tablado_interativo.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_25_tablado_interativo.png",
+                          "origem_png":  "25.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  79,
+                          "item_ata":  "26",
+                          "nome_oficial":  "SIMULADOR TRIPLO DE ESTIMULAÇÃO PARA TODOS OS MEMBROS E CERVICAL INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_26_simulador_triplo_de_estimulacao_para_todos_os_membros_e_cervical_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_26_simulador_triplo_de_estimulacao_para_todos_os_membros_e_cervical_inox.png",
+                          "origem_png":  "26.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  80,
+                          "item_ata":  "27",
+                          "nome_oficial":  "SIMULADOR TRIPLO PARA ESTIMULAÇÃO DE QUADRIL E PERNAS INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_27_simulador_triplo_para_estimulacao_de_quadril_e_pernas_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_27_simulador_triplo_para_estimulacao_de_quadril_e_pernas_inox.png",
+                          "origem_png":  "27.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  81,
+                          "item_ata":  "28",
+                          "nome_oficial":  "SIMULADOR DUPLO DE OPERAÇÕES 1 PARA TODOS OS MEMBROS INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_28_simulador_duplo_de_operacoes_1_para_todos_os_membros_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_28_simulador_duplo_de_operacoes_1_para_todos_os_membros_inox.png",
+                          "origem_png":  "28.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  82,
+                          "item_ata":  "29",
+                          "nome_oficial":  "SIMULADOR DUPLO DE OPERAÇÕES 2 PARA TODOS OS MEMBROS INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_29_simulador_duplo_de_operacoes_2_para_todos_os_membros_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_29_simulador_duplo_de_operacoes_2_para_todos_os_membros_inox.png",
+                          "origem_png":  "29.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  83,
+                          "item_ata":  "30",
+                          "nome_oficial":  "SIMULADOR DUPLO PARA MEMBROS SUPERIORES E INFERIORES INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_30_simulador_duplo_para_membros_superiores_e_inferiores_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_30_simulador_duplo_para_membros_superiores_e_inferiores_inox.png",
+                          "origem_png":  "30.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  84,
+                          "item_ata":  "31",
+                          "nome_oficial":  "SIMULADOR DE ALONGAMENTO INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_31_simulador_de_alongamento_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_31_simulador_de_alongamento_inox.png",
+                          "origem_png":  "31.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  85,
+                          "item_ata":  "32",
+                          "nome_oficial":  "SIMULADOR DE EQUILÍBRIO INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_32_simulador_de_equilibrio_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_32_simulador_de_equilibrio_inox.png",
+                          "origem_png":  "32.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  86,
+                          "item_ata":  "33",
+                          "nome_oficial":  "TOTEM INFORMATIVO INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_33_totem_informativo_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_33_totem_informativo_inox.png",
+                          "origem_png":  "33.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  87,
+                          "item_ata":  "34",
+                          "nome_oficial":  "CENTRAL CALISTÊNICA MÚLTIPLA I NOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_34_central_calistenica_multipla_i_nox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_34_central_calistenica_multipla_i_nox.png",
+                          "origem_png":  "34.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  88,
+                          "item_ata":  "35",
+                          "nome_oficial":  "ARTEFATO MULT RECREATIVO KIDS 1 INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_35_artefato_mult_recreativo_kids_1_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_35_artefato_mult_recreativo_kids_1_inox.png",
+                          "origem_png":  "35.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  89,
+                          "item_ata":  "36",
+                          "nome_oficial":  "ARTEFATO MULT RECREATIVO KIDS 2 INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_36_artefato_mult_recreativo_kids_2_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_36_artefato_mult_recreativo_kids_2_inox.png",
+                          "origem_png":  "36.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  90,
+                          "item_ata":  "37",
+                          "nome_oficial":  "BALANÇO ESTAIADO COM HASTES MAMÃE BEBÊ INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_37_balanco_estaiado_com_hastes_mamae_bebe_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_37_balanco_estaiado_com_hastes_mamae_bebe_inox.png",
+                          "origem_png":  "37.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  91,
+                          "item_ata":  "38",
+                          "nome_oficial":  "BALANÇO ESTAIADO COM HASTES DUPLO INFANTIL INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_38_balanco_estaiado_com_hastes_duplo_infantil_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_38_balanco_estaiado_com_hastes_duplo_infantil_inox.png",
+                          "origem_png":  "38.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  92,
+                          "item_ata":  "39",
+                          "nome_oficial":  "BALANÇO ESTAIADO COM HASTES DUPLO JUVENIL INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_39_balanco_estaiado_com_hastes_duplo_juvenil_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_39_balanco_estaiado_com_hastes_duplo_juvenil_inox.png",
+                          "origem_png":  "39.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  93,
+                          "item_ata":  "40",
+                          "nome_oficial":  "GLOBO GAIOLA LABIRINTO INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_40_globo_gaiola_labirinto_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_40_globo_gaiola_labirinto_inox.png",
+                          "origem_png":  "40.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  94,
+                          "item_ata":  "41",
+                          "nome_oficial":  "BALANÇO VAI E VEM ACESSÍVEL INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_41_balanco_vai_e_vem_acessivel_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_41_balanco_vai_e_vem_acessivel_inox.png",
+                          "origem_png":  "41.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  95,
+                          "item_ata":  "42",
+                          "nome_oficial":  "ARTEFATO PARA ACESSÍBILIDADE 1 INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_42_artefato_para_acessibilidade_1_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_42_artefato_para_acessibilidade_1_inox.png",
+                          "origem_png":  "42-new.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  96,
+                          "item_ata":  "43",
+                          "nome_oficial":  "ARTEFATO PARA ACESSÍBILIDADE 2 INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_43_artefato_para_acessibilidade_2_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_43_artefato_para_acessibilidade_2_inox.png",
+                          "origem_png":  "43-new.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  97,
+                          "item_ata":  "44",
+                          "nome_oficial":  "ARTEFATO INCLUSIVO TEA 1 INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_44_artefato_inclusivo_tea_1_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_44_artefato_inclusivo_tea_1_inox.png",
+                          "origem_png":  "44.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  98,
+                          "item_ata":  "45",
+                          "nome_oficial":  "ARTEFATO INCLUSIVO TEA 2 INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_45_artefato_inclusivo_tea_2_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_45_artefato_inclusivo_tea_2_inox.png",
+                          "origem_png":  "45.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  99,
+                          "item_ata":  "46",
+                          "nome_oficial":  "ARTEFATO INCLUSIVO TEA 3 INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_46_artefato_inclusivo_tea_3_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_46_artefato_inclusivo_tea_3_inox.png",
+                          "origem_png":  "46.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  100,
+                          "item_ata":  "47",
+                          "nome_oficial":  "TABLADO TENNIS INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_47_tablado_tennis_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_47_tablado_tennis_inox.png",
+                          "origem_png":  "47.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  101,
+                          "item_ata":  "48",
+                          "nome_oficial":  "TABLADO SOCCER INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_48_tablado_soccer_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_48_tablado_soccer_inox.png",
+                          "origem_png":  "48.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  102,
+                          "item_ata":  "49",
+                          "nome_oficial":  "BOUGAINVILLE FUNCIONAL 1 INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_49_bougainville_funcional_1_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_49_bougainville_funcional_1_inox.png",
+                          "origem_png":  "49.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  103,
+                          "item_ata":  "50",
+                          "nome_oficial":  "BOUGAINVILLE FUNCIONAL 2 INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_50_bougainville_funcional_2_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_50_bougainville_funcional_2_inox.png",
+                          "origem_png":  "50.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  104,
+                          "item_ata":  "51",
+                          "nome_oficial":  "BOUGAINVILLE FUNCIONAL 3 INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_51_bougainville_funcional_3_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_51_bougainville_funcional_3_inox.png",
+                          "origem_png":  "51.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  105,
+                          "item_ata":  "52",
+                          "nome_oficial":  "ASSENTO ESCANO GRANDE - INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_52_assento_escano_grande_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_52_assento_escano_grande_inox.png",
+                          "origem_png":  "52.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  106,
+                          "item_ata":  "53",
+                          "nome_oficial":  "ASSENTO ESCANO GRANDE COM ENCOSTO - INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_53_assento_escano_grande_com_encosto_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_53_assento_escano_grande_com_encosto_inox.png",
+                          "origem_png":  "53.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  107,
+                          "item_ata":  "54",
+                          "nome_oficial":  "ASSENTO ESCANO PEQUENO COM ENCOSTO - INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_54_assento_escano_pequeno_com_encosto_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_54_assento_escano_pequeno_com_encosto_inox.png",
+                          "origem_png":  "54.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  108,
+                          "item_ata":  "55",
+                          "nome_oficial":  "TABLADO INTERATIVO INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_55_tablado_interativo_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_55_tablado_interativo_inox.png",
+                          "origem_png":  "55.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  109,
+                          "item_ata":  "56",
+                          "nome_oficial":  "ESTAÇÃO 5 LUGARES PEDAL PARK INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_56_estacao_5_lugares_pedal_park_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_56_estacao_5_lugares_pedal_park_inox.png",
+                          "origem_png":  "56.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  110,
+                          "item_ata":  "57",
+                          "nome_oficial":  "GUARDA CORPO COM CORRIMÃO INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_57_guarda_corpo_com_corrimao_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_57_guarda_corpo_com_corrimao_inox.png",
+                          "origem_png":  "57.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  111,
+                          "item_ata":  "58",
+                          "nome_oficial":  "COLETOR DE RESÍDUOS DUPLO INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_58_coletor_de_residuos_duplo_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_58_coletor_de_residuos_duplo_inox.png",
+                          "origem_png":  "58.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  112,
+                          "item_ata":  "59",
+                          "nome_oficial":  "COLETOR BASCULANTE - INÓX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_59_coletor_basculante_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_59_coletor_basculante_inox.png",
+                          "origem_png":  "59.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  113,
+                          "item_ata":  "60",
+                          "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 1 INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_60_artefato_de_indicacao_e_orientacao_p_areas_publicas_1_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_60_artefato_de_indicacao_e_orientacao_p_areas_publicas_1_inox.png",
+                          "origem_png":  "60.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  114,
+                          "item_ata":  "61",
+                          "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 2 INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_61_artefato_de_indicacao_e_orientacao_p_areas_publicas_2_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_61_artefato_de_indicacao_e_orientacao_p_areas_publicas_2_inox.png",
+                          "origem_png":  "61.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  115,
+                          "item_ata":  "62",
+                          "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 3 INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_62_artefato_de_indicacao_e_orientacao_p_areas_publicas_3_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_62_artefato_de_indicacao_e_orientacao_p_areas_publicas_3_inox.png",
+                          "origem_png":  "62.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  116,
+                          "item_ata":  "63",
+                          "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 4 INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_63_artefato_de_indicacao_e_orientacao_p_areas_publicas_4_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_63_artefato_de_indicacao_e_orientacao_p_areas_publicas_4_inox.png",
+                          "origem_png":  "63.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  117,
+                          "item_ata":  "64",
+                          "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 5 INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_64_artefato_de_indicacao_e_orientacao_p_areas_publicas_5_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_64_artefato_de_indicacao_e_orientacao_p_areas_publicas_5_inox.png",
+                          "origem_png":  "64.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  118,
+                          "item_ata":  "65",
+                          "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 6 INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_65_artefato_de_indicacao_e_orientacao_p_areas_publicas_6_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_65_artefato_de_indicacao_e_orientacao_p_areas_publicas_6_inox.png",
+                          "origem_png":  "65.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  119,
+                          "item_ata":  "66",
+                          "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 7 INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_66_artefato_de_indicacao_e_orientacao_p_areas_publicas_7_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_66_artefato_de_indicacao_e_orientacao_p_areas_publicas_7_inox.png",
+                          "origem_png":  "66.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  120,
+                          "item_ata":  "67",
+                          "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 8 INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_67_artefato_de_indicacao_e_orientacao_p_areas_publicas_8_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_67_artefato_de_indicacao_e_orientacao_p_areas_publicas_8_inox.png",
+                          "origem_png":  "67.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  121,
+                          "item_ata":  "68",
+                          "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 9 INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_68_artefato_de_indicacao_e_orientacao_p_areas_publicas_9_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_68_artefato_de_indicacao_e_orientacao_p_areas_publicas_9_inox.png",
+                          "origem_png":  "68.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  122,
+                          "item_ata":  "69",
+                          "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 10 INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_69_artefato_de_indicacao_e_orientacao_p_areas_publicas_10_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_69_artefato_de_indicacao_e_orientacao_p_areas_publicas_10_inox.png",
+                          "origem_png":  "69.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  123,
+                          "item_ata":  "70",
+                          "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 11 INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_70_artefato_de_indicacao_e_orientacao_p_areas_publicas_11_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_70_artefato_de_indicacao_e_orientacao_p_areas_publicas_11_inox.png",
+                          "origem_png":  "70.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  124,
+                          "item_ata":  "71",
+                          "nome_oficial":  "ABRIGO AUTÔNOMO DE CONVIVÊNCIA E INTERAÇÃO INOX",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_71_abrigo_autonomo_de_convivencia_e_interacao_inox.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_71_abrigo_autonomo_de_convivencia_e_interacao_inox.png",
+                          "origem_png":  "71.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  125,
+                          "item_ata":  "72",
+                          "nome_oficial":  "PISO MSSD SBR MONOLITICO DUPLA CAMADA COLORIDO",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_72_piso_mssd_sbr_monolitico_dupla_camada_colorido.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_72_piso_mssd_sbr_monolitico_dupla_camada_colorido.png",
+                          "origem_png":  "72.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  126,
+                          "item_ata":  "73",
+                          "nome_oficial":  "PISO EPDM MONOLITICO DUPLA CAMADA COLORIDO",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_73_piso_epdm_monolitico_dupla_camada_colorido.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_73_piso_epdm_monolitico_dupla_camada_colorido.png",
+                          "origem_png":  "73.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      },
+                      {
+                          "id":  127,
+                          "item_ata":  "74",
+                          "nome_oficial":  "PISO EMBORRACHADO",
+                          "imagem_antiga":  "img/produtos/aco/atas/cimasp/item_74_piso_emborrachado.png",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_74_piso_emborrachado.png",
+                          "origem_png":  "74.png",
+                          "status_antigo":  "REAL_ATA",
+                          "status_novo":  "REAL_ATA",
+                          "tipo":  "principal"
+                      }
+                  ],
+    "variacoes":  [
+                      {
+                          "id":  168,
+                          "item_base":  "17",
+                          "item_variacao":  "17-1",
+                          "produto_key":  "ACO__CIMASP__029_2025__ITEM_017_1",
+                          "nome_oficial":  "ARTEFATO PARA ACESSÍBILIDADE 1",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_17_1_artefato_para_acessibilidade_1.png",
+                          "origem_png":  "17-old.png"
+                      },
+                      {
+                          "id":  169,
+                          "item_base":  "18",
+                          "item_variacao":  "18-1",
+                          "produto_key":  "ACO__CIMASP__029_2025__ITEM_018_1",
+                          "nome_oficial":  "ARTEFATO PARA ACESSÍBILIDADE 2",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_18_1_artefato_para_acessibilidade_2.png",
+                          "origem_png":  "18-old.png"
+                      },
+                      {
+                          "id":  170,
+                          "item_base":  "19",
+                          "item_variacao":  "19-1",
+                          "produto_key":  "ACO__CIMASP__029_2025__ITEM_019_1",
+                          "nome_oficial":  "ARTEFATO INCLUSIVO TEA 1",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_19_1_artefato_inclusivo_tea_1.png",
+                          "origem_png":  "19-1.png"
+                      },
+                      {
+                          "id":  171,
+                          "item_base":  "20",
+                          "item_variacao":  "20-1",
+                          "produto_key":  "ACO__CIMASP__029_2025__ITEM_020_1",
+                          "nome_oficial":  "ARTEFATO INCLUSIVO TEA 2",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_20_1_artefato_inclusivo_tea_2.png",
+                          "origem_png":  "20-1.png"
+                      },
+                      {
+                          "id":  172,
+                          "item_base":  "21",
+                          "item_variacao":  "21-1",
+                          "produto_key":  "ACO__CIMASP__029_2025__ITEM_021_1",
+                          "nome_oficial":  "ARTEFATO INCLUSIVO TEA 3",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_21_1_artefato_inclusivo_tea_3.png",
+                          "origem_png":  "21-1.png"
+                      },
+                      {
+                          "id":  173,
+                          "item_base":  "25",
+                          "item_variacao":  "25-1",
+                          "produto_key":  "ACO__CIMASP__029_2025__ITEM_025_1",
+                          "nome_oficial":  "TABLADO INTERATIVO",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_25_1_tablado_interativo.png",
+                          "origem_png":  "25-1.png"
+                      },
+                      {
+                          "id":  174,
+                          "item_base":  "42",
+                          "item_variacao":  "42-1",
+                          "produto_key":  "ACO__CIMASP__029_2025__ITEM_042_1",
+                          "nome_oficial":  "ARTEFATO PARA ACESSÍBILIDADE 1 INOX",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_42_1_artefato_para_acessibilidade_1_inox.png",
+                          "origem_png":  "42-old.png"
+                      },
+                      {
+                          "id":  175,
+                          "item_base":  "43",
+                          "item_variacao":  "43-1",
+                          "produto_key":  "ACO__CIMASP__029_2025__ITEM_043_1",
+                          "nome_oficial":  "ARTEFATO PARA ACESSÍBILIDADE 2 INOX",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_43_1_artefato_para_acessibilidade_2_inox.png",
+                          "origem_png":  "43-old.png"
+                      },
+                      {
+                          "id":  176,
+                          "item_base":  "44",
+                          "item_variacao":  "44-1",
+                          "produto_key":  "ACO__CIMASP__029_2025__ITEM_044_1",
+                          "nome_oficial":  "ARTEFATO INCLUSIVO TEA 1 INOX",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_44_1_artefato_inclusivo_tea_1_inox.png",
+                          "origem_png":  "44-1.png"
+                      },
+                      {
+                          "id":  177,
+                          "item_base":  "45",
+                          "item_variacao":  "45-1",
+                          "produto_key":  "ACO__CIMASP__029_2025__ITEM_045_1",
+                          "nome_oficial":  "ARTEFATO INCLUSIVO TEA 2 INOX",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_45_1_artefato_inclusivo_tea_2_inox.png",
+                          "origem_png":  "45-1.png"
+                      },
+                      {
+                          "id":  178,
+                          "item_base":  "46",
+                          "item_variacao":  "46-1",
+                          "produto_key":  "ACO__CIMASP__029_2025__ITEM_046_1",
+                          "nome_oficial":  "ARTEFATO INCLUSIVO TEA 3 INOX",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_46_1_artefato_inclusivo_tea_3_inox.png",
+                          "origem_png":  "46-1.png"
+                      },
+                      {
+                          "id":  179,
+                          "item_base":  "47",
+                          "item_variacao":  "47-1",
+                          "produto_key":  "ACO__CIMASP__029_2025__ITEM_047_1",
+                          "nome_oficial":  "TABLADO TENNIS INOX",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_47_1_tablado_tennis_inox.png",
+                          "origem_png":  "47-1.png"
+                      },
+                      {
+                          "id":  180,
+                          "item_base":  "48",
+                          "item_variacao":  "48-1",
+                          "produto_key":  "ACO__CIMASP__029_2025__ITEM_048_1",
+                          "nome_oficial":  "TABLADO SOCCER INOX",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_48_1_tablado_soccer_inox.png",
+                          "origem_png":  "48-1.png"
+                      },
+                      {
+                          "id":  181,
+                          "item_base":  "49",
+                          "item_variacao":  "49-1",
+                          "produto_key":  "ACO__CIMASP__029_2025__ITEM_049_1",
+                          "nome_oficial":  "BOUGAINVILLE FUNCIONAL 1 INOX",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_49_1_bougainville_funcional_1_inox.png",
+                          "origem_png":  "49-1.png"
+                      },
+                      {
+                          "id":  182,
+                          "item_base":  "55",
+                          "item_variacao":  "55-1",
+                          "produto_key":  "ACO__CIMASP__029_2025__ITEM_055_1",
+                          "nome_oficial":  "TABLADO INTERATIVO INOX",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_55_1_tablado_interativo_inox.png",
+                          "origem_png":  "55-1.png"
+                      },
+                      {
+                          "id":  183,
+                          "item_base":  "67",
+                          "item_variacao":  "67-1",
+                          "produto_key":  "ACO__CIMASP__029_2025__ITEM_067_1",
+                          "nome_oficial":  "ARTEFATO DE INDICAÇÃO E ORIENTAÇÃO P/ ÁREAS PÚBLICAS 8 INOX",
+                          "imagem_nova":  "img/produtos/aco/atas/cimasp/item_67_1_artefato_de_indicacao_e_orientacao_p_areas_publicas_8_inox.png",
+                          "origem_png":  "67-1.png"
+                      }
+                  ],
+    "duplicidades_exatas_no_zip":  [
+                                       {
+                                           "arquivos":  [
+                                                            "17-new.png",
+                                                            "42-new.png"
+                                                        ],
+                                           "sha256":  "1bf4b2a873e306ec5ba5138fd0ed8e46f6f6445192c9cf95306058b527b4d3c6"
+                                       },
+                                       {
+                                           "arquivos":  [
+                                                            "17-old.png",
+                                                            "42-old.png"
+                                                        ],
+                                           "sha256":  "57cce69813852fe1d4c632e889ff3e9383ed06d0aea527c10077b556c70d0340"
+                                       },
+                                       {
+                                           "arquivos":  [
+                                                            "18-new.png",
+                                                            "43-new.png"
+                                                        ],
+                                           "sha256":  "8150200472b3a455d0d44589407d5275f56cd12984c43e66896827868bd8af1b"
+                                       },
+                                       {
+                                           "arquivos":  [
+                                                            "18-old.png",
+                                                            "43-old.png"
+                                                        ],
+                                           "sha256":  "dcf58ee4072c76150c5226fe5ccac9fa3acc57c83a47ad9e178e4d987c90cf96"
+                                       },
+                                       {
+                                           "arquivos":  [
+                                                            "19-1.png",
+                                                            "44-1.png"
+                                                        ],
+                                           "sha256":  "46bae57b0139663ab1e24c55a8cc193b77fd6c730a0f0598cb390db349092337"
+                                       },
+                                       {
+                                           "arquivos":  [
+                                                            "19.png",
+                                                            "44.png"
+                                                        ],
+                                           "sha256":  "7a95e207ecc0b1c0aad3372ed4ae9dbc277021e588447fd2d590069845d2e47d"
+                                       },
+                                       {
+                                           "arquivos":  [
+                                                            "20-1.png",
+                                                            "45-1.png"
+                                                        ],
+                                           "sha256":  "fc804bbca917bee495f6b94b49fd57fd1160630908e2380f5a2ba1e32fa3affc"
+                                       },
+                                       {
+                                           "arquivos":  [
+                                                            "20.png",
+                                                            "45.png"
+                                                        ],
+                                           "sha256":  "33c23b7e4657b151022757dc1bb3ca055e0eefc42ab2af7b3d92bb03e5f69015"
+                                       },
+                                       {
+                                           "arquivos":  [
+                                                            "21-1.png",
+                                                            "46-1.png"
+                                                        ],
+                                           "sha256":  "ddd084c547ef1e9710e1c70c559e30359e6b01d7868c8cd3ed67f8c6349129e7"
+                                       },
+                                       {
+                                           "arquivos":  [
+                                                            "21.png",
+                                                            "46.png"
+                                                        ],
+                                           "sha256":  "0a5004372767d478e6dc98b0839f2a676c7e25e147e275d248628ceeb7b6f55b"
+                                       },
+                                       {
+                                           "arquivos":  [
+                                                            "25-1.png",
+                                                            "55-1.png"
+                                                        ],
+                                           "sha256":  "18b45d0bc2ce2780bd0dfca12501a09c49bd2b418ac9ccad7fca7239258ac85c"
+                                       },
+                                       {
+                                           "arquivos":  [
+                                                            "25.png",
+                                                            "55.png"
+                                                        ],
+                                           "sha256":  "49f7ae77a8e1d503f79b5f44b1cddd7c950e46f0366f343a02000b2caa64a78c"
+                                       }
+                                   ],
+    "observacao":  "Nomes oficiais preservados a partir dos registros/SVGs DEMO existentes."
+}

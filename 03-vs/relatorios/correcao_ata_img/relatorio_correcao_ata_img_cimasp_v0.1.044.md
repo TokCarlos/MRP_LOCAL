@@ -1,0 +1,122 @@
+# Relatorio Correcao ATA/Imagem CIMASP - v0.1.044
+
+- ATA oficial: CIMASP 029/2025
+- Key ATA: cimasp
+- Origem: CIMASP.zip
+- PNGs avaliados no ZIP: 90
+- Itens CIMASP cobertos: 74
+- Previews principais migrados: 74
+- Variacoes criadas: 16
+- Regra aplicada: nomes oficiais preservados a partir dos registros/SVGs DEMO existentes.
+
+## Migracao de preview CIMASP
+- ID 54 item 1: img/produtos/aco/atas/cimasp/item_1_simulador_triplo_de_estimulacao_para_todos_os_membros_e_cervical.png -> img/produtos/aco/atas/cimasp/item_1_simulador_triplo_de_estimulacao_para_todos_os_membros_e_cervical.png (origem PNG 1.png)
+- ID 55 item 2: img/produtos/aco/atas/cimasp/item_2_simulador_triplo_para_estimulacao_de_quadril_e_pernas.png -> img/produtos/aco/atas/cimasp/item_2_simulador_triplo_para_estimulacao_de_quadril_e_pernas.png (origem PNG 2.png)
+- ID 56 item 3: img/produtos/aco/atas/cimasp/item_3_simulador_duplo_de_operacoes_1_para_todos_os_membros.png -> img/produtos/aco/atas/cimasp/item_3_simulador_duplo_de_operacoes_1_para_todos_os_membros.png (origem PNG 3.png)
+- ID 57 item 4: img/produtos/aco/atas/cimasp/item_4_simulador_duplo_de_operacoes_2_para_todos_os_membros.png -> img/produtos/aco/atas/cimasp/item_4_simulador_duplo_de_operacoes_2_para_todos_os_membros.png (origem PNG 4.png)
+- ID 58 item 5: img/produtos/aco/atas/cimasp/item_5_simulador_duplo_para_membros_superiores_e_inferiores.png -> img/produtos/aco/atas/cimasp/item_5_simulador_duplo_para_membros_superiores_e_inferiores.png (origem PNG 5.png)
+- ID 59 item 6: img/produtos/aco/atas/cimasp/item_6_simulador_de_alongamento.png -> img/produtos/aco/atas/cimasp/item_6_simulador_de_alongamento.png (origem PNG 6.png)
+- ID 60 item 7: img/produtos/aco/atas/cimasp/item_7_simulador_de_equilibrio.png -> img/produtos/aco/atas/cimasp/item_7_simulador_de_equilibrio.png (origem PNG 7.png)
+- ID 61 item 8: img/produtos/aco/atas/cimasp/item_8_totem_informativo.png -> img/produtos/aco/atas/cimasp/item_8_totem_informativo.png (origem PNG 8.png)
+- ID 62 item 9: img/produtos/aco/atas/cimasp/item_9_central_calistenica_multipla.png -> img/produtos/aco/atas/cimasp/item_9_central_calistenica_multipla.png (origem PNG 9.png)
+- ID 63 item 10: img/produtos/aco/atas/cimasp/item_10_artefato_mult_recreativo_kids_1.png -> img/produtos/aco/atas/cimasp/item_10_artefato_mult_recreativo_kids_1.png (origem PNG 10.png)
+- ID 64 item 11: img/produtos/aco/atas/cimasp/item_11_artefato_mult_recreativo_kids_2.png -> img/produtos/aco/atas/cimasp/item_11_artefato_mult_recreativo_kids_2.png (origem PNG 11.png)
+- ID 65 item 12: img/produtos/aco/atas/cimasp/item_12_balanco_estaiado_com_hastes_mamae_bebe.png -> img/produtos/aco/atas/cimasp/item_12_balanco_estaiado_com_hastes_mamae_bebe.png (origem PNG 12.png)
+- ID 66 item 13: img/produtos/aco/atas/cimasp/item_13_balanco_estaiado_com_hastes_duplo_infantil.png -> img/produtos/aco/atas/cimasp/item_13_balanco_estaiado_com_hastes_duplo_infantil.png (origem PNG 13.png)
+- ID 67 item 14: img/produtos/aco/atas/cimasp/item_14_balanco_estaiado_com_hastes_duplo_juvenil.png -> img/produtos/aco/atas/cimasp/item_14_balanco_estaiado_com_hastes_duplo_juvenil.png (origem PNG 14.png)
+- ID 68 item 15: img/produtos/aco/atas/cimasp/item_15_globo_gaiola_labirinto.png -> img/produtos/aco/atas/cimasp/item_15_globo_gaiola_labirinto.png (origem PNG 15.png)
+- ID 69 item 16: img/produtos/aco/atas/cimasp/item_16_balanco_vai_e_vem_acessivel.png -> img/produtos/aco/atas/cimasp/item_16_balanco_vai_e_vem_acessivel.png (origem PNG 16.png)
+- ID 70 item 17: img/produtos/aco/atas/cimasp/item_17_artefato_para_acessibilidade_1.png -> img/produtos/aco/atas/cimasp/item_17_artefato_para_acessibilidade_1.png (origem PNG 17-new.png)
+- ID 71 item 18: img/produtos/aco/atas/cimasp/item_18_artefato_para_acessibilidade_2.png -> img/produtos/aco/atas/cimasp/item_18_artefato_para_acessibilidade_2.png (origem PNG 18-new.png)
+- ID 72 item 19: img/produtos/aco/atas/cimasp/item_19_artefato_inclusivo_tea_1.png -> img/produtos/aco/atas/cimasp/item_19_artefato_inclusivo_tea_1.png (origem PNG 19.png)
+- ID 73 item 20: img/produtos/aco/atas/cimasp/item_20_artefato_inclusivo_tea_2.png -> img/produtos/aco/atas/cimasp/item_20_artefato_inclusivo_tea_2.png (origem PNG 20.png)
+- ID 74 item 21: img/produtos/aco/atas/cimasp/item_21_artefato_inclusivo_tea_3.png -> img/produtos/aco/atas/cimasp/item_21_artefato_inclusivo_tea_3.png (origem PNG 21.png)
+- ID 75 item 22: img/produtos/aco/atas/cimasp/item_22_bougainville_funcional_1.png -> img/produtos/aco/atas/cimasp/item_22_bougainville_funcional_1.png (origem PNG 22.png)
+- ID 76 item 23: img/produtos/aco/atas/cimasp/item_23_bougainville_funcional_2.png -> img/produtos/aco/atas/cimasp/item_23_bougainville_funcional_2.png (origem PNG 23.png)
+- ID 77 item 24: img/produtos/aco/atas/cimasp/item_24_bougainville_funcional_3.png -> img/produtos/aco/atas/cimasp/item_24_bougainville_funcional_3.png (origem PNG 24.png)
+- ID 78 item 25: img/produtos/aco/atas/cimasp/item_25_tablado_interativo.png -> img/produtos/aco/atas/cimasp/item_25_tablado_interativo.png (origem PNG 25.png)
+- ID 79 item 26: img/produtos/aco/atas/cimasp/item_26_simulador_triplo_de_estimulacao_para_todos_os_membros_e_cervical_inox.png -> img/produtos/aco/atas/cimasp/item_26_simulador_triplo_de_estimulacao_para_todos_os_membros_e_cervical_inox.png (origem PNG 26.png)
+- ID 80 item 27: img/produtos/aco/atas/cimasp/item_27_simulador_triplo_para_estimulacao_de_quadril_e_pernas_inox.png -> img/produtos/aco/atas/cimasp/item_27_simulador_triplo_para_estimulacao_de_quadril_e_pernas_inox.png (origem PNG 27.png)
+- ID 81 item 28: img/produtos/aco/atas/cimasp/item_28_simulador_duplo_de_operacoes_1_para_todos_os_membros_inox.png -> img/produtos/aco/atas/cimasp/item_28_simulador_duplo_de_operacoes_1_para_todos_os_membros_inox.png (origem PNG 28.png)
+- ID 82 item 29: img/produtos/aco/atas/cimasp/item_29_simulador_duplo_de_operacoes_2_para_todos_os_membros_inox.png -> img/produtos/aco/atas/cimasp/item_29_simulador_duplo_de_operacoes_2_para_todos_os_membros_inox.png (origem PNG 29.png)
+- ID 83 item 30: img/produtos/aco/atas/cimasp/item_30_simulador_duplo_para_membros_superiores_e_inferiores_inox.png -> img/produtos/aco/atas/cimasp/item_30_simulador_duplo_para_membros_superiores_e_inferiores_inox.png (origem PNG 30.png)
+- ID 84 item 31: img/produtos/aco/atas/cimasp/item_31_simulador_de_alongamento_inox.png -> img/produtos/aco/atas/cimasp/item_31_simulador_de_alongamento_inox.png (origem PNG 31.png)
+- ID 85 item 32: img/produtos/aco/atas/cimasp/item_32_simulador_de_equilibrio_inox.png -> img/produtos/aco/atas/cimasp/item_32_simulador_de_equilibrio_inox.png (origem PNG 32.png)
+- ID 86 item 33: img/produtos/aco/atas/cimasp/item_33_totem_informativo_inox.png -> img/produtos/aco/atas/cimasp/item_33_totem_informativo_inox.png (origem PNG 33.png)
+- ID 87 item 34: img/produtos/aco/atas/cimasp/item_34_central_calistenica_multipla_i_nox.png -> img/produtos/aco/atas/cimasp/item_34_central_calistenica_multipla_i_nox.png (origem PNG 34.png)
+- ID 88 item 35: img/produtos/aco/atas/cimasp/item_35_artefato_mult_recreativo_kids_1_inox.png -> img/produtos/aco/atas/cimasp/item_35_artefato_mult_recreativo_kids_1_inox.png (origem PNG 35.png)
+- ID 89 item 36: img/produtos/aco/atas/cimasp/item_36_artefato_mult_recreativo_kids_2_inox.png -> img/produtos/aco/atas/cimasp/item_36_artefato_mult_recreativo_kids_2_inox.png (origem PNG 36.png)
+- ID 90 item 37: img/produtos/aco/atas/cimasp/item_37_balanco_estaiado_com_hastes_mamae_bebe_inox.png -> img/produtos/aco/atas/cimasp/item_37_balanco_estaiado_com_hastes_mamae_bebe_inox.png (origem PNG 37.png)
+- ID 91 item 38: img/produtos/aco/atas/cimasp/item_38_balanco_estaiado_com_hastes_duplo_infantil_inox.png -> img/produtos/aco/atas/cimasp/item_38_balanco_estaiado_com_hastes_duplo_infantil_inox.png (origem PNG 38.png)
+- ID 92 item 39: img/produtos/aco/atas/cimasp/item_39_balanco_estaiado_com_hastes_duplo_juvenil_inox.png -> img/produtos/aco/atas/cimasp/item_39_balanco_estaiado_com_hastes_duplo_juvenil_inox.png (origem PNG 39.png)
+- ID 93 item 40: img/produtos/aco/atas/cimasp/item_40_globo_gaiola_labirinto_inox.png -> img/produtos/aco/atas/cimasp/item_40_globo_gaiola_labirinto_inox.png (origem PNG 40.png)
+- ID 94 item 41: img/produtos/aco/atas/cimasp/item_41_balanco_vai_e_vem_acessivel_inox.png -> img/produtos/aco/atas/cimasp/item_41_balanco_vai_e_vem_acessivel_inox.png (origem PNG 41.png)
+- ID 95 item 42: img/produtos/aco/atas/cimasp/item_42_artefato_para_acessibilidade_1_inox.png -> img/produtos/aco/atas/cimasp/item_42_artefato_para_acessibilidade_1_inox.png (origem PNG 42-new.png)
+- ID 96 item 43: img/produtos/aco/atas/cimasp/item_43_artefato_para_acessibilidade_2_inox.png -> img/produtos/aco/atas/cimasp/item_43_artefato_para_acessibilidade_2_inox.png (origem PNG 43-new.png)
+- ID 97 item 44: img/produtos/aco/atas/cimasp/item_44_artefato_inclusivo_tea_1_inox.png -> img/produtos/aco/atas/cimasp/item_44_artefato_inclusivo_tea_1_inox.png (origem PNG 44.png)
+- ID 98 item 45: img/produtos/aco/atas/cimasp/item_45_artefato_inclusivo_tea_2_inox.png -> img/produtos/aco/atas/cimasp/item_45_artefato_inclusivo_tea_2_inox.png (origem PNG 45.png)
+- ID 99 item 46: img/produtos/aco/atas/cimasp/item_46_artefato_inclusivo_tea_3_inox.png -> img/produtos/aco/atas/cimasp/item_46_artefato_inclusivo_tea_3_inox.png (origem PNG 46.png)
+- ID 100 item 47: img/produtos/aco/atas/cimasp/item_47_tablado_tennis_inox.png -> img/produtos/aco/atas/cimasp/item_47_tablado_tennis_inox.png (origem PNG 47.png)
+- ID 101 item 48: img/produtos/aco/atas/cimasp/item_48_tablado_soccer_inox.png -> img/produtos/aco/atas/cimasp/item_48_tablado_soccer_inox.png (origem PNG 48.png)
+- ID 102 item 49: img/produtos/aco/atas/cimasp/item_49_bougainville_funcional_1_inox.png -> img/produtos/aco/atas/cimasp/item_49_bougainville_funcional_1_inox.png (origem PNG 49.png)
+- ID 103 item 50: img/produtos/aco/atas/cimasp/item_50_bougainville_funcional_2_inox.png -> img/produtos/aco/atas/cimasp/item_50_bougainville_funcional_2_inox.png (origem PNG 50.png)
+- ID 104 item 51: img/produtos/aco/atas/cimasp/item_51_bougainville_funcional_3_inox.png -> img/produtos/aco/atas/cimasp/item_51_bougainville_funcional_3_inox.png (origem PNG 51.png)
+- ID 105 item 52: img/produtos/aco/atas/cimasp/item_52_assento_escano_grande_inox.png -> img/produtos/aco/atas/cimasp/item_52_assento_escano_grande_inox.png (origem PNG 52.png)
+- ID 106 item 53: img/produtos/aco/atas/cimasp/item_53_assento_escano_grande_com_encosto_inox.png -> img/produtos/aco/atas/cimasp/item_53_assento_escano_grande_com_encosto_inox.png (origem PNG 53.png)
+- ID 107 item 54: img/produtos/aco/atas/cimasp/item_54_assento_escano_pequeno_com_encosto_inox.png -> img/produtos/aco/atas/cimasp/item_54_assento_escano_pequeno_com_encosto_inox.png (origem PNG 54.png)
+- ID 108 item 55: img/produtos/aco/atas/cimasp/item_55_tablado_interativo_inox.png -> img/produtos/aco/atas/cimasp/item_55_tablado_interativo_inox.png (origem PNG 55.png)
+- ID 109 item 56: img/produtos/aco/atas/cimasp/item_56_estacao_5_lugares_pedal_park_inox.png -> img/produtos/aco/atas/cimasp/item_56_estacao_5_lugares_pedal_park_inox.png (origem PNG 56.png)
+- ID 110 item 57: img/produtos/aco/atas/cimasp/item_57_guarda_corpo_com_corrimao_inox.png -> img/produtos/aco/atas/cimasp/item_57_guarda_corpo_com_corrimao_inox.png (origem PNG 57.png)
+- ID 111 item 58: img/produtos/aco/atas/cimasp/item_58_coletor_de_residuos_duplo_inox.png -> img/produtos/aco/atas/cimasp/item_58_coletor_de_residuos_duplo_inox.png (origem PNG 58.png)
+- ID 112 item 59: img/produtos/aco/atas/cimasp/item_59_coletor_basculante_inox.png -> img/produtos/aco/atas/cimasp/item_59_coletor_basculante_inox.png (origem PNG 59.png)
+- ID 113 item 60: img/produtos/aco/atas/cimasp/item_60_artefato_de_indicacao_e_orientacao_p_areas_publicas_1_inox.png -> img/produtos/aco/atas/cimasp/item_60_artefato_de_indicacao_e_orientacao_p_areas_publicas_1_inox.png (origem PNG 60.png)
+- ID 114 item 61: img/produtos/aco/atas/cimasp/item_61_artefato_de_indicacao_e_orientacao_p_areas_publicas_2_inox.png -> img/produtos/aco/atas/cimasp/item_61_artefato_de_indicacao_e_orientacao_p_areas_publicas_2_inox.png (origem PNG 61.png)
+- ID 115 item 62: img/produtos/aco/atas/cimasp/item_62_artefato_de_indicacao_e_orientacao_p_areas_publicas_3_inox.png -> img/produtos/aco/atas/cimasp/item_62_artefato_de_indicacao_e_orientacao_p_areas_publicas_3_inox.png (origem PNG 62.png)
+- ID 116 item 63: img/produtos/aco/atas/cimasp/item_63_artefato_de_indicacao_e_orientacao_p_areas_publicas_4_inox.png -> img/produtos/aco/atas/cimasp/item_63_artefato_de_indicacao_e_orientacao_p_areas_publicas_4_inox.png (origem PNG 63.png)
+- ID 117 item 64: img/produtos/aco/atas/cimasp/item_64_artefato_de_indicacao_e_orientacao_p_areas_publicas_5_inox.png -> img/produtos/aco/atas/cimasp/item_64_artefato_de_indicacao_e_orientacao_p_areas_publicas_5_inox.png (origem PNG 64.png)
+- ID 118 item 65: img/produtos/aco/atas/cimasp/item_65_artefato_de_indicacao_e_orientacao_p_areas_publicas_6_inox.png -> img/produtos/aco/atas/cimasp/item_65_artefato_de_indicacao_e_orientacao_p_areas_publicas_6_inox.png (origem PNG 65.png)
+- ID 119 item 66: img/produtos/aco/atas/cimasp/item_66_artefato_de_indicacao_e_orientacao_p_areas_publicas_7_inox.png -> img/produtos/aco/atas/cimasp/item_66_artefato_de_indicacao_e_orientacao_p_areas_publicas_7_inox.png (origem PNG 66.png)
+- ID 120 item 67: img/produtos/aco/atas/cimasp/item_67_artefato_de_indicacao_e_orientacao_p_areas_publicas_8_inox.png -> img/produtos/aco/atas/cimasp/item_67_artefato_de_indicacao_e_orientacao_p_areas_publicas_8_inox.png (origem PNG 67.png)
+- ID 121 item 68: img/produtos/aco/atas/cimasp/item_68_artefato_de_indicacao_e_orientacao_p_areas_publicas_9_inox.png -> img/produtos/aco/atas/cimasp/item_68_artefato_de_indicacao_e_orientacao_p_areas_publicas_9_inox.png (origem PNG 68.png)
+- ID 122 item 69: img/produtos/aco/atas/cimasp/item_69_artefato_de_indicacao_e_orientacao_p_areas_publicas_10_inox.png -> img/produtos/aco/atas/cimasp/item_69_artefato_de_indicacao_e_orientacao_p_areas_publicas_10_inox.png (origem PNG 69.png)
+- ID 123 item 70: img/produtos/aco/atas/cimasp/item_70_artefato_de_indicacao_e_orientacao_p_areas_publicas_11_inox.png -> img/produtos/aco/atas/cimasp/item_70_artefato_de_indicacao_e_orientacao_p_areas_publicas_11_inox.png (origem PNG 70.png)
+- ID 124 item 71: img/produtos/aco/atas/cimasp/item_71_abrigo_autonomo_de_convivencia_e_interacao_inox.png -> img/produtos/aco/atas/cimasp/item_71_abrigo_autonomo_de_convivencia_e_interacao_inox.png (origem PNG 71.png)
+- ID 125 item 72: img/produtos/aco/atas/cimasp/item_72_piso_mssd_sbr_monolitico_dupla_camada_colorido.png -> img/produtos/aco/atas/cimasp/item_72_piso_mssd_sbr_monolitico_dupla_camada_colorido.png (origem PNG 72.png)
+- ID 126 item 73: img/produtos/aco/atas/cimasp/item_73_piso_epdm_monolitico_dupla_camada_colorido.png -> img/produtos/aco/atas/cimasp/item_73_piso_epdm_monolitico_dupla_camada_colorido.png (origem PNG 73.png)
+- ID 127 item 74: img/produtos/aco/atas/cimasp/item_74_piso_emborrachado.png -> img/produtos/aco/atas/cimasp/item_74_piso_emborrachado.png (origem PNG 74.png)
+
+## Variacoes cadastradas
+- ID 168 item 17-1: img/produtos/aco/atas/cimasp/item_17_1_artefato_para_acessibilidade_1.png (origem PNG 17-old.png; nome oficial preservado do item 17)
+- ID 169 item 18-1: img/produtos/aco/atas/cimasp/item_18_1_artefato_para_acessibilidade_2.png (origem PNG 18-old.png; nome oficial preservado do item 18)
+- ID 170 item 19-1: img/produtos/aco/atas/cimasp/item_19_1_artefato_inclusivo_tea_1.png (origem PNG 19-1.png; nome oficial preservado do item 19)
+- ID 171 item 20-1: img/produtos/aco/atas/cimasp/item_20_1_artefato_inclusivo_tea_2.png (origem PNG 20-1.png; nome oficial preservado do item 20)
+- ID 172 item 21-1: img/produtos/aco/atas/cimasp/item_21_1_artefato_inclusivo_tea_3.png (origem PNG 21-1.png; nome oficial preservado do item 21)
+- ID 173 item 25-1: img/produtos/aco/atas/cimasp/item_25_1_tablado_interativo.png (origem PNG 25-1.png; nome oficial preservado do item 25)
+- ID 174 item 42-1: img/produtos/aco/atas/cimasp/item_42_1_artefato_para_acessibilidade_1_inox.png (origem PNG 42-old.png; nome oficial preservado do item 42)
+- ID 175 item 43-1: img/produtos/aco/atas/cimasp/item_43_1_artefato_para_acessibilidade_2_inox.png (origem PNG 43-old.png; nome oficial preservado do item 43)
+- ID 176 item 44-1: img/produtos/aco/atas/cimasp/item_44_1_artefato_inclusivo_tea_1_inox.png (origem PNG 44-1.png; nome oficial preservado do item 44)
+- ID 177 item 45-1: img/produtos/aco/atas/cimasp/item_45_1_artefato_inclusivo_tea_2_inox.png (origem PNG 45-1.png; nome oficial preservado do item 45)
+- ID 178 item 46-1: img/produtos/aco/atas/cimasp/item_46_1_artefato_inclusivo_tea_3_inox.png (origem PNG 46-1.png; nome oficial preservado do item 46)
+- ID 179 item 47-1: img/produtos/aco/atas/cimasp/item_47_1_tablado_tennis_inox.png (origem PNG 47-1.png; nome oficial preservado do item 47)
+- ID 180 item 48-1: img/produtos/aco/atas/cimasp/item_48_1_tablado_soccer_inox.png (origem PNG 48-1.png; nome oficial preservado do item 48)
+- ID 181 item 49-1: img/produtos/aco/atas/cimasp/item_49_1_bougainville_funcional_1_inox.png (origem PNG 49-1.png; nome oficial preservado do item 49)
+- ID 182 item 55-1: img/produtos/aco/atas/cimasp/item_55_1_tablado_interativo_inox.png (origem PNG 55-1.png; nome oficial preservado do item 55)
+- ID 183 item 67-1: img/produtos/aco/atas/cimasp/item_67_1_artefato_de_indicacao_e_orientacao_p_areas_publicas_8_inox.png (origem PNG 67-1.png; nome oficial preservado do item 67)
+
+## Duplicidades exatas observadas no ZIP
+- 17-new.png = 42-new.png
+- 17-old.png = 42-old.png
+- 18-new.png = 43-new.png
+- 18-old.png = 43-old.png
+- 19-1.png = 44-1.png
+- 19.png = 44.png
+- 20-1.png = 45-1.png
+- 20.png = 45.png
+- 21-1.png = 46-1.png
+- 21.png = 46.png
+- 25-1.png = 55-1.png
+- 25.png = 55.png
+
+## Pendencias
+- Validar visualmente os previews no frontend apos carga.
+- Manter SVGs antigos como referencia visual/demo enquanto nao houver rotina de limpeza aprovada.

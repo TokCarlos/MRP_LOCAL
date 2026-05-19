@@ -2,7 +2,7 @@
 
 ## Versao documental atual
 
-`v0.1.043-preparacao-portabilidade`
+`v0.1.044-catalogacao-imagens-cimasp`
 
 ## Base funcional anterior
 
@@ -82,3 +82,9 @@ A raiz fisica atual de desenvolvimento pode existir em documentacao, config e sc
 ## Status final desta etapa
 
 `PREPARACAO_PORTABILIDADE_INICIAL`
+
+## Catalogacao imagens CIMASP v0.1.044
+
+- ATA CIMASP 029/2025 migrada de previews SVG DEMO para PNG REAL_ATA.
+- Variacoes de itens registradas com sufixo `-1` quando havia imagem adicional no ZIP.
+- Nomes oficiais preservados a partir dos registros existentes.

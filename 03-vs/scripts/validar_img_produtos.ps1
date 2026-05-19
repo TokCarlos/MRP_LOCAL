@@ -65,6 +65,8 @@ foreach ($b in $blockedRootDirs) {
 
 $total = 0
 $realAta = 0
+$cimaspTotal = 0
+$cimaspReal = 0
 $porEmpresa = @{}
 $porOrigem = @{}
 $idsOficiais = @{}
@@ -121,6 +123,14 @@ foreach ($p in $produtos) {
         if ($arp -ne $ataCanonica -or $origem -ne $ataCanonica -or $ataOrigem -ne $ataCanonica) { $erros.Add("ID $id com nome de ATA fora do canonico") }
         if ($arpKey -ne $ataKeyCanonica -or $origemKey -ne $ataKeyCanonica -or $ataOrigemKey -ne $ataKeyCanonica) { $erros.Add("ID $id com key de ATA fora do canonico") }
     }
+    if ($arpKey -eq "cimasp") {
+        $cimaspTotal++
+        if ($imgStatus -eq "REAL_ATA") { $cimaspReal++ }
+        if ($imgStatus -ne "REAL_ATA") { $erros.Add("ID $id CIMASP com status '$imgStatus' (esperado REAL_ATA)") }
+        if ($preview -notmatch "\.png$") { $erros.Add("ID $id CIMASP deve apontar para PNG real") }
+        if ($preview -match "\.svg$") { $erros.Add("ID $id CIMASP ainda aponta para SVG demo") }
+        if ($preview -notmatch "^img/produtos/(aco|jpl)/atas/cimasp/") { $erros.Add("ID $id CIMASP com caminho fora do padrao oficial") }
+    }
 
     if ($id -ge 148 -and $id -le 167) {
         $erros.Add("ID duplicado legado ainda ativo no seed: $id")
@@ -141,6 +151,8 @@ Write-Host ""
 Write-Host "VALIDACAO DE IMAGENS DE PRODUTOS" -ForegroundColor Cyan
 Write-Host "Total de produtos: $total"
 Write-Host "Total REAL_ATA: $realAta"
+Write-Host "Total CIMASP: $cimaspTotal"
+Write-Host "Total CIMASP REAL_ATA: $cimaspReal"
 Write-Host ""
 Write-Host "Total por empresa:"
 foreach ($k in ($porEmpresa.Keys | Sort-Object)) { Write-Host " - $k : $($porEmpresa[$k])" }
