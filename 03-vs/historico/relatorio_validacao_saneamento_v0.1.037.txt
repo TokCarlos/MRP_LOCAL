@@ -1,0 +1,21 @@
+RELATORIO DE VALIDACAO - MRP_LOCAL v0.1.037-saneamento
+Gerado em: 2026-05-18
+Status geral: OK
+
+[OK] Lixo operacional encontrado: 0
+[OK] Arquivos texto com problema de encoding: 0
+[OK] Possivel mojibake ativo: 0
+[OK] JSON invalido: 0
+[OK] Referencias HTML/SPA ausentes: 0
+[OK] Previews de produtos ausentes: 0
+[OK] Produtos ativos no seed: 147
+[OK] IDs de produtos sem duplicidade
+[OK] produto_key sem duplicidade
+[OK] empresa_key encontradas: ['aco', 'jpl']
+[OK] TCR sem produto operacional
+[OK] Scripts ativos com hardcoded/encoding fragil: 0
+[OK] Arquivo obrigatorio/ponto de controle: REGRAS_MRP.txt
+[OK] Arquivo obrigatorio/ponto de controle: 00-manual-dev/MANUAL_DEV_COMPLETO.txt
+[OK] Arquivo obrigatorio/ponto de controle: 00-manual-dev/RESUMO_OPERACIONAL_DO_SISTEMA.txt
+[OK] Arquivo obrigatorio/ponto de controle: 02-docs/docs/infraestrutura/empacotamento_instalador.md
+[OK] Arquivo obrigatorio/ponto de controle: 01-mrp/config/mrp_local.env.json

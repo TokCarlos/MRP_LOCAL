@@ -1,75 +1,59 @@
+
 # MRP_LOCAL
 
-Projeto local MRP_LOCAL.
+Sistema local-first do projeto MRP.
+
+## Estado atual
+
+- Frontend estático em `01-mrp/front_end`.
+- Porta operacional configurada: `8765`.
+- Bind configurado: `0.0.0.0`.
+- Dados atuais: mock/seed local, sem banco real.
+- Backend real ainda não iniciado.
+- Sistema ainda não deve ser chamado de blindado sem validação real em Windows.
 
 ## Estrutura oficial
 
-- `01-mrp`: sistema implementado/aprovado.
-- `02-docs`: documentacao, historico, regras e decisoes.
-- `03-vs`: versionamento, patches, testes, releases e preparacao.
+- `01-mrp`: sistema operacional atual.
+- `02-docs`: documentação, regras e histórico técnico útil.
+- `03-vs`: scripts, empacotamento, releases, relatórios e apoio de versionamento.
 
-## Regra central
+## Regras absolutas
 
-`01-mrp` nao e laboratorio.
+Leia `REGRAS_MRP.txt` antes de qualquer execução grande.
 
-O Codex deve trabalhar primeiro em `03-vs`, documentar em `02-docs` e so alterar `01-mrp` quando houver tarefa explicita de promocao aprovada.
+## Comandos principais
 
-## Fluxo Git/GitHub
-
-Antes de trabalhar:
+Status:
 
 ```powershell
-git pull --rebase
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_status.ps1"
 ```
 
-Durante o trabalho:
-
-- Alterar `03-vs`.
-- Documentar em `02-docs`.
-- Nao alterar `01-mrp` sem aprovacao de promocao.
-
-Quando aprovado:
-
-- Promover para `01-mrp` com registro em `02-docs`.
-
-Ao concluir patch:
+Iniciar frontend:
 
 ```powershell
-git add .
-git commit -m "mensagem do patch"
-git tag vX.Y.Z
-git push
-git push --tags
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_start.ps1"
 ```
 
-## Papel do GitHub
+Healthcheck:
 
-GitHub guarda historico tecnico, rastreabilidade e recuperacao, mas nao substitui `03-vs`.
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_healthcheck.ps1"
+```
 
-`03-vs` continua sendo a area oficial de versionamento, patches, testes, releases e preparacao antes de qualquer promocao para `01-mrp`.
+Watchdog contínuo:
 
-## Status v0.1.006
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_watchdog.ps1"
+```
 
-`GIT_GITHUB_PREPARADO_DOCUMENTALMENTE`
+Instalar tarefa Windows no logon:
 
-Nesta etapa nao foram criados backend, banco ou frontend, e `01-mrp` nao foi alterado.
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ".\03-vs\scripts\servicos\mrp_frontend_task_install.ps1" -Schedule ONLOGON
+```
 
-## Regra de dominio (v0.1.027)
+## Futuro empacotamento
 
-- `EMPRESA` e dominio operacional interno: `JPL`, `AÇO`, `TCR`.
-- `GOV. RIO` nao e empresa; deve ser tratado como `cliente/orgao/origem de ata`.
-- Filtros de `EMPRESA` e `ATA/ORIGEM` devem permanecer separados.
-- Nome canonico da ATA/origem GOV/SEHIS: `SEHIS - GOV. RIO` (`sehis_gov_rio`).
-
-## Status v0.1.033
-
-Correção preventiva aplicada sem commit automático.
-
-- Frontend permanece em `MOCK_LOCAL`.
-- Backend real ainda não iniciado.
-- Banco real ainda não iniciado.
-- Produtos ativos: 147.
-- Empresas operacionais com dados: JPL e AÇO.
-- TCR permanece reservado para uso futuro, sem dados operacionais.
-- Validação v0.1.033: OK.
-- Fechamento Git: manual por solicitação do usuário.
+O projeto deve evoluir para instalação padrão de programa: precheck, runtime, cópia dos arquivos, configuração, firewall, tarefa/watchdog, healthcheck e relatório final. A regra de negócio deve continuar independente do instalador e do ambiente físico.

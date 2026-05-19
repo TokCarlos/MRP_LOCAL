@@ -1,6 +1,6 @@
 # Registro da versão v0.1.001
 
-Data: 2026-05-17  
+Data: 2026-05-17
 Status: GERADO_PARA_REVISAO
 
 ## Escopo

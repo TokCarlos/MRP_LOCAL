@@ -1,6 +1,6 @@
 # Inventário de fontes recebidas
 
-Versão documental: v0.1.001  
+Versão documental: v0.1.001
 Data: 2026-05-17
 
 ## Fonte documental incorporada

@@ -1,91 +1,58 @@
 param(
-    [Parameter(Mandatory = $true)]
-    [string]$Versao,
-
-    [Parameter(Mandatory = $true)]
-    [string]$Mensagem,
-
-    [switch]$Auto
+    [Parameter(Mandatory = $true)][string]$Versao,
+    [Parameter(Mandatory = $true)][string]$Mensagem,
+    [switch]$Auto,
+    [switch]$NoPush
 )
-
 $ErrorActionPreference = "Stop"
 
-function Stop-ComAviso {
-    param([string]$MensagemErro)
-    Write-Host "ERRO: $MensagemErro" -ForegroundColor Red
-    exit 1
-}
+function Stop-ComAviso { param([string]$MensagemErro) Write-Host "ERRO: $MensagemErro" -ForegroundColor Red; exit 1 }
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$repoRoot = (Resolve-Path (Join-Path $scriptDir "..\..")).Path
+Set-Location $repoRoot
 
-function Get-CaminhosVersionaveis {
-    $arquivos = @()
-    $arquivos += git ls-files -o --exclude-standard
-    $arquivos += git diff --name-only
-    $arquivos += git diff --cached --name-only
-    return $arquivos | Where-Object { $_ } | Sort-Object -Unique
-}
+if (-not (Get-Command git -ErrorAction SilentlyContinue)) { Stop-ComAviso "Git nao encontrado no PATH." }
 
-function Test-ArquivoProibido {
-    param([string]$Caminho)
+& powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $repoRoot "03-vs\scripts\validar_encoding.ps1") -Modo Ativo
+if ($LASTEXITCODE -ne 0) { Stop-ComAviso "Encoding invalido. Commit bloqueado." }
 
-    $normalizado = $Caminho -replace "\\", "/"
-    $nome = [System.IO.Path]::GetFileName($normalizado)
+git diff --check
+if ($LASTEXITCODE -ne 0) { Stop-ComAviso "git diff --check falhou. Corrija whitespace/encoding antes do commit." }
 
-    if ($normalizado -match "(^|/)\.env($|\.)") { return $true }
-    if ($normalizado -match "(^|/)\.venv(/|$)") { return $true }
-    if ($normalizado -match "(^|/)node_modules(/|$)") { return $true }
-    if ($normalizado -match "(^|/)__pycache__(/|$)") { return $true }
-    if ($normalizado -match "(^|/)\.codex(/|$)") { return $true }
-    if ($nome -like "*.db") { return $true }
-    if ($nome -like "*.sqlite") { return $true }
-    if ($nome -like "*.tmp") { return $true }
-    if ($nome -like "*.bak") { return $true }
-    if ($nome -match "(?i)(credential|credentials|secret|secrets|senha|senhas|token|tokens)") { return $true }
-
-    if ($nome -like "*.log") {
-        if (Test-Path -LiteralPath $Caminho) {
-            $item = Get-Item -LiteralPath $Caminho -ErrorAction SilentlyContinue
-            if ($item -and $item.Length -gt 5MB) { return $true }
-        }
+$versionaveis = @()
+$versionaveis += git ls-files -o --exclude-standard
+$versionaveis += git diff --name-only
+$versionaveis += git diff --cached --name-only
+$versionaveis = $versionaveis | Where-Object { $_ } | Sort-Object -Unique
+$proibidos = @()
+foreach ($a in $versionaveis) {
+    $n = $a -replace "\\", "/"
+    $base = [System.IO.Path]::GetFileName($n)
+    if ($n -match "(^|/)\.codex(/|$)" -or $n -match "(^|/)\.env($|\.)" -or $n -match "(^|/)node_modules(/|$)" -or $n -match "(^|/)__pycache__(/|$)" -or $base -match "(?i)^(Thumbs\.db|desktop\.ini)$" -or $base -match "(?i)\.(log|tmp|bak|backup|pyc|db|sqlite|sqlite3)$" -or $base -match "(?i)(credential|secret|senha|token)") {
+        $proibidos += $a
     }
-
-    return $false
 }
-
-Set-Location X:\
-
-git status
-
-$versionaveis = Get-CaminhosVersionaveis
-$proibidos = @($versionaveis | Where-Object { Test-ArquivoProibido $_ })
-
 if ($proibidos.Count -gt 0) {
-    Write-Host "Arquivos proibidos versionaveis encontrados. Commit cancelado:" -ForegroundColor Red
-    $proibidos | ForEach-Object { Write-Host $_ }
-    Stop-ComAviso "Remova, mova ou ignore corretamente os itens proibidos antes de fechar a versao."
+    Write-Host "Arquivos proibidos versionaveis encontrados:" -ForegroundColor Red
+    $proibidos | ForEach-Object { Write-Host " - $_" }
+    Stop-ComAviso "Commit bloqueado."
 }
 
-git add .
-
-$staged = git diff --cached --name-only
-if (-not $staged) {
-    Write-Host "Nada para commitar" -ForegroundColor Yellow
-    git status
+git status --short
+if (-not $Auto) {
+    Write-Host "Use -Auto para confirmar commit automatico. Nenhuma alteracao foi commitada."
     exit 0
 }
 
+git add -A
 git commit -m "$Versao - $Mensagem"
-
-git pull --rebase
-
-$tagExiste = git tag --list $Versao
-if ($tagExiste) {
-    Write-Host "Tag $Versao ja existe. Nao sera recriada." -ForegroundColor Yellow
-} else {
-    git tag $Versao
+if ($LASTEXITCODE -ne 0) { Stop-ComAviso "Falha no git commit." }
+git tag $Versao
+if ($LASTEXITCODE -ne 0) { Stop-ComAviso "Falha ao criar tag $Versao." }
+if (-not $NoPush) {
+    git push
+    if ($LASTEXITCODE -ne 0) { Stop-ComAviso "Falha no git push." }
+    git push origin $Versao
+    if ($LASTEXITCODE -ne 0) { Stop-ComAviso "Falha no git push da tag." }
 }
-
-git push
-
-git push origin $Versao
-
-git status
+Write-Host "Fechamento concluido: $Versao"

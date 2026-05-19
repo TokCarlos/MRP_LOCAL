@@ -1,120 +1,40 @@
+
 # Status Geral — MRP_LOCAL
 
-## Status atual
+## Estado consolidado
 
-```text
 Projeto: MRP_LOCAL
-Versão documental: v0.1.002
-Status: PLANEJADO / BASE DOCUMENTAL
+Status: BASE LIMPA PARA RETOMADA DE DESENVOLVIMENTO
+Versão documental: v0.1.037-saneamento
 Homologação: NÃO HOMOLOGADO
-```
 
-## Decisão técnica atual
+## O que está funcional nesta base
 
-O projeto deve começar pela interface visual e conceitual, antes de aprofundar banco de dados, backend real ou regra de negócio.
+- Frontend estático em `01-mrp/front_end`.
+- Login/interface/mock local preservados.
+- Porta configurada: `8765`.
+- Bind configurado: `0.0.0.0`.
+- Scripts de serviço passaram a usar configuração central e raiz resolvida, sem dependência direta de `X:\`.
+- Healthcheck, start, stop, status, firewall, tarefa e watchdog foram reorganizados para padrão configurável.
+- `REGRAS_MRP.txt` foi incorporado ao projeto como regra absoluta de execução.
+- Logs reais, `Thumbs.db`, `.git`, `.codex`, quarentena pesada, snapshots e patches antigos foram removidos do pacote limpo.
 
-## Ambiente de teste
+## O que ainda não pode ser chamado de blindado
 
-```text
-Servidor de teste conhecido:
-\\HOME-MACHINE
-```
+- Validação real em Windows após logoff/logon.
+- Validação real após reboot.
+- Validação real após queda de rede.
+- Validação real após queda de energia.
+- Validação real em outro PC da LAN.
+- Validação real por Tailscale, se usado.
+- Teste com Python portable/instalador final.
 
-## Observação
+## Banco e backend
 
-O sistema ainda não substitui Excel/VBA.
+- Backend real ainda não iniciado.
+- Banco real ainda não iniciado.
+- Dados atuais continuam sendo mock/seed local.
 
-Excel/VBA continua sendo a operação real onde já está funcional.
+## Regra de empacotamento futuro
 
-MRP_LOCAL será inicialmente uma camada visual, organizacional e futura camada de integração.
-
-
-## Estrutura física oficial
-
-```text
-01-mrp
-02-docs
-03-vs
-```
-
-Status da estrutura: DEFINIDO em v0.1.002.
-
-## Atualizacao v0.1.027
-
-- Dominio de empresas corrigido para: JPL, AÇO e TCR.
-- GOV. RIO reclassificado para dominio de ATA/origem/cliente/orgao.
-- TCR mantido como empresa valida futura, sem dados operacionais.
-- Nenhum backend criado.
-- Nenhuma persistencia real implementada.
-- Alteracao restrita ao CRM visual/seed/config/documentacao.
-
-## Atualizacao v0.1.028
-
-- ATA GOV RIO / SEHIS GOV RJ normalizada para `SEHIS - GOV. RIO`.
-- Numero da ATA preservado nos registros existentes.
-- GOV. RIO permanece fora do dominio empresa.
-- Empresas validas mantidas: JPL, AÇO e TCR.
-- TCR permanece sem dados operacionais.
-- Imagens reais preservadas sem renomear/mover arquivos.
-- Nenhum backend criado.
-- Nenhum banco criado.
-- Alteracao restrita a seed/config/filtros/documentacao/validacao.
-
-## Atualizacao v0.1.030
-
-- Imagens reorganizadas para `01-mrp/front_end/img`.
-- Estrutura oficial aplicada: `img/produtos/{empresa}/atas/{origem}`.
-- `assets/produtos` tratado como legado e movido para quarentena.
-- Produtos 128-147 preservaram nomes e `item_ata`.
-- Previews reais corrigidos para ATA `SEHIS - GOV. RIO`.
-- GOV. RIO removido da estrutura de empresa de imagens.
-- Sem backend.
-- Sem banco.
-- Sem alteracao funcional alem da resolucao correta de imagem.
-
-## Atualizacao v0.1.031
-
-- Auditoria de limpeza estrutural executada (nao destrutiva).
-- Nenhum arquivo removido, movido ou alterado funcionalmente.
-- Relatorios gerados em `03-vs/relatorios/limpeza`.
-- Proxima etapa de limpeza depende de aprovacao manual.
-
-## Atualizacao v0.1.031
-
-- Nome oficial da ATA consolidado para `SEHIS - GOV. RIO 114443801/2025`.
-- Produtos oficiais da ATA mantidos nos IDs 128-147.
-- Previews dos IDs 128-147 migrados para PNG real por pareamento de `item_ata`.
-- IDs 148-167 removidos do seed ativo e enviados para quarentena documental.
-- Duplicidade de `produto_key` removida do seed ativo.
-- Dominio de empresa preservado: JPL, ACO, TCR (TCR sem dados operacionais).
-- Sem backend e sem banco.
-
-## Atualizacao v0.1.032
-
-- Erro de encoding detectado em textos visuais (mojibake).
-- Nome visual da empresa corrigido para `AÇO` nos dados ativos, removendo mojibake.
-- Regra absoluta de encoding documentada como bloqueadora de commit.
-- Validacao obrigatoria de encoding criada em `03-vs/scripts/validar_encoding.ps1`.
-- Relatorios de encoding gerados em `03-vs/relatorios/encoding`.
-
-## Atualizacao v0.1.033
-
-- Correção preventiva executada sem backend e sem banco real.
-- `produtos_seed.json` permanece com 147 produtos ativos: JPL 53, AÇO 94, TCR 0.
-- `imagem.preview` e `imagem.pasta` alinhados para `img/produtos`.
-- `catalogo_ata_gov_rio.json` corrigido para caminhos físicos existentes.
-- Validador de encoding ajustado para evitar falso positivo e não validar o próprio script.
-- Auditoria de limpeza ajustada para raiz dinâmica, sem dependência fixa de `X:\`.
-- Tabela de produtos protegida contra injeção HTML básica antes de futura API/banco.
-- Relatórios v0.1.033 gerados em `03-vs/relatorios/precheck` e `03-vs/relatorios/limpeza`.
-- Commit automático não executado por pedido do usuário; fechamento manual.
-
-## Atualizacao v0.1.034
-
-- Hotfix aplicado em `01-mrp/front_end/js/pages/produtos_list.js`.
-- Causa: chamada `escapeHtml(...)` sem função auxiliar definida.
-- Efeito anterior: tela de Produtos podia ficar sem renderizar a tabela.
-- Dados preservados: `produtos_seed.json` continua com 147 produtos ativos.
-- Nenhum backend criado.
-- Nenhum banco criado.
-- Commit automático não executado.
+O sistema deve evoluir para programa instalável/empacotado. Uma máquina limpa deve receber precheck, runtime necessário, arquivos do sistema, configuração, firewall, tarefa/watchdog, healthcheck e relatório final. O instalador prepara o ambiente; a regra de negócio permanece desacoplada.

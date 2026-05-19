@@ -1,124 +1,49 @@
-$ErrorActionPreference = "Stop"
-
-$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$RepoRoot = Resolve-Path (Join-Path $ScriptDir "..\..")
-$ReportDir = Join-Path $RepoRoot "03-vs\relatorios\encoding"
-New-Item -ItemType Directory -Force -Path $ReportDir | Out-Null
-
-$Exts = @(".json", ".js", ".css", ".html", ".md", ".ps1", ".csv", ".txt")
-$IgnorePathRegex = "\\.git(\\|$)|node_modules(\\|$)|03-vs\\patches(\\|$)|03-vs\\snapshots(\\|$)|03-vs\\quarentena(\\|$)|03-vs\\relatorios\\encoding(\\|$)"
-
-$BadPatterns = @(
-  "AÃ‡O", "AÃ§O", "DESCRIÃ‡", "FAMÃ", "NÃº", "NÃš", "CÃ³", "CÃ“",
-  "INFORMAÃ‡", "SITUAÃ‡", "MEDIÃ‡", "OPÃ‡", "REVISÃƒ", "PREVISÃƒ",
-  "ATENÃ‡", "MARICÃ", "NÃ£", "NÃ¡", "NÃ©", "NÃª", "NÃ³", "NÃµ", "NÃº",
-  "Âº", "Âª", "â€“", "â€”", "â€œ", "â€", "â€˜", "â€™"
+param(
+    [ValidateSet("Ativo", "Completo")]
+    [string]$Modo = "Ativo"
 )
+$ErrorActionPreference = "Stop"
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$root = (Resolve-Path (Join-Path $scriptDir "..\..")).Path
+$reportDir = Join-Path $root "03-vs\relatorios\encoding"
+New-Item -ItemType Directory -Force -Path $reportDir | Out-Null
 
-function Read-Utf8([string]$Path) {
-    $bytes = [System.IO.File]::ReadAllBytes($Path)
-    if ($bytes.Length -ge 3 -and $bytes[0] -eq 0xEF -and $bytes[1] -eq 0xBB -and $bytes[2] -eq 0xBF) {
-        return [System.Text.Encoding]::UTF8.GetString($bytes, 3, $bytes.Length - 3)
-    }
-    return [System.Text.Encoding]::UTF8.GetString($bytes)
+function Get-Rel([string]$p) { return $p.Substring($root.Length).TrimStart("\\") -replace "\\", "/" }
+function Has-BomUtf8([byte[]]$b) { return $b.Length -ge 3 -and $b[0] -eq 0xEF -and $b[1] -eq 0xBB -and $b[2] -eq 0xBF }
+function Test-Utf8([byte[]]$b) {
+    try { $enc = [System.Text.UTF8Encoding]::new($false, $true); $null = $enc.GetString($b); return $true } catch { return $false }
 }
+function Write-Utf8NoBom([string]$path, [string]$text) { [System.IO.File]::WriteAllText($path, $text, [System.Text.UTF8Encoding]::new($false)) }
 
-function Normalize-Text([string]$Value) {
-    if ([string]::IsNullOrWhiteSpace($Value)) { return "" }
-    $formD = $Value.Normalize([Text.NormalizationForm]::FormD)
-    $sb = New-Object System.Text.StringBuilder
-    foreach ($c in $formD.ToCharArray()) {
-        $cat = [Globalization.CharUnicodeInfo]::GetUnicodeCategory($c)
-        if ($cat -ne [Globalization.UnicodeCategory]::NonSpacingMark) { [void]$sb.Append($c) }
-    }
-    return $sb.ToString().ToUpperInvariant().Trim()
+$textExt = @(".txt", ".md", ".json", ".ps1", ".js", ".css", ".html", ".xml", ".svg", ".toml", ".csv", ".bat", ".cmd")
+$skip = @(".git", "node_modules", ".venv", "venv")
+if ($Modo -eq "Ativo") { $skip += @("03-vs/patches", "03-vs/snapshots", "03-vs/quarentena", "03-vs/relatorios") }
+$files = Get-ChildItem -Path $root -Recurse -File -Force -ErrorAction SilentlyContinue | Where-Object {
+    $rel = Get-Rel $_.FullName
+    $ok = $true
+    foreach ($s in $skip) { if ($rel -like "$s/*" -or $rel -eq $s) { $ok = $false } }
+    if ($rel -eq "03-vs/scripts/validar_encoding.ps1") { $ok = $false }
+    $ok -and ($textExt -contains $_.Extension.ToLower() -or $_.Name -eq ".gitignore")
 }
-
-$files = Get-ChildItem -Path $RepoRoot -Recurse -File -Force -ErrorAction SilentlyContinue |
-    Where-Object { $Exts -contains $_.Extension.ToLower() -and $_.FullName -notmatch $IgnorePathRegex -and $_.FullName -ne $MyInvocation.MyCommand.Path }
-
-$issues = New-Object System.Collections.Generic.List[object]
-$scanned = 0
-$ignored = 0
-
+$issues = @()
 foreach ($f in $files) {
-    $scanned++
-    try {
-        $txt = Read-Utf8 $f.FullName
-    } catch {
-        $issues.Add([pscustomobject]@{ tipo = "READ_FAIL"; arquivo = $f.FullName; detalhe = $_.Exception.Message; risco = "REVISAR_MANUALMENTE" })
-        continue
-    }
-
-    foreach ($p in $BadPatterns) {
-        if ($txt.Contains($p)) {
-            $issues.Add([pscustomobject]@{ tipo = "POSSIVEL_MOJIBAKE"; arquivo = $f.FullName; detalhe = "Padrao detectado: $p"; risco = "ALTO_RISCO" })
-            break
-        }
-    }
-
-    $ataCanonica = "SEHIS - GOV. RIO 114443801/2025"
-    $ataDuplicada = "$ataCanonica (" + "SEHIS - GOV. RIO" + ")"
-    if ($txt.Contains($ataDuplicada)) {
-        $issues.Add([pscustomobject]@{ tipo = "ATA_LABEL_DUPLICADA"; arquivo = $f.FullName; detalhe = "Forma com parenteses bloqueada"; risco = "ALTO_RISCO" })
-    }
-
-    if ($f.Name -eq "produtos_seed.json") {
-        try {
-            $arr = $txt | ConvertFrom-Json
-            foreach ($p in $arr) {
-                $empresa = [string]$p.empresa
-                $empresaKey = [string]$p.empresa_key
-                $empresaNorm = Normalize-Text $empresa
-
-                if ($empresaKey -eq "aco" -and $empresaNorm -ne "ACO") {
-                    $issues.Add([pscustomobject]@{ tipo = "EMPRESA_VISUAL_INVALIDA"; arquivo = $f.FullName; detalhe = "id=$($p.id) empresa='$empresa' key='$empresaKey'"; risco = "ALTO_RISCO" })
-                }
-                if ($empresaKey -eq "AÇO") {
-                    $issues.Add([pscustomobject]@{ tipo = "EMPRESA_KEY_INVALIDA"; arquivo = $f.FullName; detalhe = "id=$($p.id) empresa_key='$empresaKey'"; risco = "ALTO_RISCO" })
-                }
-                if ($empresa -match "GOV|SEHIS" -or $empresaKey -match "gov_rio|sehis") {
-                    $issues.Add([pscustomobject]@{ tipo = "DOMINIO_EMPRESA_INVALIDO"; arquivo = $f.FullName; detalhe = "id=$($p.id) empresa='$empresa' key='$empresaKey'"; risco = "ALTO_RISCO" })
-                }
-            }
-        } catch {
-            $issues.Add([pscustomobject]@{ tipo = "JSON_INVALIDO"; arquivo = $f.FullName; detalhe = $_.Exception.Message; risco = "ALTO_RISCO" })
-        }
+    $rel = Get-Rel $f.FullName
+    $bytes = [System.IO.File]::ReadAllBytes($f.FullName)
+    if (Has-BomUtf8 $bytes) { $issues += [pscustomobject]@{tipo="UTF8_BOM";arquivo=$rel;risco="MEDIO"} }
+    if (-not (Test-Utf8 $bytes)) { $issues += [pscustomobject]@{tipo="NAO_UTF8_VALIDO";arquivo=$rel;risco="ALTO"}; continue }
+    $txt = [System.Text.Encoding]::UTF8.GetString($(if (Has-BomUtf8 $bytes) { $bytes[3..($bytes.Length-1)] } else { $bytes }))
+    if ($txt -match "VersÃ|AÃ‡O|CORRIMÃƒO|ÃƒO|Ã§|Ã£|Ã©|Ã¡|Ã³|Ãº|â€”|â€“|�") {
+        $issues += [pscustomobject]@{tipo="POSSIVEL_MOJIBAKE";arquivo=$rel;risco="ALTO"}
     }
 }
-
 $status = if ($issues.Count -eq 0) { "OK" } else { "ERRO" }
-
-$obj = [ordered]@{
-    status = $status
-    arquivos_analisados = $scanned
-    arquivos_ignorados = $ignored
-    ocorrencias_restantes = $issues.Count
-    erros_bloqueadores = ($issues | Where-Object { $_.risco -eq "ALTO_RISCO" }).Count
-    itens = $issues
-}
-$obj | ConvertTo-Json -Depth 8 | Set-Content -Encoding UTF8 -Path (Join-Path $ReportDir "relatorio_encoding.json")
-
-$md = @()
-$md += "# Relatorio de Encoding"
-$md += ""
-$md += "- Status: $status"
-$md += "- Arquivos analisados: $scanned"
-$md += "- Ocorrencias restantes: $($issues.Count)"
-$md += "- Erros bloqueadores: $(($issues | Where-Object { $_.risco -eq 'ALTO_RISCO' }).Count)"
-$md += ""
-$md += "## Itens"
-if ($issues.Count -eq 0) {
-    $md += "- Nenhuma ocorrencia bloqueadora detectada."
-} else {
-    foreach ($i in $issues) {
-        $md += "- [$($i.tipo)] $($i.arquivo) :: $($i.detalhe)"
-    }
-}
-$md | Set-Content -Encoding UTF8 -Path (Join-Path $ReportDir "relatorio_encoding.md")
-
-Write-Host "STATUS=$status"
-Write-Host "ARQUIVOS_ANALISADOS=$scanned"
+$obj = [ordered]@{ gerado_em=(Get-Date).ToString("yyyy-MM-dd HH:mm:ss"); modo=$Modo; status=$status; arquivos_analisados=$files.Count; ocorrencias=$issues.Count; itens=$issues }
+$json = $obj | ConvertTo-Json -Depth 6
+Write-Utf8NoBom (Join-Path $reportDir "relatorio_encoding.json") $json
+$md = @("# Relatorio de Encoding", "", "- Status: $status", "- Modo: $Modo", "- Arquivos analisados: $($files.Count)", "- Ocorrencias: $($issues.Count)", "")
+if ($issues.Count -gt 0) { $md += "## Itens"; foreach ($i in $issues) { $md += "- [$($i.tipo)] $($i.arquivo) :: risco=$($i.risco)" } }
+Write-Utf8NoBom (Join-Path $reportDir "relatorio_encoding.md") ($md -join "`n")
+Write-Host "ENCODING_STATUS=$status"
 Write-Host "OCORRENCIAS=$($issues.Count)"
 if ($issues.Count -gt 0) { exit 1 }
 exit 0

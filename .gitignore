@@ -1,12 +1,12 @@
-﻿# =========================================================
+
 # MRP_LOCAL - Git ignore
-# =========================================================
 
-# Codex local
+# Local tools / machine-specific
 .codex/
-.codex/**
+.vscode/settings.json
+.idea/
 
-# Secrets / ambiente
+# Secrets / environment
 .env
 .env.*
 !.env.example
@@ -48,53 +48,47 @@ pnpm-debug.log*
 dist/
 build/
 
-# Banco local / runtime
-*.db
-*.sqlite
-*.sqlite3
-*.dump
-*.bak
-*.backup
-
-# PostgreSQL local / dados reais
-pgdata/
-postgres_data/
-database/data/
-database/backups/
-
-# Logs / runtime / temporarios
+# Runtime / database / generated data
 logs/
 runtime/
 cache/
 temp/
 tmp/
 *.log
+*.pid
 *.tmp
 *.temp
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+*.bak
+*.backup
+pgdata/
+postgres_data/
+database/data/
+database/backups/
 
-# Arquivos de sistema
+# System files
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# Office temporarios
+# Office temp
 ~$*.doc*
 ~$*.xls*
 ~$*.ppt*
-*.tmp
 
-# Backups locais
+# Local backups and generated packages
 backup/
 backups/
 _bkp/
 *.old
 *.orig
-
-# IDE
-.vscode/settings.json
-.vscode/.ropeproject/
-.idea/
-
-# Arquivos compactados pesados gerados
 *.7z
 *.rar
+*.zip
+
+# Allow intentional release marker docs, but not binary packages by default.
+!03-vs/releases/.gitkeep
+!03-vs/pacotes/.gitkeep

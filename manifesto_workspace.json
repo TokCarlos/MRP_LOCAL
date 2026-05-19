@@ -1,15 +1,18 @@
 {
-  "workspace": "MRP_Workspace",
-  "versao": "v0.1.033",
-  "pastas": {
-    "01-mrp": "Sistema funcional. Somente arquivos usados pelo sistema, agora ou futuramente.",
-    "02-docs": "Documentacao, regras, historico, roadmap, inventarios e progresso.",
-    "03-vs": "Pacotes, patches, historico e versoes geradas a partir do sistema funcional."
-  },
-  "padrao_nomes": "Pastas raiz curtas, minusculas e ASCII para reduzir risco em CMD, BAT, PowerShell, Python, Git, ZIP e caminhos de rede.",
-  "status": "CORRECAO_PREVENTIVA_PRE_COMMIT_MANUAL",
-  "alteracao_v0_1_002": "Renomeadas as pastas raiz para 01-mrp, 02-docs e 03-vs conforme decisao do usuario.",
-  "alteracao_v0_1_033": "Corrigidos caminhos ativos de imagens, catalogo ATA, validacao de encoding, auditoria de limpeza e escape HTML preventivo em Produtos.",
-  "ultima_revisao_chatgpt": "v0.1.034",
-  "status_hotfix": "corrige escapeHtml ausente em produtos_list.js; produtos_seed preservado"
+    "workspace": "MRP_Workspace",
+    "versao": "v0.1.037-saneamento",
+    "status": "BASE_LIMPA_CONFIGURAVEL_PRONTA_PARA_RETOMADA_DEV",
+    "pastas": {
+        "01-mrp": "Sistema operacional atual.",
+        "02-docs": "Documentacao, regras, historico tecnico util e roadmap.",
+        "03-vs": "Scripts, releases, pacotes, relatorios gerados localmente e instalador futuro."
+    },
+    "porta_frontend": 8765,
+    "bind_frontend": "0.0.0.0",
+    "backend_real": false,
+    "banco_real": false,
+    "homologado": false,
+    "blindado": false,
+    "regras_fonte": "REGRAS_MRP.txt",
+    "alteracao_v0_1_037": "Saneamento estrutural: limpeza de pacote, configuracao central, scripts de servico configuraveis, watchdog continuo, docs TXT obrigatorios e gancho de empacotamento/instalador futuro."
 }

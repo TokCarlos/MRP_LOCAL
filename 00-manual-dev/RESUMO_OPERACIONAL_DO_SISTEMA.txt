@@ -1,0 +1,47 @@
+
+RESUMO_OPERACIONAL_DO_SISTEMA - MRP_LOCAL
+
+Estado atual:
+- Sistema local-first.
+- Frontend estatico/mock local.
+- Porta: 8765.
+- Bind: 0.0.0.0.
+- Sem backend real.
+- Sem banco real.
+- Nao homologado/blindado ainda.
+
+Arquitetura:
+- Configuracao: 01-mrp/config/mrp_local.env.json.
+- Motor/regra de negocio: futuro backend/engine, ainda nao iniciado.
+- Adaptadores: scripts de servico Windows, rede, firewall, tarefa e instalador.
+
+Fluxo atual:
+1. Script resolve raiz do projeto.
+2. Le configuracao central.
+3. Valida front_end e index.html.
+4. Localiza Python.
+5. Inicia servidor HTTP estatico na porta 8765.
+6. Healthcheck testa porta e HTTP.
+7. Watchdog monitora e reinicia se falhar.
+
+Scripts principais:
+- mrp_frontend_start.ps1
+- mrp_frontend_stop.ps1
+- mrp_frontend_status.ps1
+- mrp_frontend_healthcheck.ps1
+- mrp_frontend_watchdog.ps1
+- mrp_frontend_task_install.ps1
+- mrp_firewall_8765.ps1
+
+Pendente para blindagem:
+- Testar em Windows real.
+- Validar logoff/logon.
+- Validar reboot.
+- Validar queda de rede.
+- Validar queda de energia.
+- Validar acesso LAN.
+- Validar acesso Tailscale.
+- Validar Python portable/instalador.
+
+Regra futura:
+O sistema deve virar programa instalavel. Uma maquina limpa deve receber precheck, runtime, arquivos, configuracao, firewall, tarefa/watchdog e healthcheck. O usuario deve conseguir instalar e rodar como software comum.
