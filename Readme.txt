@@ -66,3 +66,12 @@ Pendencias antes de blindagem:
 Planejamento registrado:
 - proxima etapa planejada: validacao operacional no DEV casa com painel admin local
 - etapa seguinte planejada: watchdog/tarefa automatica/reboot
+
+Regra estrategica v0.1.050:
+- objetivo futuro de distribuicao por instalador unico (exemplo: MRP_LOCAL_Setup.exe);
+- nao implementar instalador agora;
+- nao gerar exe agora;
+- nao empacotar release agora;
+- instalador futuro deve fazer precheck e classificar pendencias: CRITICO/OPCIONAL/RECOMENDADO;
+- instalador futuro deve pedir aprovacao para acoes sensiveis;
+- tecnologia do instalador sera decidida em etapa futura.

@@ -128,3 +128,12 @@ Planejamento registrado:
 
 - proxima etapa planejada: `validacao operacional no DEV casa com painel admin local`;
 - etapa seguinte planejada: `watchdog/tarefa automatica/reboot`.
+
+## Regra estrategica v0.1.050 (instalador futuro)
+
+- objetivo futuro: distribuicao por instalador unico (exemplo conceitual: `MRP_LOCAL_Setup.exe`);
+- nesta etapa nao ha implementacao de instalador, `.exe` ou empacotamento release;
+- instalador futuro deve executar precheck e classificar pendencias em `CRITICO`, `OPCIONAL`, `RECOMENDADO`;
+- acoes sensiveis devem exigir aprovacao (firewall, servico/tarefa Windows, permissao, download e alteracoes de ambiente);
+- instalador futuro nao pode depender de `X:\`, `\\HOME-MACHINE`, usuario especifico ou drive mapeado;
+- tecnologia do instalador fica para etapa futura.

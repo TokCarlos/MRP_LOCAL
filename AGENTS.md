@@ -101,3 +101,10 @@ Planejamento:
 
 - proxima etapa: validacao operacional no DEV casa com painel admin local;
 - etapa seguinte: watchdog/tarefa automatica/reboot.
+
+Diretriz estrategica v0.1.050:
+
+- registrar o objetivo futuro de instalador unico de distribuicao;
+- nao implementar instalador real nesta etapa;
+- nao escolher tecnologia de instalador nesta etapa;
+- manter local-first, raiz configuravel e sem hardcode de ambiente.

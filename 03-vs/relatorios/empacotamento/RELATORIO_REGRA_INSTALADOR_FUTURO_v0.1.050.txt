@@ -1,0 +1,62 @@
+RELATORIO DA ETAPA
+Versao: v0.1.050-regra-instalador-futuro
+
+OBJETIVO
+- Registrar regra estrategica de empacotamento/instalador futuro sem implementar instalador agora.
+
+ESCOPO
+- Atualizacao documental e de regras.
+- Sem alteracao funcional de frontend.
+- Sem criacao de backend.
+- Sem criacao de banco.
+- Sem instalacao de dependencias.
+
+FORA DE ESCOPO
+- Criar instalador real.
+- Gerar EXE.
+- Empacotar release final.
+- Ativar watchdog ou tarefa automatica.
+
+ARQUIVOS REVISADOS/ALTERADOS
+- REGRAS_MRP.txt
+- AGENTS.md
+- README.md
+- Readme.txt
+- 00-manual-dev/MANUAL_DEV_COMPLETO.txt
+- 00-manual-dev/RESUMO_OPERACIONAL_DO_SISTEMA.txt
+- 01-mrp/install/PORTABILIDADE_FUTURA.md
+- 02-docs/docs/infraestrutura/empacotamento_instalador.md
+- 02-docs/docs/geral/status_geral.md
+
+REGRA REGISTRADA
+- Objetivo futuro: instalador unico de distribuicao.
+- Precheck obrigatorio no fluxo de instalacao futura.
+- Classificacao de pendencias: CRITICO/OPCIONAL/RECOMENDADO.
+- Acoes sensiveis exigem aprovacao.
+- Sem dependencia de X:\, \\HOME-MACHINE, usuario fixo ou unidade mapeada.
+- Implementacao final fica para etapa futura.
+
+DECISAO DESTA ETAPA
+- Nao implementar instalador agora.
+
+RISCOS DE IMPLEMENTAR CEDO DEMAIS
+- Acoplar instalador a ambiente ainda em maturacao.
+- Congelar processo antes de validar watchdog/tarefa/reboot/quedas.
+- Introduzir custo de suporte com fluxos ainda nao estabilizados.
+
+RELACAO COM PYTHON PORTABLE, FASTAPI E POSTGRESQL
+- Python portable: direcao futura, ainda nao ativado como runtime final.
+- FastAPI: direcao futura de backend, nao implementado nesta etapa.
+- PostgreSQL: direcao futura de banco real, nao implementado nesta etapa.
+
+RELACAO COM WATCHDOG/TAREFA AUTOMATICA
+- Instalador final depende de maturidade desses componentes.
+- Nesta etapa, apenas registro estrategico.
+
+STATUS FINAL REAL
+- Etapa concluida como documental/estrategica.
+- Sistema segue em teste/desenvolvimento.
+- Sistema ainda nao e blindado.
+
+PROXIMA ETAPA RECOMENDADA
+- v0.1.051: consolidar validacao operacional local (watchdog/tarefa/reboot/quedas) antes de decisao tecnica do instalador final.

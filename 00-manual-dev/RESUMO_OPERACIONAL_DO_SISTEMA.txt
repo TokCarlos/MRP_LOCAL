@@ -108,3 +108,10 @@ O sistema abre e foi validado no frontend, mas ainda nao pode ser chamado de bli
 Planejamento registrado:
 - proxima etapa planejada: validacao operacional no DEV casa com painel admin local.
 - etapa seguinte planejada: watchdog/tarefa automatica/reboot.
+
+Diretriz v0.1.050:
+- objetivo futuro de instalador unico para distribuicao;
+- sem implementacao de instalador/exe nesta etapa;
+- instalador futuro deve validar ambiente (precheck), registrar pendencias e pedir aprovacao para acoes sensiveis;
+- tecnologia do instalador sera definida em etapa futura;
+- sistema continua em teste/desenvolvimento e ainda nao e blindado.

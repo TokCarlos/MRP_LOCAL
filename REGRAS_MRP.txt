@@ -1168,3 +1168,26 @@ Tudo que for técnico deve usar chave simples, ASCII-safe e sem dependência de 
 Nada funcional deve ser alterado sem justificativa.
 Nada deve ser chamado de final sem validação real.
 O sistema atual está em teste, com porta 8765 liberada e frontend iniciando por script, mas ainda exige saneamento de encoding, caminhos, watchdog, tarefa automática, logs, healthcheck e documentação antes de ser considerado blindado.
+---
+
+## 31. Regra estrategica de instalador futuro (v0.1.050)
+
+512. Objetivo futuro: distribuicao por instalador unico (exemplo conceitual: `MRP_LOCAL_Setup.exe`).
+513. Nesta etapa, isso e somente direcao estrategica/documental.
+514. Nao implementar instalador real agora.
+515. Nao gerar `.exe` agora.
+516. Nao empacotar release agora.
+517. O instalador unico futuro e artefato de entrega/distribuicao.
+518. Apos instalacao, o sistema deve manter organizacao interna por modulos e camadas.
+519. O instalador futuro deve preparar ambiente e arquivos necessarios antes de concluir.
+520. O instalador futuro deve executar precheck.
+521. Pendencia `CRITICO` bloqueia conclusao/execucao.
+522. Pendencia `OPCIONAL` alerta, registra e permite continuar quando nao bloquear operacao.
+523. Pendencia `RECOMENDADO` alerta, registra e permite continuar.
+524. Acoes sensiveis exigem aprovacao explicita: firewall, servico/tarefa Windows, permissao, download externo, instalacao externa e alteracao de ambiente.
+525. O instalador futuro nao pode depender de `X:\`.
+526. O instalador futuro nao pode depender de `\\HOME-MACHINE`.
+527. O instalador futuro nao pode depender de usuario Windows especifico.
+528. O instalador futuro nao pode depender de letra de unidade mapeada.
+529. A tecnologia do instalador sera decidida em etapa futura.
+530. Implementacao do instalador final so deve ocorrer apos maturidade real de backend, banco, logs, watchdog/tarefa e operacao automatica.

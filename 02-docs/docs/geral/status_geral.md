@@ -134,3 +134,12 @@ A raiz fisica atual de desenvolvimento pode existir em documentacao, config e sc
 
 - proxima etapa planejada: `validacao operacional no DEV casa com painel admin local`;
 - etapa seguinte planejada: `watchdog/tarefa automatica/reboot`.
+
+## Etapa v0.1.050 - regra instalador futuro (documental)
+
+- registrada diretriz estrategica para instalador unico de distribuicao;
+- sem implementacao de instalador real nesta etapa;
+- sem geracao de `.exe` nesta etapa;
+- sem backend novo, sem banco novo e sem alteracao funcional do frontend;
+- tecnologia do instalador ainda nao definida;
+- sistema segue em teste/desenvolvimento e ainda nao e blindado.

@@ -115,3 +115,22 @@ Pacote DEV:
 Pacote RELEASE:
 - deve conter somente runtime, frontend, config, health, install, docs_runtime e servicos necessarios.
 - nao deve conter logs reais, cache, tmp, backups locais, banco real ou arquivos de desenvolvimento desnecessarios.
+
+## Direcao estrategica v0.1.050 - instalador unico
+
+- objetivo futuro: distribuicao por instalador unico (exemplo conceitual: `MRP_LOCAL_Setup.exe`);
+- nao implementar instalador real nesta etapa;
+- nao gerar `.exe` nesta etapa;
+- nao empacotar release nesta etapa.
+
+Regras do instalador futuro:
+
+- preparar ambiente e estrutura interna mantendo separacao de codigo, frontend, backend, engine, adapters, runtime, config, data, logs, backups e tmp;
+- executar precheck antes de concluir;
+- classificar pendencias em `CRITICO`, `OPCIONAL`, `RECOMENDADO`;
+- bloquear conclusao em pendencia `CRITICO`;
+- alertar/registrar e permitir continuidade para `OPCIONAL` e `RECOMENDADO` quando nao bloquear operacao;
+- exigir aprovacao para acoes sensiveis (firewall, servico/tarefa Windows, permissoes, download externo, alteracao de ambiente);
+- nao depender de `X:\`, `\\HOME-MACHINE`, usuario fixo ou unidade mapeada.
+
+Decisao de ferramenta (Inno/NSIS/WiX/PyInstaller/cx_Freeze/outra) fica para etapa futura.
