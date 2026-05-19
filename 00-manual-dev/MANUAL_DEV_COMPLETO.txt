@@ -1,7 +1,7 @@
 MRP_LOCAL - MANUAL DEV COMPLETO
 
-Versao documental: v0.1.049-painel-admin-local-preparacao
-Base anterior concluida: v0.1.048 alinhamento regras e status operacional
+Versao documental: v0.1.049-fix-launcher-painel-admin
+Base anterior concluida: v0.1.049 painel admin local preparacao
 Commit base relevante anterior: 173456b - chore: preparar portabilidade pos-cimasp v0.1.045
 
 STATUS REAL
@@ -96,6 +96,10 @@ Painel administrativo local:
 
 - 03-vs/scripts/painel/mrp_painel_controle.py
 - 03-vs/scripts/painel/mrp_admin_auth_setup.py
+- launcher principal: MRP_PAINEL_SERVIDOR.vbs
+- launcher diagnostico: MRP_PAINEL_SERVIDOR.cmd
+- criar atalho: 03-vs/scripts/painel/criar_atalho_painel.ps1
+- batch opcional: CRIAR_ATALHO_PAINEL_SERVIDOR.bat
 
 Credencial local admin (nao versionar):
 

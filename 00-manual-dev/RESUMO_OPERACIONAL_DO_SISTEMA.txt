@@ -1,7 +1,7 @@
 MRP_LOCAL - RESUMO OPERACIONAL DO SISTEMA
 
-Versao documental: v0.1.049-painel-admin-local-preparacao
-Base anterior concluida: v0.1.048 alinhamento regras e status operacional
+Versao documental: v0.1.049-fix-launcher-painel-admin
+Base anterior concluida: v0.1.049 painel admin local preparacao
 Commit base relevante anterior: 173456b - chore: preparar portabilidade pos-cimasp v0.1.045
 
 O MRP_LOCAL e um sistema local-first em ambiente de teste. O frontend atual roda como site estatico em 01-mrp/front_end, usando porta 8765.
@@ -20,6 +20,7 @@ STATUS REAL
 - Ainda nao ha FastAPI funcional.
 - O sistema ainda nao esta blindado.
 - Painel Administrativo Local em preparacao e separado do index.html.
+- launcher clicavel do painel admin: MRP_PAINEL_SERVIDOR.vbs.
 - Watchdog, tarefa automatica, reboot, queda de energia e rede ainda precisam validacao real.
 
 ARQUITETURA ATUAL

@@ -2,11 +2,11 @@
 
 ## Versao documental atual
 
-`v0.1.049-painel-admin-local-preparacao`
+`v0.1.049-fix-launcher-painel-admin`
 
 ## Base funcional anterior
 
-`v0.1.048 alinhamento regras e status operacional`
+`v0.1.049 painel admin local preparacao`
 
 Commit base funcional:
 
@@ -28,7 +28,7 @@ Commit base funcional:
 - Nao ha PostgreSQL instalado/configurado pelo sistema.
 - Nao ha Python portable baixado/ativado pelo sistema.
 - Nao ha instalador real criado nesta etapa.
-- Painel Administrativo Local em preparacao, separado do frontend final.
+- Painel Administrativo Local com launcher clicavel, separado do frontend final.
 
 ## Pendencias de blindagem
 
@@ -119,15 +119,16 @@ A raiz fisica atual de desenvolvimento pode existir em documentacao, config e sc
 - Variacoes de itens registradas com sufixo `-1` quando havia imagem adicional no ZIP.
 - Nomes oficiais preservados a partir dos registros existentes.
 
-## Etapa atual em andamento: v0.1.049
+## Etapa atual em andamento: v0.1.049-fix-launcher
 
-- preparacao do Painel Administrativo Local do Servidor;
-- credencial admin local e chave de modo automatico local como base futura;
-- integracao com scripts de servico existentes sem ativar watchdog/tarefa.
+- correcao de usabilidade do launcher do painel admin por duplo clique;
+- adicao de launcher principal VBS e launcher diagnostico CMD;
+- modernizacao visual do painel tkinter/ttk sem dependencias externas;
+- script de criacao de atalho para area de trabalho.
 
 ## Status final desta etapa
 
-`PAINEL_ADMIN_LOCAL_PREPARADO_SEM_ATIVACAO_AUTOMATICA`
+`PAINEL_ADMIN_LOCAL_COM_LAUNCHER_FUNCIONAL_SEM_ATIVACAO_AUTOMATICA`
 
 ## Planejamento
 

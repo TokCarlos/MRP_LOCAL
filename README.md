@@ -1,11 +1,11 @@
 # MRP_LOCAL
 
-Sistema local-first em ambiente de teste, com frontend web estatico funcional e deploy validado em ambiente de trabalho.
+Sistema local-first em ambiente de teste, com frontend web estatico funcional e painel administrativo local separado para o servidor.
 
 ## Estado atual
 
-- Versao documental: `v0.1.049-painel-admin-local-preparacao`.
-- Base anterior concluida: `v0.1.048 alinhamento regras e status operacional`.
+- Versao documental: `v0.1.049-fix-launcher-painel-admin`.
+- Base anterior concluida: `v0.1.049 painel admin local preparacao`.
 - Commit base relevante anterior: `173456b - chore: preparar portabilidade pos-cimasp v0.1.045`.
 - Frontend validado pelo usuario: start OK, porta 8765 OK, healthcheck OK e sistema abrindo corretamente.
 - Deploy no trabalho validado.
@@ -51,6 +51,13 @@ Separacao de interface:
 
 - `index.html` permanece interface de usuario final;
 - painel administrativo local fica separado em `03-vs/scripts/painel/mrp_painel_controle.py`.
+
+Launchers do painel admin local:
+
+- principal: `MRP_PAINEL_SERVIDOR.vbs` (duplo clique)
+- diagnostico: `MRP_PAINEL_SERVIDOR.cmd`
+- compatibilidade: `MRP_MENU_SISTEMA.bat`
+- criar atalho: `CRIAR_ATALHO_PAINEL_SERVIDOR.bat` ou `03-vs/scripts/painel/criar_atalho_painel.ps1`
 
 ## Area portable
 

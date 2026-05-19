@@ -5,29 +5,15 @@ setlocal EnableExtensions EnableDelayedExpansion
 set "ROOT=%~dp0"
 set "ROOT=%ROOT:~0,-1%"
 set "SERVICOS=%ROOT%\03-vs\scripts\servicos"
-set "PAINEL=%ROOT%\03-vs\scripts\painel\mrp_painel_controle.py"
+set "PAINEL_LAUNCHER_CMD=%ROOT%\MRP_PAINEL_SERVIDOR.cmd"
 set "PS=powershell.exe -NoProfile -ExecutionPolicy Bypass"
 
-if exist "%PAINEL%" (
-    set "PY_CMD="
-    where python >nul 2>nul
-    if %errorlevel% equ 0 set "PY_CMD=python"
-    if not defined PY_CMD (
-        where py >nul 2>nul
-        if %errorlevel% equ 0 set "PY_CMD=py"
-    )
-
-    if defined PY_CMD (
-        echo Abrindo Painel Administrativo Local com %PY_CMD%...
-        "%PY_CMD%" "%PAINEL%"
-        if %errorlevel% equ 0 exit /b 0
-        echo Painel finalizado com erro. Entrando no fallback CMD...
-        echo.
-    ) else (
-        echo Python nao encontrado ^(python/py^).
-        echo Executando fallback minimo em CMD...
-        echo.
-    )
+if exist "%PAINEL_LAUNCHER_CMD%" (
+    call "%PAINEL_LAUNCHER_CMD%"
+    if %errorlevel% equ 0 exit /b 0
+    echo.
+    echo Launcher do painel retornou erro. Entrando no fallback CMD...
+    echo.
 )
 
 if not exist "%SERVICOS%\mrp_frontend_start.ps1" goto ERRO_ESTRUTURA

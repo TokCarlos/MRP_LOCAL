@@ -1,7 +1,7 @@
 MRP_LOCAL - LEITURA RAPIDA
 
-Versao documental: v0.1.049-painel-admin-local-preparacao
-Base anterior concluida: v0.1.048 alinhamento regras e status operacional
+Versao documental: v0.1.049-fix-launcher-painel-admin
+Base anterior concluida: v0.1.049 painel admin local preparacao
 Commit base relevante anterior: 173456b - chore: preparar portabilidade pos-cimasp v0.1.045
 
 Estado real:
@@ -19,6 +19,8 @@ Estado real:
 - sem FastAPI funcional;
 - ainda nao blindado.
 - painel admin local em preparacao, separado do index.html.
+- launcher clicavel principal: MRP_PAINEL_SERVIDOR.vbs
+- launcher diagnostico: MRP_PAINEL_SERVIDOR.cmd
 
 Operacao principal:
 - MRP_MENU_SISTEMA.bat

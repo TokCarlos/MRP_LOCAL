@@ -1,0 +1,65 @@
+RELATORIO FIX LAUNCHER PAINEL
+
+Versao: v0.1.049-fix-launcher-painel-admin
+
+Problema:
+- launcher do painel admin nao abria de forma pratica/consistente em todos os contextos;
+- usuario ainda dependia de fluxo manual;
+- UI do painel estava com aparencia antiga.
+
+Causa:
+- ausencia de launcher principal dedicado para duplo clique;
+- acoplamento parcial ao contexto de execucao;
+- UI tkinter sem uso consistente de ttk/estilo.
+
+Solucao:
+- criado launcher principal `MRP_PAINEL_SERVIDOR.vbs`;
+- criado launcher diagnostico `MRP_PAINEL_SERVIDOR.cmd` com log local;
+- atualizado `MRP_MENU_SISTEMA.bat` para usar o launcher novo e manter fallback;
+- criado `03-vs/scripts/painel/criar_atalho_painel.ps1` e `CRIAR_ATALHO_PAINEL_SERVIDOR.bat`;
+- modernizado `mrp_painel_controle.py` com `ttk` (tema/estilos/layout de cards e secoes).
+
+Arquivos criados:
+- MRP_PAINEL_SERVIDOR.cmd
+- MRP_PAINEL_SERVIDOR.vbs
+- CRIAR_ATALHO_PAINEL_SERVIDOR.bat
+- 03-vs/scripts/painel/criar_atalho_painel.ps1
+- 03-vs/relatorios/painel_admin/RELATORIO_FIX_LAUNCHER_PAINEL_v0.1.049.txt
+
+Arquivos alterados:
+- MRP_MENU_SISTEMA.bat
+- 03-vs/scripts/painel/mrp_painel_controle.py
+- 03-vs/scripts/painel/README.md
+- .gitignore
+- README.md
+- Readme.txt
+- 00-manual-dev/MANUAL_DEV_COMPLETO.txt
+- 00-manual-dev/RESUMO_OPERACIONAL_DO_SISTEMA.txt
+- 02-docs/docs/geral/status_geral.md
+
+Como abrir o painel por duplo clique:
+- clicar em `MRP_PAINEL_SERVIDOR.vbs`.
+
+Como criar atalho:
+- duplo clique em `CRIAR_ATALHO_PAINEL_SERVIDOR.bat`; ou
+- executar `03-vs/scripts/painel/criar_atalho_painel.ps1`.
+
+Validacoes executadas:
+- git status --short
+- git diff --check
+- py_compile dos scripts Python do painel
+- parse dos JSON example
+- confirmacao de ignore para config/local e logs/admin
+- confirmacao de portable preservado e script de rede em portable
+- varredura de mojibake, Thumbs.db e *.bak* versionavel
+
+Limitacoes:
+- painel continua local, sem exposicao web administrativa;
+- sem backend, sem banco, sem watchdog ativo, sem tarefa automatica ativa;
+- auto mode permanece preparatorio por arquivo local.
+
+Status final real:
+- painel admin local executavel por duplo clique com launcher dedicado;
+- menu legado mantido por compatibilidade;
+- frontend de usuario final preservado;
+- sistema ainda nao blindado.

@@ -1,4 +1,4 @@
-# Painel Admin Local - MRP_LOCAL (v0.1.049)
+# Painel Admin Local - MRP_LOCAL (v0.1.049 fix launcher)
 
 Painel administrativo local separado do `index.html` (frontend de usuario final).
 
@@ -11,6 +11,13 @@ Painel administrativo local separado do `index.html` (frontend de usuario final)
 
 - `mrp_painel_controle.py`: painel tkinter local do servidor.
 - `mrp_admin_auth_setup.py`: setup de credencial admin local com PBKDF2-HMAC-SHA256.
+- `criar_atalho_painel.ps1`: cria atalho na area de trabalho.
+
+Launchers na raiz:
+
+- `MRP_PAINEL_SERVIDOR.vbs` (principal, duplo clique)
+- `MRP_PAINEL_SERVIDOR.cmd` (diagnostico com log)
+- `CRIAR_ATALHO_PAINEL_SERVIDOR.bat` (opcional para criar atalho)
 
 ## Credencial admin local
 
@@ -54,3 +61,17 @@ Exemplo versionado:
 - sem expor painel administrativo pelo navegador;
 - sem senha em texto puro no Git;
 - sem log administrativo real no Git.
+
+## Como abrir por duplo clique
+
+1. Clique em `MRP_PAINEL_SERVIDOR.vbs`.
+2. Se Python estiver disponivel (`python` ou `py`), o painel abre.
+3. Em caso de erro, verifique `01-mrp/logs/admin/launcher_painel.log`.
+
+## Como criar atalho na area de trabalho
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\painel\criar_atalho_painel.ps1
+```
+
+Ou por duplo clique em `CRIAR_ATALHO_PAINEL_SERVIDOR.bat`.
