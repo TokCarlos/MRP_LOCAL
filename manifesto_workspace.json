@@ -1,16 +1,19 @@
 {
     "workspace":  "MRP_Workspace",
-    "versao":  "v0.1.036",
+    "versao":  "v0.1.043-preparacao-portabilidade",
     "pastas":  {
                    "01-mrp":  "Sistema funcional. Somente arquivos usados pelo sistema, agora ou futuramente.",
                    "02-docs":  "Documentacao, regras, historico, roadmap, inventarios e progresso.",
                    "03-vs":  "Pacotes, patches, historico e versoes geradas a partir do sistema funcional."
                },
     "padrao_nomes":  "Pastas raiz curtas, minusculas e ASCII para reduzir risco em CMD, BAT, PowerShell, Python, Git, ZIP e caminhos de rede.",
-    "status":  "EXECUCAO_AUTOMATICA_FRONTEND_ESTRUTURADA_SEM_ALTERAR_APP",
+    "status":  "PREPARACAO_PORTABILIDADE_INICIAL_SEM_BACKEND_SEM_BANCO",
     "alteracao_v0_1_002":  "Renomeadas as pastas raiz para 01-mrp, 02-docs e 03-vs conforme decisao do usuario.",
     "alteracao_v0_1_033":  "Corrigidos caminhos ativos de imagens, catalogo ATA, validacao de encoding, auditoria de limpeza e escape HTML preventivo em Produtos.",
-    "ultima_revisao_chatgpt":  "v0.1.036",
+    "ultima_revisao_chatgpt":  "v0.1.043-preparacao-portabilidade",
     "status_hotfix":  "corrige escapeHtml ausente em produtos_list.js; produtos_seed preservado",
-    "alteracao_v0_1_036":  "Criados scripts de servico Windows para frontend estatico em 8765 com bind 0.0.0.0, watchdog limitado e documentacao de infraestrutura."
+    "alteracao_v0_1_036":  "Criados scripts de servico Windows para frontend estatico em 8765 com bind 0.0.0.0, watchdog limitado e documentacao de infraestrutura.",
+    "base_funcional_anterior":  "v0.1.042 recovery",
+    "commit_base_funcional":  "8c649e6 - chore: recovery funcional e saneamento operacional do MRP local",
+    "alteracao_v0_1_043":  "Preparada estrutura inicial de portabilidade em 01-mrp, prechecks install/health, documentacao operacional atualizada e sem alteracao do frontend funcional."
 }

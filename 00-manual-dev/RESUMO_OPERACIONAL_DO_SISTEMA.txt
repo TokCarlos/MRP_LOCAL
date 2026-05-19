@@ -1,17 +1,71 @@
-MRP_LOCAL - RESUMO OPERACIONAL
+MRP_LOCAL - RESUMO OPERACIONAL DO SISTEMA
 
-Sistema local-first com frontend estatico em 01-mrp/front_end, porta 8765 e scripts de servico em 03-vs/scripts/servicos.
+Versao documental: v0.1.043-preparacao-portabilidade
+Base funcional anterior: v0.1.042 recovery
+Commit base funcional: 8c649e6 - chore: recovery funcional e saneamento operacional do MRP local
 
-Esta versao foi reconstruida usando X.zip como base funcional. O frontend e dados operacionais do projeto original foram preservados.
+O MRP_LOCAL e um sistema local-first em ambiente de teste. O frontend atual roda como site estatico em 01-mrp/front_end, usando porta 8765.
 
-Menu principal: MRP_MENU_SISTEMA.bat
-1 - Iniciar Sistema
-2 - Desativar Sistema
-3 - Reiniciar Sistema
-4 - Sair
+STATUS REAL
 
-O start usa caminho resolvido da raiz e inicia o servidor via pushd para funcionar tambem em UNC.
-O healthcheck valida index.html em http://127.0.0.1:8765/index.html.
-O stop encerra servidores Python http.server ligados a porta configurada.
+- Frontend validado pelo usuario: start OK, porta 8765 OK, healthcheck OK e sistema abrindo corretamente.
+- Ainda nao ha backend.
+- Ainda nao ha banco real.
+- O sistema ainda nao esta blindado.
+- Watchdog, tarefa automatica, reboot, queda de energia e rede ainda precisam validacao real.
 
-Ainda pendente de validacao real: tarefa Windows, reboot, queda de rede, queda de energia e watchdog continuo em maquina Windows.
+ARQUITETURA ATUAL
+
+- 01-mrp/front_end: frontend funcional atual.
+- 01-mrp/config: configuracao do ambiente.
+- 01-mrp/install: ganchos de instalador/preparador futuro.
+- 01-mrp/health: prechecks de saude.
+- 01-mrp/back_end: reservado para API futura.
+- 01-mrp/engine: reservado para regras de negocio futuras.
+- 01-mrp/adapters: reservado para adaptadores futuros.
+- 01-mrp/runtime, db, logs, tmp, backups: areas de runtime/estado local, sem dados reais versionados.
+
+PORTAS
+
+- 8765: frontend estatico atual.
+- 8000: porta antiga descontinuada.
+
+ACESSO
+
+- Local: http://localhost:8765
+- LAN: http://IP_LOCAL_DO_SERVIDOR:8765
+- Tailscale: http://IP_TAILSCALE_DO_SERVIDOR:8765
+
+COMANDOS IMPORTANTES
+
+Start:
+
+powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_start.ps1
+
+Stop:
+
+powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_stop.ps1
+
+Status:
+
+powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_status.ps1
+
+Healthcheck:
+
+powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_healthcheck.ps1
+
+Precheck de portabilidade:
+
+powershell -NoProfile -ExecutionPolicy Bypass -File .\01-mrp\install\mrp_install_precheck.ps1
+
+DECISOES
+
+- MEGA descontinuado.
+- Tailscale para acesso remoto.
+- Rede local como acesso principal.
+- Sistema local-first.
+- Backend e banco real somente em etapa futura.
+
+RISCO ATUAL
+
+O sistema abre e foi validado no frontend, mas ainda nao pode ser chamado de blindado ou homologado porque faltam testes reais de tarefa automatica, watchdog, reboot, queda de energia, queda de rede e pacote release.

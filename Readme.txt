@@ -1,62 +1,41 @@
+MRP_LOCAL - LEITURA RAPIDA
+
+Versao documental: v0.1.043-preparacao-portabilidade
+Base funcional: v0.1.042 recovery
+Commit base: 8c649e6 - chore: recovery funcional e saneamento operacional do MRP local
+
+Estado real:
+- frontend validado pelo usuario;
+- porta 8765 OK;
+- healthcheck OK;
+- sistema abrindo corretamente;
+- sem backend;
+- sem banco real;
+- ainda nao blindado.
+
+Comando antigo apenas historico:
 py -m http.server 8000 --bind 100.108.26.10 --directory "X:\01-mrp\front_end"
 
-http://100.108.26.10:8000/login.html
+Comando novo oficial DEV:
+py -m http.server 8765 --bind 0.0.0.0 --directory "X:\01-mrp\front_end"
 
-powershell -ExecutionPolicy Bypass -File "X:\03-vs\scripts\git_fechar_versao.ps1" -Versao "v0.1.014" -Mensagem "persistir protocolo de fechamento de tarefa"
+Scripts:
+- .\03-vs\scripts\servicos\mrp_frontend_start.ps1
+- .\03-vs\scripts\servicos\mrp_frontend_stop.ps1
+- .\03-vs\scripts\servicos\mrp_frontend_status.ps1
+- .\03-vs\scripts\servicos\mrp_frontend_healthcheck.ps1
 
+Precheck portabilidade:
+.\01-mrp\install\mrp_install_precheck.ps1
 
+Precheck saude:
+.\01-mrp\health\mrp_health_precheck.ps1
 
-net use X: "\\HOME-MACHINE\system_jpl" /persistent:yes
-Set-Location X:\
-git status
-git diff --stat
-git add .
-git commit -m "v0.1.013 - auditar e alinhar 01-mrp com arquitetura atual"
-git tag v0.1.013
-git push
-git push origin v0.1.013
-git status
-git tag
-
-//Exception
-git push origin v0.1.013
-
-
-
-
-Use as referências públicas abaixo apenas como base conceitual de layout responsivo:
-
-- https://preview.tabler.io/
-- https://adminlte.io/
-- https://getbootstrap.com/docs/5.0/examples/sidebars/
-- https://developer.mozilla.org/pt-BR/docs/Learn_web_development/Core/CSS_layout/Responsive_Design
-- https://web.dev/learn/design
-
-Objetivo:
-Analisar padrões de dashboard responsivo e aplicar no nosso front-end existente em X:\01-mrp\front_end.
-
-Regras:
-1. Não baixar template completo.
-2. Não instalar dependências.
-3. Não substituir identidade visual.
-4. Não trocar framework.
-5. Não copiar código grande de terceiros.
-6. Usar apenas como referência de comportamento:
-   - sidebar responsiva
-   - header responsivo
-   - cards fluidos
-   - tabelas com overflow-x
-   - login mobile
-   - breakpoints
-   - viewport
-   - body sem overflow lateral
-
-Aplicar no projeto:
-- criar/ajustar css/responsive.css
-- criar/ajustar js/responsive.js se necessário
-- garantir meta viewport em login.html e index.html
-- preservar layout atual
-- corrigir distorções em smartphone e zoom
-
-Registrar em:
-02-docs/docs/patch/versoes/v0.1.014/referencias_layout.md
+Pendencias antes de blindagem:
+- watchdog continuo;
+- tarefa Windows;
+- reboot;
+- queda de energia;
+- queda de rede;
+- logs em execucao prolongada;
+- pacote release separado do pacote dev.

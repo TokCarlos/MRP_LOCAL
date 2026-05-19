@@ -448,13 +448,13 @@ Abaixo está a lista consolidada para virar regra absoluta do projeto **MRP_LOCA
 
 200. Mojibake é bloqueador.
 
-201. `VersÃ£o` é erro.
+201. Exemplo de mojibake para "Versao" usando bytes UTF-8 lidos como ANSI e erro.
 
-202. `comeÃ§ar` é erro.
+202. Exemplo de mojibake para "comecar" usando bytes UTF-8 lidos como ANSI e erro.
 
-203. `AÃ‡O` é erro.
+203. Exemplo de mojibake para "ACO" visual com cedilha corrompida e erro.
 
-204. `CORRIMÃƒO` é erro.
+204. Exemplo de mojibake para "CORRIMAO" visual com til corrompido e erro.
 
 205. Texto visual pode ter acento correto.
 

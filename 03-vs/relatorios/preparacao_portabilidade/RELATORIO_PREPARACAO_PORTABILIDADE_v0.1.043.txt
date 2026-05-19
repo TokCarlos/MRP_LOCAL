@@ -1,0 +1,104 @@
+MRP_LOCAL - RELATORIO PREPARACAO PORTABILIDADE v0.1.043
+
+Versao documental: v0.1.043-preparacao-portabilidade
+Base funcional anterior: v0.1.042 recovery
+Commit base funcional: 8c649e6 - chore: recovery funcional e saneamento operacional do MRP local
+
+STATUS REAL
+
+- Frontend validado pelo usuario: start OK, porta 8765 OK, healthcheck OK e sistema abrindo corretamente.
+- Sistema ainda nao esta blindado.
+- Sistema ainda nao esta homologado.
+- Backend nao criado.
+- Banco real nao criado.
+- Watchdog, tarefa Windows, reboot, queda de energia e rede ainda precisam validacao real.
+
+ARQUIVOS/ESTRUTURA CRIADOS
+
+Dentro de 01-mrp:
+
+- adapters/README.md e .gitkeep
+- back_end/README.md e .gitkeep
+- backups/.gitkeep
+- data/README.md e .gitkeep
+- db/README.md e .gitkeep
+- docs_runtime/README.md e .gitkeep
+- engine/README.md e .gitkeep
+- health/README.md, .gitkeep e mrp_health_precheck.ps1
+- install/README.md, .gitkeep, PORTABILIDADE_FUTURA.md e mrp_install_precheck.ps1
+- logs/.gitkeep
+- runtime/README.md e .gitkeep
+- tmp/.gitkeep
+- tools/README.md e .gitkeep
+
+ARQUIVOS ALTERADOS
+
+- .gitignore
+- README.md
+- Readme.txt
+- REGRAS_MRP.txt
+- AGENTS.md
+- manifesto_workspace.json
+- 00-manual-dev/MANUAL_DEV_COMPLETO.txt
+- 00-manual-dev/RESUMO_OPERACIONAL_DO_SISTEMA.txt
+- 02-docs/docs/geral/REGRAS_MRP.txt
+- 02-docs/docs/geral/status_geral.md
+- 03-vs/scripts/validar_encoding.ps1
+- 03-vs/relatorios/encoding/relatorio_encoding.md
+- 03-vs/relatorios/encoding/relatorio_encoding.json
+- 03-vs/relatorios/correcao_ata_img/relatorio_correcao_ata_img.json
+- 01-mrp/front_end/data/produtos_seed.json
+
+OBSERVACAO SOBRE FRONTEND FUNCIONAL
+
+Nenhuma regra funcional do frontend foi alterada. A alteracao em produtos_seed.json foi restrita a correcao de encoding visual: CORRIMAO com til corrompido foi corrigido para texto visual correto em UTF-8.
+
+O QUE FOI PREPARADO AUTOMATICAMENTE
+
+- Estrutura inicial de portabilidade em 01-mrp.
+- Pastas reservadas para backend, engine, adapters, db e runtime futuro.
+- Precheck de saude do nucleo.
+- Precheck de instalacao futura.
+- Documentacao de portabilidade futura.
+- .gitignore ajustado para manter .gitkeep/README e ignorar logs/tmp/backups/db/runtime reais.
+- Documentacao operacional atualizada para v0.1.043.
+- Encoding legado corrigido nos pontos bloqueadores detectados.
+- Arquivo solto zero-byte git removido por ser lixo operacional untracked.
+
+O QUE FICOU MANUAL/PENDENTE
+
+- Instalar runtime portatil futuro.
+- Criar backend FastAPI futuro.
+- Criar PostgreSQL ou banco real futuro.
+- Criar instalador real.
+- Validar tarefa Windows em logon real.
+- Validar reboot.
+- Validar queda de energia.
+- Validar queda de rede.
+- Validar watchdog continuo em execucao prolongada.
+- Separar pacote DEV de pacote RELEASE.
+
+RISCOS PENDENTES
+
+- Sistema ainda nao esta blindado.
+- Unidade/caminho fisico atual ainda e ambiente de teste.
+- Logs reais existem localmente, mas estao ignorados no Git.
+- Porta 8765 ocupada/respondendo durante precheck indica servico ativo, nao erro.
+
+VALIDACOES EXECUTADAS
+
+- git status --short
+- git diff --check
+- 03-vs/scripts/validar_encoding.ps1
+- validacao JSON dos arquivos em 01-mrp/front_end/data e 01-mrp/config
+- 01-mrp/health/mrp_health_precheck.ps1
+- 01-mrp/install/mrp_install_precheck.ps1
+- busca de hardcoded X:, HOME-MACHINE e porta 8000 em scripts ativos novos
+- busca de Thumbs.db
+- verificacao de logs reais no status Git
+
+STATUS FINAL REAL
+
+A etapa prepara a base portatil inicial, mas nao homologa e nao blinda o sistema.
+
+Status: PREPARACAO_PORTABILIDADE_INICIAL_VALIDAVEL

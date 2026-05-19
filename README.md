@@ -1,84 +1,66 @@
 # MRP_LOCAL
 
-Projeto local MRP_LOCAL.
+Sistema local-first em ambiente de teste, com frontend web estatico validado localmente e preparacao inicial para portabilidade.
 
-## Estrutura oficial
+## Estado atual
 
-- `01-mrp`: sistema implementado/aprovado.
-- `02-docs`: documentacao, historico, regras e decisoes.
-- `03-vs`: versionamento, patches, testes, releases e preparacao.
+- Versao documental: `v0.1.043-preparacao-portabilidade`.
+- Base funcional anterior: `v0.1.042 recovery`.
+- Commit base: `8c649e6 - chore: recovery funcional e saneamento operacional do MRP local`.
+- Frontend validado pelo usuario: start OK, porta 8765 OK, healthcheck OK e sistema abrindo corretamente.
+- Backend: ainda nao criado.
+- Banco real: ainda nao criado.
+- Sistema: ainda nao blindado/homologado.
 
-## Regra central
+## Estrutura principal
 
-`01-mrp` nao e laboratorio.
+- `01-mrp`: nucleo executavel.
+- `02-docs`: documentacao e historico.
+- `03-vs`: scripts, relatorios, patches e versionamento.
+- `00-manual-dev`: manual e resumo operacional do dono/dev.
 
-O Codex deve trabalhar primeiro em `03-vs`, documentar em `02-docs` e so alterar `01-mrp` quando houver tarefa explicita de promocao aprovada.
+## Frontend atual
 
-## Fluxo Git/GitHub
+Diretorio:
 
-Antes de trabalhar:
-
-```powershell
-git pull --rebase
+```text
+01-mrp/front_end
 ```
 
-Durante o trabalho:
+Porta oficial:
 
-- Alterar `03-vs`.
-- Documentar em `02-docs`.
-- Nao alterar `01-mrp` sem aprovacao de promocao.
-
-Quando aprovado:
-
-- Promover para `01-mrp` com registro em `02-docs`.
-
-Ao concluir patch:
-
-```powershell
-git add .
-git commit -m "mensagem do patch"
-git tag vX.Y.Z
-git push
-git push --tags
+```text
+8765
 ```
 
-## Papel do GitHub
+Comando novo oficial em DEV:
 
-GitHub guarda historico tecnico, rastreabilidade e recuperacao, mas nao substitui `03-vs`.
+```powershell
+py -m http.server 8765 --bind 0.0.0.0 --directory "X:\01-mrp\front_end"
+```
 
-`03-vs` continua sendo a area oficial de versionamento, patches, testes, releases e preparacao antes de qualquer promocao para `01-mrp`.
+A porta antiga `8000` esta descontinuada e deve permanecer apenas como historico documental.
 
-## Status v0.1.006
+## Scripts principais
 
-`GIT_GITHUB_PREPARADO_DOCUMENTALMENTE`
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_start.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_stop.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_status.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_healthcheck.ps1
+```
 
-Nesta etapa nao foram criados backend, banco ou frontend, e `01-mrp` nao foi alterado.
+## Prechecks de portabilidade
 
-## Status v0.1.036
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\01-mrp\install\mrp_install_precheck.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\01-mrp\health\mrp_health_precheck.ps1
+```
 
-- Patch de infraestrutura local para execucao automatica do frontend estatico.
-- Porta oficial: `8765`.
-- Bind oficial: `0.0.0.0`.
-- Tailscale mantido para remoto e LAN como acesso principal.
-- Sem alteracao do frontend funcional.
-- Sem backend e sem banco nesta etapa.
+## Regras
 
-## Regra de dominio (v0.1.027)
+Antes de alterar o projeto, ler `REGRAS_MRP.txt`.
 
-- `EMPRESA` e dominio operacional interno: `JPL`, `AÇO`, `TCR`.
-- `GOV. RIO` nao e empresa; deve ser tratado como `cliente/orgao/origem de ata`.
-- Filtros de `EMPRESA` e `ATA/ORIGEM` devem permanecer separados.
-- Nome canonico da ATA/origem GOV/SEHIS: `SEHIS - GOV. RIO` (`sehis_gov_rio`).
+Nao criar backend, banco real ou nova regra funcional sem tarefa explicita.
 
-## Status v0.1.033
-
-Correção preventiva aplicada sem commit automático.
-
-- Frontend permanece em `MOCK_LOCAL`.
-- Backend real ainda não iniciado.
-- Banco real ainda não iniciado.
-- Produtos ativos: 147.
-- Empresas operacionais com dados: JPL e AÇO.
-- TCR permanece reservado para uso futuro, sem dados operacionais.
-- Validação v0.1.033: OK.
-- Fechamento Git: manual por solicitação do usuário.
+Nao chamar o sistema de blindado antes de validar watchdog, tarefa automatica, reboot, queda de energia, queda de rede, logs e healthcheck continuo.

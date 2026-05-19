@@ -1,33 +1,10 @@
 {
-    "status":  "ERRO",
-    "arquivos_analisados":  270,
+    "status":  "OK",
+    "arquivos_analisados":  295,
     "arquivos_ignorados":  0,
-    "ocorrencias_restantes":  4,
-    "erros_bloqueadores":  4,
+    "ocorrencias_restantes":  0,
+    "erros_bloqueadores":  0,
     "itens":  [
-                  {
-                      "tipo":  "POSSIVEL_MOJIBAKE",
-                      "arquivo":  "X:\\AGENTS.md",
-                      "detalhe":  "Padrao Unicode suspeito detectado: U+195.",
-                      "risco":  "ALTO_RISCO"
-                  },
-                  {
-                      "tipo":  "POSSIVEL_MOJIBAKE",
-                      "arquivo":  "X:\\01-mrp\\front_end\\data\\produtos_seed.json",
-                      "detalhe":  "Padrao Unicode suspeito detectado: U+195.",
-                      "risco":  "ALTO_RISCO"
-                  },
-                  {
-                      "tipo":  "POSSIVEL_MOJIBAKE",
-                      "arquivo":  "X:\\02-docs\\docs\\geral\\status_geral.md",
-                      "detalhe":  "Padrao Unicode suspeito detectado: U+195.",
-                      "risco":  "ALTO_RISCO"
-                  },
-                  {
-                      "tipo":  "POSSIVEL_MOJIBAKE",
-                      "arquivo":  "X:\\03-vs\\relatorios\\correcao_ata_img\\relatorio_correcao_ata_img.json",
-                      "detalhe":  "Padrao Unicode suspeito detectado: U+195.",
-                      "risco":  "ALTO_RISCO"
-                  }
+
               ]
 }

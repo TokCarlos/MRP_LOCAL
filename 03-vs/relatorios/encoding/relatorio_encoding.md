@@ -1,12 +1,9 @@
 # Relatorio de Encoding
 
-- Status: ERRO
-- Arquivos analisados: 270
-- Ocorrencias restantes: 4
-- Erros bloqueadores: 4
+- Status: OK
+- Arquivos analisados: 295
+- Ocorrencias restantes: 0
+- Erros bloqueadores: 0
 
 ## Itens
-- [POSSIVEL_MOJIBAKE] X:\AGENTS.md :: Padrao Unicode suspeito detectado: U+195.
-- [POSSIVEL_MOJIBAKE] X:\01-mrp\front_end\data\produtos_seed.json :: Padrao Unicode suspeito detectado: U+195.
-- [POSSIVEL_MOJIBAKE] X:\02-docs\docs\geral\status_geral.md :: Padrao Unicode suspeito detectado: U+195.
-- [POSSIVEL_MOJIBAKE] X:\03-vs\relatorios\correcao_ata_img\relatorio_correcao_ata_img.json :: Padrao Unicode suspeito detectado: U+195.
+- Nenhuma ocorrencia bloqueadora detectada.

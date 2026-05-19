@@ -105,3 +105,27 @@ _bkp/
 *.zip
 !03-vs/pacotes/.gitkeep
 !03-vs/releases/.gitkeep
+# MRP_LOCAL runtime 01-mrp - manter estrutura, ignorar conteudo real
+01-mrp/logs/**
+!01-mrp/logs/
+!01-mrp/logs/.gitkeep
+!01-mrp/logs/**/
+!01-mrp/logs/**/.gitkeep
+01-mrp/tmp/**
+!01-mrp/tmp/
+!01-mrp/tmp/.gitkeep
+01-mrp/backups/**
+!01-mrp/backups/
+!01-mrp/backups/.gitkeep
+01-mrp/db/**
+!01-mrp/db/
+!01-mrp/db/.gitkeep
+!01-mrp/db/README.md
+01-mrp/runtime/**
+!01-mrp/runtime/
+!01-mrp/runtime/.gitkeep
+!01-mrp/runtime/README.md
+01-mrp/cache/**
+01-mrp/**/Thumbs.db
+01-mrp/**/*.pyc
+01-mrp/**/__pycache__/

@@ -1,22 +1,175 @@
 MRP_LOCAL - MANUAL DEV COMPLETO
 
-Status: base recovery reconstruida a partir do X.zip funcional.
-O sistema ainda nao deve ser chamado de blindado sem validacao real em Windows.
+Versao documental: v0.1.043-preparacao-portabilidade
+Base funcional anterior: v0.1.042 recovery
+Commit base funcional: 8c649e6 - chore: recovery funcional e saneamento operacional do MRP local
 
-Raiz: configuravel/detectada pelo local dos scripts.
-Frontend: 01-mrp/front_end
-Porta: 8765
-Menu: MRP_MENU_SISTEMA.bat
-Config: 01-mrp/config/mrp_local.env.json
-Scripts: 03-vs/scripts/servicos
-Logs: 01-mrp/logs/servicos
+STATUS REAL
 
-Comandos:
-- iniciar: powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_start.ps1
-- parar: powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_stop.ps1
-- healthcheck: powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_healthcheck.ps1
-- watchdog uma vez: powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_watchdog.ps1 -Once
+- Frontend validado pelo usuario: start OK, porta 8765 OK, healthcheck OK e sistema abrindo corretamente.
+- Sistema ainda NAO esta blindado.
+- Sistema ainda NAO esta homologado.
+- Backend FastAPI ainda NAO existe.
+- Banco real ainda NAO existe.
+- Watchdog, tarefa automatica, reboot, queda de energia e rede ainda precisam validacao real.
 
-Regra operacional: antes de qualquer execucao grande, ler REGRAS_MRP.txt.
+REGRA OPERACIONAL
 
-Instalador futuro: ver 02-docs/docs/infraestrutura/empacotamento_instalador.md.
+Antes de qualquer alteracao relevante, ler REGRAS_MRP.txt.
+
+O sistema e local-first. Caminhos fisicos do ambiente atual podem aparecer em documentacao, config e scripts de ambiente, mas nao devem virar regra de negocio.
+
+ESTRUTURA OFICIAL
+
+Raiz do projeto em ambiente DEV atual: X:\
+
+Pastas principais:
+
+- 01-mrp: nucleo executavel do sistema.
+- 02-docs: documentacao, regras, historico e auditoria.
+- 03-vs: scripts, relatorios, patches, snapshots e releases.
+- 00-manual-dev: documentos operacionais do dono/dev.
+
+Estrutura preparada em 01-mrp:
+
+- config: configuracoes do ambiente.
+- runtime: reservado para Python/Node portatil futuro.
+- tools: ferramentas auxiliares futuras.
+- data: dados locais futuros do nucleo.
+- db: reservado para SQLite/PostgreSQL futuro, sem banco real agora.
+- logs: logs reais de execucao, nao versionar conteudo real.
+- tmp: temporarios, nao versionar conteudo real.
+- backups: backups reais, nao versionar conteudo real.
+- front_end: frontend atual funcional.
+- back_end: reservado para backend futuro.
+- engine: reservado para motores de regra de negocio.
+- adapters: reservado para adaptadores.
+- install: prechecks e ganchos de instalador futuro.
+- health: prechecks de saude do ambiente.
+- docs_runtime: documentacao do nucleo transportavel.
+
+FRONTEND ATUAL
+
+Diretorio funcional:
+
+01-mrp/front_end
+
+Porta oficial:
+
+8765
+
+Bind operacional:
+
+0.0.0.0
+
+Comando antigo apenas historico:
+
+py -m http.server 8000 --bind 100.108.26.10 --directory "X:\01-mrp\front_end"
+
+Comando novo oficial em DEV:
+
+py -m http.server 8765 --bind 0.0.0.0 --directory "X:\01-mrp\front_end"
+
+Scripts atuais de servico:
+
+- 03-vs/scripts/servicos/mrp_frontend_start.ps1
+- 03-vs/scripts/servicos/mrp_frontend_stop.ps1
+- 03-vs/scripts/servicos/mrp_frontend_status.ps1
+- 03-vs/scripts/servicos/mrp_frontend_healthcheck.ps1
+- 03-vs/scripts/servicos/mrp_frontend_watchdog.ps1
+- 03-vs/scripts/servicos/mrp_frontend_task_install.ps1
+- 03-vs/scripts/servicos/mrp_frontend_task_uninstall.ps1
+- 03-vs/scripts/servicos/mrp_firewall_8765.ps1
+
+Comandos principais:
+
+Iniciar:
+
+powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_start.ps1
+
+Parar:
+
+powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_stop.ps1
+
+Status:
+
+powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_status.ps1
+
+Healthcheck:
+
+powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_frontend_healthcheck.ps1
+
+PRECHECK DE PORTABILIDADE
+
+Precheck de instalacao futura:
+
+powershell -NoProfile -ExecutionPolicy Bypass -File .\01-mrp\install\mrp_install_precheck.ps1
+
+Precheck de saude do nucleo:
+
+powershell -NoProfile -ExecutionPolicy Bypass -File .\01-mrp\health\mrp_health_precheck.ps1
+
+Esses scripts nao instalam nada, nao criam banco, nao iniciam backend e nao alteram dados reais.
+
+ACESSO
+
+Local no servidor:
+
+http://localhost:8765
+
+Rede local:
+
+http://IP_LOCAL_DO_SERVIDOR:8765
+
+Tailscale:
+
+http://IP_TAILSCALE_DO_SERVIDOR:8765
+
+DECISOES
+
+- MEGA descontinuado.
+- Tailscale sera usado para acesso remoto.
+- Rede local e o acesso principal.
+- Sistema deve ser local-first.
+- Backend FastAPI fica para etapa futura.
+- PostgreSQL fica para etapa futura.
+- O sistema ainda nao deve ser chamado de blindado.
+
+REGRAS DE VERSIONAMENTO
+
+Antes de commit:
+
+- validar encoding;
+- validar lixo operacional;
+- validar ausencia de logs reais versionaveis;
+- validar ausencia de Thumbs.db;
+- validar ausencia de banco real;
+- validar documentacao minima;
+- validar que frontend funcional nao foi alterado sem escopo.
+
+CHECKLIST DE NOVA MAQUINA
+
+1. Copiar ou clonar o projeto.
+2. Conferir estrutura 01-mrp, 02-docs, 03-vs e 00-manual-dev.
+3. Conferir Python ou runtime configurado.
+4. Rodar precheck de instalacao.
+5. Rodar precheck de saude.
+6. Iniciar frontend.
+7. Testar http://localhost:8765.
+8. Liberar firewall 8765 quando necessario.
+9. Testar acesso por IP local.
+10. Testar Tailscale quando aplicavel.
+11. Validar start/stop/status/healthcheck.
+12. Somente depois avaliar tarefa automatica/watchdog/reboot.
+
+PENDENCIAS
+
+- Validar tarefa Windows em ambiente real.
+- Validar reboot.
+- Validar queda de energia.
+- Validar queda de rede.
+- Validar watchdog continuo.
+- Corrigir ou justificar qualquer encoding legado restante.
+- Separar pacote DEV de pacote RELEASE.
+- Definir backend FastAPI futuro.
+- Definir banco real futuro.

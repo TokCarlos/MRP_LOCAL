@@ -34,7 +34,9 @@ function Write-Utf8NoBom {
         [string]$Text
     )
 
-    [System.IO.File]::WriteAllText($Path, $Text, $Utf8NoBom)
+    $normalized = (($Text -split "\r?\n") | ForEach-Object { $_.TrimEnd() }) -join "`n"
+    $normalized = $normalized.TrimEnd() + "`n"
+    [System.IO.File]::WriteAllText($Path, $normalized, $Utf8NoBom)
 }
 
 function Normalize-Text {

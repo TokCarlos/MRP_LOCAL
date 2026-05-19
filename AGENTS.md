@@ -1,4 +1,4 @@
-# AGENTS.md â€” MRP_LOCAL
+# AGENTS.md — MRP_LOCAL
 
 Estrutura oficial:
 
@@ -19,7 +19,7 @@ Regras obrigatorias:
 Status atual:
 
 - Versao: v0.1.036
-- Fase: frontend visual em MOCK_LOCAL / correÃ§Ã£o preventiva / sem backend real
+- Fase: frontend visual em MOCK_LOCAL / correção preventiva / sem backend real
 
 ## PROTOCOLO OBRIGATORIO DE FECHAMENTO AUTOMATICO
 
