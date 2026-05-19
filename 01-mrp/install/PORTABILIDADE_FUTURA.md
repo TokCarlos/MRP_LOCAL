@@ -1,6 +1,6 @@
 # Portabilidade futura do MRP_LOCAL
 
-Status: preparacao inicial, sem instalador real.
+Status: preparacao pos-CIMASP, sem instalador real.
 
 ## Objetivo
 
@@ -38,6 +38,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File ".\01-mrp\install\mrp_instal
 ```
 
 O precheck verifica estrutura, config, `front_end/index.html`, porta, Python/runtime e permissao de escrita em pastas operacionais.
+O precheck e passivo: nao instala dependencias, nao cria backend e nao cria banco.
 
 ## Porta e firewall
 
@@ -48,6 +49,7 @@ Firewall deve liberar entrada TCP na rede privada. A regra atual fica nos script
 ## Runtime
 
 Nesta etapa nada e baixado. O runtime futuro deve ficar em `01-mrp/runtime` e nao deve misturar dependencias com codigo-fonte.
+Python portable e apenas direcao futura; nao foi ativado ainda.
 
 ## Atalho e menu
 
@@ -56,6 +58,13 @@ O instalador futuro pode criar atalho para iniciar o menu ou abrir a URL local d
 ## Tarefa automatica futura
 
 A tarefa Windows deve iniciar o watchdog ou servico equivalente. Ainda precisa validacao real de logon, reboot e queda de energia.
+
+## Estado real da etapa v0.1.045
+
+- frontend funcional preservado na porta 8765;
+- backend FastAPI ainda nao operacional;
+- PostgreSQL ainda nao instalado/configurado pelo sistema;
+- sistema ainda nao pode ser chamado de blindado/homologado.
 
 ## Start, stop e healthcheck
 

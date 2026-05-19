@@ -18,8 +18,9 @@ Regras obrigatorias:
 
 Status atual:
 
-- Versao: v0.1.036
-- Fase: frontend visual em MOCK_LOCAL / correção preventiva / sem backend real
+- Versao: v0.1.045-preparacao-portabilidade-pos-cimasp
+- Base anterior: v0.1.044 imagens CIMASP (commit 60e5d6e)
+- Fase: frontend funcional preservado / sem backend real / sem banco real / preparacao de portabilidade
 
 ## PROTOCOLO OBRIGATORIO DE FECHAMENTO AUTOMATICO
 

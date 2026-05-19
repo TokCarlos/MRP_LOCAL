@@ -2,24 +2,25 @@
 
 ## Versao documental atual
 
-`v0.1.044-catalogacao-imagens-cimasp`
+`v0.1.045-preparacao-portabilidade-pos-cimasp`
 
 ## Base funcional anterior
 
-`v0.1.042 recovery`
+`v0.1.044 imagens CIMASP`
 
 Commit base funcional:
 
-`8c649e6 - chore: recovery funcional e saneamento operacional do MRP local`
+`60e5d6e - v0.1.044 - Cataloga imagens CIMASP`
 
 ## Estado real atual
 
 - Frontend validado pelo usuario: start OK, porta 8765 OK, healthcheck OK e sistema abrindo corretamente.
 - O sistema ainda NAO esta blindado.
 - O sistema ainda NAO esta homologado.
-- Ainda nao ha backend FastAPI.
+- Ainda nao ha backend FastAPI funcional.
 - Ainda nao ha banco real.
-- Nao ha PostgreSQL criado nesta etapa.
+- Nao ha PostgreSQL instalado/configurado pelo sistema.
+- Nao ha Python portable baixado/ativado pelo sistema.
 - Nao ha instalador real criado nesta etapa.
 
 ## Pendencias de blindagem
@@ -46,7 +47,7 @@ Ainda precisam validacao real:
 - Acesso principal: rede local.
 - MEGA: descontinuado como arquitetura.
 
-## Portabilidade v0.1.043
+## Portabilidade v0.1.045
 
 Preparada estrutura inicial dentro de `01-mrp` para futuro empacotamento/instalador:
 
@@ -79,12 +80,19 @@ Esses scripts verificam estrutura, config, frontend/index, porta, Python/runtime
 
 A raiz fisica atual de desenvolvimento pode existir em documentacao, config e scripts de ambiente, mas nao pode virar regra de negocio. Scripts novos de portabilidade resolvem a raiz dinamicamente pela propria posicao.
 
-## Status final desta etapa
-
-`PREPARACAO_PORTABILIDADE_INICIAL`
-
-## Catalogacao imagens CIMASP v0.1.044
+## Etapa anterior concluida: v0.1.044
 
 - ATA CIMASP 029/2025 migrada de previews SVG DEMO para PNG REAL_ATA.
 - Variacoes de itens registradas com sufixo `-1` quando havia imagem adicional no ZIP.
 - Nomes oficiais preservados a partir dos registros existentes.
+
+## Etapa atual em andamento: v0.1.045
+
+- saneamento documental pos-CIMASP;
+- revisao de hardcoded em scripts ativos;
+- preparacao de ganchos para Python portable/FastAPI/PostgreSQL sem ativacao;
+- manutencao do frontend funcional como base oficial.
+
+## Status final desta etapa
+
+`PREPARACAO_PORTABILIDADE_POS_CIMASP_EM_EXECUCAO`

@@ -4,6 +4,7 @@ $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $MrpRoot = Resolve-Path (Join-Path $ScriptDir "..")
 $RepoRoot = Resolve-Path (Join-Path $MrpRoot "..")
 $HealthScript = Join-Path $MrpRoot "health\mrp_health_precheck.ps1"
+$PassivePrecheckScript = Join-Path $MrpRoot "install\precheck_instalacao.ps1"
 
 Write-Host "MRP_INSTALL_PRECHECK"
 Write-Host "Este script nao instala dependencias, nao cria banco e nao inicia backend."
@@ -14,6 +15,15 @@ if (!(Test-Path $HealthScript)) {
     Write-Host "ERROR: health/mrp_health_precheck.ps1 ausente"
     exit 1
 }
+if (!(Test-Path $PassivePrecheckScript)) {
+    Write-Host "ERROR: install/precheck_instalacao.ps1 ausente"
+    exit 1
+}
+
+& powershell -NoProfile -ExecutionPolicy Bypass -File $PassivePrecheckScript
+$passiveExit = $LASTEXITCODE
+Write-Host "PASSIVE_PRECHECK_EXIT=$passiveExit"
+if ($passiveExit -ne 0) { exit $passiveExit }
 
 & powershell -NoProfile -ExecutionPolicy Bypass -File $HealthScript
 $healthExit = $LASTEXITCODE

@@ -1,11 +1,14 @@
 # back_end
 
-Reservado para o backend futuro do MRP_LOCAL.
+Direcao futura: backend FastAPI local/rede para o MRP_LOCAL.
 
-Status atual: reservado. Nao criar FastAPI nesta etapa.
+Estado atual:
+- backend ainda nao e operacional;
+- frontend atual ainda nao depende de backend;
+- esta etapa v0.1.045 nao cria API funcional.
 
 Regras:
-- nao implementar API agora;
-- nao criar banco agora;
-- manter regras de negocio fora de scripts de ambiente;
-- futura API deve usar configuracao e nao depender de caminho fisico fixo.
+- nao implementar endpoints reais nesta etapa;
+- nao criar banco real nesta etapa;
+- concentrar validacao e persistencia na API futura, nao no frontend;
+- usar configuracao de ambiente e evitar caminho fisico fixo como regra de negocio.

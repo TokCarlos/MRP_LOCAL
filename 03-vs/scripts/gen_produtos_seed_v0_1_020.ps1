@@ -1,8 +1,22 @@
 param(
-    [string]$PromptPath = "C:\Users\carlo\Downloads\PROMPT_CODEX_MRP_PRODUTOS_v0_1_020_REV_CIMASP (1).txt"
+    [string]$PromptPath = "",
+    [switch]$LegadoConfirmado
 )
 
 $ErrorActionPreference = "Stop"
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$RepoRoot = [System.IO.Path]::GetFullPath((Join-Path $ScriptDir "..\.."))
+if ($env:MRP_LOCAL_ROOT) {
+    $RepoRoot = [System.IO.Path]::GetFullPath($env:MRP_LOCAL_ROOT)
+}
+
+if (-not $LegadoConfirmado) {
+    throw "Script legado. Use -LegadoConfirmado apenas para reproducao historica controlada."
+}
+
+if ([string]::IsNullOrWhiteSpace($PromptPath)) {
+    throw "Informe -PromptPath para execucao legada controlada."
+}
 
 function Normalize-Key([string]$value) {
     $v = $value.Trim()
@@ -69,7 +83,7 @@ $lines = $tsvBlock -split "`r?`n" | Where-Object { $_.Trim() -ne "" }
 if ($lines.Count -lt 2) { throw "TSV sem dados." }
 
 $dataLines = $lines[1..($lines.Count - 1)]
-$baseDir = "X:\01-mrp\front_end"
+$baseDir = Join-Path $RepoRoot "01-mrp\front_end"
 $assetsBase = Join-Path $baseDir "assets\produtos"
 New-Item -ItemType Directory -Path $assetsBase -Force | Out-Null
 
@@ -153,7 +167,7 @@ foreach ($line in $dataLines) {
 
 if ($seed.Count -ne 147) { throw "Quantidade invalida: $($seed.Count). Esperado: 147" }
 
-$jsonPath = "X:\01-mrp\front_end\data\produtos_seed.json"
+$jsonPath = Join-Path $RepoRoot "01-mrp\front_end\data\produtos_seed.json"
 $seed | ConvertTo-Json -Depth 10 | Set-Content -Path $jsonPath -Encoding UTF8
 
 Write-Output "SEED_OK=$($seed.Count)"

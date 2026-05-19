@@ -1,0 +1,15 @@
+{
+  "version": "v0.1.045",
+  "generated_at": "EXEMPLO",
+  "status": "example",
+  "pending": [
+    {
+      "id": "python_portable_missing",
+      "level": "RECOMENDADO",
+      "title": "Python portable ainda nao preparado",
+      "required_for_current_run": false,
+      "blocks_execution": false,
+      "message": "Necessario apenas quando backend FastAPI for ativado."
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+# Planejamento base futuro do backend (nao instalar nesta etapa).
+# Esta etapa v0.1.045 nao ativa backend.
+
+# fastapi==0.115.*
+# uvicorn[standard]==0.30.*

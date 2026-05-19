@@ -1,15 +1,18 @@
 # MRP_LOCAL
 
-Sistema local-first em ambiente de teste, com frontend web estatico validado localmente e preparacao inicial para portabilidade.
+Sistema local-first em ambiente de teste, com frontend web estatico funcional e etapa de preparacao de portabilidade pos-CIMASP.
 
 ## Estado atual
 
-- Versao documental: `v0.1.043-preparacao-portabilidade`.
-- Base funcional anterior: `v0.1.042 recovery`.
-- Commit base: `8c649e6 - chore: recovery funcional e saneamento operacional do MRP local`.
+- Versao documental: `v0.1.045-preparacao-portabilidade-pos-cimasp`.
+- Base anterior concluida: `v0.1.044 imagens CIMASP`.
+- Commit base da etapa anterior: `60e5d6e - v0.1.044 - Cataloga imagens CIMASP`.
 - Frontend validado pelo usuario: start OK, porta 8765 OK, healthcheck OK e sistema abrindo corretamente.
-- Backend: ainda nao criado.
+- Backend real: ainda nao criado.
 - Banco real: ainda nao criado.
+- PostgreSQL: ainda nao instalado/configurado pelo sistema.
+- Python portable: ainda nao baixado/ativado pelo sistema.
+- FastAPI funcional: ainda nao criada.
 - Sistema: ainda nao blindado/homologado.
 
 ## Estrutura principal
@@ -33,13 +36,18 @@ Porta oficial:
 8765
 ```
 
-Comando novo oficial em DEV:
+Operacao principal:
 
-```powershell
-py -m http.server 8765 --bind 0.0.0.0 --directory "X:\01-mrp\front_end"
-```
+- `MRP_MENU_SISTEMA.bat`
+- `03-vs/scripts/servicos/mrp_frontend_start.ps1`
+- `03-vs/scripts/servicos/mrp_frontend_stop.ps1`
+- `03-vs/scripts/servicos/mrp_frontend_status.ps1`
+- `03-vs/scripts/servicos/mrp_frontend_healthcheck.ps1`
 
-A porta antiga `8000` esta descontinuada e deve permanecer apenas como historico documental.
+Observacao tecnica:
+
+- `py -m http.server` pode ser usado somente para diagnostico pontual, nao como operacao principal.
+- A porta antiga `8000` esta descontinuada e deve permanecer apenas como historico documental.
 
 ## Scripts principais
 

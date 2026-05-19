@@ -1,8 +1,8 @@
 MRP_LOCAL - RESUMO OPERACIONAL DO SISTEMA
 
-Versao documental: v0.1.043-preparacao-portabilidade
-Base funcional anterior: v0.1.042 recovery
-Commit base funcional: 8c649e6 - chore: recovery funcional e saneamento operacional do MRP local
+Versao documental: v0.1.045-preparacao-portabilidade-pos-cimasp
+Base anterior concluida: v0.1.044 imagens CIMASP
+Commit base anterior: 60e5d6e - v0.1.044 - Cataloga imagens CIMASP
 
 O MRP_LOCAL e um sistema local-first em ambiente de teste. O frontend atual roda como site estatico em 01-mrp/front_end, usando porta 8765.
 
@@ -11,6 +11,9 @@ STATUS REAL
 - Frontend validado pelo usuario: start OK, porta 8765 OK, healthcheck OK e sistema abrindo corretamente.
 - Ainda nao ha backend.
 - Ainda nao ha banco real.
+- Ainda nao ha PostgreSQL instalado pelo sistema.
+- Ainda nao ha Python portable ativado pelo sistema.
+- Ainda nao ha FastAPI funcional.
 - O sistema ainda nao esta blindado.
 - Watchdog, tarefa automatica, reboot, queda de energia e rede ainda precisam validacao real.
 
@@ -57,6 +60,19 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp
 Precheck de portabilidade:
 
 powershell -NoProfile -ExecutionPolicy Bypass -File .\01-mrp\install\mrp_install_precheck.ps1
+
+Operacao principal:
+
+- MRP_MENU_SISTEMA.bat
+- 03-vs/scripts/servicos/mrp_frontend_start.ps1
+- 03-vs/scripts/servicos/mrp_frontend_stop.ps1
+- 03-vs/scripts/servicos/mrp_frontend_status.ps1
+- 03-vs/scripts/servicos/mrp_frontend_healthcheck.ps1
+
+Comando py/http.server:
+
+- uso somente para diagnostico tecnico;
+- nao e operacao principal.
 
 DECISOES
 

@@ -1,0 +1,158 @@
+RELATORIO PREPARACAO PORTABILIDADE
+
+Versao da etapa: v0.1.045-preparacao-portabilidade-pos-cimasp
+Base anterior: v0.1.044 imagens CIMASP
+Commit base: 60e5d6e
+
+Objetivo:
+- executar saneamento documental, estrutural e preparatorio pos-CIMASP;
+- manter frontend funcional atual;
+- preparar base para futura portabilidade/instalacao sem ativar backend, banco ou runtime novo.
+
+Escopo:
+- atualizacao documental para estado real v0.1.045;
+- revisao de scripts ativos com hardcoded indevido;
+- revisao estrutural de diretorios duplicados em 01-mrp;
+- criacao de ganchos documentais para runtime/python, back_end e db;
+- criacao de modelo de pendencias CRITICO/OPCIONAL/RECOMENDADO;
+- revisao de gitignore e limpeza de lixo operacional, se houver.
+
+Fora de escopo:
+- criar backend real;
+- criar API FastAPI funcional;
+- criar banco real;
+- instalar PostgreSQL;
+- baixar/ativar Python portable;
+- alterar regra funcional do frontend;
+- remover assets/imagens CIMASP da v0.1.044.
+
+Riscos:
+- alteracao indevida em documento operacional ativo;
+- hardcoded em scripts legados nao documentados;
+- ruido de encoding em arquivos antigos.
+
+Arquivos previstos para revisao:
+- AGENTS.md
+- README.md
+- Readme.txt
+- 00-manual-dev/MANUAL_DEV_COMPLETO.txt
+- 00-manual-dev/RESUMO_OPERACIONAL_DO_SISTEMA.txt
+- 00-manual-dev/MRP_LOCAL_MANUAL_DEV.md
+- 02-docs/docs/geral/status_geral.md
+- 01-mrp/install/PORTABILIDADE_FUTURA.md
+- 03-vs/scripts/git_fechar_versao.ps1
+- 03-vs/scripts/gen_produtos_seed_v0_1_020.ps1
+- .gitignore
+
+Status inicial:
+- precheck executado antes de alteracoes;
+- base limpa confirmada;
+- commit base da etapa anterior confirmado;
+- etapa v0.1.045 iniciada a partir da v0.1.044.
+
+Arquivos alterados:
+- .gitignore
+- AGENTS.md
+- README.md
+- Readme.txt
+- 00-manual-dev/MANUAL_DEV_COMPLETO.txt
+- 00-manual-dev/MRP_LOCAL_MANUAL_DEV.md
+- 00-manual-dev/RESUMO_OPERACIONAL_DO_SISTEMA.txt
+- 01-mrp/back_end/README.md
+- 01-mrp/db/README.md
+- 01-mrp/docs_runtime/README.md
+- 01-mrp/install/PORTABILIDADE_FUTURA.md
+- 01-mrp/install/mrp_install_precheck.ps1
+- 01-mrp/install/precheck_instalacao.ps1
+- 02-docs/docs/geral/status_geral.md
+- 03-vs/scripts/gen_produtos_seed_v0_1_020.ps1
+- 03-vs/scripts/git_fechar_versao.ps1
+
+Arquivos criados:
+- 01-mrp/runtime/python/.gitkeep
+- 01-mrp/runtime/python/README.md
+- 01-mrp/back_end/app/README.md
+- 01-mrp/back_end/requirements.base.txt
+- 01-mrp/db/migrations/README.md
+- 01-mrp/db/backups/README.md
+- 01-mrp/install/PENDENCIAS_MODELO.md
+- 01-mrp/install/pending_install.example.json
+- 03-vs/relatorios/preparacao_portabilidade/RELATORIO_PREPARACAO_PORTABILIDADE_v0.1.045.txt
+
+Arquivos removidos:
+- 01-mrp/backend/.gitkeep
+- 01-mrp/database/.gitkeep
+- 01-mrp/scripts/.gitkeep
+
+Ajustes documentais:
+- status atualizado para v0.1.045 em AGENTS, README, Readme.txt, manuais e status_geral;
+- v0.1.044 registrada como etapa anterior concluida (CIMASP);
+- operacao principal reforcada por menu e scripts de servico;
+- uso de py/http.server mantido apenas como diagnostico tecnico;
+- MRP_LOCAL_MANUAL_DEV.md marcado como LEGADO/HISTORICO.
+
+Ajustes estruturais:
+- removidos diretorios duplicados vazios backend/database/scripts em 01-mrp;
+- mantida estrutura oficial (config/runtime/tools/data/db/logs/tmp/backups/front_end/back_end/engine/adapters/install/health/docs_runtime);
+- nenhum asset CIMASP removido ou alterado.
+
+Decisoes sobre Python portable:
+- direcao futura registrada em 01-mrp/runtime/python/README.md;
+- nao baixado e nao ativado nesta etapa.
+
+Decisoes sobre FastAPI:
+- direcao futura registrada em 01-mrp/back_end/README.md e 01-mrp/back_end/app/README.md;
+- requirements.base.txt criado apenas como planejamento comentado;
+- nenhum endpoint real criado.
+
+Decisoes sobre PostgreSQL:
+- direcao futura registrada em 01-mrp/db/README.md;
+- estrutura documental de migracoes e backups criada;
+- nenhum banco real instalado ou configurado.
+
+Modelo de pendencias criado:
+- 01-mrp/install/PENDENCIAS_MODELO.md
+- 01-mrp/install/pending_install.example.json
+- classificacao: CRITICO, OPCIONAL, RECOMENDADO.
+
+Pendencias manuais:
+- validar watchdog continuo por tempo prolongado;
+- validar tarefa Windows em operacao real;
+- validar reboot, queda de energia e queda de rede em ciclo real.
+
+Pendencias criticas futuras:
+- quando backend real for ativado: runtime Python validado, banco obrigatorio acessivel e migracao obrigatoria controlada.
+
+Pendencias opcionais/recomendadas futuras:
+- firewall LAN em cenario especifico;
+- atalho operacional;
+- backup automatico;
+- log rotation;
+- validacao Tailscale de longa duracao.
+
+Validacoes executadas:
+- git status --short
+- git diff --check
+- node parse de 01-mrp/install/pending_install.example.json
+- node validacao de 01-mrp/front_end/data/produtos_seed.json (total 163, CIMASP 90, sem duplicidades, sem imagem faltante)
+- precheck passivo: 01-mrp/install/precheck_instalacao.ps1 (0 CRITICO, 1 OPCIONAL, 0 RECOMENDADO)
+- checagem de hardcoded em scripts revisados (sem ocorrencia de X:\ ou \\HOME-MACHINE nos arquivos alvo)
+- checagem de mojibake em arquivos ativos alterados (sem ocorrencia)
+- checagem de lixo operacional (Thumbs.db=0, pyc=0, __pycache__=0, pending_install.json real ausente)
+- validacao basica frontend: index.html presente e sintaxe JS valida em arquivos principais.
+
+Falhas encontradas:
+- nenhuma falha critica;
+- 1 alerta OPCIONAL no precheck: porta 8765 em uso (processo ativo esperado do frontend).
+
+Status final real:
+- etapa v0.1.045 concluida em modo preparatorio;
+- frontend funcional preservado;
+- base limpa para retomada do desenvolvimento.
+
+Confirmacao de nao ativacao:
+- backend real NAO ativado;
+- banco real NAO ativado;
+- runtime Python portable NAO ativado;
+- FastAPI funcional NAO criada;
+- PostgreSQL NAO instalado/configurado pelo sistema.

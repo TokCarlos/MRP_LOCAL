@@ -1,3 +1,10 @@
+# LEGADO/HISTORICO - MRP_LOCAL_MANUAL_DEV.md
+
+Este arquivo e legado/historico e nao e o manual operacional principal atual.
+Manuais principais atuais:
+- 00-manual-dev/MANUAL_DEV_COMPLETO.txt
+- 00-manual-dev/RESUMO_OPERACIONAL_DO_SISTEMA.txt
+
 # MRP_LOCAL - Manual do Dono/Dev
 
 Este manual é o guia operacional do projeto MRP_LOCAL para o dono/dev do sistema.

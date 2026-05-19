@@ -1,8 +1,8 @@
 MRP_LOCAL - LEITURA RAPIDA
 
-Versao documental: v0.1.043-preparacao-portabilidade
-Base funcional: v0.1.042 recovery
-Commit base: 8c649e6 - chore: recovery funcional e saneamento operacional do MRP local
+Versao documental: v0.1.045-preparacao-portabilidade-pos-cimasp
+Base anterior concluida: v0.1.044 imagens CIMASP
+Commit base anterior: 60e5d6e - v0.1.044 - Cataloga imagens CIMASP
 
 Estado real:
 - frontend validado pelo usuario;
@@ -11,13 +11,21 @@ Estado real:
 - sistema abrindo corretamente;
 - sem backend;
 - sem banco real;
+- sem PostgreSQL instalado pelo sistema;
+- sem Python portable ativado;
+- sem FastAPI funcional;
 - ainda nao blindado.
 
-Comando antigo apenas historico:
-py -m http.server 8000 --bind 100.108.26.10 --directory "X:\01-mrp\front_end"
+Operacao principal:
+- MRP_MENU_SISTEMA.bat
+- .\03-vs\scripts\servicos\mrp_frontend_start.ps1
+- .\03-vs\scripts\servicos\mrp_frontend_stop.ps1
+- .\03-vs\scripts\servicos\mrp_frontend_status.ps1
+- .\03-vs\scripts\servicos\mrp_frontend_healthcheck.ps1
 
-Comando novo oficial DEV:
-py -m http.server 8765 --bind 0.0.0.0 --directory "X:\01-mrp\front_end"
+Comando py/http.server:
+- apenas diagnostico tecnico;
+- nao usar como operacao principal.
 
 Scripts:
 - .\03-vs\scripts\servicos\mrp_frontend_start.ps1

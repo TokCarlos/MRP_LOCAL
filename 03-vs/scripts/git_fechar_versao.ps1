@@ -9,6 +9,11 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+$ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$RepoRoot = [System.IO.Path]::GetFullPath((Join-Path $ScriptDir "..\.."))
+if ($env:MRP_LOCAL_ROOT) {
+    $RepoRoot = [System.IO.Path]::GetFullPath($env:MRP_LOCAL_ROOT)
+}
 
 function Stop-ComAviso {
     param([string]$MensagemErro)
@@ -24,6 +29,11 @@ function Get-CaminhosVersionaveis {
     return $arquivos | Where-Object { $_ } | Sort-Object -Unique
 }
 
+function Resolve-CaminhoFisico {
+    param([string]$Relativo)
+    return [System.IO.Path]::GetFullPath((Join-Path $RepoRoot $Relativo))
+}
+
 function Test-ArquivoProibido {
     param([string]$Caminho)
 
@@ -35,15 +45,22 @@ function Test-ArquivoProibido {
     if ($normalizado -match "(^|/)node_modules(/|$)") { return $true }
     if ($normalizado -match "(^|/)__pycache__(/|$)") { return $true }
     if ($normalizado -match "(^|/)\.codex(/|$)") { return $true }
+    if ($normalizado -match "(^|/)thumbs\.db$") { return $true }
+    if ($normalizado -match "(^|/)01-mrp/logs(/|$)") { return $true }
+    if ($normalizado -match "(^|/)01-mrp/tmp(/|$)") { return $true }
+    if ($normalizado -match "(^|/)01-mrp/backups(/|$)") { return $true }
+    if ($normalizado -match "(^|/)01-mrp/runtime(/|$)") { return $true }
     if ($nome -like "*.db") { return $true }
     if ($nome -like "*.sqlite") { return $true }
+    if ($nome -like "*.pyc") { return $true }
     if ($nome -like "*.tmp") { return $true }
     if ($nome -like "*.bak") { return $true }
     if ($nome -match "(?i)(credential|credentials|secret|secrets|senha|senhas|token|tokens)") { return $true }
 
     if ($nome -like "*.log") {
-        if (Test-Path -LiteralPath $Caminho) {
-            $item = Get-Item -LiteralPath $Caminho -ErrorAction SilentlyContinue
+        $caminhoFisico = Resolve-CaminhoFisico $Caminho
+        if (Test-Path -LiteralPath $caminhoFisico) {
+            $item = Get-Item -LiteralPath $caminhoFisico -ErrorAction SilentlyContinue
             if ($item -and $item.Length -gt 5MB) { return $true }
         }
     }
@@ -51,7 +68,11 @@ function Test-ArquivoProibido {
     return $false
 }
 
-Set-Location X:\
+if (!(Test-Path (Join-Path $RepoRoot ".git"))) {
+    Stop-ComAviso "Repositorio invalido. Esperado .git em: $RepoRoot"
+}
+
+Set-Location $RepoRoot
 
 git status
 
@@ -64,13 +85,18 @@ if ($proibidos.Count -gt 0) {
     Stop-ComAviso "Remova, mova ou ignore corretamente os itens proibidos antes de fechar a versao."
 }
 
-git add .
+git add -A
 
 $staged = git diff --cached --name-only
 if (-not $staged) {
     Write-Host "Nada para commitar" -ForegroundColor Yellow
     git status
     exit 0
+}
+
+git diff --check
+if ($LASTEXITCODE -ne 0) {
+    Stop-ComAviso "git diff --check encontrou problemas de whitespace."
 }
 
 git commit -m "$Versao - $Mensagem"

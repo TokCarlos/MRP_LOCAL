@@ -53,6 +53,7 @@ build/
 *.sqlite
 *.sqlite3
 *.dump
+*.sql
 *.bak
 *.backup
 
@@ -105,6 +106,9 @@ _bkp/
 *.zip
 !03-vs/pacotes/.gitkeep
 !03-vs/releases/.gitkeep
+
+# Modelo de pendencias - manter apenas exemplo
+01-mrp/install/pending_install.json
 # MRP_LOCAL runtime 01-mrp - manter estrutura, ignorar conteudo real
 01-mrp/logs/**
 !01-mrp/logs/
@@ -121,10 +125,17 @@ _bkp/
 !01-mrp/db/
 !01-mrp/db/.gitkeep
 !01-mrp/db/README.md
+!01-mrp/db/migrations/
+!01-mrp/db/migrations/README.md
+!01-mrp/db/backups/
+!01-mrp/db/backups/README.md
 01-mrp/runtime/**
 !01-mrp/runtime/
 !01-mrp/runtime/.gitkeep
 !01-mrp/runtime/README.md
+!01-mrp/runtime/python/
+!01-mrp/runtime/python/.gitkeep
+!01-mrp/runtime/python/README.md
 01-mrp/cache/**
 01-mrp/**/Thumbs.db
 01-mrp/**/*.pyc
