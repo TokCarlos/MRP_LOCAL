@@ -110,6 +110,12 @@ _bkp/
 
 # Modelo de pendencias - manter apenas exemplo
 01-mrp/install/pending_install.json
+
+# Credenciais e estado administrativo local (nao versionar)
+01-mrp/config/local/
+01-mrp/config/local/*.json
+01-mrp/logs/admin/
+01-mrp/logs/admin/*.log
 # MRP_LOCAL runtime 01-mrp - manter estrutura, ignorar conteudo real
 01-mrp/logs/**
 !01-mrp/logs/

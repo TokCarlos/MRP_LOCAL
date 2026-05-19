@@ -1,7 +1,7 @@
 MRP_LOCAL - LEITURA RAPIDA
 
-Versao documental: v0.1.048-alinhamento-regras-status-operacional
-Base anterior concluida: v0.1.047 registro deploy trabalho e teste DEV
+Versao documental: v0.1.049-painel-admin-local-preparacao
+Base anterior concluida: v0.1.048 alinhamento regras e status operacional
 Commit base relevante anterior: 173456b - chore: preparar portabilidade pos-cimasp v0.1.045
 
 Estado real:
@@ -18,6 +18,7 @@ Estado real:
 - sem Python portable ativado;
 - sem FastAPI funcional;
 - ainda nao blindado.
+- painel admin local em preparacao, separado do index.html.
 
 Operacao principal:
 - MRP_MENU_SISTEMA.bat
@@ -61,5 +62,5 @@ Pendencias antes de blindagem:
 - pacote release separado do pacote dev.
 
 Planejamento registrado:
-- proxima etapa planejada: v0.1.048 validacao operacional no DEV casa
-- etapa seguinte planejada: v0.1.049 watchdog/tarefa automatica/reboot
+- proxima etapa planejada: validacao operacional no DEV casa com painel admin local
+- etapa seguinte planejada: watchdog/tarefa automatica/reboot

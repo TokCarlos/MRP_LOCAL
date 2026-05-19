@@ -1,0 +1,87 @@
+RELATORIO PAINEL ADMIN LOCAL
+
+Versao da etapa: v0.1.049-painel-admin-local-preparacao
+
+Objetivo:
+- preparar Painel Administrativo Local do Servidor separado do frontend final;
+- criar base segura para modo automatico futuro sem ativar watchdog/tarefa.
+
+Escopo:
+- estrutura do painel em 03-vs/scripts/painel;
+- setup de credencial admin local com hash PBKDF2;
+- exemplo de estado de modo automatico local;
+- integracao do painel com scripts de servico existentes;
+- atualizacao do launcher MRP_MENU_SISTEMA.bat com preferencia para painel Python e fallback CMD;
+- atualizacao documental da etapa.
+
+Fora de escopo:
+- criar backend;
+- criar banco;
+- instalar dependencias externas;
+- instalar tarefa Windows;
+- ativar watchdog continuo;
+- alterar frontend funcional de usuario final.
+
+Arquivos criados:
+- 03-vs/scripts/painel/mrp_painel_controle.py
+- 03-vs/scripts/painel/mrp_admin_auth_setup.py
+- 03-vs/scripts/painel/README.md
+- 01-mrp/config/admin_auth.example.json
+- 01-mrp/config/mrp_auto_mode.example.json
+- 03-vs/relatorios/painel_admin/RELATORIO_PAINEL_ADMIN_v0.1.049.txt
+
+Arquivos alterados:
+- MRP_MENU_SISTEMA.bat
+- .gitignore
+- AGENTS.md
+- README.md
+- Readme.txt
+- 00-manual-dev/MANUAL_DEV_COMPLETO.txt
+- 00-manual-dev/RESUMO_OPERACIONAL_DO_SISTEMA.txt
+- 02-docs/docs/geral/status_geral.md
+- 01-mrp/docs_runtime/README.md
+- 01-mrp/install/PORTABILIDADE_FUTURA.md
+
+Logica de autenticacao:
+- arquivo real local: 01-mrp/config/local/admin_auth.local.json (nao versionado);
+- script de setup gera hash PBKDF2-HMAC-SHA256 (sem senha em texto puro);
+- painel valida hash para liberar acoes administrativas;
+- sem exibir senha e sem registrar segredo em log.
+
+Logica de modo automatico local:
+- arquivo real local: 01-mrp/config/local/mrp_auto_mode.local.json (nao versionado);
+- arquivo example versionado: 01-mrp/config/mrp_auto_mode.example.json;
+- botoes do painel apenas leem/escrevem estado local (running/stopped/maintenance/locked);
+- watchdog futuro deve obedecer essa chave; nesta etapa nao ha watchdog ativo.
+
+Integracao com scripts existentes:
+- Start: 03-vs/scripts/servicos/mrp_frontend_start.ps1
+- Stop: 03-vs/scripts/servicos/mrp_frontend_stop.ps1
+- Status: 03-vs/scripts/servicos/mrp_frontend_status.ps1
+- Healthcheck: 03-vs/scripts/servicos/mrp_frontend_healthcheck.ps1
+- Zerar execucao: 03-vs/scripts/servicos/mrp_zerar_execucao.ps1
+
+Riscos:
+- sem credencial local configurada, acoes admin ficam bloqueadas;
+- mudanca de ambiente sem Python mantera somente fallback CMD;
+- configuracao incorreta de permissao em config/local pode expor credencial local.
+
+Pendencias:
+- validacao operacional no DEV casa com uso real do painel;
+- watchdog/tarefa automatica/reboot/queda de rede/queda de energia/recuperacao automatica.
+
+Validacoes executadas:
+- git status --short
+- git diff --check
+- py_compile dos scripts Python do painel
+- parse JSON de admin_auth.example.json e mrp_auto_mode.example.json
+- confirmacao de ignore para 01-mrp/config/local e 01-mrp/logs/admin
+- confirmacao de portable preservado e CONFIGURAR_ACESSO_MRP_REDE.bat em portable
+- varredura de mojibake, Thumbs.db e *.bak* versionavel
+
+Status final real:
+- painel admin local preparado de forma controlada;
+- sem backend e sem banco;
+- sem ativacao de watchdog/tarefa automatica;
+- frontend final preservado;
+- sistema ainda nao blindado.

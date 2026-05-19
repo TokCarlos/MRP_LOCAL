@@ -1,7 +1,7 @@
 MRP_LOCAL - MANUAL DEV COMPLETO
 
-Versao documental: v0.1.048-alinhamento-regras-status-operacional
-Base anterior concluida: v0.1.047 registro deploy trabalho e teste DEV
+Versao documental: v0.1.049-painel-admin-local-preparacao
+Base anterior concluida: v0.1.048 alinhamento regras e status operacional
 Commit base relevante anterior: 173456b - chore: preparar portabilidade pos-cimasp v0.1.045
 
 STATUS REAL
@@ -16,6 +16,7 @@ STATUS REAL
 - Banco real ainda NAO existe.
 - PostgreSQL ainda NAO esta instalado/configurado pelo sistema.
 - Python portable ainda NAO foi baixado/ativado pelo sistema.
+- Painel Administrativo Local em preparacao (separado do index.html).
 - Watchdog, tarefa automatica, reboot, queda de energia e rede ainda precisam validacao real.
 
 REGRA OPERACIONAL
@@ -90,6 +91,19 @@ Scripts atuais de servico:
 - 03-vs/scripts/servicos/mrp_frontend_task_install.ps1
 - 03-vs/scripts/servicos/mrp_frontend_task_uninstall.ps1
 - 03-vs/scripts/servicos/mrp_firewall_8765.ps1
+
+Painel administrativo local:
+
+- 03-vs/scripts/painel/mrp_painel_controle.py
+- 03-vs/scripts/painel/mrp_admin_auth_setup.py
+
+Credencial local admin (nao versionar):
+
+- 01-mrp/config/local/admin_auth.local.json
+
+Estado local de modo automatico (nao versionar):
+
+- 01-mrp/config/local/mrp_auto_mode.local.json
 
 Comandos principais:
 
@@ -213,5 +227,5 @@ PENDENCIAS
 
 PLANEJAMENTO
 
-- proxima etapa planejada: v0.1.048 validacao operacional no DEV casa.
-- etapa seguinte planejada: v0.1.049 watchdog/tarefa automatica/reboot.
+- proxima etapa planejada: validacao operacional no DEV casa com painel admin local.
+- etapa seguinte planejada: watchdog/tarefa automatica/reboot.

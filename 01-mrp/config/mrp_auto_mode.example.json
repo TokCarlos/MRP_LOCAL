@@ -1,0 +1,10 @@
+{
+  "version": "v0.1.049",
+  "auto_enabled": false,
+  "desired_state": "stopped",
+  "maintenance_mode": false,
+  "locked": false,
+  "last_changed_by": "admin",
+  "last_changed_at": "EXEMPLO",
+  "reason": "EXEMPLO"
+}

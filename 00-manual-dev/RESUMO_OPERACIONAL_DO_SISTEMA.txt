@@ -1,7 +1,7 @@
 MRP_LOCAL - RESUMO OPERACIONAL DO SISTEMA
 
-Versao documental: v0.1.048-alinhamento-regras-status-operacional
-Base anterior concluida: v0.1.047 registro deploy trabalho e teste DEV
+Versao documental: v0.1.049-painel-admin-local-preparacao
+Base anterior concluida: v0.1.048 alinhamento regras e status operacional
 Commit base relevante anterior: 173456b - chore: preparar portabilidade pos-cimasp v0.1.045
 
 O MRP_LOCAL e um sistema local-first em ambiente de teste. O frontend atual roda como site estatico em 01-mrp/front_end, usando porta 8765.
@@ -19,6 +19,7 @@ STATUS REAL
 - Ainda nao ha Python portable ativado pelo sistema.
 - Ainda nao ha FastAPI funcional.
 - O sistema ainda nao esta blindado.
+- Painel Administrativo Local em preparacao e separado do index.html.
 - Watchdog, tarefa automatica, reboot, queda de energia e rede ainda precisam validacao real.
 
 ARQUITETURA ATUAL
@@ -104,5 +105,5 @@ RISCO ATUAL
 O sistema abre e foi validado no frontend, mas ainda nao pode ser chamado de blindado ou homologado porque faltam testes reais de tarefa automatica, watchdog, reboot, queda de energia, queda de rede e pacote release.
 
 Planejamento registrado:
-- proxima etapa planejada: v0.1.048 validacao operacional no DEV casa.
-- etapa seguinte planejada: v0.1.049 watchdog/tarefa automatica/reboot.
+- proxima etapa planejada: validacao operacional no DEV casa com painel admin local.
+- etapa seguinte planejada: watchdog/tarefa automatica/reboot.

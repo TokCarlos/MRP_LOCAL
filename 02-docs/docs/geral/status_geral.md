@@ -2,11 +2,11 @@
 
 ## Versao documental atual
 
-`v0.1.048-alinhamento-regras-status-operacional`
+`v0.1.049-painel-admin-local-preparacao`
 
 ## Base funcional anterior
 
-`v0.1.047 registro deploy trabalho e teste DEV`
+`v0.1.048 alinhamento regras e status operacional`
 
 Commit base funcional:
 
@@ -28,6 +28,7 @@ Commit base funcional:
 - Nao ha PostgreSQL instalado/configurado pelo sistema.
 - Nao ha Python portable baixado/ativado pelo sistema.
 - Nao ha instalador real criado nesta etapa.
+- Painel Administrativo Local em preparacao, separado do frontend final.
 
 ## Pendencias de blindagem
 
@@ -118,17 +119,17 @@ A raiz fisica atual de desenvolvimento pode existir em documentacao, config e sc
 - Variacoes de itens registradas com sufixo `-1` quando havia imagem adicional no ZIP.
 - Nomes oficiais preservados a partir dos registros existentes.
 
-## Etapa atual em andamento: v0.1.048
+## Etapa atual em andamento: v0.1.049
 
-- alinhamento de regras e status operacional ao estado real atual;
-- confirmacao de preservacao da pasta portable e arquivo CONFIGURAR_ACESSO_MRP_REDE.bat;
-- consolidacao documental pre-proxima rodada operacional.
+- preparacao do Painel Administrativo Local do Servidor;
+- credencial admin local e chave de modo automatico local como base futura;
+- integracao com scripts de servico existentes sem ativar watchdog/tarefa.
 
 ## Status final desta etapa
 
-`ALINHAMENTO_REGRAS_E_STATUS_CONCLUIDO`
+`PAINEL_ADMIN_LOCAL_PREPARADO_SEM_ATIVACAO_AUTOMATICA`
 
 ## Planejamento
 
-- proxima etapa planejada: `v0.1.048 validacao operacional no DEV casa`;
-- etapa seguinte planejada: `v0.1.049 watchdog/tarefa automatica/reboot`.
+- proxima etapa planejada: `validacao operacional no DEV casa com painel admin local`;
+- etapa seguinte planejada: `watchdog/tarefa automatica/reboot`.

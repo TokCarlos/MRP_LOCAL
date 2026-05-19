@@ -4,8 +4,8 @@ Sistema local-first em ambiente de teste, com frontend web estatico funcional e 
 
 ## Estado atual
 
-- Versao documental: `v0.1.048-alinhamento-regras-status-operacional`.
-- Base anterior concluida: `v0.1.047 registro deploy trabalho e teste DEV`.
+- Versao documental: `v0.1.049-painel-admin-local-preparacao`.
+- Base anterior concluida: `v0.1.048 alinhamento regras e status operacional`.
 - Commit base relevante anterior: `173456b - chore: preparar portabilidade pos-cimasp v0.1.045`.
 - Frontend validado pelo usuario: start OK, porta 8765 OK, healthcheck OK e sistema abrindo corretamente.
 - Deploy no trabalho validado.
@@ -47,6 +47,11 @@ Operacao principal:
 - `03-vs/scripts/servicos/mrp_frontend_status.ps1`
 - `03-vs/scripts/servicos/mrp_frontend_healthcheck.ps1`
 
+Separacao de interface:
+
+- `index.html` permanece interface de usuario final;
+- painel administrativo local fica separado em `03-vs/scripts/painel/mrp_painel_controle.py`.
+
 ## Area portable
 
 A pasta `portable` e area operacional auxiliar para deploy/teste/acesso em maquinas clientes.
@@ -73,6 +78,15 @@ Arquivos operacionais relevantes em `portable`:
 - IP LAN usado no teste: `192.168.1.71`;
 - IP Tailscale usado no teste: `100.117.224.127`;
 - esses IPs sao dados operacionais de teste, nao regra fixa do sistema.
+
+## Painel Administrativo Local (v0.1.049)
+
+- uso exclusivo no servidor/PC onde o MRP roda;
+- nao exposto como controle administrativo via navegador;
+- acoes administrativas exigem credencial local;
+- credencial real local: `01-mrp/config/local/admin_auth.local.json` (nao versionar);
+- chave de modo automatico local: `01-mrp/config/local/mrp_auto_mode.local.json` (nao versionar);
+- watchdog futuro deve obedecer essa chave administrativa.
 
 Observacao tecnica:
 
@@ -105,5 +119,5 @@ Nao chamar o sistema de blindado antes de validar watchdog, tarefa automatica, r
 
 Planejamento registrado:
 
-- proxima etapa planejada: `v0.1.048 validacao operacional no DEV casa`;
-- etapa seguinte planejada: `v0.1.049 watchdog/tarefa automatica/reboot`.
+- proxima etapa planejada: `validacao operacional no DEV casa com painel admin local`;
+- etapa seguinte planejada: `watchdog/tarefa automatica/reboot`.

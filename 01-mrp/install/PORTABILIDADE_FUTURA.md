@@ -84,8 +84,15 @@ Area operacional auxiliar:
 
 Planejamento registrado:
 
-- proxima etapa planejada: v0.1.048 validacao operacional no DEV casa;
-- etapa seguinte planejada: v0.1.049 watchdog/tarefa automatica/reboot.
+- proxima etapa planejada: validacao operacional no DEV casa com painel admin local;
+- etapa seguinte planejada: watchdog/tarefa automatica/reboot.
+
+Preparacao adicional v0.1.049:
+
+- painel administrativo local separado do frontend final;
+- credencial local admin em `01-mrp/config/local/admin_auth.local.json` (nao versionar);
+- chave local de modo automatico em `01-mrp/config/local/mrp_auto_mode.local.json` (nao versionar);
+- watchdog futuro deve obedecer a chave administrativa local.
 
 ## Start, stop e healthcheck
 

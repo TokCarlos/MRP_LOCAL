@@ -18,9 +18,9 @@ Regras obrigatorias:
 
 Status atual:
 
-- Versao: v0.1.048-alinhamento-regras-status-operacional
-- Base anterior: v0.1.047 registro deploy trabalho e teste DEV
-- Fase: frontend funcional em DEV casa e deploy trabalho validados / sem backend real / sem banco real
+- Versao: v0.1.049-painel-admin-local-preparacao
+- Base anterior: v0.1.048 alinhamento regras e status operacional
+- Fase: painel administrativo local em preparacao / frontend final preservado / sem backend real / sem banco real
 
 ## PROTOCOLO OBRIGATORIO DE FECHAMENTO AUTOMATICO
 
@@ -99,5 +99,5 @@ Observacao operacional v0.1.047:
 
 Planejamento:
 
-- proxima etapa: v0.1.048 validacao operacional no DEV casa;
-- etapa seguinte: v0.1.049 watchdog/tarefa automatica/reboot.
+- proxima etapa: validacao operacional no DEV casa com painel admin local;
+- etapa seguinte: watchdog/tarefa automatica/reboot.
