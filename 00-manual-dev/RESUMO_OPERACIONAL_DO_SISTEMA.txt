@@ -1,7 +1,7 @@
 MRP_LOCAL - RESUMO OPERACIONAL DO SISTEMA
 
-Versao documental: v0.1.047-registro-deploy-trabalho-e-teste-dev
-Base anterior concluida: v0.1.046 pacote protegido validado no trabalho
+Versao documental: v0.1.048-alinhamento-regras-status-operacional
+Base anterior concluida: v0.1.047 registro deploy trabalho e teste DEV
 Commit base relevante anterior: 173456b - chore: preparar portabilidade pos-cimasp v0.1.045
 
 O MRP_LOCAL e um sistema local-first em ambiente de teste. O frontend atual roda como site estatico em 01-mrp/front_end, usando porta 8765.
@@ -102,3 +102,7 @@ DECISOES
 RISCO ATUAL
 
 O sistema abre e foi validado no frontend, mas ainda nao pode ser chamado de blindado ou homologado porque faltam testes reais de tarefa automatica, watchdog, reboot, queda de energia, queda de rede e pacote release.
+
+Planejamento registrado:
+- proxima etapa planejada: v0.1.048 validacao operacional no DEV casa.
+- etapa seguinte planejada: v0.1.049 watchdog/tarefa automatica/reboot.

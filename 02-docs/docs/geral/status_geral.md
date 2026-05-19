@@ -2,11 +2,11 @@
 
 ## Versao documental atual
 
-`v0.1.047-registro-deploy-trabalho-e-teste-dev`
+`v0.1.048-alinhamento-regras-status-operacional`
 
 ## Base funcional anterior
 
-`v0.1.046 pacote protegido validado no trabalho`
+`v0.1.047 registro deploy trabalho e teste DEV`
 
 Commit base funcional:
 
@@ -118,13 +118,17 @@ A raiz fisica atual de desenvolvimento pode existir em documentacao, config e sc
 - Variacoes de itens registradas com sufixo `-1` quando havia imagem adicional no ZIP.
 - Nomes oficiais preservados a partir dos registros existentes.
 
-## Etapa atual em andamento: v0.1.047
+## Etapa atual em andamento: v0.1.048
 
-- registro de deploy trabalho e testes DEV;
-- preservacao da pasta portable como area auxiliar oficial;
-- limpeza de temporarios .bak e arquivos de analise;
-- alinhamento documental pos-v0.1.046.
+- alinhamento de regras e status operacional ao estado real atual;
+- confirmacao de preservacao da pasta portable e arquivo CONFIGURAR_ACESSO_MRP_REDE.bat;
+- consolidacao documental pre-proxima rodada operacional.
 
 ## Status final desta etapa
 
-`DEPLOY_TRABALHO_E_TESTE_DEV_REGISTRADO`
+`ALINHAMENTO_REGRAS_E_STATUS_CONCLUIDO`
+
+## Planejamento
+
+- proxima etapa planejada: `v0.1.048 validacao operacional no DEV casa`;
+- etapa seguinte planejada: `v0.1.049 watchdog/tarefa automatica/reboot`.

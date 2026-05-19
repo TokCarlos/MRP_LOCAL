@@ -82,6 +82,11 @@ Area operacional auxiliar:
 - IP Tailscale de teste: `100.117.224.127`;
 - IPs de teste nao sao regra fixa do sistema.
 
+Planejamento registrado:
+
+- proxima etapa planejada: v0.1.048 validacao operacional no DEV casa;
+- etapa seguinte planejada: v0.1.049 watchdog/tarefa automatica/reboot.
+
 ## Start, stop e healthcheck
 
 Antes de release, validar:

@@ -4,8 +4,8 @@ Sistema local-first em ambiente de teste, com frontend web estatico funcional e 
 
 ## Estado atual
 
-- Versao documental: `v0.1.047-registro-deploy-trabalho-e-teste-dev`.
-- Base anterior concluida: `v0.1.046 pacote protegido validado no trabalho`.
+- Versao documental: `v0.1.048-alinhamento-regras-status-operacional`.
+- Base anterior concluida: `v0.1.047 registro deploy trabalho e teste DEV`.
 - Commit base relevante anterior: `173456b - chore: preparar portabilidade pos-cimasp v0.1.045`.
 - Frontend validado pelo usuario: start OK, porta 8765 OK, healthcheck OK e sistema abrindo corretamente.
 - Deploy no trabalho validado.
@@ -102,3 +102,8 @@ Antes de alterar o projeto, ler `REGRAS_MRP.txt`.
 Nao criar backend, banco real ou nova regra funcional sem tarefa explicita.
 
 Nao chamar o sistema de blindado antes de validar watchdog, tarefa automatica, reboot, queda de energia, queda de rede, logs e healthcheck continuo.
+
+Planejamento registrado:
+
+- proxima etapa planejada: `v0.1.048 validacao operacional no DEV casa`;
+- etapa seguinte planejada: `v0.1.049 watchdog/tarefa automatica/reboot`.

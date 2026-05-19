@@ -1,7 +1,7 @@
 MRP_LOCAL - LEITURA RAPIDA
 
-Versao documental: v0.1.047-registro-deploy-trabalho-e-teste-dev
-Base anterior concluida: v0.1.046 pacote protegido validado no trabalho
+Versao documental: v0.1.048-alinhamento-regras-status-operacional
+Base anterior concluida: v0.1.047 registro deploy trabalho e teste DEV
 Commit base relevante anterior: 173456b - chore: preparar portabilidade pos-cimasp v0.1.045
 
 Estado real:
@@ -59,3 +59,7 @@ Pendencias antes de blindagem:
 - queda de rede;
 - logs em execucao prolongada;
 - pacote release separado do pacote dev.
+
+Planejamento registrado:
+- proxima etapa planejada: v0.1.048 validacao operacional no DEV casa
+- etapa seguinte planejada: v0.1.049 watchdog/tarefa automatica/reboot

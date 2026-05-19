@@ -18,8 +18,8 @@ Regras obrigatorias:
 
 Status atual:
 
-- Versao: v0.1.047-registro-deploy-trabalho-e-teste-dev
-- Base anterior: v0.1.046 pacote protegido validado no trabalho
+- Versao: v0.1.048-alinhamento-regras-status-operacional
+- Base anterior: v0.1.047 registro deploy trabalho e teste DEV
 - Fase: frontend funcional em DEV casa e deploy trabalho validados / sem backend real / sem banco real
 
 ## PROTOCOLO OBRIGATORIO DE FECHAMENTO AUTOMATICO
@@ -96,3 +96,8 @@ Observacao operacional v0.1.047:
 - pasta `portable` e area oficial auxiliar para deploy/teste/acesso externo;
 - `portable\CONFIGURAR_ACESSO_MRP_REDE.bat` permanece em `portable`;
 - nao mover nem copiar `CONFIGURAR_ACESSO_MRP_REDE.bat` para a raiz.
+
+Planejamento:
+
+- proxima etapa: v0.1.048 validacao operacional no DEV casa;
+- etapa seguinte: v0.1.049 watchdog/tarefa automatica/reboot.

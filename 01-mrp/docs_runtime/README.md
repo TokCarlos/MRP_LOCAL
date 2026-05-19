@@ -3,7 +3,7 @@
 Documentacao do nucleo transportavel de `01-mrp`.
 
 O objetivo e separar o que pertence ao pacote executavel do MRP_LOCAL do que pertence ao ambiente DEV.
-Etapa atual: v0.1.047-registro-deploy-trabalho-e-teste-dev.
+Etapa atual: v0.1.048-alinhamento-regras-status-operacional.
 
 Regras:
 - `front_end` e o frontend atual funcional;
@@ -13,3 +13,7 @@ Regras:
 - `runtime`, `db`, `logs`, `tmp` e `backups` nao devem misturar codigo-fonte com estado local;
 - caminhos fisicos podem existir em config, scripts de ambiente ou documentacao, mas nao em regra de negocio.
 - pasta `portable` (raiz do projeto) e area auxiliar operacional de deploy/teste externo, fora da regra de negocio.
+
+Planejamento registrado:
+- proxima etapa planejada: v0.1.048 validacao operacional no DEV casa;
+- etapa seguinte planejada: v0.1.049 watchdog/tarefa automatica/reboot.

@@ -1,0 +1,65 @@
+RELATORIO ALINHAMENTO REGRAS E STATUS
+
+Versao da etapa: v0.1.048-alinhamento-regras-status-operacional
+
+Objetivo da etapa:
+- alinhar regras, status e documentacao ao estado operacional real atual antes da proxima fase;
+- manter escopo documental/organizacional sem alterar frontend funcional.
+
+Arquivos revisados:
+- REGRAS_MRP.txt
+- AGENTS.md
+- README.md
+- Readme.txt
+- 00-manual-dev/MANUAL_DEV_COMPLETO.txt
+- 00-manual-dev/RESUMO_OPERACIONAL_DO_SISTEMA.txt
+- 02-docs/docs/geral/status_geral.md
+- 01-mrp/docs_runtime/README.md
+- 01-mrp/install/PORTABILIDADE_FUTURA.md
+
+Arquivos alterados:
+- REGRAS_MRP.txt
+- AGENTS.md
+- README.md
+- Readme.txt
+- 00-manual-dev/MANUAL_DEV_COMPLETO.txt
+- 00-manual-dev/RESUMO_OPERACIONAL_DO_SISTEMA.txt
+- 02-docs/docs/geral/status_geral.md
+- 01-mrp/docs_runtime/README.md
+- 01-mrp/install/PORTABILIDADE_FUTURA.md
+- 03-vs/relatorios/regras_status/RELATORIO_ALINHAMENTO_REGRAS_STATUS_v0.1.048.txt
+
+Regras apenas confirmadas:
+- local-first mantido;
+- raiz configuravel mantida;
+- X:\ mantido como ambiente DEV/teste;
+- sem hardcoded em regra de negocio;
+- UTF-8 sem BOM como padrao;
+- sem logs reais versionados;
+- sem backend/banco real nesta etapa;
+- Python portable/FastAPI/PostgreSQL mantidos como direcao futura;
+- documentacao obrigatoria MANUAL_DEV_COMPLETO.txt e RESUMO_OPERACIONAL_DO_SISTEMA.txt mantida.
+
+Trechos de status atualizados:
+- DEV casa funcional;
+- deploy trabalho funcional;
+- acesso local no trabalho validado;
+- acesso por PCs clientes validado com portable\CONFIGURAR_ACESSO_MRP_REDE.bat;
+- acesso remoto via Tailscale validado;
+- IP LAN 192.168.1.71 e IP Tailscale 100.117.224.127 registrados como dados operacionais de teste;
+- reforco de que o sistema ainda nao e blindado;
+- pendencias de watchdog/tarefa/reboot/queda de rede/queda de energia/recuperacao automatica mantidas.
+
+Confirmacoes:
+- pasta portable preservada: SIM;
+- CONFIGURAR_ACESSO_MRP_REDE.bat permaneceu em portable: SIM;
+- nenhum backend criado: SIM;
+- nenhum banco criado: SIM;
+- frontend funcional nao foi alterado: SIM.
+
+Status final real:
+- etapa documental/organizacional concluida com base limpa e alinhamento ao estado atual.
+
+Proxima etapa recomendada:
+- v0.1.048 validacao operacional no DEV casa;
+- etapa seguinte: v0.1.049 watchdog/tarefa automatica/reboot.

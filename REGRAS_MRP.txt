@@ -990,6 +990,22 @@ Abaixo está a lista consolidada para virar regra absoluta do projeto **MRP_LOCA
 
 441. Frontend está iniciando por script.
 
+441A. Ambiente DEV casa está funcional.
+
+441B. Deploy no trabalho está funcional.
+
+441C. Acesso local no PC do trabalho foi validado.
+
+441D. Acesso por PCs da rede foi validado com apoio de `portable\CONFIGURAR_ACESSO_MRP_REDE.bat`.
+
+441E. Acesso remoto via Tailscale foi validado.
+
+441F. A pasta `portable` é área oficial de apoio operacional para deploy/teste externo.
+
+441G. `CONFIGURAR_ACESSO_MRP_REDE.bat` deve permanecer em `portable`.
+
+441H. IP LAN `192.168.1.71` e IP Tailscale `100.117.224.127` são dados operacionais de teste, não regra fixa do sistema.
+
 442. Sistema ainda não é 100% blindado.
 
 443. Falta validar watchdog profundamente.
