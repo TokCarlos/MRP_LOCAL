@@ -89,3 +89,9 @@ Registro v0.1.051:
 - seed continua fonte temporaria;
 - sem banco real e sem instalacao de dependencias;
 - frontend e painel admin preservados.
+
+Registro documental adicional:
+- objetivo futuro de programa Windows instalado com instalador unico;
+- artefatos de release podem incluir exe/dll/pyd/bin/runtime interno;
+- repositorio DEV nao deve virar pasta de build;
+- backend Produtos segue como proxima frente tecnica.

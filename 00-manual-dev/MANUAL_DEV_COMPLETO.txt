@@ -273,3 +273,19 @@ ETAPA V0.1.051 - BACKEND PRODUTOS (BASE TECNICA)
 - Sem instalacao de dependencias.
 - Fonte atual continua `01-mrp/front_end/data/produtos_seed.json`.
 - Imagens continuam em arquivo fisico com referencia por caminho.
+
+REGISTRO FUTURO - MODELO PROGRAMA WINDOWS
+
+- O repositorio DEV nao e pasta de programa instalado.
+- Build/release futuro pode conter executaveis e bibliotecas de runtime.
+- Exemplo conceitual de release:
+  - MRP_LOCAL_Setup.exe
+  - MRP_Server.exe
+  - MRP_Painel.exe
+  - runtime/
+  - app/
+  - config/
+  - data/
+  - logs/
+  - db/
+- `.dll`, `.pyd` e `.bin` sao esperados apenas no artefato de release quando a etapa de empacotamento for aberta.

@@ -1209,3 +1209,16 @@ O sistema atual está em teste, com porta 8765 liberada e frontend iniciando por
 543. Chaves/tokens/segredos devem ficar fora do Git.
 544. Integracao IA depende de backend minimo, autenticacao, permissoes, logs, contratos de API e modelo de dados minimo.
 545. Nesta etapa, a regra e apenas documental/estrategica, sem implementacao tecnica.
+
+## 33. Regra estrategica futura - modelo de programa Windows instalado
+
+546. O MRP_LOCAL deve evoluir para programa instalavel no Windows.
+547. O instalador final pode ser artefato unico `.exe` (exemplo conceitual: `MRP_LOCAL_Setup.exe`).
+548. A pasta instalada pode conter `.exe`, `.dll`, `.pyd`, `.bin`, runtime interno, frontend, backend, engine, config, data, logs e db.
+549. Esses itens sao artefatos de distribuicao/release, nao estrutura obrigatoria do repositorio DEV.
+550. O repositorio DEV deve continuar limpo, auditavel e modular (`01-mrp`, `02-docs`, `03-vs`, `portable`).
+551. `.exe`, `.dll`, `.bin` e runtime empacotado nao devem ser criados/versionados sem etapa especifica.
+552. Release/build/installer devem ser produzidos em etapa propria futura.
+553. O sistema instalado deve manter separacao entre codigo, config, runtime, dados, logs, backups e temporarios.
+554. O instalador nao pode depender de `X:\`, `\\HOME-MACHINE`, usuario Windows fixo ou unidade mapeada.
+555. O instalador deve executar validacao de pendencias antes de concluir.

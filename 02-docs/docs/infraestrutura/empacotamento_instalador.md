@@ -99,3 +99,28 @@ A escolha de tecnologia (Inno Setup, NSIS, WiX, PyInstaller, cx_Freeze ou outra)
 - isso nao muda a regra de negocio e nao elimina controles de seguranca;
 - integracao IA futura depende de backend minimo, autenticacao, permissao, logs e contratos de API;
 - nada disso e implementado nesta etapa.
+
+## Modelo futuro de programa Windows instalado
+
+Diferenca estrutural:
+
+- repositorio DEV: fonte, scripts, docs e relatorios;
+- release instalado: executaveis, runtime interno e componentes operacionais.
+
+Estrutura conceitual de release futuro:
+
+- `MRP_LOCAL_Setup.exe`
+- `MRP_Server.exe`
+- `MRP_Painel.exe`
+- `runtime/`
+- `app/`
+- `config/`
+- `data/`
+- `logs/`
+- `db/`
+
+Observacoes:
+
+- `.dll`, `.pyd` e `.bin` podem existir no release por dependencia/runtime;
+- nao criar/versionar esses artefatos nesta etapa;
+- retomar quando houver etapa dedicada de build/installer com backend mais maduro.

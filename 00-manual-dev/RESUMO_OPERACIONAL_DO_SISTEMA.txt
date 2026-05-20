@@ -128,3 +128,9 @@ Diretriz v0.1.051:
 - banco real ainda nao criado;
 - seed e imagens continuam como base temporaria;
 - frontend e painel admin continuam preservados.
+
+Registro documental - programa Windows futuro:
+- separacao obrigatoria entre repositorio DEV e artefato instalado;
+- release futuro pode conter exe/dll/pyd/bin/runtime interno;
+- nada disso deve ser gerado/versionado nesta etapa;
+- backend Produtos segue como frente tecnica principal.

@@ -161,3 +161,10 @@ A raiz fisica atual de desenvolvimento pode existir em documentacao, config e sc
 - criada base Python padrao para adapter/repository/service/teste do seed;
 - criado diagnostico `03-vs/scripts/backend/validar_backend_produtos_seed.py`;
 - sem FastAPI ativo, sem banco real e sem alteracao funcional de frontend/painel.
+
+## Registro documental - modelo futuro de programa Windows
+
+- registrado objetivo futuro de release instalado com instalador unico;
+- registrada diferenca entre repositorio DEV e artefato de programa instalado;
+- confirmado que nao houve criacao de `.exe`, `.dll`, `.bin` ou runtime empacotado nesta etapa;
+- confirmada continuidade da frente tecnica do backend Produtos apos este registro.

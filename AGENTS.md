@@ -122,3 +122,10 @@ Diretriz v0.1.051 (backend Produtos base):
 - nao alterar frontend funcional;
 - nao criar banco real;
 - nao instalar dependencias nesta etapa.
+
+Diretriz documental - modelo futuro de programa Windows:
+
+- diferenciar repositorio DEV de artefato instalado/release;
+- DEV permanece modular e limpo;
+- `.exe`, `.dll`, `.bin`, runtime interno e empacotamento ficam para etapa especifica de release;
+- frente tecnica seguinte permanece backend Produtos.

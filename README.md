@@ -155,3 +155,11 @@ Planejamento registrado:
 - mantem `produtos_seed.json` como fonte temporaria;
 - sem FastAPI ativo e sem banco real nesta etapa;
 - frontend e painel admin permanecem preservados.
+
+## Registro futuro - programa Windows instalado
+
+- objetivo futuro: distribuicao como programa Windows instalado com instalador unico;
+- exemplo conceitual de release: `MRP_LOCAL_Setup.exe`, `MRP_Server.exe`, `MRP_Painel.exe`, `runtime/`, `app/`, `config/`, `data/`, `logs/`, `db/`;
+- `.dll`, `.pyd` e `.bin` podem existir no release futuro como dependencias/runtime;
+- isso nao altera o repositorio DEV atual, que deve permanecer limpo e modular;
+- backend Produtos continua como proxima frente tecnica.

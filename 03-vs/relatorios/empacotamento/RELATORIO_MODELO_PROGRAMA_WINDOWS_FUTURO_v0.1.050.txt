@@ -1,0 +1,49 @@
+RELATORIO DA ETAPA
+Versao: v0.1.050-registro-futuro-programa-windows
+
+OBJETIVO
+- Registrar documentalmente a direcao futura do MRP_LOCAL como programa Windows instalado.
+
+ESCOPO
+- Atualizacao de regras e documentacao.
+- Definicao da diferenca entre DEV e release instalado.
+
+FORA DE ESCOPO
+- Gerar `.exe`, `.dll`, `.pyd`, `.bin`.
+- Criar instalador real.
+- Empacotar runtime.
+- Alterar backend em desenvolvimento.
+- Alterar frontend funcional.
+- Instalar dependencias.
+
+ARQUIVOS ALTERADOS
+- REGRAS_MRP.txt
+- AGENTS.md
+- README.md
+- Readme.txt
+- 00-manual-dev/MANUAL_DEV_COMPLETO.txt
+- 00-manual-dev/RESUMO_OPERACIONAL_DO_SISTEMA.txt
+- 01-mrp/install/PORTABILIDADE_FUTURA.md
+- 02-docs/docs/infraestrutura/empacotamento_instalador.md
+- 02-docs/docs/geral/status_geral.md
+
+ARQUIVOS CRIADOS
+- 02-docs/docs/infraestrutura/modelo_programa_windows_futuro.md
+
+REGRA REGISTRADA
+- MRP_LOCAL deve evoluir para programa Windows instalavel.
+- Instalador final pode ser arquivo unico.
+- Release instalado pode conter executaveis, bibliotecas e runtime interno.
+- Repositorio DEV deve continuar limpo e modular.
+
+CONFIRMACOES
+- Nenhum `.exe`, `.dll`, `.bin` foi criado nesta etapa.
+- Nenhum runtime foi empacotado nesta etapa.
+
+RISCOS DE ANTECIPAR EMPACOTAMENTO
+- congelar arquitetura antes da maturidade do backend;
+- aumentar retrabalho por mudanca prematura de build/release;
+- poluir repositorio DEV com artefatos transientes.
+
+PROXIMA ETAPA RECOMENDADA
+- continuar a frente tecnica do backend Produtos.

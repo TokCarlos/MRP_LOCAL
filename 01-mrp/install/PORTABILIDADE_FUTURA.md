@@ -147,3 +147,11 @@ Integracao IA futura:
 - deve ocorrer via backend/API, nao diretamente no frontend;
 - deve usar ferramentas internas controladas, permissao e log;
 - sem implementacao nesta etapa.
+
+## Modelo futuro - programa Windows instalado
+
+- DEV e release devem permanecer separados;
+- repositorio DEV nao deve virar pasta poluida de build;
+- release futuro pode conter executaveis (`.exe`) e dependencias (`.dll`, `.pyd`, `.bin`) com runtime interno;
+- artefatos empacotados ficam fora do Git e sao gerados por etapa propria de release;
+- backend Produtos continua como frente tecnica apos este registro documental.
