@@ -181,3 +181,10 @@ Planejamento registrado:
   - `mrp_mrp_dark.ico`
 - padrao atual do atalho: `mrp_mrp_dark.ico` (fallback `mrp_pcp_light.ico`);
 - DLL de icones permanece opcional/futura e nao e caminho principal do atalho.
+
+## Ajuste definitivo de atalho visual
+
+- `.vbs` e launcher operacional interno e nao item visual final;
+- item visual oficial e `MRP_LOCAL - Painel do Servidor.lnk`;
+- atalho aponta para `wscript.exe` com argumento para o `.vbs`;
+- icone do atalho usa `.ico` local em `%LOCALAPPDATA%\MRP_LOCAL\icons`.

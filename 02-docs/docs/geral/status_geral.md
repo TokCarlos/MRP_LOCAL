@@ -183,3 +183,10 @@ A raiz fisica atual de desenvolvimento pode existir em documentacao, config e sc
 - 4 icones oficiais gerados em `01-mrp/assets/icons/windows/ico`;
 - atalho do painel aponta para `mrp_mrp_dark.ico` com fallback para `mrp_pcp_light.ico`;
 - DLL mantida apenas como recurso opcional/futuro.
+
+## Correcao definitiva de atalho visual do painel
+
+- conceito corrigido: `.vbs` e launcher interno, `.lnk` e item visual oficial;
+- atalho passa a usar `wscript.exe` como alvo e `MRP_PAINEL_SERVIDOR.vbs` em argumentos;
+- icone vem de `.ico` local em `%LOCALAPPDATA%\MRP_LOCAL\icons`;
+- criado script de diagnostico para validar `TargetPath`, `Arguments`, `WorkingDirectory` e `IconLocation`.

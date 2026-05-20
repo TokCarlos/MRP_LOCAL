@@ -304,3 +304,11 @@ ETAPA V0.1.052 - ICONES OFICIAIS .ICO
 - padrao do painel: `mrp_mrp_dark.ico`;
 - fallback: `mrp_pcp_light.ico`;
 - DLL permanece opcional/futura, nao padrao do atalho.
+
+CORRECAO FINAL DE ATALHO VISUAL
+
+- nao tratar `.vbs` como executavel visual com icone proprio;
+- item visual oficial e o atalho `.lnk` na Area de Trabalho;
+- `TargetPath` do atalho deve ser `wscript.exe`;
+- `.vbs` deve entrar em `Arguments`;
+- icone oficial fica no `.lnk` com arquivo `.ico` local em `%LOCALAPPDATA%\MRP_LOCAL\icons`.

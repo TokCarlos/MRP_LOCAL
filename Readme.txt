@@ -107,3 +107,9 @@ Registro v0.1.052 icones oficiais:
 - icone padrao: mrp_mrp_dark.ico;
 - fallback: mrp_pcp_light.ico;
 - 4 icones oficiais compoem a identidade visual inicial.
+
+Ajuste definitivo de conceito:
+- .vbs e launcher interno;
+- .lnk e item visual oficial para o usuario;
+- icone personalizado fica no .lnk;
+- atalho usa wscript.exe + argumento para o vbs.

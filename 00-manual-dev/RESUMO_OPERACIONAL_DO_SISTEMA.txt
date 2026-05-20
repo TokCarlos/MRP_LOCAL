@@ -144,3 +144,8 @@ Registro v0.1.052:
 - atalho corrigido para usar .ico direto oficial;
 - DLL nao e padrao atual para atalho de desktop;
 - identidade visual oficial com 4 icones.
+
+Ajuste final de atalho:
+- .vbs interno e launcher operacional;
+- .lnk e o item visual final;
+- icone aplicado no .lnk com .ico local em AppData.

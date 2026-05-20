@@ -2,6 +2,12 @@
 
 Painel administrativo local separado do `index.html` (frontend de usuario final).
 
+Conceito operacional:
+
+- `MRP_PAINEL_SERVIDOR.vbs` e launcher interno.
+- o item visual oficial para o usuario e o atalho `.lnk` na Area de Trabalho.
+- o icone personalizado deve ficar no `.lnk`, nao no `.vbs`.
+
 ## Objetivo
 
 - controlar a operacao local do servidor: start, stop, restart, status, healthcheck;
@@ -75,6 +81,17 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\painel\criar
 ```
 
 Ou por duplo clique em `CRIAR_ATALHO_PAINEL_SERVIDOR.bat`.
+
+O script cria:
+
+- `MRP_LOCAL - Painel do Servidor.lnk`
+- `MRP_LOCAL - Painel do Servidor NOVO.lnk` (teste anti-cache)
+
+Modelo tecnico do atalho:
+
+- `TargetPath` = `wscript.exe`
+- `Arguments` = caminho absoluto do `MRP_PAINEL_SERVIDOR.vbs`
+- `IconLocation` = `%LOCALAPPDATA%\MRP_LOCAL\icons\mrp_painel_servidor.ico,0`
 
 ## Icone do atalho
 
