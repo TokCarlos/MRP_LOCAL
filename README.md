@@ -147,3 +147,11 @@ Planejamento registrado:
 - integracao IA futura deve ser via backend/API, nunca com chave no frontend;
 - IA futura deve usar ferramentas controladas, permissao, confirmacao para acoes criticas e log obrigatorio;
 - nao implementar proxy, DNS, Tailscale Serve nem IA nesta etapa.
+
+## Etapa v0.1.051 (backend Produtos base)
+
+- inicia a base tecnica do backend para o modulo Produtos;
+- define contrato de API planejado e modelo logico inicial;
+- mantem `produtos_seed.json` como fonte temporaria;
+- sem FastAPI ativo e sem banco real nesta etapa;
+- frontend e painel admin permanecem preservados.

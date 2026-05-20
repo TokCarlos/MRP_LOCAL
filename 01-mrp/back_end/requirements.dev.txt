@@ -1,0 +1,8 @@
+# Dependencias de desenvolvimento futuras (nao instalar automaticamente nesta etapa).
+# Etapa: v0.1.051-backend-produtos-contrato-base
+
+-r requirements.base.txt
+
+# Ferramentas opcionais de qualidade/teste para etapa futura:
+# pytest==8.*
+# ruff==0.*

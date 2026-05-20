@@ -9,3 +9,8 @@ Estado atual:
 
 Observacao:
 - esta etapa e apenas preparatoria para portabilidade e organizacao futura.
+
+Atualizacao v0.1.051:
+- camadas basicas criadas para Produtos: domain, adapters, repositories, services, contracts, tests;
+- sem import de FastAPI/SQLAlchemy/psycop nesta etapa;
+- objetivo: validar seed e contrato antes de ativar API real.

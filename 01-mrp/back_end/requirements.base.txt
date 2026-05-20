@@ -1,5 +1,11 @@
 # Planejamento base futuro do backend (nao instalar nesta etapa).
-# Esta etapa v0.1.045 nao ativa backend.
+# Etapa atual: v0.1.051-backend-produtos-contrato-base.
 
+# Dependencias planejadas para ativacao futura de API:
 # fastapi==0.115.*
 # uvicorn[standard]==0.30.*
+# pydantic==2.*
+# pydantic-settings==2.*
+# sqlalchemy==2.*
+# psycopg[binary]==3.*
+# alembic==1.*

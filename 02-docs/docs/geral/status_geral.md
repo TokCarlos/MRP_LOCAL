@@ -152,3 +152,12 @@ A raiz fisica atual de desenvolvimento pode existir em documentacao, config e sc
 - confirmacao de que nada foi implementado: sem proxy, sem DNS, sem Tailscale Serve, sem backend novo, sem banco novo, sem IA integrada;
 - sem criacao de segredo/token/API key;
 - sistema continua em teste/desenvolvimento e ainda nao e blindado.
+
+## Etapa v0.1.051 - backend Produtos contrato/base (tecnica sem ativacao)
+
+- definido papel do modulo Produtos como primeiro dominio real do backend;
+- definido modelo logico inicial (empresas, atas, categorias, produtos);
+- contrato planejado publicado em `01-mrp/back_end/contracts/produtos_api.v0.1.json`;
+- criada base Python padrao para adapter/repository/service/teste do seed;
+- criado diagnostico `03-vs/scripts/backend/validar_backend_produtos_seed.py`;
+- sem FastAPI ativo, sem banco real e sem alteracao funcional de frontend/painel.

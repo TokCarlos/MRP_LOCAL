@@ -82,3 +82,10 @@ Registro adicional v0.1.050:
 - integracao IA futura somente via backend com ferramentas controladas;
 - sem implementacao de proxy/DNS/Tailscale Serve/IA nesta etapa;
 - sem criacao de segredo, token ou API key nesta etapa.
+
+Registro v0.1.051:
+- base tecnica do backend para modulo Produtos iniciada;
+- contrato de API planejado criado (sem API ativa);
+- seed continua fonte temporaria;
+- sem banco real e sem instalacao de dependencias;
+- frontend e painel admin preservados.

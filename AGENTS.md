@@ -115,3 +115,10 @@ Diretriz complementar v0.1.050 (dominio/proxy/IA futura):
 - registrar integracao IA futura via backend com ferramentas controladas e logs;
 - nao implementar proxy, DNS, Tailscale Serve, backend ou IA nesta etapa;
 - nao criar segredo/token/chave nesta etapa.
+
+Diretriz v0.1.051 (backend Produtos base):
+
+- iniciar base tecnica e contrato do modulo Produtos sem ativar API;
+- nao alterar frontend funcional;
+- nao criar banco real;
+- nao instalar dependencias nesta etapa.

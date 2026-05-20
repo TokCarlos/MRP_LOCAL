@@ -263,3 +263,13 @@ REGRA ESTRATEGICA V0.1.050 - NOME AMIGAVEL/PROXY E IA FUTURA
 - IA nao deve acessar banco diretamente.
 - Chaves/tokens ficam fora do Git.
 - Nao implementar IA nesta etapa.
+
+ETAPA V0.1.051 - BACKEND PRODUTOS (BASE TECNICA)
+
+- Produto e o cadastro-mestre de aparelhos/equipamentos.
+- Nesta etapa foi criada base tecnica de backend para validar seed e contrato.
+- Sem servidor FastAPI em execucao.
+- Sem banco real.
+- Sem instalacao de dependencias.
+- Fonte atual continua `01-mrp/front_end/data/produtos_seed.json`.
+- Imagens continuam em arquivo fisico com referencia por caminho.

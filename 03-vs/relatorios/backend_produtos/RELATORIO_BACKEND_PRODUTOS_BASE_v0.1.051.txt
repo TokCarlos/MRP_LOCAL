@@ -1,0 +1,82 @@
+RELATORIO DA ETAPA
+Versao: v0.1.051-backend-produtos-contrato-base
+
+OBJETIVO
+- Preparar base tecnica e contrato do backend para o modulo Produtos.
+
+ESCOPO
+- Definicao documental do dominio Produtos.
+- Definicao de modelo logico inicial.
+- Contrato de API planejado (nao ativo).
+- Base Python padrao (adapter/repository/service/teste) para leitura/validacao do seed.
+- Script de diagnostico do seed.
+
+FORA DE ESCOPO
+- Ativar servidor FastAPI.
+- Criar banco real.
+- Instalar dependencias.
+- Alterar frontend funcional.
+- Alterar painel admin funcional.
+
+ARQUIVOS CRIADOS
+- 02-docs/docs/modulos/produtos/backend_produtos.md
+- 02-docs/docs/modulos/produtos/contrato_api_produtos.md
+- 01-mrp/back_end/contracts/produtos_api.v0.1.json
+- 01-mrp/back_end/app/domain/produto.py
+- 01-mrp/back_end/app/adapters/produtos_seed_adapter.py
+- 01-mrp/back_end/app/repositories/produtos_repository.py
+- 01-mrp/back_end/app/services/produtos_service.py
+- 01-mrp/back_end/app/contracts/README.md
+- 01-mrp/back_end/app/tests/test_produtos_seed_adapter.py
+- 01-mrp/back_end/requirements.dev.txt
+- 03-vs/scripts/backend/validar_backend_produtos_seed.py
+- 03-vs/scripts/backend/mrp_backend_prepare_dev_env.ps1
+
+ARQUIVOS ALTERADOS
+- 02-docs/docs/modulos/produtos/modelo_dados.md
+- 01-mrp/back_end/README.md
+- 01-mrp/back_end/app/README.md
+- 01-mrp/back_end/requirements.base.txt
+- AGENTS.md
+- README.md
+- Readme.txt
+- 00-manual-dev/MANUAL_DEV_COMPLETO.txt
+- 00-manual-dev/RESUMO_OPERACIONAL_DO_SISTEMA.txt
+- 02-docs/docs/geral/status_geral.md
+- 01-mrp/docs_runtime/README.md
+
+MODELO LOGICO DEFINIDO
+- entidades: empresas, atas, categorias, produtos.
+- produto definido como cadastro-mestre do dominio.
+
+CONTRATO API PLANEJADO
+- leitura: /api/health, /api/version, /api/produtos, /api/produtos/{produto_key}, /api/empresas, /api/atas, /api/categorias
+- escrita/upload/BOM mantidos fora de escopo agora.
+
+RESULTADO VALIDACAO DO SEED
+- total_produtos: 163
+- empresas_encontradas: 2
+- atas_encontradas: 5
+- categorias_encontradas: 4
+- produtos_sem_imagem: 0
+- imagens_inexistentes: 0
+- duplicidades_produto_key: 0
+- duplicidades_item_empresa_ata: 0
+- alertas: 163
+- erros: 0
+
+ALERTAS ENCONTRADOS
+- seed contem simultaneamente `arp_key` e `ata_key`; adapter tolera ambos e prioriza `ata_key`.
+
+DECISOES
+- nao criar banco nesta etapa.
+- nao instalar dependencias nesta etapa.
+- manter seed como fonte temporaria.
+
+STATUS FINAL REAL
+- backend Produtos base preparado sem ativacao de API.
+- frontend preservado sem alteracao funcional.
+- painel admin preservado.
+
+PROXIMA ETAPA RECOMENDADA
+- ativar backend minimo com endpoint /health e /version usando contrato definido, mantendo leitura pelo adapter do seed.

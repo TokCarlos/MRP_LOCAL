@@ -1,0 +1,38 @@
+{
+  "version": "v0.1.051",
+  "module": "produtos",
+  "status": "planned_not_active",
+  "note": "Contrato planejado. API ainda nao esta ativa nesta etapa.",
+  "endpoints": {
+    "ativos_planejados": [
+      "GET /api/health",
+      "GET /api/version",
+      "GET /api/produtos",
+      "GET /api/produtos/{produto_key}",
+      "GET /api/empresas",
+      "GET /api/atas",
+      "GET /api/categorias"
+    ],
+    "fora_de_escopo_agora": [
+      "POST /api/produtos",
+      "PUT /api/produtos/{produto_key}",
+      "POST /api/atas",
+      "POST /api/produtos/{produto_key}/imagem",
+      "POST /api/produtos/{produto_key}/bom"
+    ]
+  },
+  "produto_schema_conceitual": {
+    "id": "int",
+    "produto_key": "string_ascii_safe_unique",
+    "empresa_key": "string_ascii_safe",
+    "ata_key": "string_ascii_safe",
+    "categoria_key": "string_ascii_safe",
+    "item_ata": "string",
+    "nome_oficial": "string",
+    "nome_busca": "string_normalized",
+    "imagem_path": "string_optional",
+    "ativo": "bool",
+    "created_at": "datetime_iso_optional",
+    "updated_at": "datetime_iso_optional"
+  }
+}

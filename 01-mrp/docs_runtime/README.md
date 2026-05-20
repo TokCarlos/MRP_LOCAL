@@ -18,3 +18,10 @@ Regras:
 Planejamento registrado:
 - proxima etapa planejada: validacao operacional no DEV casa com painel admin local;
 - etapa seguinte planejada: watchdog/tarefa automatica/reboot.
+
+Atualizacao v0.1.051:
+
+- inicia base tecnica de backend para o modulo Produtos (contrato + adapter + validacao de seed);
+- sem backend FastAPI ativo;
+- sem banco real ativo;
+- frontend permanece funcional e preservado.

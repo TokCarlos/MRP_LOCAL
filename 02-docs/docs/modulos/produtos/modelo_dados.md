@@ -1,31 +1,55 @@
-# Modulo Produtos - Modelo de dados (v0.1.020)
+# Modulo Produtos - Modelo logico inicial (v0.1.051)
 
-## Arquivo base
+## Estruturas logicas
 
-- `01-mrp/front_end/data/produtos_seed.json`
+### empresas
 
-## Campos do produto
+- `id`
+- `key`
+- `nome_visual`
+- `ativo`
 
-- `id` (numero): identificador interno global sequencial.
-- `produto_key` (string): chave unica tecnica por `EMPRESA + ARP + ATA + ITEM`.
-- `empresa` (string): valor oficial de exibicao.
-- `empresa_key` (string): chave tecnica normalizada.
-- `arp` (string): valor oficial de exibicao.
-- `arp_key` (string): chave tecnica normalizada.
-- `ata_numero` (string): valor oficial de exibicao.
-- `ata_key` (string): chave tecnica normalizada.
-- `item_ata` (string): item oficial da ata, preservado como string.
-- `item_key` (string): chave tecnica normalizada do item.
-- `nome_oficial` (string): nome oficial exatamente como entrada.
-- `categoria` (string): provisoria por inferencia textual (`ATI`, `PLAYGROUND`, `MOBILIARIO`, `PENDENTE_CLASSIFICACAO`).
-- `imagem` (objeto):
-  - `pasta`
-  - `preview`
-  - `status` (`DEMO`)
-- `status` (string): `ATIVO`.
+### atas
 
-## Regras
+- `id`
+- `key`
+- `nome_canonico`
+- `numero_ata`
+- `empresa_key` (ou `empresa_id`)
+- `ativo`
 
-- `item_ata` nao e `id`.
-- `id` e interno e pode mudar em nova carga.
-- exibicao usa `nome_oficial`; chaves tecnicas sao para roteamento/arquivos.
+### categorias
+
+- `id`
+- `key`
+- `nome_visual`
+- `ativo`
+
+### produtos
+
+- `id`
+- `produto_key`
+- `empresa_key` (ou `empresa_id`)
+- `ata_key` (ou `ata_id`)
+- `categoria_key` (ou `categoria_id`)
+- `item_ata`
+- `nome_oficial`
+- `nome_busca`
+- `imagem_path`
+- `ativo`
+- `created_at`
+- `updated_at`
+
+## Regras de modelagem
+
+- `produto_key` deve ser unico.
+- `item_ata` e chave de negocio contextual por empresa+ata.
+- `imagem_path` pode ficar na tabela de produtos na primeira fase.
+- Tabela `produto_imagens` sera criada apenas se houver necessidade real de multiplas imagens por produto.
+- Visual pode usar acento; campos tecnicos devem ser ASCII-safe quando forem keys.
+
+## Fonte atual e transicao
+
+- seed atual: `01-mrp/front_end/data/produtos_seed.json` (temporario/mock).
+- fonte real futura: PostgreSQL.
+- adapter backend da v0.1.051 tolera variacoes de campo do seed sem reescrever o seed.

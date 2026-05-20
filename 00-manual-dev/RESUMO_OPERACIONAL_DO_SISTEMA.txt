@@ -121,3 +121,10 @@ Diretriz complementar v0.1.050:
 - porta 8765 segue interna/configuravel;
 - integracao IA futura somente via backend e ferramentas controladas;
 - sem implementacao tecnica de proxy/DNS/Tailscale Serve/IA nesta etapa.
+
+Diretriz v0.1.051:
+- backend Produtos recebeu base tecnica e contrato planejado;
+- API ainda nao ativa;
+- banco real ainda nao criado;
+- seed e imagens continuam como base temporaria;
+- frontend e painel admin continuam preservados.
