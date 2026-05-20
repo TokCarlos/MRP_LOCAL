@@ -143,3 +143,12 @@ A raiz fisica atual de desenvolvimento pode existir em documentacao, config e sc
 - sem backend novo, sem banco novo e sem alteracao funcional do frontend;
 - tecnologia do instalador ainda nao definida;
 - sistema segue em teste/desenvolvimento e ainda nao e blindado.
+
+## Etapa v0.1.050 - registro futuro dominio/proxy e IA (documental)
+
+- registrada diretriz de acesso futuro por nome amigavel/proxy para ocultar IP e porta do usuario final;
+- mantida regra de porta interna/configuravel `8765`;
+- registrada diretriz de integracao IA futura via backend com ferramentas controladas;
+- confirmacao de que nada foi implementado: sem proxy, sem DNS, sem Tailscale Serve, sem backend novo, sem banco novo, sem IA integrada;
+- sem criacao de segredo/token/API key;
+- sistema continua em teste/desenvolvimento e ainda nao e blindado.

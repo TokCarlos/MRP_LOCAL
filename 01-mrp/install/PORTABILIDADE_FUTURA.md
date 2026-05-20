@@ -134,3 +134,16 @@ Regras do instalador futuro:
 - nao depender de `X:\`, `\\HOME-MACHINE`, usuario fixo ou unidade mapeada.
 
 Decisao de ferramenta (Inno/NSIS/WiX/PyInstaller/cx_Freeze/outra) fica para etapa futura.
+
+## Direcao estrategica complementar v0.1.050 - nome amigavel/proxy e IA futura
+
+- objetivo futuro de usabilidade: acesso por nome amigavel (LAN/Tailscale/proxy), evitando URL final com IP:porta;
+- a porta `8765` permanece como porta interna/configuravel do frontend;
+- instalador/preparador futuro podera configurar hosts/DNS/proxy com aprovacao administrativa;
+- ocultar IP/porta nao substitui seguranca real (autenticacao, firewall, Tailscale, backend e controle de acesso).
+
+Integracao IA futura:
+
+- deve ocorrer via backend/API, nao diretamente no frontend;
+- deve usar ferramentas internas controladas, permissao e log;
+- sem implementacao nesta etapa.

@@ -148,3 +148,29 @@ Motores futuros devem ficar desacoplados de interface e infraestrutura.
 - `GOV. RIO` nao pertence ao dominio EMPRESA; deve ficar em campos de cliente/orgao/origem de ata.
 - Filtros de interface devem manter separacao entre `EMPRESA` e `ATA/ORIGEM`.
 - ATA/origem canonica para referencias GOV/SEHIS: `SEHIS - GOV. RIO` (`sehis_gov_rio`).
+
+## Diretriz futura - acesso por nome amigavel/proxy
+
+- objetivo de UX: usuario final acessar por nome amigavel e nao por IP:porta;
+- `8765` permanece porta interna/configuravel;
+- camada de proxy/dominio interno fica na infraestrutura;
+- nao implementar nesta etapa.
+
+## Diretriz futura - integracao IA via backend
+
+Arquitetura conceitual:
+
+Frontend MRP
+-> Backend FastAPI
+-> Modulo IA / Orquestrador
+-> API de IA
+-> Ferramentas internas controladas
+-> Engine / Banco / Logs / Relatorios
+
+Regras:
+
+- IA nao deve usar chave no frontend;
+- IA nao acessa banco direto, chama funcoes de backend;
+- IA nao executa PowerShell livre;
+- acoes criticas exigem permissao, confirmacao e log;
+- iniciar em modo leitura antes de escrita.

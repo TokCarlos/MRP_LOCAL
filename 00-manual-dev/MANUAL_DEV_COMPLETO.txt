@@ -246,3 +246,20 @@ REGRA ESTRATEGICA V0.1.050 - INSTALADOR FUTURO
 - Acoes sensiveis devem exigir aprovacao administrativa.
 - O instalador futuro nao pode depender de X:\, \\HOME-MACHINE, usuario Windows fixo ou drive mapeado.
 - Decisao de tecnologia do instalador fica para etapa futura.
+
+REGRA ESTRATEGICA V0.1.050 - NOME AMIGAVEL/PROXY E IA FUTURA
+
+- Objetivo futuro de acesso: esconder IP/porta do usuario final com nome amigavel.
+- Exemplos conceituais: http://mrp.local, https://mrp.local, https://mrp-trabalho.<tailnet>.ts.net
+- Porta 8765 continua interna/configuravel.
+- Nome amigavel/proxy e infraestrutura, nao regra de negocio.
+- Opcao futura LAN: hosts local em clientes, DNS interno e proxy reverso 80/443 para 127.0.0.1:8765.
+- Opcao futura Tailscale: MagicDNS e Tailscale Serve com HTTPS.
+- Nao implementar isso nesta etapa.
+
+- Integracao IA futura deve ser via backend FastAPI, nunca direta no frontend com chave exposta.
+- IA deve operar com ferramentas controladas, permissao, confirmacao em acao critica e log.
+- IA nao deve executar PowerShell livre.
+- IA nao deve acessar banco diretamente.
+- Chaves/tokens ficam fora do Git.
+- Nao implementar IA nesta etapa.

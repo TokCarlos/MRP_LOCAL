@@ -1,0 +1,68 @@
+RELATORIO DA ETAPA
+Versao: v0.1.050-registro-futuro-dominio-proxy-ia
+
+OBJETIVO
+- Registrar documentalmente duas implementacoes futuras:
+  1) acesso por nome amigavel/dominio interno/proxy;
+  2) integracao IA via backend com ferramentas controladas.
+
+ESCOPO
+- Atualizacao documental e estrategica.
+- Sem alteracao funcional de frontend e painel admin.
+- Sem backend, banco, proxy, DNS, webhook ou IA operacional.
+
+FORA DE ESCOPO
+- Implementar proxy reverso.
+- Configurar DNS/hosts em cliente.
+- Configurar Tailscale Serve.
+- Integrar OpenAI/API externa.
+- Criar backend real.
+- Criar banco real.
+- Instalar dependencias.
+
+ARQUIVOS REVISADOS
+- REGRAS_MRP.txt
+- AGENTS.md
+- README.md
+- Readme.txt
+- 00-manual-dev/MANUAL_DEV_COMPLETO.txt
+- 00-manual-dev/RESUMO_OPERACIONAL_DO_SISTEMA.txt
+- 01-mrp/install/PORTABILIDADE_FUTURA.md
+- 02-docs/docs/infraestrutura/rede_local_tailscale.md
+- 02-docs/docs/infraestrutura/portas.md
+- 02-docs/docs/infraestrutura/empacotamento_instalador.md
+- 02-docs/docs/geral/arquitetura.md
+- 02-docs/docs/geral/status_geral.md
+
+ARQUIVOS CRIADOS
+- 02-docs/docs/infraestrutura/nome_amigavel_proxy_futuro.md
+- 02-docs/docs/infraestrutura/integracao_ia_futura.md
+
+REGRA REGISTRADA - NOME AMIGAVEL/PROXY
+- Porta 8765 continua interna/configuravel.
+- Nome amigavel/proxy e infraestrutura, nao regra de negocio.
+- Possibilidades futuras: hosts, DNS interno, proxy reverso local, MagicDNS e Tailscale Serve.
+- Ocultar IP/porta melhora UX, mas nao substitui seguranca.
+
+REGRA REGISTRADA - IA FUTURA
+- Integracao via backend/API.
+- Ferramentas controladas, permissao e logs.
+- Sem chave no frontend.
+- Sem PowerShell livre.
+- Sem acesso direto ao banco.
+- Acoes criticas com confirmacao.
+
+RISCOS
+- Implementar proxy cedo pode fixar infraestrutura antes da maturidade operacional.
+- Integrar IA cedo sem backend/permissoes/logs pode ampliar risco operacional.
+
+DECISOES
+- Etapa 100% documental.
+- Nenhuma implementacao tecnica nesta versao.
+
+CONFIRMACAO EXPLICITA
+- Nada foi implementado de proxy, DNS, Tailscale Serve ou IA operacional.
+- Nenhum segredo/token/API key foi criado/versionado.
+
+PROXIMA ETAPA RECOMENDADA
+- Definir arquitetura e contratos minimos de backend (rotas, autenticacao, permissao e logging).

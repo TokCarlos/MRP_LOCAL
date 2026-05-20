@@ -75,3 +75,10 @@ Regra estrategica v0.1.050:
 - instalador futuro deve fazer precheck e classificar pendencias: CRITICO/OPCIONAL/RECOMENDADO;
 - instalador futuro deve pedir aprovacao para acoes sensiveis;
 - tecnologia do instalador sera decidida em etapa futura.
+
+Registro adicional v0.1.050:
+- acesso futuro por nome amigavel/proxy para ocultar IP e porta ao usuario final;
+- 8765 continua interna/configuravel;
+- integracao IA futura somente via backend com ferramentas controladas;
+- sem implementacao de proxy/DNS/Tailscale Serve/IA nesta etapa;
+- sem criacao de segredo, token ou API key nesta etapa.

@@ -115,3 +115,9 @@ Diretriz v0.1.050:
 - instalador futuro deve validar ambiente (precheck), registrar pendencias e pedir aprovacao para acoes sensiveis;
 - tecnologia do instalador sera definida em etapa futura;
 - sistema continua em teste/desenvolvimento e ainda nao e blindado.
+
+Diretriz complementar v0.1.050:
+- acesso futuro por nome amigavel/proxy para ocultar IP/porta;
+- porta 8765 segue interna/configuravel;
+- integracao IA futura somente via backend e ferramentas controladas;
+- sem implementacao tecnica de proxy/DNS/Tailscale Serve/IA nesta etapa.

@@ -137,3 +137,13 @@ Planejamento registrado:
 - acoes sensiveis devem exigir aprovacao (firewall, servico/tarefa Windows, permissao, download e alteracoes de ambiente);
 - instalador futuro nao pode depender de `X:\`, `\\HOME-MACHINE`, usuario especifico ou drive mapeado;
 - tecnologia do instalador fica para etapa futura.
+
+## Regra estrategica v0.1.050 (nome amigavel/proxy e IA futura)
+
+- objetivo futuro de acesso: trocar `http://IP:8765/index.html` por nome amigavel (LAN/Tailscale/proxy);
+- exemplos conceituais: `http://mrp.local`, `https://mrp.local`, `https://mrp-trabalho.<tailnet>.ts.net`;
+- a porta `8765` permanece interna/configuravel;
+- proxy/dominio interno e camada de infraestrutura, nao regra de negocio;
+- integracao IA futura deve ser via backend/API, nunca com chave no frontend;
+- IA futura deve usar ferramentas controladas, permissao, confirmacao para acoes criticas e log obrigatorio;
+- nao implementar proxy, DNS, Tailscale Serve nem IA nesta etapa.

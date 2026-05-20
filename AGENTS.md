@@ -108,3 +108,10 @@ Diretriz estrategica v0.1.050:
 - nao implementar instalador real nesta etapa;
 - nao escolher tecnologia de instalador nesta etapa;
 - manter local-first, raiz configuravel e sem hardcode de ambiente.
+
+Diretriz complementar v0.1.050 (dominio/proxy/IA futura):
+
+- registrar acesso futuro por nome amigavel/dominio interno/proxy, mantendo 8765 como porta interna;
+- registrar integracao IA futura via backend com ferramentas controladas e logs;
+- nao implementar proxy, DNS, Tailscale Serve, backend ou IA nesta etapa;
+- nao criar segredo/token/chave nesta etapa.

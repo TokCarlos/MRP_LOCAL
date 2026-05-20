@@ -1191,3 +1191,21 @@ O sistema atual está em teste, com porta 8765 liberada e frontend iniciando por
 528. O instalador futuro nao pode depender de letra de unidade mapeada.
 529. A tecnologia do instalador sera decidida em etapa futura.
 530. Implementacao do instalador final so deve ocorrer apos maturidade real de backend, banco, logs, watchdog/tarefa e operacao automatica.
+
+## 32. Regra estrategica futura - nome amigavel/proxy e integracao IA
+
+531. O acesso por IP e porta e estado atual tecnico, nao objetivo final de experiencia.
+532. Objetivo futuro: acesso por nome amigavel/dominio interno/proxy, ocultando IP e porta do usuario final.
+533. A porta 8765 deve continuar como porta interna/configuravel do frontend.
+534. Nome amigavel/proxy e camada de infraestrutura, nao regra de negocio.
+535. IP, hostname e porta nao podem ficar hardcoded na regra de negocio.
+536. Ocultar IP/porta melhora usabilidade, mas nao substitui autenticacao, firewall, Tailscale e controle de acesso.
+537. Possibilidades futuras aceitas: hosts em clientes, DNS interno, proxy reverso local 80/443->8765, MagicDNS e Tailscale Serve.
+538. Nao implementar proxy, DNS ou Tailscale Serve nesta etapa.
+539. Integracao IA futura deve ocorrer via backend/API, nunca com chave exposta no frontend.
+540. IA deve operar por ferramentas controladas com permissao, confirmacao e log para acoes criticas.
+541. IA nao deve executar PowerShell livre.
+542. IA nao deve acessar banco diretamente sem camada de controle do backend.
+543. Chaves/tokens/segredos devem ficar fora do Git.
+544. Integracao IA depende de backend minimo, autenticacao, permissoes, logs, contratos de API e modelo de dados minimo.
+545. Nesta etapa, a regra e apenas documental/estrategica, sem implementacao tecnica.

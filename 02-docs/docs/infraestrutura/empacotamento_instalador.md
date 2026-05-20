@@ -92,3 +92,10 @@ O instalador futuro:
 ## Decisao de ferramenta
 
 A escolha de tecnologia (Inno Setup, NSIS, WiX, PyInstaller, cx_Freeze ou outra) fica para etapa futura, apos maturidade operacional.
+
+## Relacao com nome amigavel/proxy e IA futura
+
+- instalador/preparador futuro podera, com aprovacao administrativa, configurar camada de nome amigavel/proxy;
+- isso nao muda a regra de negocio e nao elimina controles de seguranca;
+- integracao IA futura depende de backend minimo, autenticacao, permissao, logs e contratos de API;
+- nada disso e implementado nesta etapa.
