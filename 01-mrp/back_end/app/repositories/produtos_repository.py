@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import List
 
-from adapters.produtos_seed_adapter import ProdutosSeedAdapter
-from domain.produto import Produto
+from app.adapters.produtos_seed_adapter import ProdutosSeedAdapter
+from app.domain.produto import Produto
 
 
 class ProdutosRepository:

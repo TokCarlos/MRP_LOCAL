@@ -1,6 +1,7 @@
 import { localGET } from "../api.js";
 
 const SEED_PATH = "data/produtos_seed.json";
+const PRODUTOS_API_URL = "http://localhost:8876/api/produtos";
 const PLACEHOLDER = "img/ui/placeholders/produto_placeholder.svg";
 
 const produtosState = {
@@ -10,7 +11,8 @@ const produtosState = {
         ata: "",
         empresa: "",
         categoria: ""
-    }
+    },
+    sourceInfo: ""
 };
 
 let lightboxBound = false;
@@ -201,12 +203,14 @@ function updateContador(exibidos, total) {
     const contador = document.getElementById("produtosContador");
     if (!contador) return;
 
+    const source = produtosState.sourceInfo ? ` | ${produtosState.sourceInfo}` : "";
+
     if (exibidos === 0) {
-        contador.textContent = "0 produtos encontrados";
+        contador.textContent = `0 produtos encontrados${source}`;
         return;
     }
 
-    contador.textContent = `Exibindo ${exibidos} de ${total} produtos`;
+    contador.textContent = `Exibindo ${exibidos} de ${total} produtos${source}`;
 }
 
 function renderTabela(produtos) {
@@ -301,14 +305,35 @@ function initLightbox() {
 }
 
 async function loadProdutosSeed() {
+    let apiError = "";
+    try {
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), 6000);
+        const response = await fetch(PRODUTOS_API_URL, { cache: "no-store", signal: ctrl.signal });
+        clearTimeout(timer);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        if (data && data.ok === true && Array.isArray(data.items)) {
+            produtosState.sourceInfo = "Fonte: API backend";
+            return data.items;
+        }
+        throw new Error("Payload invalido da API");
+    } catch (err) {
+        apiError = `API indisponivel (${err?.message || "falha"}).`;
+    }
+
     try {
         const response = await fetch(SEED_PATH, { cache: "no-store" });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const data = await response.json();
-        if (Array.isArray(data) && data.length) return data;
-    } catch {
-        // fallback local temporario
+        if (Array.isArray(data) && data.length) {
+            produtosState.sourceInfo = `${apiError} Fallback: seed local`;
+            return data;
+        }
+    } catch (seedErr) {
+        apiError = `${apiError} Seed indisponivel (${seedErr?.message || "falha"}).`;
     }
 
+    produtosState.sourceInfo = `${apiError} Fallback: mock local`;
     return localGET("produtos");
 }

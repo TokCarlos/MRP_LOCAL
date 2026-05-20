@@ -19,3 +19,22 @@ v0.1.051:
 - primeiro dominio real do backend: Produtos;
 - seed atual segue como fonte temporaria de leitura;
 - sem FastAPI ativo, sem banco real e sem instalacao de dependencias.
+
+v0.1.053:
+
+- backend minimo FastAPI oficial em `01-mrp/back_end` com endpoints:
+  - `GET /health`
+  - `GET /api/status`
+  - `GET /api/produtos`
+- sem banco real;
+- sem CRUD completo;
+- sem autenticacao nova nesta etapa;
+- frontend Produtos com consumo prioritario da API e fallback documentado.
+
+v0.1.053b:
+
+- backend oficial consolidado em `01-mrp/back_end` com camadas:
+  - `routes` -> `services` -> `repositories/adapters` -> `domain/contracts`;
+- modulo Produtos definido como template para proximos dominios;
+- estrutura temporaria `01-mrp/backend` removida;
+- sem banco real, sem CRUD completo e sem alteracao de seed/imagens.

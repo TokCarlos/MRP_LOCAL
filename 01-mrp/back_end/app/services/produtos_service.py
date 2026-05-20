@@ -4,8 +4,9 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Set, Tuple
 
-from domain.produto import Produto
-from repositories.produtos_repository import ProdutosRepository
+from app.core.paths import normalize_rel_path
+from app.domain.produto import Produto
+from app.repositories.produtos_repository import ProdutosRepository
 
 
 @dataclass
@@ -23,18 +24,20 @@ class ProdutosValidationReport:
 
 
 class ProdutosService:
-    def __init__(self, repository: ProdutosRepository, project_root: Path) -> None:
+    def __init__(self, repository: ProdutosRepository, image_root: Path) -> None:
         self._repository = repository
-        self._project_root = project_root
+        self._image_root = image_root
+
+    def list_produtos(self) -> List[Produto]:
+        return self._repository.list_produtos()
 
     def _imagem_existe(self, imagem_path: str) -> bool:
-        normalized_parts = [part for part in imagem_path.replace("\\", "/").split("/") if part]
-        path = self._project_root / "01-mrp" / "front_end" / Path(*normalized_parts)
-        return path.exists()
+        rel_path = normalize_rel_path(imagem_path)
+        return (self._image_root / rel_path).exists()
 
     def validate(self) -> ProdutosValidationReport:
         report = ProdutosValidationReport()
-        produtos: List[Produto] = self._repository.list_produtos()
+        produtos = self.list_produtos()
         report.total_produtos = len(produtos)
 
         seen_keys: Dict[str, int] = {}
@@ -60,7 +63,7 @@ class ProdutosService:
             if produto.categoria_key:
                 report.categorias.add(produto.categoria_key)
             else:
-                report.alertas.append(f"{row_ref}: categoria ausente.")
+                report.alertas.append(f"{row_ref}: categoria_key ausente.")
 
             if produto.imagem_path:
                 if not self._imagem_existe(produto.imagem_path):
@@ -89,5 +92,4 @@ class ProdutosService:
             report.erros.append("Duplicidade de produto_key encontrada.")
         if report.duplicidades_item_empresa_ata:
             report.alertas.append("Duplicidade de item_ata por empresa/ata encontrada.")
-
         return report

@@ -317,3 +317,47 @@ SANEAMENTO V0.1.052b
 - removidos artefatos antigos de DLL sem uso operacional;
 - limpeza de lixo DEV (__pycache__, pyc, logs, zip transitorio);
 - criado gerador de pacote limpo para upload/revisao.
+
+ETAPA V0.1.053 - BACKEND MINIMO + API PRODUTOS
+
+Problema:
+- frontend Produtos dependia de seed direto e o sistema ainda nao tinha backend local minimo para saude/status/api de produtos.
+
+Causa:
+- etapas anteriores mantiveram somente base preparatoria sem servidor API em execucao.
+
+Solucao:
+- consolidar backend minimo FastAPI em `01-mrp/back_end/app` com:
+  - `GET /health`
+  - `GET /api/status`
+  - `GET /api/produtos`
+- criar scripts operacionais backend (start/status/healthcheck/stop) em `03-vs/scripts/servicos`.
+- integrar aba Produtos para consumir API primeiro com fallback explicito.
+
+Escopo:
+- sem banco real;
+- sem CRUD completo;
+- sem autenticacao nova.
+
+Risco:
+- dependencia de FastAPI/Uvicorn no Python local para subir o backend.
+
+Status:
+- backend minimo funcional para leitura de produtos via seed.
+
+ETAPA V0.1.053B - REFATORACAO ARQUITETURAL BACK_END
+
+Decisao:
+- backend oficial unico em `01-mrp/back_end`.
+
+Aplicado:
+- estrutura temporaria `01-mrp/backend` removida apos migracao util;
+- modulo Produtos ajustado como template por camadas:
+  - route -> service -> repository/adapter -> domain/contracts -> seed;
+- resposta de `GET /api/produtos` padronizada em `{ok, source, count, items}`.
+
+Mantido:
+- sem alteracao de seed e imagens;
+- sem banco real;
+- sem CRUD completo;
+- sem autenticacao nova.

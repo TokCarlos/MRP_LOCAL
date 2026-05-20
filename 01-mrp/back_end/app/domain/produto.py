@@ -55,3 +55,17 @@ class Produto:
             ativo=ativo,
             raw=raw,
         )
+
+    def to_contract(self) -> Dict[str, Any]:
+        return {
+            "id": self.id,
+            "produto_key": self.produto_key,
+            "empresa_key": self.empresa_key,
+            "ata_key": self.ata_key,
+            "categoria_key": self.categoria_key,
+            "item_ata": self.item_ata,
+            "nome_oficial": self.nome_oficial,
+            "nome_busca": self.nome_busca,
+            "imagem_path": self.imagem_path,
+            "ativo": self.ativo,
+        }

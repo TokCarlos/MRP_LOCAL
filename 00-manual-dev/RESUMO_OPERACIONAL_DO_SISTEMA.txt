@@ -153,3 +153,14 @@ Saneamento v0.1.052b:
 - 4 icones oficiais preservados;
 - artefatos antigos de DLL removidos do uso atual;
 - pacote limpo padronizado via script dedicado.
+
+Registro v0.1.053:
+- backend minimo local com /health, /api/status e /api/produtos;
+- sem banco real e sem FastAPI completo de producao;
+- frontend Produtos com consumo prioritario da API e fallback explicito.
+
+Registro v0.1.053b:
+- backend oficial consolidado em 01-mrp/back_end;
+- estrutura temporaria 01-mrp/backend removida apos migracao util;
+- Produtos padronizado como template arquitetural por camadas;
+- sem banco real, sem CRUD completo e sem alteracao de seed/imagens.

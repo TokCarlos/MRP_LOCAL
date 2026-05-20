@@ -7,16 +7,18 @@ from pathlib import Path
 
 def main() -> int:
     project_root = Path(__file__).resolve().parents[3]
-    app_path = project_root / "01-mrp" / "back_end" / "app"
-    sys.path.insert(0, str(app_path))
+    backend_root = project_root / "01-mrp" / "back_end"
+    sys.path.insert(0, str(backend_root))
 
-    from adapters.produtos_seed_adapter import ProdutosSeedAdapter
-    from repositories.produtos_repository import ProdutosRepository
-    from services.produtos_service import ProdutosService
+    from app.adapters.produtos_seed_adapter import ProdutosSeedAdapter
+    from app.config import load_config
+    from app.repositories.produtos_repository import ProdutosRepository
+    from app.services.produtos_service import ProdutosService
 
-    adapter = ProdutosSeedAdapter(project_root=project_root)
+    cfg = load_config()
+    adapter = ProdutosSeedAdapter(seed_path=cfg.produtos_seed_path)
     repo = ProdutosRepository(adapter=adapter)
-    service = ProdutosService(repository=repo, project_root=project_root)
+    service = ProdutosService(repository=repo, image_root=cfg.produtos_image_root)
     report = service.validate()
 
     print("=== DIAGNOSTICO BACKEND PRODUTOS (SEED) ===")

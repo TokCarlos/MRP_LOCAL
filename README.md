@@ -196,3 +196,25 @@ Planejamento registrado:
 - adapter de seed com resolucao de path de imagem mais portavel;
 - pacote para upload/revisao deve ser gerado por `GERAR_PACOTE_LIMPO_DEV.bat`.
 - pacote limpo exclui `.git`, `.codex`, logs reais, cache, `__pycache__`, `*.pyc`, `Thumbs.db` e zips transitarios.
+
+## Etapa v0.1.053 (backend minimo + API Produtos)
+
+- backend FastAPI minimo consolidado em `01-mrp/back_end/app`;
+- endpoints:
+  - `GET /health`
+  - `GET /api/status`
+  - `GET /api/produtos`
+- sem banco real, sem CRUD completo e sem autenticacao nova;
+- aba Produtos passa a tentar API backend primeiro e usa fallback explicito (seed/local mock) quando a API falha;
+- scripts operacionais backend:
+  - `03-vs/scripts/servicos/mrp_backend_start.ps1`
+  - `03-vs/scripts/servicos/mrp_backend_status.ps1`
+  - `03-vs/scripts/servicos/mrp_backend_healthcheck.ps1`
+  - `03-vs/scripts/servicos/mrp_backend_stop.ps1`
+
+## Etapa v0.1.053b (refatoracao arquitetural back_end)
+
+- backend oficial consolidado em `01-mrp/back_end` (estrutura `01-mrp/backend` removida por ser temporaria/legado);
+- fluxo Produtos padronizado: `route -> service -> repository/adapter -> domain/contracts -> seed`;
+- resposta de `GET /api/produtos` padronizada em `{ ok, source, count, items }`;
+- sem banco real, sem CRUD completo e sem alteracao de seed/imagens.

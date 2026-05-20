@@ -21,7 +21,9 @@ if (!(Test-Path -LiteralPath $wscriptExe)) {
 
 $desktop = [Environment]::GetFolderPath("Desktop")
 $shortcutPath = Join-Path $desktop "MRP_LOCAL - Painel do Servidor.lnk"
-$shortcutPathNovo = Join-Path $desktop "MRP_LOCAL - Painel do Servidor NOVO.lnk"
+$legacyShortcutPaths = @(
+    (Join-Path $desktop "MRP_LOCAL - Painel do Servidor NOVO.lnk")
+)
 
 New-Item -ItemType Directory -Force -Path $localIconDir | Out-Null
 
@@ -39,23 +41,27 @@ if ($iconSource) {
 }
 
 if (Test-Path -LiteralPath $shortcutPath) { Remove-Item -LiteralPath $shortcutPath -Force }
-if (Test-Path -LiteralPath $shortcutPathNovo) { Remove-Item -LiteralPath $shortcutPathNovo -Force }
+foreach ($legacyPath in $legacyShortcutPaths) {
+    if (Test-Path -LiteralPath $legacyPath) {
+        Remove-Item -LiteralPath $legacyPath -Force
+        Write-Host "Atalho legado removido:"
+        Write-Host $legacyPath
+    }
+}
 
 $shell = New-Object -ComObject WScript.Shell
-foreach ($lnk in @($shortcutPath, $shortcutPathNovo)) {
-    $shortcut = $shell.CreateShortcut($lnk)
-    $shortcut.TargetPath = $wscriptExe
-    $shortcut.Arguments = "`"$vbsPath`""
-    $shortcut.WorkingDirectory = $repoRoot
-    if (Test-Path -LiteralPath $localIconPath) {
-        $shortcut.IconLocation = "$localIconPath,0"
-    } else {
-        $shortcut.IconLocation = "$env:WINDIR\System32\imageres.dll,15"
-        Write-Warning "Icones oficiais nao encontrados. Usando icone padrao do Windows."
-    }
-    $shortcut.Description = "Launcher do Painel Administrativo Local do MRP_LOCAL"
-    $shortcut.Save()
-    Write-Host "Atalho criado/recriado:"
-    Write-Host $lnk
+$shortcut = $shell.CreateShortcut($shortcutPath)
+$shortcut.TargetPath = $wscriptExe
+$shortcut.Arguments = "`"$vbsPath`""
+$shortcut.WorkingDirectory = $repoRoot
+if (Test-Path -LiteralPath $localIconPath) {
+    $shortcut.IconLocation = "$localIconPath,0"
+} else {
+    $shortcut.IconLocation = "$env:WINDIR\System32\imageres.dll,15"
+    Write-Warning "Icones oficiais nao encontrados. Usando icone padrao do Windows."
 }
+$shortcut.Description = "Launcher do Painel Administrativo Local do MRP_LOCAL"
+$shortcut.Save()
+Write-Host "Atalho criado/recriado:"
+Write-Host $shortcutPath
 exit 0

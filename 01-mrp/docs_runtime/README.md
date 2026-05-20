@@ -25,3 +25,10 @@ Atualizacao v0.1.051:
 - sem backend FastAPI ativo;
 - sem banco real ativo;
 - frontend permanece funcional e preservado.
+
+Atualizacao v0.1.053:
+
+- backend local minimo oficial em `01-mrp/back_end/app`;
+- rotas de saude/status/produtos ativas quando o servico backend e iniciado;
+- sem persistencia real (seed continua fonte temporaria);
+- scripts operacionais backend em `03-vs/scripts/servicos`.

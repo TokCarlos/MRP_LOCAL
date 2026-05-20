@@ -1,0 +1,106 @@
+RELATORIO_BACKEND_REFATORACAO_v0.1.053b
+
+objetivo
+- consolidar backend oficial em 01-mrp/back_end sem reescrever do zero
+- preservar frontend, seed, imagens e fluxo funcional aprovado
+- deixar Produtos como modulo-template por camadas
+
+decisao arquitetural
+- backend oficial: 01-mrp/back_end
+- 01-mrp/backend tratado como temporario/legado da v0.1.053
+
+aprovado_preservar
+- frontend visual aprovado
+- produtos_seed.json sem alteracao de dados
+- imagens de produtos sem alteracao
+- painel admin preservado
+- portable preservado
+
+funcional_em_validacao
+- scripts backend start/status/stop/healthcheck
+- integracao da aba Produtos com API
+- endpoints /health /api/status /api/produtos
+
+em_desenvolvimento
+- arquitetura final do backend por camadas
+- padronizacao de contratos de resposta e erro
+
+pendente
+- validacao de subida real do backend depende de fastapi/uvicorn no ambiente local
+- sem banco real nesta etapa
+- sem CRUD completo nesta etapa
+
+risco
+- regressao de path/execucao ao migrar de 01-mrp/backend para 01-mrp/back_end
+- mitigacao: validacoes de scripts, contratos padronizados e frontend com aviso explicito de fallback
+
+o_que_existia_em_01_mrp_backend
+- app/main.py e app/config.py
+- rotas health/status/produtos
+- service/adapter iniciais
+- cache __pycache__ e .pyc
+
+o_que_foi_migrado_para_back_end
+- configuracao central de backend
+- rotas de health/status/produtos
+- adapter seed
+- service de produtos e validacao
+- contratos de resposta/erro
+- inicializacao FastAPI em app/main.py
+
+o_que_foi_removido
+- estrutura temporaria 01-mrp/backend
+- caches __pycache__
+- arquivos .pyc
+- Thumbs.db (quando presentes)
+
+estrutura_final_resumida
+- app/main.py, app/config.py
+- app/core (errors/result/paths/encoding)
+- app/routes (health/status/produtos)
+- app/services (health/status/produtos)
+- app/repositories (produtos_repository)
+- app/adapters (produtos_seed_adapter)
+- app/domain (produto)
+- app/contracts (health/status/produtos/error)
+
+fluxo_produtos_template
+- route recebe requisicao
+- service aplica regra de aplicacao
+- repository chama adapter
+- adapter le seed
+- domain/contracts padronizam saida
+- API retorna payload padronizado
+
+acid_ready
+- regra critica fora do frontend
+- persistencia futura atras de repository/adapter
+- contrato de erro padronizado
+- caminho para transacao futura sem acoplamento de UI
+
+nao_acid_real_ainda
+- sem banco/transacao real
+- sem auditoria transacional de escrita
+- sem controle de concorrencia de persistencia
+
+validacoes_executadas
+- git diff --check
+- py_compile dos python afetados
+- diagnostico de produtos seed
+- healthcheck/status/start/stop scriptados
+
+resultado_validacoes
+- git diff --check: OK
+- py_compile backend/app + scripts backend: OK
+- validar_backend_produtos_seed.py: OK (total_produtos=163, erros=0, duplicidades_produto_key=0, imagens_inexistentes=0)
+- mrp_backend_start.ps1: FAIL (fastapi nao instalado no ambiente Python)
+- mrp_backend_status.ps1: LISTEN=NAO, HEALTH=FAIL
+- mrp_backend_healthcheck.ps1: FAIL (health/status/produtos sem resposta)
+- teste de erro seed ausente via adapter: OK (`seed_not_found` com mensagem clara)
+
+o_que_nao_foi_validado
+- homologacao de execucao real do FastAPI se dependencia nao estiver instalada
+- carga/concorrencia
+
+proximos_passos
+- v0.1.054: modelo minimo + persistencia local

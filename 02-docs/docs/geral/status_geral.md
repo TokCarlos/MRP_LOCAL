@@ -198,3 +198,24 @@ A raiz fisica atual de desenvolvimento pode existir em documentacao, config e sc
 - removidos artefatos antigos de DLL sem uso operacional atual;
 - adapter de Produtos com path de imagem mais portavel;
 - criado script de pacote limpo para upload/revisao.
+
+## Etapa v0.1.053 - backend minimo + API Produtos
+
+- backend minimo consolidado em `01-mrp/back_end/app`;
+- endpoints ativos quando iniciado:
+  - `GET /health`
+  - `GET /api/status`
+  - `GET /api/produtos`
+- sem banco real, sem CRUD completo e sem autenticacao nova;
+- scripts de operacao backend criados em `03-vs/scripts/servicos`;
+- frontend Produtos ajustado para consumir API primeiro com fallback explicito.
+
+## Etapa v0.1.053b - refatoracao arquitetural e limpeza pos-backend inicial
+
+- backend oficial unico consolidado em `01-mrp/back_end`;
+- estrutura temporaria `01-mrp/backend` removida apos migracao util;
+- Produtos padronizado como modulo-template:
+  - route -> service -> repository/adapter -> domain/contracts -> seed;
+- resposta de `GET /api/produtos` padronizada em:
+  - `{ ok, source, count, items }`;
+- sem banco real, sem CRUD completo e sem alteracao de seed/imagens.

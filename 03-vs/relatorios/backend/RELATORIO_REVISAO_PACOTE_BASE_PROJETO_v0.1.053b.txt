@@ -1,0 +1,39 @@
+MRP_LOCAL - RELATORIO REVISAO PACOTE BASE DO PROJETO v0.1.053b
+
+Status: revisao corretiva usando o pacote upado pelo usuario como base canonica.
+
+Problema identificado:
+- O pacote anterior gerado pelo assistente introduziu scripts auxiliares e ajustes de start/backend que nao devem substituir o pacote funcional do usuario sem validacao no Windows.
+- O script de atalho ja existente criava dois atalhos: MRP_LOCAL - Painel do Servidor.lnk e MRP_LOCAL - Painel do Servidor NOVO.lnk.
+
+Decisao:
+- Preservar o pacote do projeto como base funcional.
+- Nao aplicar os scripts de start/stop/status do pacote anterior.
+- Corrigir somente a duplicidade objetiva do atalho.
+- Manter backend oficial em 01-mrp/back_end.
+
+Alteracao aplicada:
+- 03-vs/scripts/painel/criar_atalho_painel.ps1 agora cria apenas o atalho oficial MRP_LOCAL - Painel do Servidor.lnk.
+- O atalho legado MRP_LOCAL - Painel do Servidor NOVO.lnk e removido automaticamente se existir.
+- 03-vs/scripts/painel/README.md atualizado para refletir o comportamento real.
+
+Preservado:
+- Scripts backend funcionais do pacote do usuario.
+- Frontend atual.
+- Seed de produtos.
+- Imagens.
+- Estrutura back_end consolidada pelo Codex.
+
+Validacoes executadas neste ambiente:
+- git diff --check OK.
+- python -m compileall -q 01-mrp/back_end/app OK.
+- FastAPI TestClient /health OK.
+- FastAPI TestClient /api/status OK.
+- FastAPI TestClient /api/produtos OK.
+
+Pendencia de homologacao:
+- Validar no Windows DEV real a criacao de apenas um atalho na area de trabalho.
+- Validar start/status/healthcheck exatamente com os scripts preservados do pacote do usuario.
+
+Observacao:
+- Esta revisao nao chama o sistema de blindado. O estado continua DEV/parcial conforme REGRAS_MRP.txt.

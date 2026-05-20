@@ -118,3 +118,16 @@ Saneamento v0.1.052b:
 - adapter backend produtos com path de imagem mais portavel;
 - pacote limpo deve ser gerado por GERAR_PACOTE_LIMPO_DEV.bat.
 - pacote limpo nao deve incluir .git, .codex, logs, cache, pycache, pyc, Thumbs.db ou zip transitorio.
+
+Registro v0.1.053:
+- backend minimo local consolidado em 01-mrp/back_end/app;
+- endpoints: /health, /api/status, /api/produtos;
+- sem banco real, sem CRUD completo e sem autenticacao nova;
+- aba Produtos tenta API primeiro e usa fallback explicito quando API nao responde;
+- scripts de start/status/healthcheck/stop do backend adicionados em 03-vs/scripts/servicos.
+
+Registro v0.1.053b:
+- backend oficial unico consolidado em 01-mrp/back_end;
+- estrutura temporaria 01-mrp/backend removida apos migracao util;
+- Produtos vira modulo-template por camadas (route/service/repository-adapter/domain-contracts);
+- resposta de produtos padronizada em {ok, source, count, items}.

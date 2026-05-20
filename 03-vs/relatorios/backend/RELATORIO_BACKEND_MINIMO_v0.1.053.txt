@@ -1,0 +1,75 @@
+RELATORIO DA ETAPA
+Versao: v0.1.053-backend-minimo-api-produtos
+
+OBJETIVO
+- Criar primeiro backend local controlado com FastAPI e integrar a aba Produtos ao endpoint de API.
+
+PROBLEMA
+- A aba Produtos dependia de leitura direta do seed sem backend local minimo.
+
+CAUSA
+- O projeto estava em fase preparatoria de backend, sem servidor API em execucao.
+
+SOLUCAO
+- Criar backend minimo em `01-mrp/backend/app` com rotas:
+  - `GET /health`
+  - `GET /api/status`
+  - `GET /api/produtos`
+- Criar scripts operacionais backend em `03-vs/scripts/servicos`.
+- Ajustar frontend Produtos para consumir API primeiro com fallback explicito.
+
+ESCOPO
+- sem PostgreSQL;
+- sem SQLite;
+- sem CRUD completo;
+- sem autenticacao nova;
+- sem alteracao de seed/imagens.
+
+ARQUIVOS CRIADOS
+- 01-mrp/backend/app/main.py
+- 01-mrp/backend/app/config.py
+- 01-mrp/backend/app/routes/__init__.py
+- 01-mrp/backend/app/routes/health.py
+- 01-mrp/backend/app/routes/status.py
+- 01-mrp/backend/app/routes/produtos.py
+- 01-mrp/backend/app/services/produtos_service.py
+- 01-mrp/backend/app/adapters/produtos_seed_adapter.py
+- 03-vs/scripts/servicos/mrp_backend_start.ps1
+- 03-vs/scripts/servicos/mrp_backend_status.ps1
+- 03-vs/scripts/servicos/mrp_backend_stop.ps1
+- 03-vs/scripts/servicos/mrp_backend_healthcheck.ps1
+- 03-vs/scripts/backend/diagnosticar_backend_minimo.ps1
+
+ARQUIVOS ALTERADOS
+- 01-mrp/front_end/js/pages/produtos_list.js
+- docs operacionais e status geral
+- 01-mrp/back_end/README.md
+- 01-mrp/docs_runtime/README.md
+
+DECISOES TECNICAS
+- porta backend padrao: 8876;
+- raiz resolvida por pathlib/config, sem hardcode de regra de negocio;
+- sem log real versionado pelos scripts backend;
+- fallback de Produtos mantido para seed/local mock com mensagem explicita de fonte.
+
+VALIDADO
+- compilacao Python dos novos modulos;
+- backend inicia e responde `/health`, `/api/status`, `/api/produtos`;
+- scripts start/status/healthcheck/stop executam com exit code coerente;
+- diagnostico backend minimo executa;
+- `git diff --check` sem erro.
+
+NAO VALIDADO
+- autenticacao de API;
+- persistencia real em banco;
+- fluxo multiusuario/rede prolongado.
+
+RISCOS
+- dependencia de FastAPI/Uvicorn no Python local;
+- fallback para seed pode mascarar indisponibilidade da API se o operador ignorar mensagens de fonte.
+
+PENDENCIAS
+- v0.1.054: modelo minimo + persistencia local.
+
+STATUS FINAL
+- backend minimo funcional para leitura de Produtos, sem banco real e sem CRUD completo.

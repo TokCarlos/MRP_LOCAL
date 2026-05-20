@@ -36,3 +36,9 @@ Produtos e o cadastro-mestre que sera referenciado por materiais, tubos, chapas,
 - resolucao de `imagem_path` ajustada para montagem portavel com `pathlib`;
 - sem alteracao de `produtos_seed.json`;
 - sem alteracao funcional de frontend.
+
+## Etapa v0.1.053
+
+- API minima de leitura de Produtos ativa em `/api/produtos`;
+- backend local responde `/health` e `/api/status`;
+- dados continuam vindo de seed (sem banco real nesta etapa).

@@ -1,0 +1,2 @@
+"""MRP backend app package."""
+

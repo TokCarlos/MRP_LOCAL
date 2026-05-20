@@ -82,10 +82,11 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\painel\criar
 
 Ou por duplo clique em `CRIAR_ATALHO_PAINEL_SERVIDOR.bat`.
 
-O script cria:
+O script cria somente um atalho oficial:
 
 - `MRP_LOCAL - Painel do Servidor.lnk`
-- `MRP_LOCAL - Painel do Servidor NOVO.lnk` (teste anti-cache)
+
+O atalho legado `MRP_LOCAL - Painel do Servidor NOVO.lnk`, se existir, e removido automaticamente.
 
 Modelo tecnico do atalho:
 
