@@ -101,3 +101,9 @@ Registro v0.1.050 icons dll launcher:
 - atalho do painel usa MRP_ICONS.dll,0;
 - MRP_PAINEL_SERVIDOR.vbs segue launcher clicavel principal;
 - CRIAR_ATALHO_PAINEL_SERVIDOR.bat recria atalho com icone correto.
+
+Registro v0.1.052 icones oficiais:
+- atalho principal usa .ico direto (multi-resolucao), nao DLL;
+- icone padrao: mrp_mrp_dark.ico;
+- fallback: mrp_pcp_light.ico;
+- 4 icones oficiais compoem a identidade visual inicial.

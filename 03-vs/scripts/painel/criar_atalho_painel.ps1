@@ -3,7 +3,8 @@ $ErrorActionPreference = "Stop"
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $repoRoot = [System.IO.Path]::GetFullPath((Join-Path $scriptDir "..\..\.."))
 $vbsPath = Join-Path $repoRoot "MRP_PAINEL_SERVIDOR.vbs"
-$iconsDll = Join-Path $repoRoot "01-mrp\assets\icons\windows\MRP_ICONS.dll"
+$iconPrimary = Join-Path $repoRoot "01-mrp\assets\icons\windows\ico\mrp_mrp_dark.ico"
+$iconFallback = Join-Path $repoRoot "01-mrp\assets\icons\windows\ico\mrp_pcp_light.ico"
 
 if (!(Test-Path -LiteralPath $vbsPath)) {
     Write-Host "ERRO: launcher VBS nao encontrado: $vbsPath"
@@ -17,12 +18,15 @@ $shell = New-Object -ComObject WScript.Shell
 $shortcut = $shell.CreateShortcut($shortcutPath)
 $shortcut.TargetPath = $vbsPath
 $shortcut.WorkingDirectory = $repoRoot
-if (Test-Path -LiteralPath $iconsDll) {
-    $shortcut.IconLocation = "$iconsDll,0"
-    Write-Host "Icone definido pela DLL: $iconsDll,0"
+if (Test-Path -LiteralPath $iconPrimary) {
+    $shortcut.IconLocation = $iconPrimary
+    Write-Host "Icone definido: $iconPrimary"
+} elseif (Test-Path -LiteralPath $iconFallback) {
+    $shortcut.IconLocation = $iconFallback
+    Write-Warning "Icone principal ausente. Usando fallback: $iconFallback"
 } else {
     $shortcut.IconLocation = "$env:WINDIR\System32\imageres.dll,15"
-    Write-Warning "DLL de icones nao encontrada. Usando icone padrao do Windows."
+    Write-Warning "Icones oficiais nao encontrados. Usando icone padrao do Windows."
 }
 $shortcut.Description = "Launcher do Painel Administrativo Local do MRP_LOCAL"
 $shortcut.Save()

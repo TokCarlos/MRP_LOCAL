@@ -175,3 +175,11 @@ A raiz fisica atual de desenvolvimento pode existir em documentacao, config e sc
 - `criar_atalho_painel.ps1` atualizado para usar `MRP_ICONS.dll,0`;
 - fallback para icone padrao do Windows quando a DLL nao existir;
 - alteracao restrita a recurso visual de launcher.
+
+## Etapa v0.1.052 - icones oficiais .ico launcher
+
+- problema: icone da DLL aparecia em propriedades, mas nao renderizava de forma confiavel na area de trabalho;
+- decisao: usar `.ico` direto multi-resolucao como padrao do atalho;
+- 4 icones oficiais gerados em `01-mrp/assets/icons/windows/ico`;
+- atalho do painel aponta para `mrp_mrp_dark.ico` com fallback para `mrp_pcp_light.ico`;
+- DLL mantida apenas como recurso opcional/futuro.

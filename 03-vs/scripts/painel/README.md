@@ -78,6 +78,7 @@ Ou por duplo clique em `CRIAR_ATALHO_PAINEL_SERVIDOR.bat`.
 
 ## Icone do atalho
 
-- local oficial da DLL: `01-mrp/assets/icons/windows/MRP_ICONS.dll`
-- indice principal usado no atalho: `MRP_ICONS.dll,0`
-- se a DLL nao existir, o script usa icone padrao do Windows sem quebrar.
+- padrao atual: `.ico` direto em `01-mrp/assets/icons/windows/ico/mrp_mrp_dark.ico`
+- fallback: `01-mrp/assets/icons/windows/ico/mrp_pcp_light.ico`
+- se ambos nao existirem, o script usa icone padrao do Windows sem quebrar.
+- DLL de icones permanece opcional/futura e nao e padrao de atalho nesta fase.

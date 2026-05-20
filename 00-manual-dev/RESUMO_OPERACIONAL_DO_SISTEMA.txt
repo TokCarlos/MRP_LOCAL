@@ -139,3 +139,8 @@ Registro icons dll launcher:
 - DLL de icones oficial em 01-mrp/assets/icons/windows;
 - atalho do painel usa MRP_ICONS.dll,0;
 - alteracao apenas visual/launcher.
+
+Registro v0.1.052:
+- atalho corrigido para usar .ico direto oficial;
+- DLL nao e padrao atual para atalho de desktop;
+- identidade visual oficial com 4 icones.

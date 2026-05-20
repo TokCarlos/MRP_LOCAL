@@ -1,0 +1,48 @@
+RELATORIO DA ETAPA
+Versao: v0.1.052-icons-oficiais-ico-launcher
+
+PROBLEMA IDENTIFICADO
+- icone via DLL aparecia em Propriedades do atalho, mas renderizava de forma inconsistente na Area de Trabalho.
+
+CAUSA PROVAVEL
+- comportamento de cache/renderizacao do Explorer com IconLocation em DLL no contexto atual.
+
+DECISAO TECNICA
+- usar arquivos `.ico` multi-resolucao diretamente no atalho como caminho principal.
+- manter DLL apenas como recurso opcional/futuro.
+
+IMAGENS OFICIAIS USADAS
+- 01-mrp/assets/icons/source/mrp_pcp_light.png
+- 01-mrp/assets/icons/source/mrp_jpl_dark.png
+- 01-mrp/assets/icons/source/mrp_mrp_light.png
+- 01-mrp/assets/icons/source/mrp_mrp_dark.png
+
+ARQUIVOS .ICO GERADOS
+- 01-mrp/assets/icons/windows/ico/mrp_pcp_light.ico
+- 01-mrp/assets/icons/windows/ico/mrp_jpl_dark.ico
+- 01-mrp/assets/icons/windows/ico/mrp_mrp_light.ico
+- 01-mrp/assets/icons/windows/ico/mrp_mrp_dark.ico
+
+AJUSTE NO ATALHO
+- script: 03-vs/scripts/painel/criar_atalho_painel.ps1
+- IconLocation padrao: 01-mrp/assets/icons/windows/ico/mrp_mrp_dark.ico
+- fallback: 01-mrp/assets/icons/windows/ico/mrp_pcp_light.ico
+- fallback final: icone padrao do Windows
+
+SCRIPT DE REPARO DE CACHE
+- 03-vs/scripts/icons/reparar_cache_icones_windows.ps1
+- REPARAR_CACHE_ICONES_WINDOWS.bat
+- uso manual, com confirmacao antes de reiniciar explorer.exe
+
+VALIDACOES EXECUTADAS
+- geracao dos 4 .ico concluida;
+- criacao do atalho testada;
+- sem hardcode X:\\ ou \\HOME-MACHINE no script de atalho;
+- frontend/backend preservados.
+
+LIMITACOES
+- renderizacao final do icone pode depender de cache local do Explorer.
+
+STATUS FINAL REAL
+- correcao principal aplicada com .ico direto como padrao de atalho.
+- DLL permanece historica/opcional e nao e caminho padrao.

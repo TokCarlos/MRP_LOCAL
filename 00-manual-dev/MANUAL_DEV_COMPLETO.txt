@@ -296,3 +296,11 @@ ETAPA V0.1.050 - ICONS DLL LAUNCHER
 - atalho de desktop do painel usa `MRP_ICONS.dll,0`.
 - fallback para icone padrao se a DLL nao existir.
 - recurso visual de launcher, sem mudanca de regra de negocio.
+
+ETAPA V0.1.052 - ICONES OFICIAIS .ICO
+
+- correcao principal: usar `.ico` direto no atalho da Area de Trabalho;
+- icones oficiais gerados em `01-mrp/assets/icons/windows/ico`;
+- padrao do painel: `mrp_mrp_dark.ico`;
+- fallback: `mrp_pcp_light.ico`;
+- DLL permanece opcional/futura, nao padrao do atalho.

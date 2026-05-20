@@ -170,3 +170,14 @@ Planejamento registrado:
 - atalho do painel usa `MRP_ICONS.dll,0` via `03-vs/scripts/painel/criar_atalho_painel.ps1`;
 - `MRP_PAINEL_SERVIDOR.vbs` permanece launcher principal por duplo clique;
 - `CRIAR_ATALHO_PAINEL_SERVIDOR.bat` recria o atalho com icone correto.
+
+## Etapa visual launcher (v0.1.052 icones oficiais .ico)
+
+- atalho do painel passou a usar `.ico` direto multi-resolucao;
+- 4 icones oficiais em `01-mrp/assets/icons/windows/ico`:
+  - `mrp_pcp_light.ico`
+  - `mrp_jpl_dark.ico`
+  - `mrp_mrp_light.ico`
+  - `mrp_mrp_dark.ico`
+- padrao atual do atalho: `mrp_mrp_dark.ico` (fallback `mrp_pcp_light.ico`);
+- DLL de icones permanece opcional/futura e nao e caminho principal do atalho.
