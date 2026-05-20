@@ -166,10 +166,9 @@ Planejamento registrado:
 
 ## Etapa visual launcher (v0.1.050 icons dll)
 
-- DLL de icones incorporada em `01-mrp/assets/icons/windows`;
-- atalho do painel usa `MRP_ICONS.dll,0` via `03-vs/scripts/painel/criar_atalho_painel.ps1`;
-- `MRP_PAINEL_SERVIDOR.vbs` permanece launcher principal por duplo clique;
-- `CRIAR_ATALHO_PAINEL_SERVIDOR.bat` recria o atalho com icone correto.
+- registro historico: pacote DLL foi incorporado em etapa anterior;
+- padrao atual do atalho nao usa DLL;
+- DLL de icones e historica/opcional/futura.
 
 ## Etapa visual launcher (v0.1.052 icones oficiais .ico)
 
@@ -188,3 +187,12 @@ Planejamento registrado:
 - item visual oficial e `MRP_LOCAL - Painel do Servidor.lnk`;
 - atalho aponta para `wscript.exe` com argumento para o `.vbs`;
 - icone do atalho usa `.ico` local em `%LOCALAPPDATA%\MRP_LOCAL\icons`.
+
+## Saneamento v0.1.052b
+
+- icones oficiais preservados: `mrp_pcp_light`, `mrp_jpl_dark`, `mrp_mrp_light`, `mrp_mrp_dark`;
+- artefatos antigos de DLL removidos do caminho oficial de uso;
+- backend Produtos permanece sem FastAPI ativo e sem banco;
+- adapter de seed com resolucao de path de imagem mais portavel;
+- pacote para upload/revisao deve ser gerado por `GERAR_PACOTE_LIMPO_DEV.bat`.
+- pacote limpo exclui `.git`, `.codex`, logs reais, cache, `__pycache__`, `*.pyc`, `Thumbs.db` e zips transitarios.

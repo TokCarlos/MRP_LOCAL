@@ -292,10 +292,8 @@ REGISTRO FUTURO - MODELO PROGRAMA WINDOWS
 
 ETAPA V0.1.050 - ICONS DLL LAUNCHER
 
-- pacote de icones incorporado em `01-mrp/assets/icons/windows`.
-- atalho de desktop do painel usa `MRP_ICONS.dll,0`.
-- fallback para icone padrao se a DLL nao existir.
-- recurso visual de launcher, sem mudanca de regra de negocio.
+- etapa historica de recurso visual;
+- DLL nao e padrao atual do atalho.
 
 ETAPA V0.1.052 - ICONES OFICIAIS .ICO
 
@@ -312,3 +310,10 @@ CORRECAO FINAL DE ATALHO VISUAL
 - `TargetPath` do atalho deve ser `wscript.exe`;
 - `.vbs` deve entrar em `Arguments`;
 - icone oficial fica no `.lnk` com arquivo `.ico` local em `%LOCALAPPDATA%\MRP_LOCAL\icons`.
+
+SANEAMENTO V0.1.052b
+
+- mantidos como oficiais os 4 icones .ico atuais;
+- removidos artefatos antigos de DLL sem uso operacional;
+- limpeza de lixo DEV (__pycache__, pyc, logs, zip transitorio);
+- criado gerador de pacote limpo para upload/revisao.

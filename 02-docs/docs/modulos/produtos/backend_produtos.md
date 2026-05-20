@@ -30,3 +30,9 @@ Produtos e o cadastro-mestre que sera referenciado por materiais, tubos, chapas,
 - nao ativar FastAPI;
 - nao criar banco real;
 - nao alterar frontend funcional.
+
+## Saneamento v0.1.052b
+
+- resolucao de `imagem_path` ajustada para montagem portavel com `pathlib`;
+- sem alteracao de `produtos_seed.json`;
+- sem alteracao funcional de frontend.

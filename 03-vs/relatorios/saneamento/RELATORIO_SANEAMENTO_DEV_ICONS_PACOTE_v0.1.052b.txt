@@ -1,0 +1,93 @@
+RELATORIO DA ETAPA
+Versao: v0.1.052b-saneamento-dev-icons-pacote
+
+OBJETIVO
+- Sanear ambiente DEV antes de continuar backend Produtos.
+
+ESCOPO
+- limpeza de lixo operacional;
+- limpeza de artefatos antigos de icones;
+- preservacao dos 4 icones oficiais;
+- ajuste de path portavel no backend Produtos;
+- criacao de script de pacote limpo para upload/revisao.
+
+FORA DE ESCOPO
+- ativar FastAPI;
+- criar banco;
+- instalar dependencias;
+- alterar frontend funcional.
+
+LIXO OPERACIONAL ENCONTRADO
+- pastas __pycache__ em back_end app e scripts;
+- arquivos *.pyc em back_end/scripts;
+- logs reais em 01-mrp/logs/admin e 01-mrp/logs/servicos;
+- zip transitorio na raiz: system_jpl.zip.
+
+LIXO OPERACIONAL REMOVIDO
+- __pycache__ mapeados;
+- *.pyc mapeados;
+- logs reais mapeados;
+- system_jpl.zip na raiz;
+- Thumbs.db e *.tmp/*.bak* (quando existentes).
+
+ARTEFATOS ANTIGOS DE ICONES ENCONTRADOS
+- MRP_ICONS.dll
+- MRP_ICONS.rc
+- LEIA_ICONS_DLL.txt
+- manifest_icons.json
+- pasta windows/icons legado
+- preview legado *_preview.png
+
+ARTEFATOS ANTIGOS DE ICONES REMOVIDOS
+- MRP_ICONS.dll
+- MRP_ICONS.rc
+- LEIA_ICONS_DLL.txt
+- manifest_icons.json
+- pasta windows/icons legado
+- previews legado *_preview.png
+
+ICONES OFICIAIS PRESERVADOS
+PNG source:
+- 01-mrp/assets/icons/source/mrp_pcp_light.png
+- 01-mrp/assets/icons/source/mrp_jpl_dark.png
+- 01-mrp/assets/icons/source/mrp_mrp_light.png
+- 01-mrp/assets/icons/source/mrp_mrp_dark.png
+
+ICO oficiais:
+- 01-mrp/assets/icons/windows/ico/mrp_pcp_light.ico
+- 01-mrp/assets/icons/windows/ico/mrp_jpl_dark.ico
+- 01-mrp/assets/icons/windows/ico/mrp_mrp_light.ico
+- 01-mrp/assets/icons/windows/ico/mrp_mrp_dark.ico
+
+REFERENCIAS A DLL CORRIGIDAS/REMOVIDAS
+- documentacao ativa ajustada para deixar DLL como historica/opcional;
+- padrao atual de atalho mantido em .ico local no AppData.
+
+CORRECAO BACKEND PRODUTOS
+- ajuste de montagem de path de imagem para estrategia portavel com pathlib em:
+  01-mrp/back_end/app/services/produtos_service.py
+
+SCRIPT DE PACOTE LIMPO CRIADO
+- 03-vs/scripts/pacote/gerar_pacote_limpo_dev.ps1
+- GERAR_PACOTE_LIMPO_DEV.bat
+
+VALIDACOES EXECUTADAS
+- py_compile de adapter backend, validador backend e diagnostico de icones;
+- diagnostico backend produtos;
+- diagnostico icones oficiais;
+- git diff --check;
+- confirmacao de preservacao de portable e 4 icones oficiais;
+- confirmacao de atalho com .ico local/AppData.
+
+RISCOS RESTANTES
+- persistem alertas tolerados no seed para coexistencia de arp_key/ata_key;
+- etapa FastAPI/control plane ainda pendente.
+
+STATUS FINAL REAL
+- saneamento concluido;
+- base DEV mais limpa;
+- icones oficiais consolidados;
+- backend produtos continua sem FastAPI ativo e sem banco.
+
+PROXIMA ETAPA RECOMENDADA
+- FastAPI minimo controlado (/health e /version) sobre a base do modulo Produtos.

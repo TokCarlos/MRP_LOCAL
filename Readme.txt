@@ -97,10 +97,8 @@ Registro documental adicional:
 - backend Produtos segue como proxima frente tecnica.
 
 Registro v0.1.050 icons dll launcher:
-- pacote de icones incorporado em 01-mrp\assets\icons\windows;
-- atalho do painel usa MRP_ICONS.dll,0;
-- MRP_PAINEL_SERVIDOR.vbs segue launcher clicavel principal;
-- CRIAR_ATALHO_PAINEL_SERVIDOR.bat recria atalho com icone correto.
+- pacote de icones DLL foi etapa historica;
+- DLL nao e padrao atual de atalho.
 
 Registro v0.1.052 icones oficiais:
 - atalho principal usa .ico direto (multi-resolucao), nao DLL;
@@ -113,3 +111,10 @@ Ajuste definitivo de conceito:
 - .lnk e item visual oficial para o usuario;
 - icone personalizado fica no .lnk;
 - atalho usa wscript.exe + argumento para o vbs.
+
+Saneamento v0.1.052b:
+- mantidos apenas 4 icones oficiais .ico;
+- removidos artefatos antigos de DLL sem uso atual;
+- adapter backend produtos com path de imagem mais portavel;
+- pacote limpo deve ser gerado por GERAR_PACOTE_LIMPO_DEV.bat.
+- pacote limpo nao deve incluir .git, .codex, logs, cache, pycache, pyc, Thumbs.db ou zip transitorio.

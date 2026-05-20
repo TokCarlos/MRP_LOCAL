@@ -136,9 +136,8 @@ Registro documental - programa Windows futuro:
 - backend Produtos segue como frente tecnica principal.
 
 Registro icons dll launcher:
-- DLL de icones oficial em 01-mrp/assets/icons/windows;
-- atalho do painel usa MRP_ICONS.dll,0;
-- alteracao apenas visual/launcher.
+- etapa historica de icones;
+- DLL nao e padrao atual do atalho visual.
 
 Registro v0.1.052:
 - atalho corrigido para usar .ico direto oficial;
@@ -149,3 +148,8 @@ Ajuste final de atalho:
 - .vbs interno e launcher operacional;
 - .lnk e o item visual final;
 - icone aplicado no .lnk com .ico local em AppData.
+
+Saneamento v0.1.052b:
+- 4 icones oficiais preservados;
+- artefatos antigos de DLL removidos do uso atual;
+- pacote limpo padronizado via script dedicado.

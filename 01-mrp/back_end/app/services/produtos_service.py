@@ -28,7 +28,8 @@ class ProdutosService:
         self._project_root = project_root
 
     def _imagem_existe(self, imagem_path: str) -> bool:
-        path = self._project_root / "01-mrp" / "front_end" / imagem_path.replace("/", "\\")
+        normalized_parts = [part for part in imagem_path.replace("\\", "/").split("/") if part]
+        path = self._project_root / "01-mrp" / "front_end" / Path(*normalized_parts)
         return path.exists()
 
     def validate(self) -> ProdutosValidationReport:

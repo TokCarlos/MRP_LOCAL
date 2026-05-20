@@ -93,6 +93,10 @@ Modelo tecnico do atalho:
 - `Arguments` = caminho absoluto do `MRP_PAINEL_SERVIDOR.vbs`
 - `IconLocation` = `%LOCALAPPDATA%\MRP_LOCAL\icons\mrp_painel_servidor.ico,0`
 
+Diagnostico:
+
+- use `03-vs/scripts/painel/diagnosticar_atalho_painel.ps1` para validar TargetPath/Arguments/WorkingDirectory/IconLocation.
+
 ## Icone do atalho
 
 - padrao atual: `.ico` direto em `01-mrp/assets/icons/windows/ico/mrp_mrp_dark.ico`

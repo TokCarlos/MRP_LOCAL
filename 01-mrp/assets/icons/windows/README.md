@@ -8,7 +8,6 @@ Pacote visual oficial para atalhos Windows do MRP_LOCAL.
 
 - fonte PNG: `01-mrp/assets/icons/source/*.png`
 - icones oficiais `.ico`: `01-mrp/assets/icons/windows/ico/*.ico`
-- DLL historica/opcional: `01-mrp/assets/icons/windows/MRP_ICONS.dll`
 - preview: `01-mrp/assets/icons/windows/preview/*.png`
 
 ## 4 icones oficiais atuais
@@ -26,8 +25,9 @@ Pacote visual oficial para atalhos Windows do MRP_LOCAL.
 
 ## DLL de icones
 
-- pode permanecer como recurso opcional/futuro;
-- nao e o caminho principal atual para atalho.
+- recurso historico/opcional/futuro;
+- nao e o caminho principal atual para atalho;
+- pode ser retomado somente em etapa especifica de empacotamento/instalador.
 
 ## Regras
 

@@ -47,6 +47,7 @@ pnpm-debug.log*
 .vite/
 dist/
 build/
+release/
 
 # Banco local / runtime
 *.db
@@ -118,6 +119,7 @@ _bkp/
 01-mrp/logs/admin/*.log
 # MRP_LOCAL runtime 01-mrp - manter estrutura, ignorar conteudo real
 01-mrp/logs/**
+01-mrp/logs/
 !01-mrp/logs/
 !01-mrp/logs/.gitkeep
 !01-mrp/logs/**/

@@ -172,7 +172,7 @@ A raiz fisica atual de desenvolvimento pode existir em documentacao, config e sc
 ## Etapa v0.1.050 - icons dll launcher
 
 - pacote de icones incorporado em `01-mrp/assets/icons/windows`;
-- `criar_atalho_painel.ps1` atualizado para usar `MRP_ICONS.dll,0`;
+- etapa historica (DLL nao e padrao atual de atalho);
 - fallback para icone padrao do Windows quando a DLL nao existir;
 - alteracao restrita a recurso visual de launcher.
 
@@ -190,3 +190,11 @@ A raiz fisica atual de desenvolvimento pode existir em documentacao, config e sc
 - atalho passa a usar `wscript.exe` como alvo e `MRP_PAINEL_SERVIDOR.vbs` em argumentos;
 - icone vem de `.ico` local em `%LOCALAPPDATA%\MRP_LOCAL\icons`;
 - criado script de diagnostico para validar `TargetPath`, `Arguments`, `WorkingDirectory` e `IconLocation`.
+
+## Saneamento v0.1.052b - dev, icones e pacote
+
+- limpeza de lixo operacional DEV (pycache, pyc, logs reais e zip transitorio);
+- preservados os 4 icones oficiais atuais;
+- removidos artefatos antigos de DLL sem uso operacional atual;
+- adapter de Produtos com path de imagem mais portavel;
+- criado script de pacote limpo para upload/revisao.
