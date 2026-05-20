@@ -95,3 +95,9 @@ Registro documental adicional:
 - artefatos de release podem incluir exe/dll/pyd/bin/runtime interno;
 - repositorio DEV nao deve virar pasta de build;
 - backend Produtos segue como proxima frente tecnica.
+
+Registro v0.1.050 icons dll launcher:
+- pacote de icones incorporado em 01-mrp\assets\icons\windows;
+- atalho do painel usa MRP_ICONS.dll,0;
+- MRP_PAINEL_SERVIDOR.vbs segue launcher clicavel principal;
+- CRIAR_ATALHO_PAINEL_SERVIDOR.bat recria atalho com icone correto.

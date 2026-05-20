@@ -168,3 +168,10 @@ A raiz fisica atual de desenvolvimento pode existir em documentacao, config e sc
 - registrada diferenca entre repositorio DEV e artefato de programa instalado;
 - confirmado que nao houve criacao de `.exe`, `.dll`, `.bin` ou runtime empacotado nesta etapa;
 - confirmada continuidade da frente tecnica do backend Produtos apos este registro.
+
+## Etapa v0.1.050 - icons dll launcher
+
+- pacote de icones incorporado em `01-mrp/assets/icons/windows`;
+- `criar_atalho_painel.ps1` atualizado para usar `MRP_ICONS.dll,0`;
+- fallback para icone padrao do Windows quando a DLL nao existir;
+- alteracao restrita a recurso visual de launcher.

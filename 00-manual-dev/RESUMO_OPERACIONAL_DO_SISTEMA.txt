@@ -134,3 +134,8 @@ Registro documental - programa Windows futuro:
 - release futuro pode conter exe/dll/pyd/bin/runtime interno;
 - nada disso deve ser gerado/versionado nesta etapa;
 - backend Produtos segue como frente tecnica principal.
+
+Registro icons dll launcher:
+- DLL de icones oficial em 01-mrp/assets/icons/windows;
+- atalho do painel usa MRP_ICONS.dll,0;
+- alteracao apenas visual/launcher.

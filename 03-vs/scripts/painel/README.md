@@ -75,3 +75,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\painel\criar
 ```
 
 Ou por duplo clique em `CRIAR_ATALHO_PAINEL_SERVIDOR.bat`.
+
+## Icone do atalho
+
+- local oficial da DLL: `01-mrp/assets/icons/windows/MRP_ICONS.dll`
+- indice principal usado no atalho: `MRP_ICONS.dll,0`
+- se a DLL nao existir, o script usa icone padrao do Windows sem quebrar.

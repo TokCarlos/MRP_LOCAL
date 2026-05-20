@@ -163,3 +163,10 @@ Planejamento registrado:
 - `.dll`, `.pyd` e `.bin` podem existir no release futuro como dependencias/runtime;
 - isso nao altera o repositorio DEV atual, que deve permanecer limpo e modular;
 - backend Produtos continua como proxima frente tecnica.
+
+## Etapa visual launcher (v0.1.050 icons dll)
+
+- DLL de icones incorporada em `01-mrp/assets/icons/windows`;
+- atalho do painel usa `MRP_ICONS.dll,0` via `03-vs/scripts/painel/criar_atalho_painel.ps1`;
+- `MRP_PAINEL_SERVIDOR.vbs` permanece launcher principal por duplo clique;
+- `CRIAR_ATALHO_PAINEL_SERVIDOR.bat` recria o atalho com icone correto.

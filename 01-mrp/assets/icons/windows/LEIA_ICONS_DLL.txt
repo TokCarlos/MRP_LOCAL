@@ -1,0 +1,33 @@
+MRP_ICONS - Biblioteca de icones do MRP_LOCAL
+
+Conteudo:
+- MRP_ICONS.dll: DLL de recursos com 5 grupos de icones.
+- MRP_ICONS.rc: script de recursos para recompilar em Windows.
+- icons/: arquivos .ico individuais.
+- preview/: previews .png.
+
+Icones:
+1. mrp_main.ico     - icone principal PCP/MRP.
+2. mrp_server.ico   - servidor/local service.
+3. mrp_panel.ico    - painel administrativo.
+4. mrp_products.ico - modulo Produtos/aparelhos.
+5. mrp_network.ico  - rede/Tailscale/clientes.
+
+Uso em atalhos Windows:
+MRP_ICONS.dll,0
+MRP_ICONS.dll,1
+MRP_ICONS.dll,2
+MRP_ICONS.dll,3
+MRP_ICONS.dll,4
+
+Observacao:
+Esta DLL e um artefato visual/operacional futuro. Nao deve substituir regras de seguranca,
+configuracao, backend ou instalador. Para projeto DEV, manter como recurso de icones.
+
+Recompilar no Windows com MinGW, se necessario:
+windres MRP_ICONS.rc -O coff -o MRP_ICONS.res
+gcc -shared -nostdlib -Wl,--no-entry -o MRP_ICONS.dll MRP_ICONS.res
+
+Alternativa com Visual Studio Build Tools:
+rc.exe MRP_ICONS.rc
+link.exe /NOENTRY /DLL /MACHINE:X64 /OUT:MRP_ICONS.dll MRP_ICONS.res

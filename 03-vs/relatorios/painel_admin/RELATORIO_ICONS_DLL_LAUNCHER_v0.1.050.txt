@@ -1,0 +1,46 @@
+RELATORIO DA ETAPA
+Versao: v0.1.050-icons-dll-launcher
+
+OBJETIVO
+- Incorporar pacote de icones DLL ao projeto e ajustar atalho do Painel do Servidor para usar a DLL.
+
+ESCOPO
+- Copia dos artefatos de icones para local oficial.
+- Ajuste de script de criacao de atalho.
+- Atualizacao documental.
+
+FORA DE ESCOPO
+- Criacao de backend.
+- Criacao de banco.
+- Alteracao funcional do frontend.
+- Alteracao funcional do painel alem do icone do atalho.
+- Instalacao de dependencias.
+
+ARQUIVOS INCORPORADOS
+- 01-mrp/assets/icons/windows/MRP_ICONS.dll
+- 01-mrp/assets/icons/windows/MRP_ICONS.rc
+- 01-mrp/assets/icons/windows/LEIA_ICONS_DLL.txt
+- 01-mrp/assets/icons/windows/manifest_icons.json
+- 01-mrp/assets/icons/windows/icons/*.ico
+- 01-mrp/assets/icons/windows/preview/*.png
+- 01-mrp/assets/icons/windows/README.md
+
+LOCAL FINAL DA DLL
+- 01-mrp/assets/icons/windows/MRP_ICONS.dll
+
+AJUSTE NO ATALHO
+- script: 03-vs/scripts/painel/criar_atalho_painel.ps1
+- icone principal: MRP_ICONS.dll,0
+- fallback: imageres.dll,15 quando DLL nao existe.
+
+VALIDACOES
+- existencia da DLL e subpastas de icones/preview;
+- criacao de atalho com script PowerShell;
+- sem hardcode X:\\ ou \\HOME-MACHINE no script;
+- sem alteracao funcional de frontend/backend.
+
+STATUS FINAL REAL
+- etapa concluida com incorporacao visual/launcher.
+
+OBSERVACAO
+- mudanca nao altera regra de negocio do sistema.

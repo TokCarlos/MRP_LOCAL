@@ -289,3 +289,10 @@ REGISTRO FUTURO - MODELO PROGRAMA WINDOWS
   - logs/
   - db/
 - `.dll`, `.pyd` e `.bin` sao esperados apenas no artefato de release quando a etapa de empacotamento for aberta.
+
+ETAPA V0.1.050 - ICONS DLL LAUNCHER
+
+- pacote de icones incorporado em `01-mrp/assets/icons/windows`.
+- atalho de desktop do painel usa `MRP_ICONS.dll,0`.
+- fallback para icone padrao se a DLL nao existir.
+- recurso visual de launcher, sem mudanca de regra de negocio.
