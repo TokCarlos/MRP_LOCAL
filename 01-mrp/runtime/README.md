@@ -1,11 +1,9 @@
 # runtime
 
-Reservado para runtime portatil futuro.
+Area de execucao local do MRP.
 
-Pode receber futuramente Python portable, Node portable ou dependencias empacotadas.
-
-Nesta etapa:
-- nada foi baixado;
-- nada foi instalado;
-- nenhum runtime foi versionado;
-- a pasta existe apenas como gancho de portabilidade.
+Regras:
+- arquivos reais de runtime nao devem ser versionados;
+- manter somente estrutura minima versionada (`.gitkeep` e este `README.md`);
+- logs ficam em `01-mrp/logs`;
+- temporarios ficam em `01-mrp/tmp`.

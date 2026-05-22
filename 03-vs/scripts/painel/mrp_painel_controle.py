@@ -7,12 +7,16 @@ import hmac
 import json
 import socket
 import subprocess
+import threading
 import webbrowser
 from datetime import datetime, timezone
 from pathlib import Path
 from tkinter import END, Tk, Toplevel, messagebox
 from tkinter import ttk
 from tkinter.scrolledtext import ScrolledText
+
+
+PROCESS_TIMEOUT_SECONDS = 30
 
 
 def utc_now_iso() -> str:
@@ -67,6 +71,9 @@ class MrpPainel:
         self.user_name = getpass.getuser()
         self.port = self._load_port()
         self.admin_unlocked = False
+        self.busy = False
+        self.main_thread_id = threading.get_ident()
+        self.process_timeout_seconds = PROCESS_TIMEOUT_SECONDS
 
         self.root = Tk()
         self.root.title("MRP_LOCAL - Painel Administrativo do Servidor")
@@ -79,7 +86,9 @@ class MrpPainel:
         self.status_vars: dict[str, ttk.Label] = {}
         self.output: ScrolledText | None = None
         self.admin_buttons: list[ttk.Button] = []
+        self.user_buttons: list[ttk.Button] = []
         self.admin_status: ttk.Label | None = None
+        self.admin_login_button: ttk.Button | None = None
 
         self._build_ui()
         self.refresh_status_card()
@@ -139,17 +148,18 @@ class MrpPainel:
         user_card = ttk.Frame(left, style="Card.TFrame", padding=12)
         user_card.pack(fill="x", pady=(0, 10))
         ttk.Label(user_card, text="Acoes de Usuario", style="CardTitle.TLabel").pack(anchor="w", pady=(0, 8))
-        ttk.Button(user_card, text="Abrir Sistema no Navegador", command=self.open_system).pack(fill="x", pady=2)
-        ttk.Button(user_card, text="Ver Status", command=lambda: self.run_service("mrp_frontend_status.ps1", "VER_STATUS")).pack(fill="x", pady=2)
-        ttk.Button(user_card, text="Healthcheck", command=lambda: self.run_service("mrp_frontend_healthcheck.ps1", "HEALTHCHECK")).pack(fill="x", pady=2)
-        ttk.Button(user_card, text="Sair", command=self.root.destroy).pack(fill="x", pady=2)
+        self._add_user_btn(user_card, "Abrir Sistema no Navegador", self.open_system)
+        self._add_user_btn(user_card, "Ver Status", lambda: self.queue_action("VER_STATUS", lambda: self.run_service("mrp_frontend_status.ps1", "VER_STATUS"), require_admin=False))
+        self._add_user_btn(user_card, "Healthcheck", lambda: self.queue_action("HEALTHCHECK", lambda: self.run_service("mrp_frontend_healthcheck.ps1", "HEALTHCHECK"), require_admin=False))
+        self._add_user_btn(user_card, "Sair", self.root.destroy)
 
         admin_card = ttk.Frame(left, style="Card.TFrame", padding=12)
         admin_card.pack(fill="x")
         ttk.Label(admin_card, text="Acoes Administrativas", style="CardTitle.TLabel").pack(anchor="w", pady=(0, 8))
         self.admin_status = ttk.Label(admin_card, text="", style="CardText.TLabel")
         self.admin_status.pack(anchor="w", pady=(0, 8))
-        ttk.Button(admin_card, text="Entrar como Admin", command=self.admin_login, style="Accent.TButton").pack(fill="x", pady=(0, 8))
+        self.admin_login_button = ttk.Button(admin_card, text="Entrar como Admin", command=self.admin_login, style="Accent.TButton")
+        self.admin_login_button.pack(fill="x", pady=(0, 8))
 
         def add_admin_btn(text: str, fn):
             b = ttk.Button(admin_card, text=text, command=fn)
@@ -172,7 +182,25 @@ class MrpPainel:
         self.append("Painel local do servidor - nao e interface de usuario final.")
         self.set_admin_enabled(False)
 
+    def _add_user_btn(self, parent: ttk.Frame, text: str, command) -> ttk.Button:
+        b = ttk.Button(parent, text=text, command=command)
+        b.pack(fill="x", pady=2)
+        self.user_buttons.append(b)
+        return b
+
+    def _in_ui_thread(self) -> bool:
+        return threading.get_ident() == self.main_thread_id
+
+    def _ui(self, fn, *args, **kwargs) -> None:
+        if self._in_ui_thread():
+            fn(*args, **kwargs)
+        else:
+            self.root.after(0, lambda: fn(*args, **kwargs))
+
     def append(self, text: str) -> None:
+        if not self._in_ui_thread():
+            self.root.after(0, lambda: self.append(text))
+            return
         if not self.output:
             return
         self.output.insert(END, text + "\n")
@@ -213,6 +241,9 @@ class MrpPainel:
         return default
 
     def refresh_status_card(self) -> None:
+        if not self._in_ui_thread():
+            self.root.after(0, self.refresh_status_card)
+            return
         is_open = self._port_open()
         auto = self._read_auto_mode()
         self.status_vars["Porta 8765"].configure(text="ocupada" if is_open else "livre")
@@ -220,8 +251,13 @@ class MrpPainel:
         self.status_vars["Modo Automatico"].configure(text="ATIVO" if auto.get("auto_enabled") else "DESATIVADO")
         self.status_vars["Manutencao"].configure(text="SIM" if auto.get("maintenance_mode") else "NAO")
 
+        if self.busy:
+            return
         if self.auth_file.exists():
-            self.admin_status.configure(text="Credencial admin local configurada.")
+            if self.admin_unlocked:
+                self.admin_status.configure(text="Sessao admin ativa.")
+            else:
+                self.admin_status.configure(text="Credencial admin local configurada.")
         else:
             self.admin_status.configure(text="Credencial admin ausente. Rode: python 03-vs/scripts/painel/mrp_admin_auth_setup.py")
             self.set_admin_enabled(False)
@@ -245,7 +281,31 @@ class MrpPainel:
 
         cmd = ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(p)]
         self.append("> " + " ".join(cmd))
-        cp = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")
+        try:
+            cp = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+                timeout=self.process_timeout_seconds,
+            )
+        except subprocess.TimeoutExpired as exc:
+            combined = ((exc.stdout or "") + (exc.stderr or "")).strip()
+            msg = f"Timeout apos {self.process_timeout_seconds}s executando {script_name}."
+            if combined:
+                msg += "\n" + combined
+            self.append(msg)
+            self.log_admin(action, "TIMEOUT", msg.replace("\n", " | "))
+            self.refresh_status_card()
+            return False, msg
+        except FileNotFoundError as exc:
+            msg = f"PowerShell nao encontrado: {exc}"
+            self.append(msg)
+            self.log_admin(action, "ERRO", msg)
+            self.refresh_status_card()
+            return False, msg
+
         combined = ((cp.stdout or "") + (cp.stderr or "")).strip()
         if combined:
             self.append(combined)
@@ -262,10 +322,61 @@ class MrpPainel:
         return ok, f"{t1}\n{t2}"
 
     def set_admin_enabled(self, enabled: bool) -> None:
-        state = "normal" if enabled else "disabled"
-        for b in self.admin_buttons:
-            b.configure(state=state)
         self.admin_unlocked = enabled
+        self._apply_button_states()
+
+    def _apply_button_states(self) -> None:
+        user_state = "disabled" if self.busy else "normal"
+        admin_state = "normal" if self.admin_unlocked and not self.busy else "disabled"
+        login_state = "disabled" if self.busy else "normal"
+        for b in self.user_buttons:
+            b.configure(state=user_state)
+        for b in self.admin_buttons:
+            b.configure(state=admin_state)
+        if self.admin_login_button is not None:
+            self.admin_login_button.configure(state=login_state)
+
+    def set_busy(self, busy: bool, action: str | None = None) -> None:
+        self.busy = busy
+        self._apply_button_states()
+        if self.admin_status is not None:
+            if busy and action:
+                self.admin_status.configure(text=f"Executando: {action}...")
+            elif self.admin_unlocked:
+                self.admin_status.configure(text="Sessao admin ativa.")
+            elif self.auth_file.exists():
+                self.admin_status.configure(text="Credencial admin local configurada.")
+
+    def queue_action(self, action: str, fn, require_admin: bool = True) -> None:
+        if require_admin and not self.admin_unlocked:
+            messagebox.showwarning("Bloqueado", "Acao administrativa bloqueada. Use 'Entrar como Admin'.")
+            self.log_admin(action, "NEGADO", "admin_nao_autenticado")
+            return
+        if self.busy:
+            self.append(f"[BLOQUEADO] Ja existe uma acao em execucao. Ignorado: {action}")
+            self.log_admin(action, "BLOQUEADO", "acao_em_execucao")
+            return
+
+        self.set_busy(True, action)
+        self.append(f"[INICIO] {action}")
+        self.log_admin(action, "INICIO", "execucao_assincrona")
+
+        def worker() -> None:
+            try:
+                ok, result = fn()
+            except Exception as exc:
+                ok = False
+                result = str(exc)
+                self.log_admin(action, "ERRO", result)
+            def finish() -> None:
+                self.append(f"[{'OK' if ok else 'ERRO'}] {action}")
+                if result and not ok:
+                    self.append(str(result))
+                self.set_busy(False)
+                self.refresh_status_card()
+            self.root.after(0, finish)
+
+        threading.Thread(target=worker, name=f"mrp-painel-{action.lower()}", daemon=True).start()
 
     def admin_login(self) -> None:
         if not self.auth_file.exists():
@@ -297,16 +408,7 @@ class MrpPainel:
             self.log_admin("ADMIN_LOGIN", "NEGADO", "credencial_invalida")
 
     def admin_action(self, action: str, fn) -> None:
-        if not self.admin_unlocked:
-            messagebox.showwarning("Bloqueado", "Acao administrativa bloqueada. Use 'Entrar como Admin'.")
-            self.log_admin(action, "NEGADO", "admin_nao_autenticado")
-            return
-        try:
-            ok, _ = fn()
-            self.append(f"[{'OK' if ok else 'ERRO'}] {action}")
-        except Exception as exc:
-            self.append(f"[ERRO] {action}: {exc}")
-            self.log_admin(action, "ERRO", str(exc))
+        self.queue_action(action, fn, require_admin=True)
 
     def _read_auth(self) -> dict | None:
         try:

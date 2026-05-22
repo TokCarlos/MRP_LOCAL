@@ -1,0 +1,53 @@
+MRP_LOCAL - MANIFEST PORTABLE
+
+Gerado em: 2026-05-21 20:33:36
+Origem base: C:\Users\carlo\Desktop\PCP SERVIDOR\SISTEMA_MRP
+
+Origens copiadas:
+- 01-mrp\front_end -> portable\app\frontend
+- 01-mrp\back_end -> portable\app\backend
+- 01-mrp\config -> portable\infrastructure\config
+- 01-mrp\back_end\app\domain -> portable\core\domain
+- 01-mrp\back_end\app\services -> portable\core\services
+- 01-mrp\core\engine -> portable\core\engine
+- 01-mrp\back_end\app\adapters -> portable\infrastructure\adapters
+- 01-mrp\back_end\app\repositories + 01-mrp\db -> portable\infrastructure\persistence
+- 01-mrp\health -> portable\operations\health
+- 03-vs\scripts\servicos -> portable\operations\scripts
+- 01-mrp\tools -> portable\operations\tools
+- 01-mrp\assets\icons -> portable\assets\icons
+- 01-mrp\front_end\img -> portable\assets\images
+- 01-mrp\front_end\data -> portable\data\seed|mock|reference
+- 01-mrp\runtime -> portable\runtime
+
+Pastas incluidas:
+- app, core, infrastructure, operations, assets, data, runtime, logs, tmp
+
+Entrypoints operacionais:
+- MRP_MENU_SISTEMA.bat
+- start_mrp.bat / stop_mrp.bat / status_mrp.bat / healthcheck_mrp.bat
+- MRP_PAINEL_SERVIDOR.cmd / MRP_PAINEL_SERVIDOR.vbs
+- CRIAR_ATALHO_PAINEL_SERVIDOR.bat
+
+Pastas/itens excluidos:
+- .git, .codex, 00-manual-dev, 02-docs, 03-vs, quarentena
+- __pycache__, *.pyc, Thumbs.db, logs reais antigos, temporarios antigos
+- system_jpl.zip, Stop.ps1
+
+Dependencias:
+- Python no PATH
+- FastAPI/Uvicorn para backend (opcional ao fluxo frontend)
+
+Porta padrao:
+- frontend 8765
+- backend 8876
+
+Status de validacao:
+- estrutura portable: OK
+- scripts relativos: OK
+- menu e launcher de painel: OK (validacao estrutural)
+- validacao completa de execucao em outra maquina: PENDENTE
+
+Pendencias:
+- testar start/stop/status/healthcheck em maquina destino
+- validar backend com fastapi/uvicorn instalados

@@ -1,0 +1,9 @@
+{
+  "version": "v0.1.049",
+  "auth_type": "pbkdf2-hmac-sha256",
+  "password_hash": "EXEMPLO_HASH_HEX",
+  "salt": "EXEMPLO_SALT_HEX",
+  "iterations": 260000,
+  "created_at": "EXEMPLO",
+  "note": "Exemplo de estrutura. Use admin_auth_setup.py para gerar arquivo local real em 01-mrp/config/local/admin_auth.local.json."
+}

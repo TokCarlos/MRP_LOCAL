@@ -1,0 +1,6 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='320' height='180' viewBox='0 0 320 180'>
+  <rect width='320' height='180' fill='#1f1f23'/>
+  <rect x='8' y='8' width='304' height='164' rx='8' fill='none' stroke='#ed1c24' stroke-width='2'/>
+  <text x='16' y='34' font-size='20' fill='#ffffff' font-family='Arial, sans-serif'>DEMO</text>
+  <text x='16' y='62' font-size='14' fill='#cccccc' font-family='Arial, sans-serif'>PREVIEW INDISPONIVEL</text>
+</svg>

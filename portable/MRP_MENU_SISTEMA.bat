@@ -1,105 +1,27 @@
 @echo off
 chcp 65001 >nul
-setlocal EnableExtensions EnableDelayedExpansion
-
-set "ROOT=%~dp0"
-set "ROOT=%ROOT:~0,-1%"
-set "SCRIPTS=%ROOT%\03-vs\scripts\servicos"
-set "CONFIG=%ROOT%\01-mrp\config\mrp_local.env.json"
-set "PS=powershell.exe -NoProfile -ExecutionPolicy Bypass"
-set "TASK_NAME=MRP_LOCAL_FRONTEND"
-
-if exist "%CONFIG%" (
-    for /f "usebackq delims=" %%T in (`powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "try { $p = '%CONFIG%'; ((Get-Content -Raw -LiteralPath $p) | ConvertFrom-Json).windows_task.name } catch { 'MRP_LOCAL_FRONTEND' }"`) do (
-        if not "%%T"=="" set "TASK_NAME=%%T"
-    )
-)
-
-if not exist "%SCRIPTS%\mrp_frontend_start.ps1" goto ERRO_ESTRUTURA
-if not exist "%SCRIPTS%\mrp_frontend_stop.ps1" goto ERRO_ESTRUTURA
-if not exist "%SCRIPTS%\mrp_frontend_healthcheck.ps1" goto ERRO_ESTRUTURA
+setlocal EnableExtensions
 
 :MENU
 cls
 echo ========================================================
-echo                  MRP_LOCAL - SISTEMA
+echo                MRP_LOCAL - MENU PORTABLE
 echo ========================================================
-echo Raiz: %ROOT%
-echo Tarefa Windows: %TASK_NAME%
 echo.
-echo 1 - Iniciar Sistema
-echo 2 - Desativar Sistema
-echo 3 - Reiniciar Sistema
-echo 4 - Sair
+echo 1 - Iniciar sistema
+echo 2 - Parar sistema
+echo 3 - Status do sistema
+echo 4 - Healthcheck
+echo 5 - Abrir painel do servidor
+echo 6 - Criar atalho do painel na area de trabalho
+echo 7 - Sair
 echo.
-choice /C 1234 /N /M "Escolha uma opcao [1-4]: "
-if errorlevel 4 goto SAIR
-if errorlevel 3 goto REINICIAR
-if errorlevel 2 goto DESATIVAR
-if errorlevel 1 goto INICIAR
+choice /C 1234567 /N /M "Escolha [1-7]: "
+if errorlevel 7 exit /b 0
+if errorlevel 6 call "%~dp0CRIAR_ATALHO_PAINEL_SERVIDOR.bat" & pause & goto MENU
+if errorlevel 5 call "%~dp0MRP_PAINEL_SERVIDOR.cmd" & pause & goto MENU
+if errorlevel 4 call "%~dp0healthcheck_mrp.bat" & pause & goto MENU
+if errorlevel 3 call "%~dp0status_mrp.bat" & pause & goto MENU
+if errorlevel 2 call "%~dp0stop_mrp.bat" & pause & goto MENU
+if errorlevel 1 call "%~dp0start_mrp.bat" & pause & goto MENU
 goto MENU
-
-:INICIAR
-cls
-echo ========================================================
-echo Iniciando MRP_LOCAL...
-echo ========================================================
-echo.
-call :HABILITAR_TAREFA
-%PS% -File "%SCRIPTS%\mrp_frontend_start.ps1"
-echo.
-echo Validando healthcheck...
-%PS% -File "%SCRIPTS%\mrp_frontend_healthcheck.ps1"
-echo.
-pause
-goto MENU
-
-:DESATIVAR
-cls
-echo ========================================================
-echo Desativando MRP_LOCAL...
-echo ========================================================
-echo.
-echo Encerrando/desabilitando tarefa Windows, se existir...
-schtasks /End /TN "%TASK_NAME%" >nul 2>nul
-schtasks /Change /TN "%TASK_NAME%" /Disable >nul 2>nul
-echo.
-echo Parando frontend e watchdog do projeto...
-%PS% -File "%SCRIPTS%\mrp_frontend_stop.ps1"
-echo.
-echo Sistema desativado nesta maquina. Para religar, use a opcao 1.
-echo.
-pause
-goto MENU
-
-:REINICIAR
-cls
-echo ========================================================
-echo Reiniciando MRP_LOCAL...
-echo ========================================================
-echo.
-%PS% -File "%SCRIPTS%\mrp_frontend_stop.ps1"
-timeout /t 2 /nobreak >nul
-%PS% -File "%SCRIPTS%\mrp_frontend_start.ps1"
-echo.
-echo Validando healthcheck...
-%PS% -File "%SCRIPTS%\mrp_frontend_healthcheck.ps1"
-echo.
-pause
-goto MENU
-
-:HABILITAR_TAREFA
-schtasks /Query /TN "%TASK_NAME%" >nul 2>nul
-if %errorlevel% equ 0 schtasks /Change /TN "%TASK_NAME%" /Enable >nul 2>nul
-exit /b 0
-
-:ERRO_ESTRUTURA
-cls
-echo ERRO: estrutura do projeto nao encontrada.
-echo Este arquivo deve ficar na raiz do projeto MRP_LOCAL.
-echo Pasta esperada: %SCRIPTS%
-pause
-exit /b 1
-
-:SAIR
-exit /b 0

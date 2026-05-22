@@ -1,0 +1,34 @@
+<h2>Processos</h2>
+
+<button class="btn-add page-list-actions" id="btnAddProcesso">+ Novo Processo</button>
+
+<div class="page-filtros">
+    <input id="filtroProcessoPesquisa" type="text" placeholder="Pesquisar processo, código ou setor...">
+    <select id="filtroProcessoSetor">
+        <option value="">Todos os Setores</option>
+    </select>
+    <select id="filtroProcessoStatus">
+        <option value="">Todos os Status</option>
+    </select>
+    <div></div>
+    <button id="btnLimparFiltrosProcesso" class="btn-row-action" type="button">Limpar</button>
+</div>
+
+<div id="contadorProcessos" class="page-contador">Exibindo 0 de 0 processos</div>
+
+<div class="table-responsive">
+    <table class="preview-table sistema-table" id="tblProcessos">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>CÓDIGO</th>
+                <th>PROCESSO</th>
+                <th>SETOR</th>
+                <th>TEMPO PADRÃO</th>
+                <th>STATUS</th>
+                <th>AÇÃO</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>

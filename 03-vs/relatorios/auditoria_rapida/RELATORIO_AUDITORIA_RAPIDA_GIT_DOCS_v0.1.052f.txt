@@ -1,0 +1,220 @@
+RELATORIO_AUDITORIA_RAPIDA_GIT_DOCS_v0.1.052f
+MRP_LOCAL
+
+Data/hora da revisao: 2026-05-20 01:23:49 -03:00
+Raiz analisada: \\HOME-MACHINE\system_jpl (equivalente operacional de X:\ neste ambiente)
+Branch atual: main
+Modo: auditoria rapida sem correcao automatica, sem commit e sem push.
+Regras aplicadas: REGRAS_MRP.txt, AGENTS.md e pedido do usuario para nao refatorar, nao alterar funcionalidade, nao criar backend e nao chamar o sistema de blindado/final/homologado.
+
+1. Estado Git
+
+Comandos executados:
+- git status --short
+- git log --oneline -8
+- git diff --stat
+- git diff --check
+- git diff --name-only
+- git ls-files
+
+Resultado git status --short antes deste relatorio:
+- D 01-mrp/runtime/README.md
+- D 01-mrp/runtime/python/.gitkeep
+- D 01-mrp/runtime/python/README.md
+- M 03-vs/scripts/painel/mrp_painel_controle.py
+- ?? Stop.ps1
+
+Ultimos commits:
+- 8d72487 fix: preservar base funcional e remover duplicidade de atalho v0.1.053b
+- b4b1e38 chore: sanear dev icons pacote antes do backend v0.1.052b
+- e88c163 fix: corrigir atalho visual do painel via wscript e ico local
+- 3e547e9 fix: usar icones oficiais ico no launcher v0.1.052
+- 856ac1d feat: adicionar dll de icones ao launcher v0.1.050
+- e7debfe docs: registrar modelo futuro de programa windows v0.1.050
+- 3773ea0 feat: preparar backend produtos base v0.1.051
+- c548590 docs: registrar dominio proxy e ia futura v0.1.050
+
+Diff stat:
+- 01-mrp/runtime/README.md: 11 linhas removidas
+- 01-mrp/runtime/python/.gitkeep: 1 linha removida
+- 01-mrp/runtime/python/README.md: 13 linhas removidas
+- 03-vs/scripts/painel/mrp_painel_controle.py: 122 insercoes, 20 remocoes aproximadas dentro do total do diff
+- Total: 4 arquivos alterados no diff rastreado, 122 insertions(+), 45 deletions(-)
+
+Diff check:
+- Sem apontamentos retornados por git diff --check.
+
+git ls-files:
+- 846 arquivos rastreados.
+
+2. Arquivos alterados, novos ou removidos por categoria
+
+Codigo:
+- M 03-vs/scripts/painel/mrp_painel_controle.py
+  - Mudanca observada: painel tkinter recebeu threading, estado busy, timeout de subprocesso, bloqueio de botoes durante acao e execucao assincrona de acoes administrativas.
+  - Risco: alteracao funcional em script de painel administrativo ainda sem documentacao propria nesta rodada e sem teste visual/operacional do painel nesta auditoria.
+
+Scripts:
+- M 03-vs/scripts/painel/mrp_painel_controle.py
+- ?? Stop.ps1
+  - Arquivo novo na raiz.
+  - Conteudo observado: hardcode para \\HOME-MACHINE\system_jpl, parada forçada de processos, desativacao de tarefas Windows, remocao de runtime, temp, logs, venv, __pycache__, pyc, tmp, bak e log.
+  - Classificacao: CRITICO para commit no formato atual. E script destrutivo, fora do fluxo oficial e nao deve entrar no Git sem escopo explicito, revisao e documentacao.
+
+Documentacao:
+- D 01-mrp/runtime/README.md
+- D 01-mrp/runtime/python/README.md
+- Novo relatorio criado nesta auditoria: 03-vs/relatorios/auditoria_rapida/RELATORIO_AUDITORIA_RAPIDA_GIT_DOCS_v0.1.052f.txt
+
+Config/example:
+- Nenhuma alteracao rastreada detectada nesta categoria.
+
+Dados seed:
+- Nenhuma alteracao rastreada detectada nesta categoria.
+
+Pacote/deploy:
+- Nenhuma alteracao rastreada detectada nesta categoria.
+
+Lixo operacional suspeito:
+- Stop.ps1 na raiz: suspeito/critico por ser script de limpeza destrutiva e hardcoded.
+- __pycache__ e *.pyc encontrados em 01-mrp/back_end/app e 03-vs/scripts; ignorados pelo Git, mas presentes no disco.
+- Logs reais encontrados em 01-mrp/logs/admin e 01-mrp/logs/servicos; ignorados pelo Git, mas presentes no disco.
+
+3. Documentos recentes versionados no Git
+
+Documentos principais encontrados:
+- 00-manual-dev/MANUAL_DEV_COMPLETO.txt - 2026-05-19 20:24:46
+- 00-manual-dev/RESUMO_OPERACIONAL_DO_SISTEMA.txt - 2026-05-19 20:24:58
+- 02-docs/docs/geral/status_geral.md - 2026-05-19 20:25:24
+- README.md - 2026-05-19 20:24:14
+- 03-vs/scripts/painel/README.md - 2026-05-20 00:24:50
+
+Relatorios recentes em 03-vs/relatorios:
+- 03-vs/relatorios/backend/RELATORIO_REVISAO_PACOTE_BASE_PROJETO_v0.1.053b.txt - 2026-05-20 00:24:50
+- 03-vs/relatorios/backend/RELATORIO_BACKEND_REFATORACAO_v0.1.053b.txt - 2026-05-19 20:29:18
+- 03-vs/relatorios/backend/RELATORIO_BACKEND_MINIMO_v0.1.053.txt - 2026-05-19 19:50:04
+- 03-vs/relatorios/saneamento/RELATORIO_SANEAMENTO_DEV_ICONS_PACOTE_v0.1.052b.txt - 2026-05-19 19:26:42
+- 03-vs/relatorios/icons/RELATORIO_ICONES_OFICIAIS_v0.1.052.txt - 2026-05-19 18:49:26
+
+Coerencia documental:
+- MANUAL_DEV_COMPLETO.txt informa frontend validado pelo usuario, porta 8765 OK, healthcheck OK e sistema abrindo corretamente.
+- MANUAL_DEV_COMPLETO.txt tambem afirma que o sistema ainda NAO esta blindado e NAO esta homologado.
+- RESUMO_OPERACIONAL_DO_SISTEMA.txt descreve ambiente local-first em teste e explicita pendencias de tarefa automatica, watchdog, reboot, queda de energia, queda de rede e pacote release.
+- status_geral.md lista pendencias de blindagem: watchdog continuo, tarefa Windows, reboot, queda de energia, queda de rede, logs reais em execucao prolongada.
+- README.md afirma sistema local-first em ambiente de teste, frontend estatico funcional e painel administrativo separado.
+- Nao foi encontrada afirmacao recente indevida de que o sistema esteja blindado, final ou homologado. Ocorrencias de "final" aparecem principalmente como "usuario final", "objetivo futuro" ou contexto documental historico.
+
+4. O que esta funcional/preservar
+
+Preservado e existente:
+- 01-mrp: existe.
+- 02-docs: existe.
+- 03-vs: existe.
+- portable: existe.
+- portable/CONFIGURAR_ACESSO_MRP_REDE.bat: existe.
+- Scripts versionados de servico existem em 03-vs/scripts/servicos:
+  - mrp_frontend_start.ps1
+  - mrp_frontend_stop.ps1
+  - mrp_frontend_status.ps1
+  - mrp_frontend_healthcheck.ps1
+  - mrp_frontend_watchdog.ps1
+  - mrp_frontend_task_install.ps1
+  - mrp_frontend_task_uninstall.ps1
+  - mrp_backend_start.ps1
+  - mrp_backend_stop.ps1
+  - mrp_backend_status.ps1
+  - mrp_backend_healthcheck.ps1
+  - mrp_firewall_8765.ps1
+  - mrp_service_common.ps1
+- Painel administrativo local existe em 03-vs/scripts/painel.
+- Icones oficiais atuais existem em 01-mrp/assets/icons/windows/ico e previews.
+- Porta 8765 consta como porta oficial/configuravel nos documentos e em 01-mrp/config/mrp_local.env.json.
+- Documentacao operacional principal existe e esta coerente com status de teste, nao homologado.
+
+Validacao Python segura:
+- python -B -m py_compile executado nos arquivos Python principais de painel/backend/adapters.
+- Resultado: OK para 30 arquivos, incluindo 03-vs/scripts/painel/mrp_painel_controle.py e base 01-mrp/back_end/app.
+- Observacao: py_compile em execucao anterior sem -B atualizou __pycache__; esses artefatos estao ignorados pelo Git e foram apenas reportados, nao apagados.
+
+5. Falhas criticas
+
+- Stop.ps1 novo na raiz e critico para commit: contem acoes destrutivas e hardcode de ambiente. Nao deve ser versionado sem revisao explicita.
+- Remocoes rastreadas em 01-mrp/runtime removem README/.gitkeep de area funcional/runtime. Como a regra do projeto protege 01-mrp, essas remocoes precisam ser justificadas ou revertidas antes de fechar versao.
+- Ha alteracao funcional no painel administrativo local sem evidencia nesta auditoria de teste visual/operacional do painel apos a mudanca.
+
+6. Alertas
+
+- Git contem mudancas reais de codigo e remocoes em 01-mrp; nao e um estado de commit documental simples.
+- Logs reais existem em 01-mrp/logs; estao ignorados, mas nao devem entrar em commit.
+- __pycache__ e *.pyc existem; estao ignorados, mas devem ser limpos antes de empacotamento se a regra da entrega exigir pacote limpo.
+- Busca de credenciais encontrou apenas exemplos/documentacao e senha local temporaria de mock no frontend (`01-mrp/front_end/js/config.js` com senha "admin"). Isso parece estado conhecido de teste, mas nao e blindagem de seguranca.
+
+7. Lixo operacional encontrado
+
+No Git rastreado:
+- Nao foi encontrado lixo operacional rastreado relevante.
+- Falsos positivos por nome: REPARAR_CACHE_ICONES_WINDOWS.bat e 03-vs/scripts/icons/reparar_cache_icones_windows.ps1 contem "cache" no nome, mas sao scripts legitimos.
+
+No disco, nao rastreado/ignorado:
+- 01-mrp/back_end/app/**/__pycache__/*.pyc
+- 03-vs/scripts/backend/__pycache__/*.pyc
+- 03-vs/scripts/painel/__pycache__/*.pyc
+- 01-mrp/logs/admin/launcher_painel.log
+- 01-mrp/logs/admin/painel_admin.log
+- 01-mrp/logs/servicos/frontend.err.log
+- 01-mrp/logs/servicos/frontend.health.log
+- 01-mrp/logs/servicos/frontend.out.log
+- 01-mrp/logs/servicos/frontend.start.log
+- 01-mrp/logs/servicos/frontend.stop.log
+
+Nao apagado automaticamente, conforme pedido.
+
+8. Riscos de encoding
+
+- REGRAS_MRP.txt, README.md e status_geral.md foram lidos corretamente com UTF-8.
+- A busca por padroes retornou principalmente falsos positivos com texto valido acentuado, por exemplo "CORRIMAO" com til e "NAO HOMOLOGADO" em documentos antigos/principais.
+- Nao foi identificado mojibake bloqueador em arquivos principais recentes.
+- Observacao: leitura sem Encoding UTF8 no PowerShell pode exibir mojibake por code page; leitura UTF-8 confirmou legibilidade dos documentos principais.
+
+9. Riscos de hardcoded
+
+ACEITAVEL:
+- Documentacao que registra ambiente atual X:\, \\HOME-MACHINE, IPs LAN/Tailscale de teste e porta 8765.
+- Scripts operacionais de servico/firewall/healthcheck usando porta 8765.
+- 01-mrp/config/mrp_local.env.json com porta 8765 como configuracao.
+- 01-mrp/install/precheck_instalacao.ps1 validando porta 8765 como precheck operacional.
+
+RISCO:
+- Documentos historicos ainda citam comandos antigos com X:\ e IPs Tailscale 100.x em contextos de teste. Baixo risco por estarem em docs, mas podem confundir se usados como procedimento atual.
+- 01-mrp/front_end/js/config.js mantem senha local "admin" de mock/teste; nao e segredo real, mas e risco se confundido com autenticacao operacional.
+
+CRITICO:
+- Stop.ps1 hardcoded para \\HOME-MACHINE\system_jpl e com logica destrutiva. Critico se versionado ou executado sem controle.
+
+10. Pendencias reais
+
+- Confirmar intencao das remocoes em 01-mrp/runtime.
+- Remover, mover para area correta ou documentar formalmente Stop.ps1 antes de qualquer commit, considerando que ele e destrutivo.
+- Testar operacionalmente o painel administrativo apos mudanca async/threading antes de versionar codigo.
+- Limpar lixo operacional ignorado antes de empacotamento ou release, sem misturar logs/pycache no Git.
+- Continuam pendentes: watchdog continuo, tarefa Windows em ambiente real, reboot, queda de energia, queda de rede, logs prolongados e healthcheck continuo.
+- Sistema continua funcional em teste, mas nao blindado, nao final e nao homologado.
+
+11. Recomendacao objetiva
+
+PRECISA CORRIGIR ANTES.
+
+Justificativa:
+- Estado atual tem script destrutivo novo na raiz, remocoes em 01-mrp/runtime e alteracao funcional no painel sem validacao operacional registrada.
+- Nao ha lixo operacional rastreado no Git, mas ha lixo operacional no disco.
+- Documentacao recente esta coerente, porem o estado de trabalho atual ainda nao esta pronto para commit geral.
+- Depois de resolver Stop.ps1 e confirmar/remediar as remocoes em 01-mrp/runtime, pode avaliar commit separado: primeiro correcao/codigo com validacao, depois documentacao.
+
+12. Status Git apos criacao deste relatorio
+
+ D 01-mrp/runtime/README.md
+ D 01-mrp/runtime/python/.gitkeep
+ D 01-mrp/runtime/python/README.md
+ M 03-vs/scripts/painel/mrp_painel_controle.py
+?? 03-vs/relatorios/auditoria_rapida/
+?? Stop.ps1

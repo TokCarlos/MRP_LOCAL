@@ -149,3 +149,19 @@ _bkp/
 01-mrp/**/Thumbs.db
 01-mrp/**/*.pyc
 01-mrp/**/__pycache__/
+
+# Saneamento v0.1.054
+03-vs/quarentena/**
+!03-vs/quarentena/
+!03-vs/quarentena/.gitkeep
+portable/logs/**
+!portable/logs/
+!portable/logs/.gitkeep
+!portable/logs/**/.gitkeep
+portable/tmp/**
+!portable/tmp/
+!portable/tmp/.gitkeep
+portable/runtime/**
+!portable/runtime/
+!portable/runtime/.gitkeep
+*.old

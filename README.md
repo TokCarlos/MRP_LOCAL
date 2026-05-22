@@ -218,3 +218,17 @@ Planejamento registrado:
 - fluxo Produtos padronizado: `route -> service -> repository/adapter -> domain/contracts -> seed`;
 - resposta de `GET /api/produtos` padronizada em `{ ok, source, count, items }`;
 - sem banco real, sem CRUD completo e sem alteracao de seed/imagens.
+
+## Etapa v0.1.054 (ambiente, saneamento e desacoplamento)
+
+- raiz fisica oficial atual: `C:\Users\carlo\Desktop\PCP SERVIDOR\SISTEMA_MRP`;
+- pasta proibida e intocavel: `C:\Users\carlo\Desktop\PCP SERVIDOR\PCP`;
+- raiz direta em `C:\` e proibida para o MRP_LOCAL, incluindo `C:\system_jpl`, `C:\MRP_REDE_FAKE` e `C:\SISTEMA_MRP`;
+- caminho de rede operacional: `\\HOME-MACHINE\system_jpl`;
+- unidade mapeada operacional: `X:\`;
+- o share `system_jpl` deve apontar para a raiz fisica oficial e nunca para PCP ou raizes diretas em `C:\`;
+- o sistema deve validar ambiente antes de iniciar quando depender de share/unidade/script operacional;
+- `portable` e pacote minimo de execucao/teste, nao deposito de documentacao pesada;
+- quarentena oficial fica em `03-vs/quarentena`;
+- modulos devem permanecer desacoplados, com dependencias explicitas e validacao propria;
+- toda alteracao deve ser rastreavel, reversivel e documentada.

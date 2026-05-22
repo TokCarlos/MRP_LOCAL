@@ -1,0 +1,33 @@
+MRP_LOCAL - RESUMO OPERACIONAL DO SISTEMA
+
+Status: resumo operacional criado na etapa v0.1.054.
+
+O MRP_LOCAL e um sistema local-first, portatil, configuravel, auditavel e versionado.
+Nao deve ser chamado de final, homologado ou blindado sem validacao real.
+
+Ambiente DEV/teste atual:
+
+- Raiz fisica oficial: C:\Users\carlo\Desktop\PCP SERVIDOR\SISTEMA_MRP
+- Pasta proibida/intocavel: C:\Users\carlo\Desktop\PCP SERVIDOR\PCP
+- Caminho de rede operacional: \\HOME-MACHINE\system_jpl
+- Unidade mapeada operacional: X:\
+
+Regras de infraestrutura:
+
+- O share system_jpl deve apontar para a raiz fisica oficial.
+- O share nao pode apontar para C:\system_jpl, C:\MRP_REDE_FAKE ou PCP.
+- Raiz direta em C:\ nao pode ser usada como raiz do MRP_LOCAL.
+- O ambiente deve ser validado antes da execucao operacional.
+
+Regras de pacote:
+
+- portable e pacote minimo de execucao/teste.
+- portable nao deve conter documentacao pesada, historico, quarentena, logs reais, .git ou .codex.
+- Quarentena fica em 03-vs/quarentena.
+
+Regras de modulo:
+
+- Modulos devem ser desacoplados.
+- Cada modulo deve ter responsabilidade, entradas, saidas, dependencias e validacao propria.
+- Concluir um modulo nao deve criar dependencia desnecessaria em outro.
+- Toda alteracao deve ser rastreavel, reversivel e documentada.

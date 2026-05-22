@@ -1,0 +1,84 @@
+RELATORIO_PRODUTOS_BOM_v0.1.053
+
+Data/hora: 2026-05-20 01:31:43 -03:00
+Projeto: MRP_LOCAL (ambiente de teste)
+Escopo: Preparacao modular do fluxo Produtos -> BOM -> TUBOS/CHAPAS/INSUMOS, sem banco real e sem persistencia definitiva.
+
+1) Objetivo da alteracao
+- Ajustar a listagem de Produtos para o padrao solicitado:
+  ID | PREVIEW | ATA + Nº | PRODUTO | EMPRESA | AÇÃO
+- Trocar o botao visual da coluna AÇÃO de "Editar" para "BOM".
+- Criar visualizacao detalhada BOM do produto selecionado com 3 tabelas:
+  TUBOS, CHAPAS e INSUMOS.
+
+2) Arquivos alterados
+- 01-mrp/front_end/pages/produtos_list.html
+- 01-mrp/front_end/js/pages/produtos_list.js
+- 01-mrp/front_end/css/pages/produtos_list.css
+
+3) O que foi preservado
+- Modulo Produtos existente e botao "+ Novo Produto" mantidos.
+- Fluxo de carga atual de produtos (API backend quando disponivel, fallback para seed/mock) preservado.
+- Lightbox de preview de imagem preservado.
+- Nenhuma persistencia definitiva adicionada.
+- Nenhuma alteracao de backend/banco/API definitiva nesta etapa.
+
+4) O que foi implementado
+- Listagem principal de Produtos com colunas:
+  ID | PREVIEW | ATA + Nº | PRODUTO | EMPRESA | AÇÃO
+- Coluna AÇÃO com botao "BOM" por linha de produto.
+- Clique em "BOM" abre secao detalhada do produto selecionado.
+- Secao BOM com contexto do produto/equipamento selecionado e botao de voltar para a listagem.
+- Tela BOM com 3 tabelas em sequencia:
+  1. TUBOS (usa TAMANHO)
+  2. CHAPAS (usa TAMANHO)
+  3. INSUMOS (usa UNIDADE no lugar de TAMANHO)
+- Tabelas com colunas conforme escopo:
+  COD | MATERIAL | DIM 1 | DIM 2 | ESPESSURA | REVESTIMENTO | TAMANHO/UNIDADE | QUANTIDADE
+
+5) O que ficou provisório/mock
+- BOM carregado com dados mock controlados por produto selecionado.
+- Nota visual explicita na tela: "Dados de teste (mock) para preparo de estrutura. Sem persistencia definitiva."
+- Sem criacao de banco real.
+- Sem API nova de persistencia de BOM.
+
+6) Como acessar o BOM pelo botao "BOM"
+- Abrir modulo Produtos.
+- Na tabela principal, clicar em "BOM" na linha do produto desejado.
+- A tela de detalhes BOM abre para o produto selecionado.
+- Para retornar, clicar em "Voltar para Produtos".
+
+7) Estrutura das 3 tabelas BOM
+- TUBOS
+  Colunas: COD | MATERIAL | DIM 1 | DIM 2 | ESPESSURA | REVESTIMENTO | TAMANHO | QUANTIDADE
+- CHAPAS
+  Colunas: COD | MATERIAL | DIM 1 | DIM 2 | ESPESSURA | REVESTIMENTO | TAMANHO | QUANTIDADE
+- INSUMOS
+  Colunas: COD | MATERIAL | DIM 1 | DIM 2 | ESPESSURA | REVESTIMENTO | UNIDADE | QUANTIDADE
+
+8) Pendencias futuras para backend/banco/API
+- Definir contrato backend para BOM de produtos (owner da regra de negocio).
+- Definir adapter/repositorio para BOM sem duplicidade por acento/chave.
+- Conectar frontend de BOM ao backend quando etapa permitir.
+- Incluir validacoes de dominio na camada backend/engine (sem regra critica de persistencia no frontend).
+
+9) Validacoes executadas
+- git status --short (antes e depois da implementacao).
+- Identificacao de arquivos alterados no escopo.
+- Validacao de sintaxe JS:
+  node --check 01-mrp/front_end/js/pages/produtos_list.js
+- python -m py_compile:
+  nao aplicavel nesta etapa (nenhum .py alterado por este escopo).
+- git diff --check:
+  executado e sem erros apos normalizacao de whitespace/EOF.
+- Checagem de mojibake nos arquivos alterados:
+  padroes predefinidos de encoding do checklist
+  resultado: sem ocorrencia nos arquivos alterados.
+- Checagem de lixo operacional (reportada, sem remocao automatica):
+  Thumbs.db / __pycache__ / *.pyc / *.tmp / *.bak / logs reais encontrados no workspace (fora do escopo desta alteracao).
+
+10) Status real
+- Funcional em teste.
+- Nao homologado.
+- Nao final.
+- Nao blindado.

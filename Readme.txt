@@ -131,3 +131,15 @@ Registro v0.1.053b:
 - estrutura temporaria 01-mrp/backend removida apos migracao util;
 - Produtos vira modulo-template por camadas (route/service/repository-adapter/domain-contracts);
 - resposta de produtos padronizada em {ok, source, count, items}.
+
+Registro v0.1.054:
+- raiz fisica oficial atual: C:\Users\carlo\Desktop\PCP SERVIDOR\SISTEMA_MRP;
+- pasta proibida/intocavel: C:\Users\carlo\Desktop\PCP SERVIDOR\PCP;
+- raiz direta em C:\ nao pode ser usada como raiz do MRP_LOCAL;
+- caminho de rede operacional: \\HOME-MACHINE\system_jpl;
+- unidade mapeada operacional: X:\;
+- share system_jpl deve apontar somente para a raiz fisica oficial;
+- portable deve ser pacote minimo de execucao/teste;
+- quarentena deve ficar em 03-vs/quarentena;
+- modulos devem ser desacoplados e validados isoladamente;
+- toda alteracao deve ser rastreavel, reversivel e documentada.

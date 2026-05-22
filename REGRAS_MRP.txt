@@ -1222,3 +1222,34 @@ O sistema atual está em teste, com porta 8765 liberada e frontend iniciando por
 553. O sistema instalado deve manter separacao entre codigo, config, runtime, dados, logs, backups e temporarios.
 554. O instalador nao pode depender de `X:\`, `\\HOME-MACHINE`, usuario Windows fixo ou unidade mapeada.
 555. O instalador deve executar validacao de pendencias antes de concluir.
+
+## 34. Regra de ambiente, area proibida e desacoplamento (v0.1.054)
+
+556. A raiz fisica oficial atual do MRP_LOCAL em DEV/teste e `C:\Users\carlo\Desktop\PCP SERVIDOR\SISTEMA_MRP`.
+557. A pasta `C:\Users\carlo\Desktop\PCP SERVIDOR\PCP` e proibida e intocavel.
+558. Nenhum script, pacote, limpeza, teste ou geracao de arquivo pode usar `C:\Users\carlo\Desktop\PCP SERVIDOR\PCP` como destino.
+559. Pastas diretas em `C:\` sao proibidas como raiz do MRP_LOCAL.
+560. Sao proibidas como raiz do MRP_LOCAL: `C:\system_jpl`, `C:\MRP_REDE_FAKE`, `C:\SISTEMA_MRP` e qualquer `C:\NOME_DA_PASTA` usado como raiz do sistema.
+561. O caminho de rede operacional/fake e `\\HOME-MACHINE\system_jpl`.
+562. A unidade mapeada operacional e `X:\`.
+563. `\\HOME-MACHINE\system_jpl` e `X:\` sao caminhos de ambiente DEV/teste e nao podem virar dependencia de regra de negocio.
+564. O share `system_jpl` deve apontar para `C:\Users\carlo\Desktop\PCP SERVIDOR\SISTEMA_MRP`.
+565. O share `system_jpl` nunca pode apontar para `C:\system_jpl`, `C:\MRP_REDE_FAKE` ou `C:\Users\carlo\Desktop\PCP SERVIDOR\PCP`.
+566. O sistema deve validar o ambiente antes de iniciar quando a execucao depender de share, unidade mapeada ou scripts operacionais.
+567. O pacote `portable` deve ser pacote minimo de execucao/teste, nao deposito de documentacao pesada.
+568. Quarentena deve ficar em `03-vs/quarentena`, nao dentro do portable final.
+569. Modulos devem ser desacoplados, com responsabilidade clara, entradas e saidas claras, dependencia explicita, validacao propria e documentacao minima.
+570. Ao concluir um modulo, nao criar dependencia desnecessaria em outro modulo.
+571. Ao alterar um modulo, nao alterar outro salvo necessidade tecnica real e documentada.
+572. Alteracoes que envolvam persistencia, logs, geracao de arquivos, estado ou operacao critica devem seguir principio ACID quando aplicavel.
+573. Trabalhos com dependencia de etapas devem seguir cascata: documentar, validar, alterar, testar e registrar.
+574. Toda alteracao deve ser rastreavel, reversivel e documentada.
+575. O sistema nao pode ser chamado de final, homologado ou blindado sem validacao real.
+
+## 35. Clausula permanente de area absolutamente proibida (ETERNA)
+
+576. A pasta `C:\Users\carlo\Desktop\PCP SERVIDOR\PCP` e area absolutamente proibida e intocavel por completo.
+577. Esta clausula tem prioridade maxima e permanente sobre qualquer fluxo operacional do MRP_LOCAL.
+578. E proibido ler para operacao, escrever, editar, mover, apagar, limpar, testar, criar arquivo temporario, usar como destino ou usar como raiz.
+579. A pasta proibida so pode aparecer em regra/validador para bloqueio explicito de seguranca.
+580. Nenhuma automacao, script, pacote portable, instalador futuro ou rotina de manutencao pode tocar nessa pasta.

@@ -1,0 +1,21 @@
+Modulo
+Produtos
+Submenus: + Novo Produto
+
+Colunas: ID | PREVIEW | ATA + Nª | PRODUTO | EMPRESA | AÇÃO
+na Coluna AÇÃO, temos botões "Editar" na verdade ele deve se chamar agora de "BOM"
+O que esse botão vai fazer?  vai levar para uma nova tabela detalhada do Equipamento
+nela vamos ter 3 Tabelas uma em baixo da outra
+
+1ª Tabela: TUBOS
+COD | MATERIAL | DIM 1 | DIM 2 | ESPESSURA | REVESTIMENTO | TAMANHO | QUANTIDADE
+"Tubos usados para fabricação"
+
+2ª Tabela: CHAPAS
+COD | MATERIAL | DIM 1 | DIM 2 | ESPESSURA | REVESTIMENTO | TAMANHO | QUANTIDADE
+"Chapas usadas para fabricação"
+
+
+3ª Tabela: INSUMOS
+COD | MATERIAL | DIM 1 | DIM 2 | ESPESSURA | REVESTIMENTO | UNIDADE | QUANTIDADE
+"Aqui ´onde vai parafusos, porcas, arruelas etc... ela é um pouco diferente e troca tamanho, que não é certo para insumos que são individuais e não matéria prima moldável, para UNIDADE que vai explicar se é Metro, Kg, M² etc...

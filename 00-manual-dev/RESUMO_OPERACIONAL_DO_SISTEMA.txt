@@ -164,3 +164,13 @@ Registro v0.1.053b:
 - estrutura temporaria 01-mrp/backend removida apos migracao util;
 - Produtos padronizado como template arquitetural por camadas;
 - sem banco real, sem CRUD completo e sem alteracao de seed/imagens.
+
+---
+
+ATUALIZACAO PRODUTOS BOM (v0.1.053) - 2026-05-20 01:32:03 -03:00
+
+- Produtos agora exibe acao "BOM" por linha.
+- BOM abre detalhe do equipamento/produto selecionado.
+- Estrutura exibida: TUBOS, CHAPAS e INSUMOS.
+- Dados de BOM mantidos como mock de teste nesta etapa.
+- Status segue: funcional em teste, nao homologado.

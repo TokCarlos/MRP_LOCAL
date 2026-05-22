@@ -990,6 +990,22 @@ Abaixo está a lista consolidada para virar regra absoluta do projeto **MRP_LOCA
 
 441. Frontend está iniciando por script.
 
+441A. Ambiente DEV casa está funcional.
+
+441B. Deploy no trabalho está funcional.
+
+441C. Acesso local no PC do trabalho foi validado.
+
+441D. Acesso por PCs da rede foi validado com apoio de `portable\CONFIGURAR_ACESSO_MRP_REDE.bat`.
+
+441E. Acesso remoto via Tailscale foi validado.
+
+441F. A pasta `portable` é área oficial de apoio operacional para deploy/teste externo.
+
+441G. `CONFIGURAR_ACESSO_MRP_REDE.bat` deve permanecer em `portable`.
+
+441H. IP LAN `192.168.1.71` e IP Tailscale `100.117.224.127` são dados operacionais de teste, não regra fixa do sistema.
+
 442. Sistema ainda não é 100% blindado.
 
 443. Falta validar watchdog profundamente.
@@ -1152,3 +1168,88 @@ Tudo que for técnico deve usar chave simples, ASCII-safe e sem dependência de 
 Nada funcional deve ser alterado sem justificativa.
 Nada deve ser chamado de final sem validação real.
 O sistema atual está em teste, com porta 8765 liberada e frontend iniciando por script, mas ainda exige saneamento de encoding, caminhos, watchdog, tarefa automática, logs, healthcheck e documentação antes de ser considerado blindado.
+---
+
+## 31. Regra estrategica de instalador futuro (v0.1.050)
+
+512. Objetivo futuro: distribuicao por instalador unico (exemplo conceitual: `MRP_LOCAL_Setup.exe`).
+513. Nesta etapa, isso e somente direcao estrategica/documental.
+514. Nao implementar instalador real agora.
+515. Nao gerar `.exe` agora.
+516. Nao empacotar release agora.
+517. O instalador unico futuro e artefato de entrega/distribuicao.
+518. Apos instalacao, o sistema deve manter organizacao interna por modulos e camadas.
+519. O instalador futuro deve preparar ambiente e arquivos necessarios antes de concluir.
+520. O instalador futuro deve executar precheck.
+521. Pendencia `CRITICO` bloqueia conclusao/execucao.
+522. Pendencia `OPCIONAL` alerta, registra e permite continuar quando nao bloquear operacao.
+523. Pendencia `RECOMENDADO` alerta, registra e permite continuar.
+524. Acoes sensiveis exigem aprovacao explicita: firewall, servico/tarefa Windows, permissao, download externo, instalacao externa e alteracao de ambiente.
+525. O instalador futuro nao pode depender de `X:\`.
+526. O instalador futuro nao pode depender de `\\HOME-MACHINE`.
+527. O instalador futuro nao pode depender de usuario Windows especifico.
+528. O instalador futuro nao pode depender de letra de unidade mapeada.
+529. A tecnologia do instalador sera decidida em etapa futura.
+530. Implementacao do instalador final so deve ocorrer apos maturidade real de backend, banco, logs, watchdog/tarefa e operacao automatica.
+
+## 32. Regra estrategica futura - nome amigavel/proxy e integracao IA
+
+531. O acesso por IP e porta e estado atual tecnico, nao objetivo final de experiencia.
+532. Objetivo futuro: acesso por nome amigavel/dominio interno/proxy, ocultando IP e porta do usuario final.
+533. A porta 8765 deve continuar como porta interna/configuravel do frontend.
+534. Nome amigavel/proxy e camada de infraestrutura, nao regra de negocio.
+535. IP, hostname e porta nao podem ficar hardcoded na regra de negocio.
+536. Ocultar IP/porta melhora usabilidade, mas nao substitui autenticacao, firewall, Tailscale e controle de acesso.
+537. Possibilidades futuras aceitas: hosts em clientes, DNS interno, proxy reverso local 80/443->8765, MagicDNS e Tailscale Serve.
+538. Nao implementar proxy, DNS ou Tailscale Serve nesta etapa.
+539. Integracao IA futura deve ocorrer via backend/API, nunca com chave exposta no frontend.
+540. IA deve operar por ferramentas controladas com permissao, confirmacao e log para acoes criticas.
+541. IA nao deve executar PowerShell livre.
+542. IA nao deve acessar banco diretamente sem camada de controle do backend.
+543. Chaves/tokens/segredos devem ficar fora do Git.
+544. Integracao IA depende de backend minimo, autenticacao, permissoes, logs, contratos de API e modelo de dados minimo.
+545. Nesta etapa, a regra e apenas documental/estrategica, sem implementacao tecnica.
+
+## 33. Regra estrategica futura - modelo de programa Windows instalado
+
+546. O MRP_LOCAL deve evoluir para programa instalavel no Windows.
+547. O instalador final pode ser artefato unico `.exe` (exemplo conceitual: `MRP_LOCAL_Setup.exe`).
+548. A pasta instalada pode conter `.exe`, `.dll`, `.pyd`, `.bin`, runtime interno, frontend, backend, engine, config, data, logs e db.
+549. Esses itens sao artefatos de distribuicao/release, nao estrutura obrigatoria do repositorio DEV.
+550. O repositorio DEV deve continuar limpo, auditavel e modular (`01-mrp`, `02-docs`, `03-vs`, `portable`).
+551. `.exe`, `.dll`, `.bin` e runtime empacotado nao devem ser criados/versionados sem etapa especifica.
+552. Release/build/installer devem ser produzidos em etapa propria futura.
+553. O sistema instalado deve manter separacao entre codigo, config, runtime, dados, logs, backups e temporarios.
+554. O instalador nao pode depender de `X:\`, `\\HOME-MACHINE`, usuario Windows fixo ou unidade mapeada.
+555. O instalador deve executar validacao de pendencias antes de concluir.
+
+## 34. Regra de ambiente, area proibida e desacoplamento (v0.1.054)
+
+556. A raiz fisica oficial atual do MRP_LOCAL em DEV/teste e `C:\Users\carlo\Desktop\PCP SERVIDOR\SISTEMA_MRP`.
+557. A pasta `C:\Users\carlo\Desktop\PCP SERVIDOR\PCP` e proibida e intocavel.
+558. Nenhum script, pacote, limpeza, teste ou geracao de arquivo pode usar `C:\Users\carlo\Desktop\PCP SERVIDOR\PCP` como destino.
+559. Pastas diretas em `C:\` sao proibidas como raiz do MRP_LOCAL.
+560. Sao proibidas como raiz do MRP_LOCAL: `C:\system_jpl`, `C:\MRP_REDE_FAKE`, `C:\SISTEMA_MRP` e qualquer `C:\NOME_DA_PASTA` usado como raiz do sistema.
+561. O caminho de rede operacional/fake e `\\HOME-MACHINE\system_jpl`.
+562. A unidade mapeada operacional e `X:\`.
+563. `\\HOME-MACHINE\system_jpl` e `X:\` sao caminhos de ambiente DEV/teste e nao podem virar dependencia de regra de negocio.
+564. O share `system_jpl` deve apontar para `C:\Users\carlo\Desktop\PCP SERVIDOR\SISTEMA_MRP`.
+565. O share `system_jpl` nunca pode apontar para `C:\system_jpl`, `C:\MRP_REDE_FAKE` ou `C:\Users\carlo\Desktop\PCP SERVIDOR\PCP`.
+566. O sistema deve validar o ambiente antes de iniciar quando a execucao depender de share, unidade mapeada ou scripts operacionais.
+567. O pacote `portable` deve ser pacote minimo de execucao/teste, nao deposito de documentacao pesada.
+568. Quarentena deve ficar em `03-vs/quarentena`, nao dentro do portable final.
+569. Modulos devem ser desacoplados, com responsabilidade clara, entradas e saidas claras, dependencia explicita, validacao propria e documentacao minima.
+570. Ao concluir um modulo, nao criar dependencia desnecessaria em outro modulo.
+571. Ao alterar um modulo, nao alterar outro salvo necessidade tecnica real e documentada.
+572. Alteracoes que envolvam persistencia, logs, geracao de arquivos, estado ou operacao critica devem seguir principio ACID quando aplicavel.
+573. Trabalhos com dependencia de etapas devem seguir cascata: documentar, validar, alterar, testar e registrar.
+574. Toda alteracao deve ser rastreavel, reversivel e documentada.
+575. O sistema nao pode ser chamado de final, homologado ou blindado sem validacao real.
+
+## 35. Clausula permanente de area absolutamente proibida (ETERNA)
+
+576. A pasta `C:\Users\carlo\Desktop\PCP SERVIDOR\PCP` e area absolutamente proibida e intocavel por completo.
+577. Esta clausula tem prioridade maxima e permanente sobre qualquer fluxo operacional do MRP_LOCAL.
+578. E proibido ler para operacao, escrever, editar, mover, apagar, limpar, testar, criar arquivo temporario, usar como destino ou usar como raiz.
+579. A pasta proibida so pode aparecer em regra/validador para bloqueio explicito de seguranca.
+580. Nenhuma automacao, script, pacote portable, instalador futuro ou rotina de manutencao pode tocar nessa pasta.

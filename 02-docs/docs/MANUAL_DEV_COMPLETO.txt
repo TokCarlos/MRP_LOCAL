@@ -1,0 +1,49 @@
+MRP_LOCAL - MANUAL DEV COMPLETO
+
+Status: documento operacional criado na etapa v0.1.054.
+
+REGRAS DE AMBIENTE
+
+1. Raiz fisica oficial atual:
+   C:\Users\carlo\Desktop\PCP SERVIDOR\SISTEMA_MRP
+
+2. Pasta proibida e intocavel:
+   C:\Users\carlo\Desktop\PCP SERVIDOR\PCP
+
+3. Pastas diretas em C:\ sao proibidas para raiz do MRP_LOCAL.
+
+4. Caminho de rede operacional/fake:
+   \\HOME-MACHINE\system_jpl
+
+5. Unidade mapeada operacional:
+   X:\
+
+6. O share system_jpl deve apontar para:
+   C:\Users\carlo\Desktop\PCP SERVIDOR\SISTEMA_MRP
+
+7. O share nunca pode apontar para:
+   C:\system_jpl
+   C:\MRP_REDE_FAKE
+   C:\Users\carlo\Desktop\PCP SERVIDOR\PCP
+
+8. O sistema deve validar o ambiente antes de iniciar quando depender de share, unidade mapeada ou script operacional.
+
+9. Portable deve ser pacote minimo de execucao/teste, nao deposito de documentacao pesada.
+
+10. Quarentena deve ficar em 03-vs/quarentena, nao dentro do portable final.
+
+11. Modulos devem ser desacoplados.
+
+12. Ao concluir um modulo, nao criar dependencia desnecessaria em outro.
+
+13. Toda alteracao deve ser rastreavel, reversivel e documentada.
+
+REGRAS DE MODULARIDADE
+
+- Cada modulo deve ter responsabilidade clara.
+- Entradas e saidas devem ser explicitas.
+- Dependencias devem ser documentadas.
+- Validacao propria deve existir quando houver comportamento operacional.
+- Alterar um modulo nao deve gerar efeito colateral em outro sem necessidade tecnica real.
+- Operacoes com persistencia, logs, arquivos ou estado devem respeitar principio ACID quando aplicavel.
+- Fluxos dependentes devem seguir cascata: documentar, validar, alterar, testar e registrar.

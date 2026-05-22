@@ -361,3 +361,17 @@ Mantido:
 - sem banco real;
 - sem CRUD completo;
 - sem autenticacao nova.
+
+---
+
+ATUALIZACAO ETAPA PRODUTOS BOM (v0.1.053) - 2026-05-20 01:32:03 -03:00
+
+- Modulo Produtos preparado para fluxo visual de BOM por item.
+- Tabela principal de Produtos ajustada para:
+  ID | PREVIEW | ATA + NUMERO | PRODUTO | EMPRESA | ACAO.
+- Botao visual de acao alterado para "BOM".
+- Clique em "BOM" abre detalhe do produto com 3 tabelas:
+  TUBOS, CHAPAS e INSUMOS.
+- TUBOS/CHAPAS usam coluna TAMANHO; INSUMOS usa UNIDADE.
+- Dados de BOM nesta etapa sao mock controlados para teste visual e de fluxo.
+- Sem banco real, sem persistencia definitiva e sem homologacao.

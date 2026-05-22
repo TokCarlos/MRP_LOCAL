@@ -1,12 +1,6 @@
 # adapters
 
-Reservado para adaptadores futuros.
+Compatibilidade v0.1.054.
 
-Exemplos futuros:
-- banco local;
-- arquivos;
-- Excel/VBA legado;
-- API externa;
-- integracoes internas.
-
-Status atual: reservado, sem implementacao funcional.
+O conteudo estrutural foi movido para `01-mrp/infrastructure/adapters`.
+Nao adicionar implementacoes novas nesta pasta sem justificativa de compatibilidade.

@@ -59,6 +59,15 @@ Ainda precisam validacao real:
 
 ## Area portable (preservada)
 
+## Atualizacao pre-backend v0.1.056
+
+- DEV passou por saneamento operacional (cache Python, logs reais e BOM tecnico tratados).
+- Portable ficou apenas com limpeza operacional nesta etapa (sem avancar escopo funcional).
+- Estrutura nova (`app/core/infrastructure/operations`) permanece parcial.
+- `front_end` e `back_end` seguem ativos por compatibilidade nesta fase.
+- Proximo foco tecnico: etapa Backend.
+- O sistema continua NAO homologado e NAO blindado.
+
 A pasta `portable` e area oficial de apoio operacional para deploy/teste/acesso em maquinas clientes.
 
 Arquivos chave:
@@ -219,3 +228,29 @@ A raiz fisica atual de desenvolvimento pode existir em documentacao, config e sc
 - resposta de `GET /api/produtos` padronizada em:
   - `{ ok, source, count, items }`;
 - sem banco real, sem CRUD completo e sem alteracao de seed/imagens.
+
+## Atualizacao Produtos BOM v0.1.053 (2026-05-20 01:32:03 -03:00)
+
+- Fluxo visual implantado: Produtos -> BOM (por produto selecionado).
+- Tabela Produtos no frontend com colunas:
+  ID | PREVIEW | ATA + NUMERO | PRODUTO | EMPRESA | ACAO.
+- Acao visual da linha: botao "BOM".
+- Tela BOM com 3 tabelas:
+  - TUBOS (com TAMANHO)
+  - CHAPAS (com TAMANHO)
+  - INSUMOS (com UNIDADE)
+- Implementacao provisoria com dados mock controlados.
+- Sem banco real e sem persistencia definitiva nesta etapa.
+- Estado do sistema: funcional em teste, nao homologado.
+
+## Etapa v0.1.054 - saneamento estrutural e regras de ambiente
+
+- raiz fisica oficial atual registrada: `C:\Users\carlo\Desktop\PCP SERVIDOR\SISTEMA_MRP`;
+- pasta `C:\Users\carlo\Desktop\PCP SERVIDOR\PCP` registrada como proibida/intocavel;
+- raiz direta em `C:\` bloqueada para uso como raiz do MRP_LOCAL;
+- caminho operacional `\\HOME-MACHINE\system_jpl` e unidade `X:\` tratados como ambiente DEV/teste;
+- share `system_jpl` deve apontar somente para a raiz fisica oficial;
+- portable deve permanecer minimo, sem historico pesado, logs reais, quarentena, `.git` ou `.codex`;
+- quarentena oficial fica em `03-vs/quarentena`;
+- modulos devem ser desacoplados, com dependencia explicita e validacao propria;
+- sistema permanece local-first, em teste, nao homologado e nao blindado.
