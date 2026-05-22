@@ -42,3 +42,16 @@ Produtos e o cadastro-mestre que sera referenciado por materiais, tubos, chapas,
 - API minima de leitura de Produtos ativa em `/api/produtos`;
 - backend local responde `/health` e `/api/status`;
 - dados continuam vindo de seed (sem banco real nesta etapa).
+
+## Etapa v0.1.058
+
+- Corrigido contrato real de `GET /api/produtos` para incluir dados de Base ATA e Empresa na listagem.
+- Listagem passa a devolver `base_ata_id`, `arp`, `ata_numero` e `empresa`, alinhada ao endpoint individual.
+- Filtro do frontend Produtos volta a ter dados suficientes para ATA, Empresa, Categoria e pesquisa.
+- Implementado endpoint de upload real de imagem: `POST /api/produtos/{id}/imagem/upload`.
+- Campo multipart esperado: `arquivo`.
+- Extensoes permitidas: `.png`, `.jpg`, `.jpeg`, `.webp`, `.svg`.
+- Limite inicial: 5 MB.
+- Upload gera nome tecnico seguro baseado no `produto_key`.
+- O caminho relativo salvo no banco passa a apontar para `assets/images/produtos/...`.
+- `python-multipart` passa a ser dependencia obrigatoria do backend FastAPI.

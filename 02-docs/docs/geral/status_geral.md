@@ -2,7 +2,7 @@
 
 ## Versao documental atual
 
-`v0.1.049-fix-launcher-painel-admin`
+`v0.1.058-produtos-filtro-ui-upload`
 
 ## Base funcional anterior
 
@@ -67,6 +67,33 @@ Ainda precisam validacao real:
 - `front_end` e `back_end` seguem ativos por compatibilidade nesta fase.
 - Proximo foco tecnico: etapa Backend.
 - O sistema continua NAO homologado e NAO blindado.
+
+## Atualizacao backend Produtos v0.1.057
+
+- Backend Produtos com SQLite local implementado no backend ativo (`01-mrp/back_end/app`).
+- CRUD de Base ATA, Produtos e BOM implementado em rotas `api/produtos`.
+- Regras de dominio aplicadas:
+  - Base ATA obrigatoria antes de Produto;
+  - empresa valida: JPL, ACO, TCR;
+  - TCR bloqueada para criacao de produtos nesta etapa;
+  - `imagem_path` apenas relativo (sem caminho absoluto de ambiente).
+- Frontend Produtos (DEV ativo `01-mrp/front_end`) integrado com:
+  - ficha Nova Base ATA;
+  - ficha Novo/Editar Produto;
+  - ficha Editar BOM;
+  - atualizacao de lista sem logout/login.
+- Compatibilidade portable mantida com sincronizacao de JS/HTML/CSS de Produtos para `portable/app/frontend`.
+- Status: implementacao tecnica concluida para revisao, sem commit, com validacao manual fim-a-fim pendente de runtime FastAPI no ambiente local.
+
+## Atualizacao Produtos v0.1.058
+
+- Diagnostico confirmou banco SQLite DEV integro: 5 bases ATA, 163 produtos ativos, seed migrado integralmente, sem duplicidade de `produto_key` e sem imagens ausentes.
+- Corrigido contrato de `GET /api/produtos` para retornar Base ATA, numero da ATA e empresa na listagem.
+- Filtro Produtos volta a receber os campos esperados pelo frontend.
+- Formularios de Nova Base ATA, Produto e Editar BOM alinhados ao padrao visual branco translucido da tabela Produtos.
+- Registro de foto evoluiu de caminho manual para upload real via backend.
+- Backend passa a depender de `python-multipart`.
+- Validacao tecnica executada com TestClient e API em subprocesso.
 
 A pasta `portable` e area oficial de apoio operacional para deploy/teste/acesso em maquinas clientes.
 
@@ -254,3 +281,12 @@ A raiz fisica atual de desenvolvimento pode existir em documentacao, config e sc
 - quarentena oficial fica em `03-vs/quarentena`;
 - modulos devem ser desacoplados, com dependencia explicita e validacao propria;
 - sistema permanece local-first, em teste, nao homologado e nao blindado.
+
+## Ajuste painel local DEV v0.1.057
+
+- painel local DEV passa a controlar tambem o backend na porta `8876`;
+- incluidas acoes de iniciar, parar, status, healthcheck e reiniciar backend;
+- backend operacional depende da venv `01-mrp/runtime/venv_backend`;
+- se dependencias Python faltarem, rodar `03-vs/scripts/backend/setup_backend_dev_env.ps1`;
+- corrigidos scroll do painel e acionamento por Enter;
+- pendente teste manual visual do painel aberto.

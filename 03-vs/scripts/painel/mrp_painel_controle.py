@@ -11,7 +11,7 @@ import threading
 import webbrowser
 from datetime import datetime, timezone
 from pathlib import Path
-from tkinter import END, Tk, Toplevel, messagebox
+from tkinter import Canvas, END, Tk, Toplevel, messagebox
 from tkinter import ttk
 from tkinter.scrolledtext import ScrolledText
 
@@ -48,6 +48,9 @@ class AdminAuthDialog(Toplevel):
 
         ttk.Button(frm, text="Cancelar", command=self.cancel).grid(row=2, column=0, sticky="ew", padx=(0, 6))
         ttk.Button(frm, text="Confirmar", command=self.confirm).grid(row=2, column=1, sticky="ew")
+        self.bind("<Return>", lambda _event: self.confirm())
+        self.bind("<KP_Enter>", lambda _event: self.confirm())
+        self.bind("<Escape>", lambda _event: self.cancel())
 
     def confirm(self) -> None:
         val = self.entry.get().strip()
@@ -70,10 +73,12 @@ class MrpPainel:
         self.log_file = self.logs_admin_dir / "painel_admin.log"
         self.user_name = getpass.getuser()
         self.port = self._load_port()
+        self.backend_port = 8876
         self.admin_unlocked = False
         self.busy = False
         self.main_thread_id = threading.get_ident()
         self.process_timeout_seconds = PROCESS_TIMEOUT_SECONDS
+        self.main_canvas: Canvas | None = None
 
         self.root = Tk()
         self.root.title("MRP_LOCAL - Painel Administrativo do Servidor")
@@ -91,6 +96,9 @@ class MrpPainel:
         self.admin_login_button: ttk.Button | None = None
 
         self._build_ui()
+        self.root.bind("<Return>", self._handle_enter)
+        self.root.bind("<KP_Enter>", self._handle_enter)
+        self.root.bind("<MouseWheel>", self._handle_mousewheel)
         self.refresh_status_card()
 
     def _configure_style(self) -> None:
@@ -116,8 +124,30 @@ class MrpPainel:
         self.style.configure("TButton", font=("Segoe UI", 10))
 
     def _build_ui(self) -> None:
-        root_pad = ttk.Frame(self.root, padding=14)
-        root_pad.pack(fill="both", expand=True)
+        outer = ttk.Frame(self.root)
+        outer.pack(fill="both", expand=True)
+
+        self.main_canvas = Canvas(outer, bg="#101419", highlightthickness=0, borderwidth=0)
+        main_scroll = ttk.Scrollbar(outer, orient="vertical", command=self.main_canvas.yview)
+        self.main_canvas.configure(yscrollcommand=main_scroll.set)
+        self.main_canvas.pack(side="left", fill="both", expand=True)
+        main_scroll.pack(side="right", fill="y")
+
+        root_pad = ttk.Frame(self.main_canvas, padding=14)
+        canvas_window = self.main_canvas.create_window((0, 0), window=root_pad, anchor="nw")
+
+        def update_scrollregion(_event=None) -> None:
+            if self.main_canvas is None:
+                return
+            self.main_canvas.configure(scrollregion=self.main_canvas.bbox("all"))
+
+        def update_canvas_width(event) -> None:
+            if self.main_canvas is None:
+                return
+            self.main_canvas.itemconfigure(canvas_window, width=event.width)
+
+        root_pad.bind("<Configure>", update_scrollregion)
+        self.main_canvas.bind("<Configure>", update_canvas_width)
 
         header = ttk.Frame(root_pad)
         header.pack(fill="x", pady=(0, 10))
@@ -131,7 +161,7 @@ class MrpPainel:
         status_card = ttk.Frame(cards, style="Card.TFrame", padding=12)
         status_card.pack(fill="x", pady=(0, 10))
         ttk.Label(status_card, text="Status Operacional", style="CardTitle.TLabel").grid(row=0, column=0, sticky="w", pady=(0, 8))
-        for i, key in enumerate(("Porta 8765", "Frontend", "Modo Automatico", "Manutencao")):
+        for i, key in enumerate(("Porta 8765", "Frontend", "Porta 8876", "Backend", "Modo Automatico", "Manutencao")):
             ttk.Label(status_card, text=key + ":", style="CardText.TLabel").grid(row=i + 1, column=0, sticky="w", padx=(0, 8), pady=1)
             lbl = ttk.Label(status_card, text="-", style="CardText.TLabel")
             lbl.grid(row=i + 1, column=1, sticky="w", pady=1)
@@ -149,8 +179,10 @@ class MrpPainel:
         user_card.pack(fill="x", pady=(0, 10))
         ttk.Label(user_card, text="Acoes de Usuario", style="CardTitle.TLabel").pack(anchor="w", pady=(0, 8))
         self._add_user_btn(user_card, "Abrir Sistema no Navegador", self.open_system)
-        self._add_user_btn(user_card, "Ver Status", lambda: self.queue_action("VER_STATUS", lambda: self.run_service("mrp_frontend_status.ps1", "VER_STATUS"), require_admin=False))
-        self._add_user_btn(user_card, "Healthcheck", lambda: self.queue_action("HEALTHCHECK", lambda: self.run_service("mrp_frontend_healthcheck.ps1", "HEALTHCHECK"), require_admin=False))
+        self._add_user_btn(user_card, "Status Frontend", lambda: self.queue_action("STATUS_FRONTEND", lambda: self.run_service("mrp_frontend_status.ps1", "STATUS_FRONTEND"), require_admin=False))
+        self._add_user_btn(user_card, "Healthcheck Frontend", lambda: self.queue_action("HEALTH_FRONTEND", lambda: self.run_service("mrp_frontend_healthcheck.ps1", "HEALTH_FRONTEND"), require_admin=False))
+        self._add_user_btn(user_card, "Status Backend", lambda: self.queue_action("STATUS_BACKEND", lambda: self.run_service("mrp_backend_status.ps1", "STATUS_BACKEND"), require_admin=False))
+        self._add_user_btn(user_card, "Healthcheck Backend", lambda: self.queue_action("HEALTH_BACKEND", lambda: self.run_service("mrp_backend_healthcheck.ps1", "HEALTH_BACKEND"), require_admin=False))
         self._add_user_btn(user_card, "Sair", self.root.destroy)
 
         admin_card = ttk.Frame(left, style="Card.TFrame", padding=12)
@@ -166,9 +198,12 @@ class MrpPainel:
             b.pack(fill="x", pady=2)
             self.admin_buttons.append(b)
 
-        add_admin_btn("Iniciar Sistema", lambda: self.admin_action("INICIAR", lambda: self.run_service("mrp_frontend_start.ps1", "INICIAR")))
-        add_admin_btn("Desativar Sistema", lambda: self.admin_action("DESATIVAR", lambda: self.run_service("mrp_frontend_stop.ps1", "DESATIVAR")))
-        add_admin_btn("Reiniciar Sistema", lambda: self.admin_action("REINICIAR", self.restart_service))
+        add_admin_btn("Iniciar Frontend", lambda: self.admin_action("INICIAR_FRONTEND", lambda: self.run_service("mrp_frontend_start.ps1", "INICIAR_FRONTEND")))
+        add_admin_btn("Desativar Frontend", lambda: self.admin_action("DESATIVAR_FRONTEND", lambda: self.run_service("mrp_frontend_stop.ps1", "DESATIVAR_FRONTEND")))
+        add_admin_btn("Reiniciar Frontend", lambda: self.admin_action("REINICIAR_FRONTEND", self.restart_frontend_service))
+        add_admin_btn("Iniciar Backend", lambda: self.admin_action("INICIAR_BACKEND", lambda: self.run_service("mrp_backend_start.ps1", "INICIAR_BACKEND")))
+        add_admin_btn("Parar Backend", lambda: self.admin_action("PARAR_BACKEND", lambda: self.run_service("mrp_backend_stop.ps1", "PARAR_BACKEND")))
+        add_admin_btn("Reiniciar Backend", lambda: self.admin_action("REINICIAR_BACKEND", self.restart_backend_service))
         add_admin_btn("Zerar Execucao", lambda: self.admin_action("ZERAR", lambda: self.run_service("mrp_zerar_execucao.ps1", "ZERAR")))
         add_admin_btn("Ativar Modo Automatico", lambda: self.admin_action("AUTO_ON", lambda: self.update_auto_mode(True, "running", False, False, "Ativacao admin local")))
         add_admin_btn("Desativar Modo Automatico", lambda: self.admin_action("AUTO_OFF", lambda: self.update_auto_mode(False, "stopped", False, False, "Desativacao admin local")))
@@ -187,6 +222,24 @@ class MrpPainel:
         b.pack(fill="x", pady=2)
         self.user_buttons.append(b)
         return b
+
+    def _handle_mousewheel(self, event) -> None:
+        if self.main_canvas is None:
+            return
+        if self.output is not None and str(event.widget).startswith(str(self.output)):
+            return
+        delta = -1 * int(event.delta / 120) if event.delta else 0
+        if delta:
+            self.main_canvas.yview_scroll(delta, "units")
+
+    def _handle_enter(self, event) -> str | None:
+        if self.busy:
+            return "break"
+        widget = self.root.focus_get()
+        if isinstance(widget, ttk.Button):
+            widget.invoke()
+            return "break"
+        return None
 
     def _in_ui_thread(self) -> bool:
         return threading.get_ident() == self.main_thread_id
@@ -221,6 +274,11 @@ class MrpPainel:
             s.settimeout(0.6)
             return s.connect_ex(("127.0.0.1", self.port)) == 0
 
+    def _backend_port_open(self) -> bool:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.settimeout(0.6)
+            return s.connect_ex(("127.0.0.1", self.backend_port)) == 0
+
     def _read_auto_mode(self) -> dict:
         default = {
             "version": "v0.1.049",
@@ -245,9 +303,12 @@ class MrpPainel:
             self.root.after(0, self.refresh_status_card)
             return
         is_open = self._port_open()
+        backend_open = self._backend_port_open()
         auto = self._read_auto_mode()
         self.status_vars["Porta 8765"].configure(text="ocupada" if is_open else "livre")
         self.status_vars["Frontend"].configure(text="ONLINE" if is_open else "OFFLINE")
+        self.status_vars["Porta 8876"].configure(text="ocupada" if backend_open else "livre")
+        self.status_vars["Backend"].configure(text="RODANDO" if backend_open else "PARADO")
         self.status_vars["Modo Automatico"].configure(text="ATIVO" if auto.get("auto_enabled") else "DESATIVADO")
         self.status_vars["Manutencao"].configure(text="SIM" if auto.get("maintenance_mode") else "NAO")
 
@@ -314,11 +375,18 @@ class MrpPainel:
         self.refresh_status_card()
         return ok, combined
 
-    def restart_service(self) -> tuple[bool, str]:
+    def restart_frontend_service(self) -> tuple[bool, str]:
         ok1, t1 = self.run_service("mrp_frontend_stop.ps1", "RESTART_STOP")
         ok2, t2 = self.run_service("mrp_frontend_start.ps1", "RESTART_START")
         ok = ok1 and ok2
-        self.log_admin("REINICIAR", "OK" if ok else "ERRO", "stop+start")
+        self.log_admin("REINICIAR_FRONTEND", "OK" if ok else "ERRO", "stop+start")
+        return ok, f"{t1}\n{t2}"
+
+    def restart_backend_service(self) -> tuple[bool, str]:
+        ok1, t1 = self.run_service("mrp_backend_stop.ps1", "BACKEND_RESTART_STOP")
+        ok2, t2 = self.run_service("mrp_backend_start.ps1", "BACKEND_RESTART_START")
+        ok = ok1 and ok2
+        self.log_admin("REINICIAR_BACKEND", "OK" if ok else "ERRO", "stop+start")
         return ok, f"{t1}\n{t2}"
 
     def set_admin_enabled(self, enabled: bool) -> None:

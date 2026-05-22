@@ -1,7 +1,10 @@
 <section id="produtosListaSection">
     <h2>Produtos</h2>
 
-    <button class="btn-add" id="btnAddProd">+ Novo Produto</button>
+    <div class="produtos-toolbar">
+        <button class="btn-add" id="btnNovaBaseAta" type="button">+ Nova Base ATA</button>
+        <button class="btn-add" id="btnNovoProduto" type="button">+ Novo Produto</button>
+    </div>
 
     <div class="produtos-filtros">
         <input id="filtroPesquisa" type="text" placeholder="Pesquisar produto, ata/origem, item ou empresa...">
@@ -39,6 +42,7 @@
 <section id="produtoBomSection" class="hidden">
     <div class="bom-header">
         <button id="btnVoltarProdutos" class="btn-row-action" type="button">Voltar para Produtos</button>
+        <button id="btnEditarBom" class="btn-row-action" type="button">Editar BOM</button>
         <h2>BOM do Produto</h2>
     </div>
     <p id="bomProdutoTitulo" class="bom-produto-titulo"></p>
@@ -115,5 +119,74 @@
     <button id="produtoLightboxClose" class="produto-lightbox-close" type="button" aria-label="Fechar">x</button>
     <div class="produto-lightbox-content">
         <img id="produtoLightboxImg" class="produto-lightbox-img" src="" alt="Preview ampliado do produto">
+    </div>
+</div>
+
+<div id="modalBaseAta" class="modal hidden" aria-hidden="true">
+    <div class="modal-content">
+        <h3>Nova Base ATA</h3>
+        <label>ATA</label>
+        <input id="baseAtaNome" type="text">
+        <label>NUMERO DA ATA</label>
+        <input id="baseAtaNumero" type="text">
+        <label>EMPRESA</label>
+        <select id="baseEmpresa">
+            <option value="">Selecione...</option>
+            <option value="jpl">JPL</option>
+            <option value="aco">AÇO</option>
+            <option value="tcr">TCR</option>
+        </select>
+        <div class="modal-actions">
+            <button id="btnSalvarBaseAta" class="btn-row-action" type="button">Salvar</button>
+            <button class="btn-row-action" data-action="close-modal" type="button">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<div id="modalProduto" class="modal hidden" aria-hidden="true">
+    <div class="modal-content">
+        <h3>Produto</h3>
+        <label>BASE ATA</label>
+        <select id="produtoBaseAta"></select>
+        <label>ITEM DA ATA</label>
+        <input id="produtoItemAta" type="text">
+        <label>NOME OFICIAL</label>
+        <input id="produtoNomeOficial" type="text">
+        <label>CATEGORIA</label>
+        <input id="produtoCategoria" type="text">
+        <label>IMAGEM ATUAL</label>
+        <input id="produtoImagemPath" type="text" readonly placeholder="Sem imagem cadastrada">
+        <label>NOVA IMAGEM (opcional)</label>
+        <input id="produtoImagemFile" type="file" accept=".png,.jpg,.jpeg,.webp,.svg,image/png,image/jpeg,image/webp,image/svg+xml">
+        <div class="modal-actions">
+            <button id="btnSalvarProduto" class="btn-row-action" type="button">Salvar</button>
+            <button class="btn-row-action" data-action="close-modal" type="button">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<div id="modalBom" class="modal hidden" aria-hidden="true">
+    <div class="modal-content modal-bom">
+        <h3>Editar BOM</h3>
+        <div class="table-responsive">
+            <table class="preview-table produtos-table">
+                <thead>
+                    <tr>
+                        <th>Grupo</th>
+                        <th>Item</th>
+                        <th>Quantidade</th>
+                        <th>Unidade</th>
+                        <th>Observacao</th>
+                        <th>Acao</th>
+                    </tr>
+                </thead>
+                <tbody id="bomEditRows"></tbody>
+            </table>
+        </div>
+        <div class="modal-actions">
+            <button id="btnAdicionarBomItem" class="btn-row-action" type="button">Adicionar item</button>
+            <button id="btnSalvarBom" class="btn-row-action" type="button">Salvar BOM</button>
+            <button class="btn-row-action" data-action="close-modal" type="button">Cancelar</button>
+        </div>
     </div>
 </div>

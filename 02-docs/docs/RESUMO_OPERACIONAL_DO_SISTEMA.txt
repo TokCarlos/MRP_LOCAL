@@ -31,3 +31,10 @@ Regras de modulo:
 - Cada modulo deve ter responsabilidade, entradas, saidas, dependencias e validacao propria.
 - Concluir um modulo nao deve criar dependencia desnecessaria em outro.
 - Toda alteracao deve ser rastreavel, reversivel e documentada.
+
+Atualizacao v0.1.057:
+
+- modulo Produtos com backend SQLite local ativo em desenvolvimento;
+- CRUD de Base ATA, Produtos e BOM implementado;
+- frontend Produtos integrado com modais de cadastro/edicao;
+- sistema segue em desenvolvimento, nao homologado e nao blindado.

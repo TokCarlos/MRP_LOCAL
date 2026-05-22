@@ -15,29 +15,38 @@ function Get-PortPids([int]$Port) {
 
 $stopped = 0
 if (!(Test-Path -LiteralPath $backendRootDir)) {
-    Write-Host "ERRO: backend oficial inexistente."
+    Write-Host "ERRO: backend oficial inexistente: $backendRootDir"
     exit 2
 }
+
+$listeners = Get-PortPids -Port $port
+if ($listeners.Count -eq 0) {
+    Remove-Item -LiteralPath $pidFile -Force -ErrorAction SilentlyContinue
+    Write-Host "Backend parado. Porta $port livre."
+    exit 0
+}
+
+Write-Host "Porta $port ocupada. Encerrando somente processo dono da porta."
+foreach ($listenerPid in $listeners) {
+    try {
+        $proc = Get-CimInstance Win32_Process -Filter "ProcessId = $listenerPid" -ErrorAction SilentlyContinue
+        $name = if ($proc) { $proc.Name } else { "desconhecido" }
+        Write-Host "Encerrando PID=$listenerPid Processo=$name"
+        Stop-Process -Id $listenerPid -Force -ErrorAction Stop
+        $stopped++
+    } catch {
+        Write-Host "ERRO: falha ao encerrar PID=${listenerPid}: $($_.Exception.Message)"
+    }
+}
+
 if (Test-Path -LiteralPath $pidFile) {
     $pidText = Get-Content -Path $pidFile -ErrorAction SilentlyContinue
     if ($pidText -match "^\d+$") {
-        try {
-            Stop-Process -Id ([int]$pidText) -Force -ErrorAction Stop
-            $stopped++
-        } catch { }
-    }
-    Remove-Item -LiteralPath $pidFile -Force -ErrorAction SilentlyContinue
-}
-
-$remaining = Get-PortPids -Port $port
-foreach ($pid in $remaining) {
-    try {
-        $proc = Get-CimInstance Win32_Process -Filter "ProcessId = $pid" -ErrorAction SilentlyContinue
-        if ($proc -and $proc.Name -eq "python.exe") {
-            Stop-Process -Id $pid -Force -ErrorAction Stop
-            $stopped++
+        $pidNumber = [int]$pidText
+        if ($listeners -contains $pidNumber) {
+            Remove-Item -LiteralPath $pidFile -Force -ErrorAction SilentlyContinue
         }
-    } catch { }
+    }
 }
 
 Start-Sleep -Milliseconds 800

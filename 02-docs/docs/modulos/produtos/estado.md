@@ -18,3 +18,12 @@
 - Imagens ainda sao DEMO e serao substituidas por imagens reais ATA por ATA.
 - Categoria atual e provisoria por inferencia textual.
 - Backend e banco continuam fora do escopo nesta etapa.
+
+## Atualizacao v0.1.058
+
+- Banco SQLite DEV ativo em `01-mrp/data/db/mrp_local_dev.sqlite`.
+- Estado verificado: 5 bases ATA, 163 produtos ativos, 0 produtos sem categoria, 0 produtos sem empresa, 0 produtos sem ATA, 0 produtos sem `imagem_path`, 0 imagens inexistentes e 0 duplicidade de `produto_key`.
+- `GET /api/produtos` corrigido para devolver os campos necessarios ao filtro e renderizacao.
+- Fichas de Nova Base ATA, Produto e Editar BOM alinhadas ao padrao visual branco translucido da tabela Produtos.
+- Produto passa a aceitar selecao de arquivo bruto para upload de imagem.
+- Upload salva arquivo em `assets/images/produtos` no frontend DEV e grava caminho relativo no SQLite.

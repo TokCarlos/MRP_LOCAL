@@ -47,3 +47,11 @@ REGRAS DE MODULARIDADE
 - Alterar um modulo nao deve gerar efeito colateral em outro sem necessidade tecnica real.
 - Operacoes com persistencia, logs, arquivos ou estado devem respeitar principio ACID quando aplicavel.
 - Fluxos dependentes devem seguir cascata: documentar, validar, alterar, testar e registrar.
+
+ATUALIZACAO v0.1.057 - BACKEND PRODUTOS
+
+- Backend Produtos evoluido de seed/mock para SQLite local com CRUD de Bases, Produtos e BOM.
+- Endpoints em /api/produtos criados para base, produto e BOM com delete logico (ativo=0).
+- Frontend Produtos recebeu fichas/modais para Nova Base ATA, Novo/Editar Produto e Editar BOM.
+- Integracao principal agora consome API backend; fallback local permanece como contingencia.
+- Sem commit nesta etapa.

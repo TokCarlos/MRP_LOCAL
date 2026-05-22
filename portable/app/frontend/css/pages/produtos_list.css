@@ -91,6 +91,12 @@
     margin-bottom: 14px;
 }
 
+.produtos-toolbar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
 .produtos-filtros {
     display: grid;
     grid-template-columns: minmax(220px, 1.6fr) repeat(3, minmax(140px, 1fr)) auto;
@@ -227,24 +233,78 @@
 
 .modal {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: rgba(0,0,0,0.7);
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 18px;
+    box-sizing: border-box;
+    z-index: 9000;
 }
 
 .modal-content {
-    background: var(--cor-painel);
+    background: rgba(255, 255, 255, 0.70);
+    color: #111;
     padding: 26px;
     border-radius: 12px;
-    width: 380px;
+    width: min(520px, 94vw);
+    max-height: 92vh;
+    overflow: auto;
+    box-sizing: border-box;
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.35);
 }
 
 .hidden { display: none; }
+
+.prod-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.modal-content label {
+    display: block;
+    margin: 8px 0 4px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #111;
+}
+
+.modal-content input,
+.modal-content select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 9px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    background: rgba(255, 255, 255, 0.92);
+    color: #111;
+}
+
+.modal-content input[readonly] {
+    background: rgba(255, 255, 255, 0.62);
+    color: #333;
+}
+
+.modal-content option {
+    color: #111;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+}
+
+.modal-bom {
+    width: min(960px, 94vw);
+}
+
+.modal-bom .table-responsive {
+    overflow-x: auto;
+}
 
 @media (max-width: 768px) {
     .produtos-filtros {
@@ -414,6 +474,16 @@
     .bom-header {
         flex-direction: column;
         align-items: stretch;
+    }
+
+    .modal {
+        align-items: flex-start;
+        padding: 12px;
+    }
+
+    .modal-content {
+        width: 100%;
+        padding: 18px;
     }
 
     .bom-table {

@@ -5,34 +5,34 @@ $root = [System.IO.Path]::GetFullPath((Join-Path $scriptDir "..\..\.."))
 $backendRootDir = Join-Path $root "01-mrp\back_end"
 $backendHost = "127.0.0.1"
 $port = 8876
-$healthUrl = "http://$backendHost`:$port/health"
-$statusUrl = "http://$backendHost`:$port/api/status"
-$produtosUrl = "http://$backendHost`:$port/api/produtos"
+$baseUrl = "http://$backendHost`:$port"
+$endpoints = @(
+    "/health",
+    "/api/status",
+    "/api/produtos",
+    "/api/produtos/bases"
+)
 
 $errors = New-Object System.Collections.Generic.List[string]
+
 if (!(Test-Path -LiteralPath $backendRootDir)) {
-    $errors.Add("backend oficial inexistente")
+    $errors.Add("backend oficial inexistente: $backendRootDir")
 }
 
-try {
-    $h = Invoke-WebRequest -UseBasicParsing -TimeoutSec 4 -Uri $healthUrl
-    if ($h.StatusCode -lt 200 -or $h.StatusCode -ge 300) { $errors.Add("health HTTP $($h.StatusCode)") }
-} catch {
-    $errors.Add("health sem resposta")
-}
-
-try {
-    $s = Invoke-WebRequest -UseBasicParsing -TimeoutSec 4 -Uri $statusUrl
-    if ($s.StatusCode -lt 200 -or $s.StatusCode -ge 300) { $errors.Add("status HTTP $($s.StatusCode)") }
-} catch {
-    $errors.Add("status sem resposta")
-}
-
-try {
-    $p = Invoke-WebRequest -UseBasicParsing -TimeoutSec 6 -Uri $produtosUrl
-    if ($p.StatusCode -lt 200 -or $p.StatusCode -ge 300) { $errors.Add("produtos HTTP $($p.StatusCode)") }
-} catch {
-    $errors.Add("produtos sem resposta")
+foreach ($endpoint in $endpoints) {
+    $url = "$baseUrl$endpoint"
+    try {
+        $resp = Invoke-WebRequest -UseBasicParsing -TimeoutSec 4 -Uri $url
+        if ($resp.StatusCode -ge 200 -and $resp.StatusCode -lt 300) {
+            Write-Host "$endpoint = OK HTTP $($resp.StatusCode)"
+        } else {
+            $errors.Add("$endpoint HTTP $($resp.StatusCode)")
+            Write-Host "$endpoint = FALHOU HTTP $($resp.StatusCode)"
+        }
+    } catch {
+        $errors.Add("$endpoint sem resposta: $($_.Exception.Message)")
+        Write-Host "$endpoint = FALHOU $($_.Exception.Message)"
+    }
 }
 
 if ($errors.Count -eq 0) {
@@ -41,5 +41,7 @@ if ($errors.Count -eq 0) {
 }
 
 Write-Host "HEALTHCHECK_BACKEND=FAIL"
-foreach ($e in $errors) { Write-Host " - $e" }
+foreach ($e in $errors) {
+    Write-Host " - $e"
+}
 exit 1

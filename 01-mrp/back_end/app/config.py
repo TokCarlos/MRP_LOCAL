@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import sys
 from dataclasses import dataclass
 from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
@@ -16,6 +17,10 @@ class AppConfig:
     backend_root: Path
     produtos_seed_path: Path
     produtos_image_root: Path
+    produtos_upload_root: Path
+    produtos_upload_public_prefix: str
+    db_path: Path
+    db_migration_path: Path
 
 
 def _resolve_project_root() -> Path:
@@ -32,6 +37,7 @@ def _load_paths_module(project_root: Path):
             spec = spec_from_file_location("mrp_paths", candidate)
             if spec and spec.loader:
                 module = module_from_spec(spec)
+                sys.modules[spec.name] = module
                 spec.loader.exec_module(module)
                 return module
     return None
@@ -44,6 +50,12 @@ def load_config() -> AppConfig:
     backend_root = project_root / "01-mrp" / "back_end"
     seed_path = project_root / "01-mrp" / "data" / "seed" / "produtos_seed.json"
     image_root = project_root / "01-mrp" / "assets" / "images"
+    upload_root = project_root / "01-mrp" / "front_end" / "assets" / "images" / "produtos"
+    upload_public_prefix = "assets/images/produtos"
+    db_path = project_root / "01-mrp" / "data" / "db" / "mrp_local_dev.sqlite"
+    migration_path = (
+        project_root / "01-mrp" / "infrastructure" / "persistence" / "migrations" / "001_produtos.sql"
+    )
 
     if paths_module:
         resolved = paths_module.resolve_runtime_paths(default_mode="dev")
@@ -52,6 +64,9 @@ def load_config() -> AppConfig:
         fallback_seed = resolved.frontend_root / "data" / "produtos_seed.json"
         seed_path = preferred_seed if preferred_seed.exists() else fallback_seed
         image_root = resolved.frontend_root
+        upload_root = resolved.frontend_root / "assets" / "images" / "produtos"
+        upload_public_prefix = "assets/images/produtos"
+        db_path = resolved.data_root / "db" / "mrp_local_dev.sqlite"
 
     host = (os.getenv("MRP_BACKEND_HOST") or "127.0.0.1").strip() or "127.0.0.1"
     port_raw = (os.getenv("MRP_BACKEND_PORT") or "8876").strip() or "8876"
@@ -71,4 +86,8 @@ def load_config() -> AppConfig:
         backend_root=backend_root,
         produtos_seed_path=seed_path,
         produtos_image_root=image_root,
+        produtos_upload_root=upload_root,
+        produtos_upload_public_prefix=upload_public_prefix,
+        db_path=db_path,
+        db_migration_path=migration_path,
     )
