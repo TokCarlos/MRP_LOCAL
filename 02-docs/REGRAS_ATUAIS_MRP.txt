@@ -1,0 +1,98 @@
+# REGRAS_ATUAIS_MRP
+
+Status: FONTE OFICIAL ATUAL
+Versao de referencia: v0.1.060
+
+Este arquivo define COMO o sistema MRP_LOCAL deve ser conduzido. Antes de qualquer codificacao, automacao, revisao ou acao de Codex, ler primeiro:
+
+1. 02-docs/REGRAS_ATUAIS_MRP.txt
+2. 02-docs/LOG_PROGRESSO_MRP.txt
+
+Depois, se necessario, ler manual, resumo operacional e documentacao especifica do modulo.
+
+## 1. Regras absolutas de caminho
+
+[PROIBIDO] Nunca tocar na pasta:
+C:\Users\carlo\Desktop\PCP SERVIDOR\PCP
+
+Essa pasta e intocavel. Nao ler para operacao, nao escrever, nao mover, nao apagar, nao criar arquivo de teste, nao usar como destino, nao usar como origem e nao usar como raiz. Ela so pode aparecer em regra, validador ou documentacao como bloqueio explicito.
+
+[PROIBIDO] Nao usar raiz direta em C:\ como raiz do MRP_LOCAL, por exemplo:
+C:\system_jpl
+C:\MRP_REDE_FAKE
+C:\SISTEMA_MRP
+C:\qualquer_pasta_do_mrp
+
+[RAIZ DEV ATUAL] A raiz fisica atual do DEV e:
+C:\Users\carlo\Desktop\PCP SERVIDOR\SISTEMA_MRP
+
+[REDE FAKE/ACESSO HUMANO] O acesso por rede pode usar:
+\\HOME-MACHINE\system_jpl
+X:\
+
+Esses caminhos sao operacionais, nao regra de negocio.
+
+## 2. Regras de arquitetura
+
+[REGRA] Regra de negocio nao pode depender de X:\, \\HOME-MACHINE, usuario Windows, UNC fixo ou caminho absoluto de DEV.
+[REGRA] Caminhos fixos so podem existir em documentacao operacional, scripts de ambiente, validadores ou bloqueios de seguranca.
+[REGRA] Backend oficial atual: 01-mrp/back_end.
+[REGRA] Frontend oficial atual: 01-mrp/front_end.
+[OBSOLETO] 01-mrp/app/backend nao deve rodar como backend ativo.
+[OBSOLETO] 01-mrp/app/frontend nao e fonte ativa do frontend nesta fase.
+[REGRA] Estrutura app/core/infrastructure/operations e estrutura-alvo parcial, nao migracao concluida.
+
+## 3. Regras de dados, midia e imagens
+
+[REGRA] Dados estruturados de Produtos ficam no SQLite DEV em 01-mrp/data/db/mrp_local_dev.sqlite quando gerado em runtime.
+[REGRA] Banco SQLite e runtime/dado local; nao versionar arquivo .sqlite/.db.
+[REGRA] Seed ativo atual ainda pode estar em 01-mrp/front_end/data/produtos_seed.json.
+[REGRA] 01-mrp/data/seed e estrutura-alvo; se ainda estiver vazio, tratar como pendencia, nao como fonte real.
+[REGRA] Imagens oficiais/seed/catalogo ficam em 01-mrp/front_end/img/produtos.
+[REGRA] Upload de usuario deve ficar em 01-mrp/data/media/produtos.
+[REGRA] Banco deve salvar upload como caminho relativo canonico, por exemplo: media/produtos/arquivo.png.
+[REGRA] Backend deve servir uploads em /media/produtos/arquivo.png.
+[PROIBIDO] Upload de usuario nao deve salvar em 01-mrp/app/frontend/assets nem em assets do frontend.
+[PROIBIDO] Frontend nao deve exigir usuario digitando caminho fisico para imagem.
+
+## 4. Regras de modulo Produtos
+
+[ATIVO] Produtos e o primeiro modulo backend real.
+[ATIVO] Backend Produtos usa FastAPI + SQLite DEV.
+[ATIVO] Endpoints minimos validados: /health, /api/status, /api/produtos, /api/produtos/bases.
+[REGRA] Cadastro de Produto deve seguir fluxo: Base ATA primeiro; Produto depois.
+[REGRA] Base ATA exige ATA, numero da ATA e empresa.
+[REGRA] Produto exige Base ATA, item da ATA e nome oficial.
+[REGRA] Empresas validas nesta fase: JPL, ACO, TCR.
+[REGRA] GOV. RIO, GOV RIO e SEHIS nao sao empresa; sao orgao/cliente/origem/ATA.
+[REGRA] TCR existe como empresa valida futura, mas nao deve receber produto artificial nesta etapa.
+
+## 5. Regras de Codex e area restrita
+
+[REGRA] Alteracao em 01-mrp ou .git exige chave explicita: LIBERADO.
+[REGRA] Mesmo com LIBERADO, alterar somente o escopo pedido.
+[PROIBIDO] Nao fazer commit/push sem pedido explicito do usuario.
+[PROIBIDO] Nao alterar internamente .git.
+[PROIBIDO] Nao apagar arquivo sem registrar motivo e destino.
+[REGRA] Antes de codar, identificar problema, causa, solucao e risco.
+[REGRA] Ao concluir, atualizar LOG_PROGRESSO_MRP.txt e relatorio da versao quando aplicavel.
+
+## 6. Regras de documentacao
+
+[REGRA] REGRAS_ATUAIS_MRP.txt define como o sistema deve ser.
+[REGRA] LOG_PROGRESSO_MRP.txt define o que foi feito, o que funciona, o que esta pendente e o que esta quebrado.
+[REGRA] Documentacao antiga divergente deve ir para 02-docs/obsolete com manifesto.
+[REGRA] Arquivo obsoleto de sistema dentro de 01-mrp deve ir para 01-mrp/_obsolete com manifesto.
+[REGRA] Nao apagar historico tecnico util; mover para obsolete quando for divergente.
+
+## 7. Regras de limpeza operacional
+
+[PROIBIDO] Nao versionar __pycache__, .pyc, .pyo, logs reais, venv, runtime gerado, tmp, banco SQLite runtime ou credenciais.
+[REGRA] Pastas logs/runtime/tmp podem existir com .gitkeep/README.
+[REGRA] Pacote limpo nao deve incluir venv, logs reais, caches, pycache ou arquivo temporario.
+
+## 8. Regras de status
+
+[REGRA] Nao chamar de final, blindado ou homologado sem validacao real.
+[REGRA] Separar sempre: funcional, validado localmente, validado pelo usuario, pendente, risco e nao homologado.
+[REGRA] O sistema esta funcional em partes, mas ainda nao esta blindado.

@@ -43,14 +43,15 @@
     <div class="bom-header">
         <button id="btnVoltarProdutos" class="btn-row-action" type="button">Voltar para Produtos</button>
         <button id="btnEditarBom" class="btn-row-action" type="button">Editar BOM</button>
+        <button id="btnBomHistorico" class="btn-row-action bom-update-button" type="button">Última atualização: sem registro</button>
         <h2>BOM do Produto</h2>
     </div>
     <p id="bomProdutoTitulo" class="bom-produto-titulo"></p>
-    <p class="bom-mock-nota">Dados de teste (mock) para preparo de estrutura. Sem persistencia definitiva.</p>
+    <p class="bom-mock-nota">Estrutura BOM separada por grupo. Edicao estruturada por campos tecnicos.</p>
 
     <div class="bom-bloco">
         <h3>TUBOS</h3>
-        <p>Tubos usados para fabricacao</p>
+        <p>PEÇAS TUBULARES</p>
         <div class="table-responsive">
             <table class="preview-table produtos-table bom-table" id="tblBomTubos">
                 <thead>
@@ -72,7 +73,7 @@
 
     <div class="bom-bloco">
         <h3>CHAPAS</h3>
-        <p>Chapas usadas para fabricacao</p>
+        <p>PEÇAS DE CHAPARIA</p>
         <div class="table-responsive">
             <table class="preview-table produtos-table bom-table" id="tblBomChapas">
                 <thead>
@@ -94,7 +95,7 @@
 
     <div class="bom-bloco">
         <h3>INSUMOS</h3>
-        <p>Aqui onde vai parafusos, porcas, arruelas etc. Ela e um pouco diferente e troca TAMANHO, que nao e certo para insumos individuais, por UNIDADE, que informa se e Metro, Kg, m2 etc.</p>
+        <p>MONTAGEM, INSTALAÇÃO E ACABAMENTO</p>
         <div class="table-responsive">
             <table class="preview-table produtos-table bom-table" id="tblBomInsumos">
                 <thead>
@@ -133,7 +134,7 @@
         <select id="baseEmpresa">
             <option value="">Selecione...</option>
             <option value="jpl">JPL</option>
-            <option value="aco">AÇO</option>
+            <option value="aco">Aço</option>
             <option value="tcr">TCR</option>
         </select>
         <div class="modal-actions">
@@ -165,19 +166,25 @@
     </div>
 </div>
 
-<div id="modalBom" class="modal hidden" aria-hidden="true">
-    <div class="modal-content modal-bom">
-        <h3>Editar BOM</h3>
-        <div class="table-responsive">
-            <table class="preview-table produtos-table">
+<div id="modalBom" class="modal modal-floating hidden" aria-hidden="true">
+    <div class="modal-content modal-bom" role="dialog" aria-modal="true" aria-labelledby="modalBomTitulo">
+        <div class="modal-drag-handle" data-drag-modal="modalBom">
+            <h3 id="modalBomTitulo">Editar BOM</h3>
+        </div>
+        <div class="table-responsive bom-edit-responsive">
+            <table class="preview-table produtos-table bom-edit-table">
                 <thead>
                     <tr>
-                        <th>Grupo</th>
-                        <th>Item</th>
-                        <th>Quantidade</th>
-                        <th>Unidade</th>
-                        <th>Observacao</th>
-                        <th>Acao</th>
+                        <th>GRUPO</th>
+                        <th>COD</th>
+                        <th>MATERIAL</th>
+                        <th>DIM1</th>
+                        <th>DIM2</th>
+                        <th>ESPESSURA</th>
+                        <th>REVESTIMENTO</th>
+                        <th>TAMANHO / UN.</th>
+                        <th>QUANTIDADE</th>
+                        <th>AÇÃO</th>
                     </tr>
                 </thead>
                 <tbody id="bomEditRows"></tbody>
@@ -187,6 +194,32 @@
             <button id="btnAdicionarBomItem" class="btn-row-action" type="button">Adicionar item</button>
             <button id="btnSalvarBom" class="btn-row-action" type="button">Salvar BOM</button>
             <button class="btn-row-action" data-action="close-modal" type="button">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="modalBomHistorico" class="modal modal-floating hidden" aria-hidden="true">
+    <div class="modal-content modal-bom-historico" role="dialog" aria-modal="true" aria-labelledby="modalBomHistoricoTitulo">
+        <div class="modal-drag-handle" data-drag-modal="modalBomHistorico">
+            <h3 id="modalBomHistoricoTitulo">Histórico da BOM</h3>
+            <button class="btn-row-action" data-action="close-modal" type="button">Fechar</button>
+        </div>
+        <div id="bomHistoricoProdutoTitulo" class="bom-historico-produto"></div>
+        <div class="table-responsive bom-historico-responsive">
+            <table class="preview-table produtos-table bom-historico-table">
+                <thead>
+                    <tr>
+                        <th>DATA/HORA</th>
+                        <th>AÇÃO</th>
+                        <th>GRUPO</th>
+                        <th>COD</th>
+                        <th>MATERIAL</th>
+                        <th>DETALHE</th>
+                    </tr>
+                </thead>
+                <tbody id="bomHistoricoRows"></tbody>
+            </table>
         </div>
     </div>
 </div>

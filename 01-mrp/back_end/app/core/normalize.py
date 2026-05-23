@@ -4,7 +4,7 @@ import re
 import unicodedata
 
 
-EMPRESA_NOME_BY_KEY = {"jpl": "JPL", "aco": "AÇO", "tcr": "TCR"}
+EMPRESA_NOME_BY_KEY = {"jpl": "JPL", "aco": "Aço", "tcr": "TCR"}
 
 
 def ascii_key(value: str) -> str:
@@ -17,7 +17,7 @@ def ascii_key(value: str) -> str:
 
 def normalize_empresa_key(value: str) -> str:
     v = ascii_key(value)
-    aliases = {"aco": "aco", "aço": "aco", "jpl": "jpl", "tcr": "tcr"}
+    aliases = {"aco": "aco", "ao": "aco", "aço": "aco", "jpl": "jpl", "tcr": "tcr"}
     if v in aliases:
         return aliases[v]
     raise ValueError("empresa_invalida")

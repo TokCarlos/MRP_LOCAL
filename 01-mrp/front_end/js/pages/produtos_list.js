@@ -3,14 +3,44 @@ import { localGET } from "../api.js";
 const SEED_PATH = "data/produtos_seed.json";
 const API_HOST = window.location.hostname || "127.0.0.1";
 const API_PROTOCOL = window.location.protocol === "http:" || window.location.protocol === "https:" ? window.location.protocol : "http:";
-const BASE_API = `${API_PROTOCOL}//${API_HOST}:8876/api/produtos`;
+const API_ORIGIN = `${API_PROTOCOL}//${API_HOST}:8876`;
+const BASE_API = `${API_ORIGIN}/api/produtos`;
 const PLACEHOLDER = "img/ui/placeholders/produto_placeholder.svg";
 const EMPRESAS = [
     { key: "jpl", nome: "JPL" },
-    { key: "aco", nome: "AÇO" },
+    { key: "aco", nome: "Aço" },
     { key: "tcr", nome: "TCR" }
 ];
 const BOM_GRUPOS = ["tubos", "chapas", "insumos"];
+const BOM_GRUPO_LABELS = {
+    tubos: "TUBOS",
+    chapas: "CHAPAS",
+    insumos: "INSUMOS"
+};
+const SESSION_KEY = "mrp_local_session";
+const ADMIN_USERS = new Set(["admin", "administrador"]);
+
+function getLocalSession() {
+    try {
+        return JSON.parse(localStorage.getItem(SESSION_KEY) || "{}");
+    } catch {
+        return {};
+    }
+}
+
+function hasAdminToken(value) {
+    const normalized = String(value || "").trim().toLowerCase();
+    return normalized === "admin" || normalized === "administrador" || normalized === "grupo_admin";
+}
+
+function isAdminUser() {
+    const session = getLocalSession();
+    if (ADMIN_USERS.has(String(session.user || "").trim().toLowerCase())) return true;
+    if (hasAdminToken(session.role) || hasAdminToken(session.perfil) || hasAdminToken(session.grupo)) return true;
+    if (Array.isArray(session.grupos) && session.grupos.some(hasAdminToken)) return true;
+    if (Array.isArray(session.permissions) && session.permissions.some(hasAdminToken)) return true;
+    return false;
+}
 
 function toBoolean(value) {
     if (value === true || value === 1) return true;
@@ -42,7 +72,7 @@ const produtosState = {
     sourceInfo: ""
 };
 
-const bomState = { produtoSelecionado: null, itens: [] };
+const bomState = { produtoSelecionado: null, itens: [], ultimaAtualizacao: null, historico: [] };
 const uiState = { modalOpen: null, modalProdutoId: null };
 const listenerState = { navBound: false, keyBound: false };
 
@@ -199,6 +229,56 @@ function escapeHtml(value) {
         .replace(/'/g, "&#039;");
 }
 
+function parseBomDate(value) {
+    if (!value) return null;
+    const raw = String(value).trim();
+    if (!raw) return null;
+    const date = new Date(raw);
+    return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function formatBomDate(value) {
+    const date = parseBomDate(value);
+    if (!date) return "sem registro";
+    const dias = ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SAB"];
+    const dd = String(date.getDate()).padStart(2, "0");
+    const mm = String(date.getMonth() + 1).padStart(2, "0");
+    const yyyy = String(date.getFullYear());
+    const hh = String(date.getHours()).padStart(2, "0");
+    const min = String(date.getMinutes()).padStart(2, "0");
+    return `${dias[date.getDay()]} - ${dd}/${mm}/${yyyy} - ${hh}:${min}`;
+}
+
+function setBomUltimaAtualizacao(value) {
+    bomState.ultimaAtualizacao = value || null;
+    const btn = document.getElementById("btnBomHistorico");
+    if (btn) btn.textContent = `Última atualização: ${formatBomDate(value)}`;
+}
+
+function bomAcaoLabel(value) {
+    const map = {
+        ADICIONADO: "ADICIONADO",
+        MODIFICADO: "MODIFICADO",
+        REMOVIDO: "REMOVIDO",
+        BOM_ATUALIZADA: "BOM ATUALIZADA",
+        HISTORICO_LIMPO: "HISTÓRICO LIMPO"
+    };
+    const key = String(value || "").trim().toUpperCase();
+    return map[key] || key || "-";
+}
+
+function resolveImageSrc(value, version = "") {
+    const raw = String(value || "").trim().replace(/\\/g, "/");
+    if (!raw) return PLACEHOLDER;
+    if (/^(https?:)?\/\//i.test(raw) || raw.startsWith("data:")) return raw;
+    const clean = raw.replace(/^\/+/, "");
+    if (clean.startsWith("media/")) {
+        const suffix = version ? `?v=${encodeURIComponent(version)}` : "";
+        return `${API_ORIGIN}/${clean}${suffix}`;
+    }
+    return clean;
+}
+
 function reportUiError(context, err) {
     const message = err?.message || String(err || "falha desconhecida");
     console.error(`${context}:`, err);
@@ -212,6 +292,7 @@ function aplicarFiltros(produtos) {
     const categoria = produtosState.filtros.categoria;
 
     return produtos.filter((produto) => {
+        if (!isAdminUser() && !toBoolean(produto.ativo ?? true)) return false;
         const ataKey = buildAtaFiltroKey(produto);
         const textoBusca = normalizeSearchText([
             produto.nome_oficial,
@@ -274,17 +355,32 @@ function renderTabela(produtos) {
         const tr = document.createElement("tr");
         const nome = p.nome_oficial || p.nome || "";
         const id = p.id ?? index + 1;
-        const preview = p?.imagem?.preview || p.imagem_path || PLACEHOLDER;
+        const itemNumero = String(p.item_ata ?? p.itemAta ?? p.item ?? p.numero_item ?? p.numero ?? id).trim() || String(id);
+        const officialImagePath = p.imagem_path || p.imagem_url || "";
+        const previewImagePath = p?.imagem?.preview || "";
+        const imagePath = officialImagePath || previewImagePath || PLACEHOLDER;
+        const fallbackImagePath = officialImagePath && previewImagePath ? previewImagePath : PLACEHOLDER;
+        const preview = resolveImageSrc(imagePath, p.updated_at || "");
+        const previewFallback = resolveImageSrc(fallbackImagePath, "");
         const arp = String(p.arp || "").trim();
         const ataNumeroRaw = String(p.ata_numero || p.ata || "").trim();
         const ataNumero = arp.includes(ataNumeroRaw) || !ataNumeroRaw
             ? arp
             : `${arp} ${ataNumeroRaw}`.trim();
         const empresa = p.empresa || "";
+        const produtoAtivo = toBoolean(p.ativo ?? true);
+        const admin = isAdminUser();
+        const rowClasses = produtoAtivo ? "" : "produto-desativado";
+        const toggleLabel = produtoAtivo ? "Desativar" : "Ativar";
+        const statusBadge = produtoAtivo ? "" : `<span class="produto-status-desativado">Desativado</span>`;
+
+        tr.className = rowClasses;
 
         const safeId = escapeHtml(id);
+        const safeItemNumero = escapeHtml(itemNumero);
         const safePreview = escapeHtml(preview);
         const safePlaceholder = escapeHtml(PLACEHOLDER);
+        const safePreviewFallback = escapeHtml(previewFallback);
         const safeAtaNumero = escapeHtml(ataNumero);
         const safeNome = escapeHtml(nome);
         const safeEmpresa = escapeHtml(empresa);
@@ -292,16 +388,17 @@ function renderTabela(produtos) {
         tr.innerHTML = `
             <td class="col-id" data-label="ID">${safeId}</td>
             <td class="col-preview" data-label="PREVIEW">
-                <img class="produto-preview js-produto-preview" data-action="zoom-image" src="${safePreview}" alt="Preview demo" width="56" height="32" loading="lazy" onerror="this.onerror=null;this.src='${safePlaceholder}';">
+                <img class="produto-preview js-produto-preview" data-action="zoom-image" data-image="${safePreview}" data-fallback="${safePreviewFallback}" src="${safePreview}" alt="Preview demo" width="56" height="32" loading="lazy" onerror="this.onerror=null;this.src=this.dataset.fallback || '${safePlaceholder}';">
+                <span class="produto-preview-item-numero">Nº ${safeItemNumero}</span>
             </td>
             <td class="col-ata-numero" data-label="ATA + Nº">${safeAtaNumero}</td>
-            <td class="col-produto" data-label="PRODUTO">${safeNome}</td>
+            <td class="col-produto" data-label="PRODUTO">${safeNome}${statusBadge}</td>
             <td class="col-empresa" data-label="EMPRESA">${safeEmpresa}</td>
             <td class="col-acao" data-label="AÇÃO">
                 <div class="prod-actions">
                     <button class="btn-row-action js-btn-bom" data-action="open-bom" type="button" data-produto-id="${safeId}">BOM</button>
                     <button class="btn-row-action" data-action="edit-produto" type="button" data-produto-id="${safeId}">Editar</button>
-                    <button class="btn-row-action" data-action="toggle-produto" type="button" data-produto-id="${safeId}">${toBoolean(p.ativo) ? "Inativar" : "Ativar"}</button>
+                    ${admin ? `<button class="btn-row-action btn-toggle-produto" data-action="toggle-produto" type="button" data-produto-id="${safeId}">${toggleLabel}</button>` : ""}
                 </div>
             </td>
         `;
@@ -355,7 +452,7 @@ function initProdutosInteractions() {
 
         const img = target.closest("[data-action='zoom-image']");
         if (img instanceof HTMLImageElement) {
-            const src = img.dataset.image || img.currentSrc || img.src || PLACEHOLDER;
+            const src = img.currentSrc || img.src || img.dataset.image || PLACEHOLDER;
             if (!src) {
                 console.warn("Zoom ignorado: imagem ausente.");
                 return;
@@ -399,6 +496,7 @@ async function abrirBomProduto(produto) {
     titulo.textContent = `Produto selecionado: ID ${id} | ATA + Nº ${ataNumero} | PRODUTO ${produtoNome} | EMPRESA ${empresa}`;
 
     bomState.itens = await fetchBom(produto.id);
+    setBomUltimaAtualizacao(await fetchBomUltimaAtualizacao(produto.id));
     renderBomTabela("tblBomTubos", bomState.itens.filter((x) => x.grupo === "tubos"));
     renderBomTabela("tblBomChapas", bomState.itens.filter((x) => x.grupo === "chapas"));
     renderBomTabela("tblBomInsumos", bomState.itens.filter((x) => x.grupo === "insumos"));
@@ -415,7 +513,10 @@ function returnToProdutos() {
     closeLightbox();
     bom.classList.add("hidden");
     lista.classList.remove("hidden");
+    closeBomHistoricoModal();
     bomState.produtoSelecionado = null;
+    bomState.historico = [];
+    setBomUltimaAtualizacao(null);
 }
 
 function resetUiStateAfterBom() {
@@ -432,6 +533,46 @@ function resetUiStateAfterBom() {
     document.body.style.pointerEvents = "";
 }
 
+function normalizeBomGrupo(value) {
+    const grupo = String(value || "").trim().toLowerCase();
+    return BOM_GRUPOS.includes(grupo) ? grupo : "tubos";
+}
+
+function getFirstFilled(...values) {
+    for (const value of values) {
+        if (value === 0) return "0";
+        if (value === null || value === undefined) continue;
+        const text = String(value).trim();
+        if (text) return text;
+    }
+    return "";
+}
+
+function normalizeBomItem(row = {}) {
+    const grupo = normalizeBomGrupo(row.grupo);
+    const material = getFirstFilled(row.material, row.item_nome, row.descricao, row.nome);
+    const tamanho = getFirstFilled(row.tamanho, grupo === "insumos" ? "" : row.unidade);
+    const unidade = getFirstFilled(row.unidade, grupo === "insumos" ? row.tamanho : "");
+    return {
+        ...row,
+        grupo,
+        cod: getFirstFilled(row.cod, row.codigo, row.id),
+        material,
+        dim1: getFirstFilled(row.dim1, row.dimensao1, row.observacao),
+        dim2: getFirstFilled(row.dim2, row.dimensao2),
+        espessura: getFirstFilled(row.espessura, row.esp),
+        revestimento: getFirstFilled(row.revestimento, row.resvestimento),
+        tamanho,
+        unidade,
+        quantidade: row.quantidade ?? row.qtd ?? ""
+    };
+}
+
+function getBomMedidaValue(item) {
+    const normalized = normalizeBomItem(item);
+    return normalized.grupo === "insumos" ? normalized.unidade : normalized.tamanho;
+}
+
 function renderBomTabela(tableId, rows) {
     const tbody = document.querySelector(`#${tableId} tbody`);
     if (!tbody) return;
@@ -443,17 +584,16 @@ function renderBomTabela(tableId, rows) {
         tbody.appendChild(tr);
         return;
     }
-    rows.forEach((row) => {
+    rows.map(normalizeBomItem).forEach((row) => {
         const tr = document.createElement("tr");
-        const medida = row.unidade || "-";
         tr.innerHTML = `
-            <td>${escapeHtml(row.id)}</td>
-            <td>${escapeHtml(row.item_nome)}</td>
-            <td>${escapeHtml(row.observacao || "-")}</td>
-            <td>-</td>
-            <td>-</td>
-            <td>${escapeHtml(row.grupo)}</td>
-            <td>${escapeHtml(medida)}</td>
+            <td>${escapeHtml(row.cod || "-")}</td>
+            <td>${escapeHtml(row.material || "-")}</td>
+            <td>${escapeHtml(row.dim1 || "-")}</td>
+            <td>${escapeHtml(row.dim2 || "-")}</td>
+            <td>${escapeHtml(row.espessura || "-")}</td>
+            <td>${escapeHtml(row.revestimento || "-")}</td>
+            <td>${escapeHtml(getBomMedidaValue(row) || "-")}</td>
             <td>${escapeHtml(row.quantidade ?? "-")}</td>
         `;
         tbody.appendChild(tr);
@@ -495,7 +635,8 @@ function extractProdutosPayload(data) {
 async function loadProdutosSeed() {
     let apiError = "";
     try {
-        const data = await api("GET", "");
+        const query = isAdminUser() ? "?include_inactive=1" : "";
+        const data = await api("GET", query);
         const produtos = extractProdutosPayload(data);
         if (produtos) {
             produtosState.sourceInfo = "Fonte: API backend";
@@ -535,10 +676,36 @@ async function fetchBases() {
 async function fetchBom(produtoId) {
     try {
         const data = await api("GET", `/${produtoId}/bom`);
-        return data.ok && Array.isArray(data.data) ? data.data : [];
+        if (data.ok && Array.isArray(data.data)) return data.data;
+        if (data.ok && Array.isArray(data.data?.itens)) {
+            setBomUltimaAtualizacao(data.data.ultima_atualizacao_bom || data.data.ultima_atualizacao || null);
+            return data.data.itens;
+        }
+        return [];
     } catch {
         return [];
     }
+}
+
+async function fetchBomUltimaAtualizacao(produtoId) {
+    try {
+        const data = await api("GET", `/${produtoId}/bom/ultima-atualizacao`);
+        if (data.ok) return data.data?.ultima_atualizacao_bom || data.data?.ultima_atualizacao || null;
+    } catch {
+        return null;
+    }
+    return null;
+}
+
+async function fetchBomHistorico(produtoId) {
+    try {
+        const data = await api("GET", `/${produtoId}/bom/historico`);
+        if (data.ok && Array.isArray(data.data)) return data.data;
+        if (data.ok && Array.isArray(data.data?.items)) return data.data.items;
+    } catch {
+        return [];
+    }
+    return [];
 }
 
 async function reloadData() {
@@ -548,6 +715,8 @@ async function reloadData() {
 }
 
 function bindModalEvents() {
+    initBomModalDrag();
+    initBomHistoricoModalDrag();
     const closeButtons = document.querySelectorAll("[data-action='close-modal']");
     closeButtons.forEach((btn) => {
         btn.onclick = () => closeCurrentModal();
@@ -620,6 +789,11 @@ function bindModalEvents() {
     if (btnEditarBom) {
         btnEditarBom.onclick = () => openBomModal();
     }
+
+    const btnBomHistorico = document.getElementById("btnBomHistorico");
+    if (btnBomHistorico) {
+        btnBomHistorico.onclick = () => openBomHistoricoModal();
+    }
 }
 
 function openBaseModal() {
@@ -646,7 +820,131 @@ function openBomModal() {
     tbody.innerHTML = "";
     (bomState.itens || []).forEach((item) => addBomRow(item));
     if (!bomState.itens.length) addBomRow();
+    resetBomModalPosition();
     openModal("modalBom");
+}
+
+function resetBomModalPosition() {
+    const content = document.querySelector("#modalBom .modal-content");
+    if (!content) return;
+    content.style.left = "";
+    content.style.top = "";
+    content.style.transform = "";
+}
+
+function initFloatingModalDrag(modalId) {
+    const modal = document.getElementById(modalId);
+    const content = modal?.querySelector(".modal-content");
+    const handle = modal?.querySelector(`[data-drag-modal='${modalId}']`);
+    if (!modal || !content || !handle || handle.dataset.dragBound === "1") return;
+    handle.dataset.dragBound = "1";
+
+    let dragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    const startDrag = (event) => {
+        if (event.button !== undefined && event.button !== 0) return;
+        const target = event.target;
+        if (target instanceof HTMLElement && target.closest("button, input, select, textarea")) return;
+        const rect = content.getBoundingClientRect();
+        dragging = true;
+        offsetX = event.clientX - rect.left;
+        offsetY = event.clientY - rect.top;
+        content.style.left = `${rect.left}px`;
+        content.style.top = `${rect.top}px`;
+        content.style.transform = "none";
+        content.classList.add("is-dragging");
+        event.preventDefault();
+    };
+
+    const moveDrag = (event) => {
+        if (!dragging) return;
+        const maxLeft = Math.max(8, window.innerWidth - content.offsetWidth - 8);
+        const maxTop = Math.max(8, window.innerHeight - content.offsetHeight - 8);
+        const nextLeft = Math.min(Math.max(8, event.clientX - offsetX), maxLeft);
+        const nextTop = Math.min(Math.max(8, event.clientY - offsetY), maxTop);
+        content.style.left = `${nextLeft}px`;
+        content.style.top = `${nextTop}px`;
+    };
+
+    const endDrag = () => {
+        if (!dragging) return;
+        dragging = false;
+        content.classList.remove("is-dragging");
+    };
+
+    handle.addEventListener("mousedown", startDrag);
+    document.addEventListener("mousemove", moveDrag);
+    document.addEventListener("mouseup", endDrag);
+}
+
+function initBomModalDrag() {
+    initFloatingModalDrag("modalBom");
+}
+
+function initBomHistoricoModalDrag() {
+    initFloatingModalDrag("modalBomHistorico");
+}
+
+function resetBomHistoricoModalPosition() {
+    const content = document.querySelector("#modalBomHistorico .modal-content");
+    if (!content) return;
+    content.style.left = "";
+    content.style.top = "";
+    content.style.transform = "";
+}
+
+function closeBomHistoricoModal() {
+    const modal = document.getElementById("modalBomHistorico");
+    if (!modal) return;
+    modal.classList.add("hidden");
+    modal.setAttribute("aria-hidden", "true");
+    if (uiState.modalOpen === "modalBomHistorico") {
+        uiState.modalOpen = null;
+        document.body.style.overflow = "";
+    }
+}
+
+function renderBomHistoricoRows(rows) {
+    const tbody = document.getElementById("bomHistoricoRows");
+    if (!tbody) return;
+    tbody.innerHTML = "";
+    if (!rows.length) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<td colspan="6">Sem histórico registrado para este produto.</td>`;
+        tbody.appendChild(tr);
+        return;
+    }
+    rows.forEach((row) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${escapeHtml(formatBomDate(row.created_at || row.data_hora))}</td>
+            <td>${escapeHtml(bomAcaoLabel(row.acao))}</td>
+            <td>${escapeHtml(String(row.grupo || "-").toUpperCase())}</td>
+            <td>${escapeHtml(row.cod || "-")}</td>
+            <td>${escapeHtml(row.material || "-")}</td>
+            <td>${escapeHtml(row.detalhe || "-")}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+async function openBomHistoricoModal() {
+    if (!bomState.produtoSelecionado) return;
+    const titulo = document.getElementById("bomHistoricoProdutoTitulo");
+    if (titulo) {
+        const produto = bomState.produtoSelecionado;
+        titulo.textContent = `Produto selecionado: ID ${produto.id || "-"} | ${produto.nome_oficial || produto.nome || "-"}`;
+    }
+    try {
+        bomState.historico = await fetchBomHistorico(bomState.produtoSelecionado.id);
+        renderBomHistoricoRows(bomState.historico);
+        resetBomHistoricoModalPosition();
+        openModal("modalBomHistorico");
+    } catch (err) {
+        reportUiError("Erro ao abrir histórico da BOM", err);
+    }
 }
 
 function openModal(id) {
@@ -737,21 +1035,35 @@ async function uploadProdutoImagem(produtoId, file) {
     return apiForm("POST", `/${produtoId}/imagem/upload`, form);
 }
 
+function updateBomRowMedidaField(tr) {
+    const input = tr.querySelector(".bom-medida");
+    if (input) input.placeholder = "";
+}
+
 function addBomRow(row = null) {
     const tbody = document.getElementById("bomEditRows");
     if (!tbody) return;
+    const normalized = normalizeBomItem(row || {});
     const tr = document.createElement("tr");
     tr.innerHTML = `
-        <td><select class="bom-grupo">${BOM_GRUPOS.map((g) => `<option value="${g}">${g}</option>`).join("")}</select></td>
-        <td><input class="bom-item-nome" type="text" value="${escapeHtml(row?.item_nome || "")}"></td>
-        <td><input class="bom-quantidade" type="number" step="0.01" value="${escapeHtml(row?.quantidade ?? "")}"></td>
-        <td><input class="bom-unidade" type="text" value="${escapeHtml(row?.unidade || "")}"></td>
-        <td><input class="bom-observacao" type="text" value="${escapeHtml(row?.observacao || "")}"></td>
+        <td><input class="bom-id" type="hidden" value="${escapeHtml(normalized.id || "")}"><select class="bom-grupo">${BOM_GRUPOS.map((g) => `<option value="${g}">${BOM_GRUPO_LABELS[g]}</option>`).join("")}</select></td>
+        <td><input class="bom-cod" type="text" value="${escapeHtml(normalized.cod || "")}"></td>
+        <td><input class="bom-material" type="text" value="${escapeHtml(normalized.material || "")}"></td>
+        <td><input class="bom-dim1" type="text" value="${escapeHtml(normalized.dim1 || "")}"></td>
+        <td><input class="bom-dim2" type="text" value="${escapeHtml(normalized.dim2 || "")}"></td>
+        <td><input class="bom-espessura" type="text" value="${escapeHtml(normalized.espessura || "")}"></td>
+        <td><input class="bom-revestimento" type="text" value="${escapeHtml(normalized.revestimento || "")}"></td>
+        <td><input class="bom-medida" type="text" value="${escapeHtml(getBomMedidaValue(normalized) || "")}"></td>
+        <td><input class="bom-quantidade" type="number" step="0.01" value="${escapeHtml(normalized.quantidade ?? "")}"></td>
         <td><button type="button" class="btn-row-action" data-action="remove-bom-row">Remover</button></td>
     `;
     tbody.appendChild(tr);
     const g = tr.querySelector(".bom-grupo");
-    if (g && row?.grupo) g.value = row.grupo;
+    if (g) {
+        g.value = normalized.grupo;
+        g.addEventListener("change", () => updateBomRowMedidaField(tr));
+    }
+    updateBomRowMedidaField(tr);
     const rm = tr.querySelector("[data-action='remove-bom-row']");
     if (rm) rm.addEventListener("click", () => tr.remove());
 }
@@ -762,19 +1074,35 @@ function collectBomFormRows() {
     const rows = [...tbody.querySelectorAll("tr")];
     return rows
         .map((tr, idx) => {
-            const grupo = tr.querySelector(".bom-grupo")?.value || "";
-            const itemNome = tr.querySelector(".bom-item-nome")?.value?.trim() || "";
+            const bomIdRaw = tr.querySelector(".bom-id")?.value || "";
+            const bomId = bomIdRaw ? Number(bomIdRaw) : null;
+            const grupo = normalizeBomGrupo(tr.querySelector(".bom-grupo")?.value || "");
+            const cod = tr.querySelector(".bom-cod")?.value?.trim() || null;
+            const material = tr.querySelector(".bom-material")?.value?.trim() || "";
+            const dim1 = tr.querySelector(".bom-dim1")?.value?.trim() || null;
+            const dim2 = tr.querySelector(".bom-dim2")?.value?.trim() || null;
+            const espessura = tr.querySelector(".bom-espessura")?.value?.trim() || null;
+            const revestimento = tr.querySelector(".bom-revestimento")?.value?.trim() || null;
+            const medida = tr.querySelector(".bom-medida")?.value?.trim() || null;
             const qtdRaw = tr.querySelector(".bom-quantidade")?.value || "";
-            const unidade = tr.querySelector(".bom-unidade")?.value?.trim() || null;
-            const obs = tr.querySelector(".bom-observacao")?.value?.trim() || null;
-            if (!itemNome || !BOM_GRUPOS.includes(grupo)) return null;
+            if (!material || !BOM_GRUPOS.includes(grupo)) return null;
+            const tamanho = grupo === "insumos" ? null : medida;
+            const unidade = grupo === "insumos" ? medida : null;
             return {
+                id: Number.isFinite(bomId) ? bomId : null,
                 grupo,
-                item_nome: itemNome,
-                quantidade: qtdRaw === "" ? null : Number(qtdRaw),
+                cod,
+                material,
+                dim1,
+                dim2,
+                espessura,
+                revestimento,
+                tamanho,
                 unidade,
-                observacao: obs,
-                ordem: idx + 1
+                quantidade: qtdRaw === "" ? null : Number(qtdRaw),
+                ordem: idx + 1,
+                item_nome: material,
+                observacao: dim1
             };
         })
         .filter(Boolean);

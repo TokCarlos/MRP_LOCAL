@@ -10,10 +10,22 @@ $statusUrl = "http://$backendHost`:$port/api/status"
 
 function Get-PortListeners([int]$Port) {
     try {
-        return @(Get-NetTCPConnection -State Listen -ErrorAction Stop | Where-Object { $_.LocalPort -eq $Port })
+        $listeners = @(Get-NetTCPConnection -State Listen -ErrorAction Stop | Where-Object { $_.LocalPort -eq $Port })
+        if ($listeners.Count -gt 0) {
+            return $listeners
+        }
     } catch {
-        return @()
     }
+
+    $netstatRows = @(netstat -ano | Select-String ":$Port\s+.*LISTENING")
+    return @($netstatRows | ForEach-Object {
+        $parts = ($_.Line.Trim() -split "\s+")
+        [pscustomobject]@{
+            LocalAddress = $parts[1]
+            LocalPort = $Port
+            OwningProcess = [int]$parts[-1]
+        }
+    })
 }
 
 function Test-HttpEndpoint([string]$Url) {
@@ -52,9 +64,19 @@ Write-Host "LISTEN=SIM"
 $pids = @($listeners | Select-Object -ExpandProperty OwningProcess -Unique)
 Write-Host "PIDs=$([string]::Join(', ', $pids))"
 foreach ($listenerPid in $pids) {
-    $proc = Get-CimInstance Win32_Process -Filter "ProcessId = $listenerPid" -ErrorAction SilentlyContinue
+    $proc = $null
+    try {
+        $proc = Get-CimInstance Win32_Process -Filter "ProcessId = $listenerPid" -ErrorAction SilentlyContinue
+    } catch {
+        $proc = $null
+    }
     if ($proc) {
         Write-Host "PID=$listenerPid Processo=$($proc.Name) Comando=$($proc.CommandLine)"
+    } else {
+        $basicProc = Get-Process -Id $listenerPid -ErrorAction SilentlyContinue
+        if ($basicProc) {
+            Write-Host "PID=$listenerPid Processo=$($basicProc.ProcessName)"
+        }
     }
 }
 

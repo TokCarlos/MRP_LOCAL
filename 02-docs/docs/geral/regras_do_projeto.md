@@ -575,3 +575,31 @@ E proibido:
 Imagens de produtos devem usar `imagem.preview` com caminho relativo ao front-end:
 
 `img/produtos/{empresa_key}/atas/{origem_ata_key}/{arquivo}`
+
+## Regra permanente de dados e midia runtime
+
+A partir da v0.1.059, a separacao oficial e:
+
+- Dados estruturados do sistema: `01-mrp/data/db/`.
+- Seeds tecnicos de carga inicial: `01-mrp/data/seed/`.
+- Imagens oficiais do catalogo/seed: `01-mrp/front_end/img/produtos/`.
+- Midia enviada pelo usuario em runtime: `01-mrp/data/media/produtos/`.
+- Midia runtime no pacote portable: `portable/data/media/produtos/`.
+
+O banco deve guardar apenas caminho relativo, nunca caminho absoluto de maquina.
+
+Para upload real de produto, o caminho canonico salvo em `produtos.imagem_path` deve seguir:
+
+`media/produtos/{arquivo_tecnico_seguro}`
+
+O backend deve servir esses arquivos por:
+
+`/media/produtos/{arquivo_tecnico_seguro}`
+
+O frontend deve resolver caminho iniciado por `media/` pela origem do backend na porta oficial `8876`.
+
+E proibido usar `assets/images/produtos` como destino de upload de usuario.
+
+E proibido salvar upload real dentro de `01-mrp/app/frontend`, pois `app/frontend` e estrutura alvo futura e nao e o frontend ativo do DEV atual.
+
+Arquivos reais enviados pelo usuario sao dados de runtime e nao devem ser versionados no Git. Apenas a estrutura de pasta pode ser versionada com `.gitkeep`.

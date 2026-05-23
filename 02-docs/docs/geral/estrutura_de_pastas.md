@@ -99,3 +99,25 @@ Nesta versão foi aplicada a padronização física das três pastas raiz:
 ```
 
 O projeto antigo `mrp-main.zip` segue apenas inventariado. Ele ainda não foi incorporado ao `01-mrp`.
+## Atualizacao v0.1.059 - dados e midia runtime
+
+Separacao oficial:
+
+```text
+01-mrp/data/db
+01-mrp/data/seed
+01-mrp/data/media/produtos
+01-mrp/front_end/img/produtos
+portable/data/media/produtos
+```
+
+Regras:
+
+- `01-mrp/data/db` guarda banco local DEV.
+- `01-mrp/data/seed` guarda carga inicial tecnica.
+- `01-mrp/data/media/produtos` guarda uploads reais feitos pelo usuario.
+- `01-mrp/front_end/img/produtos` guarda imagens oficiais do catalogo/seed.
+- `portable/data/media/produtos` e a area equivalente para runtime portable.
+- `01-mrp/app/frontend` nao e destino de upload no DEV atual.
+- `assets/images/produtos` nao e raiz oficial de imagem de produto.
+- O banco guarda caminho relativo, por exemplo `media/produtos/arquivo.png`.

@@ -50,12 +50,10 @@ def _detect_root(default_mode: str) -> tuple[str, Path]:
 def resolve_runtime_paths(default_mode: str = "dev") -> RuntimePaths:
     mode, root = _detect_root(default_mode=default_mode)
     app_root = _env_path("MRP_APP_ROOT") or (root / "app" if mode == "portable" else root / "01-mrp" / "app")
-    frontend_root = _env_path("MRP_FRONTEND_ROOT") or (
-        app_root / "frontend" if (app_root / "frontend").exists() else root / "01-mrp" / "front_end"
-    )
-    backend_root = _env_path("MRP_BACKEND_ROOT") or (
-        app_root / "backend" if (app_root / "backend").exists() else root / "01-mrp" / "back_end"
-    )
+    default_frontend_root = app_root / "frontend" if mode == "portable" else root / "01-mrp" / "front_end"
+    default_backend_root = app_root / "backend" if mode == "portable" else root / "01-mrp" / "back_end"
+    frontend_root = _env_path("MRP_FRONTEND_ROOT") or default_frontend_root
+    backend_root = _env_path("MRP_BACKEND_ROOT") or default_backend_root
     assets_root = _env_path("MRP_ASSETS_ROOT") or (root / "assets" if mode == "portable" else root / "01-mrp" / "assets")
     data_root = _env_path("MRP_DATA_ROOT") or (root / "data" if mode == "portable" else root / "01-mrp" / "data")
     seed_root = data_root / "seed"

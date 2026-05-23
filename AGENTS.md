@@ -1,131 +1,75 @@
 # AGENTS.md — MRP_LOCAL
 
-Estrutura oficial:
+## Leitura obrigatoria antes de qualquer trabalho
 
-- 01-mrp = sistema funcional
-- 02-docs = documentacao, regras, relatorios e progresso
-- 03-vs = versionamento, pacotes, historico e releases
+Antes de diagnosticar, codar, mover arquivo, limpar, documentar ou executar patch, ler primeiro:
 
-Regras obrigatorias:
+1. `02-docs/REGRAS_ATUAIS_MRP.txt`
+2. `02-docs/LOG_PROGRESSO_MRP.txt`
+3. `COMO_CRIAR_COMANDOS_CODEX.txt`, quando for montar comando ou revisar escopo.
 
-1. Nao alterar 01-mrp sem escopo explicito.
-2. Nao apagar arquivos.
-3. Nao renomear 01-mrp, 02-docs ou 03-vs.
-4. Nao usar acentos em nomes fisicos de arquivos ou pastas.
-5. Registrar toda mudanca em 02-docs.
-6. MCP e camada auxiliar para IA/Codex, nao dependencia obrigatoria do sistema.
-7. O sistema MRP_LOCAL deve funcionar mesmo sem MCP.
+Esses arquivos sao a fonte atual. Documentos antigos podem existir apenas como historico.
 
-Status atual:
+## Estrutura oficial
 
-- Versao: v0.1.049-painel-admin-local-preparacao
-- Base anterior: v0.1.048 alinhamento regras e status operacional
-- Fase: painel administrativo local em preparacao / frontend final preservado / sem backend real / sem banco real
+- `01-mrp` = sistema funcional.
+- `02-docs` = documentacao, regras, progresso e historico.
+- `03-vs` = scripts, relatorios, patches, pacotes e versionamento.
+- `portable` = pacote/apoio operacional separado, pausado para evolucao nesta fase.
 
-## PROTOCOLO OBRIGATORIO DE FECHAMENTO AUTOMATICO
+## Estado atual resumido
 
-A partir da v0.1.014, toda tarefa concluida pelo Codex no projeto MRP_LOCAL deve terminar com fechamento automatico Git.
+- Frontend oficial atual: `01-mrp/front_end`.
+- Backend oficial atual: `01-mrp/back_end`.
+- Backend Produtos usa FastAPI + SQLite em DEV.
+- Porta frontend: `8765`.
+- Porta backend: `8876`.
+- Upload de usuario em Produtos deve salvar em `01-mrp/data/media/produtos` e ser servido por `/media/produtos`.
+- `01-mrp/app/backend` e `01-mrp/app/frontend` nao sao fontes ativas nesta fase.
+- Sistema ainda nao esta homologado/blindado.
 
-Regra central:
+## Chave de area restrita
 
-- AUTO_COMMIT_E_PUSH = padrao obrigatorio.
-- FECHAMENTO_MANUAL = excecao somente quando solicitado explicitamente pelo usuario.
+Alterar `01-mrp` ou `.git` exige a chave explicita:
 
-Fluxo oficial:
+`LIBERADO`
 
-- 03-vs prepara.
-- 02-docs registra.
-- 01-mrp executa.
-- GitHub guarda.
+Sem essa chave, pode ler, diagnosticar e planejar, mas nao alterar area restrita.
 
-Regras obrigatorias:
+Mesmo com a chave:
+- nao tocar na pasta PCP;
+- nao alterar `.git` internamente;
+- nao fazer commit/push sem pedido explicito;
+- nao criar sujeira;
+- nao mudar modulo fora do escopo.
 
-1. Toda tarefa deve terminar com documentacao em 02-docs.
-2. Toda tarefa deve ter versao.
-3. Toda tarefa deve ser registrada em 02-docs/docs/patch/versoes.
-4. Ao concluir, deve executar fechamento Git automatico quando houver alteracao real.
-5. Se nao houver alteracao real, nao criar commit vazio.
-6. Se a tag ja existir, nao recriar; informar e tentar enviar a tag existente.
-7. O GitHub e o cofre de historico do projeto.
-8. O Codex nao deve perguntar se deve commitar quando uma tarefa for concluida.
-9. Se git pull --rebase gerar conflito, parar e avisar.
+## Pasta proibida absoluta
 
-O Codex so deve evitar commit/push quando o usuario disser explicitamente:
+Nunca tocar:
 
-- "nao commita"
-- "nao de push"
-- "vou commitar manualmente"
-- "fechamento manual"
-- "nao fechar versao"
+`C:\Users\carlo\Desktop\PCP SERVIDOR\PCP`
 
-Antes de commitar, verificar se existem arquivos proibidos:
+Essa pasta so pode aparecer em regra/validador/documentacao como bloqueio explicito.
 
-- .env
-- .venv
-- node_modules
-- __pycache__
-- *.db
-- *.sqlite
-- *.log pesado
-- arquivos temporarios
-- credenciais
-- .codex, quando versionavel
+## Git
 
-Se encontrar arquivo proibido, parar e avisar. Nao fazer commit.
+Regra atual:
+- Nao fazer commit/push automatico.
+- Deixar staged/preparado somente quando o usuario pedir.
+- Commit/push dependem de ordem explicita do usuario.
 
-Fechamento Git automatico padrao:
+Regra antiga de auto-commit esta obsoleta.
 
-```powershell
-.\03-vs\scripts\git_fechar_versao.ps1 -Versao "vX.Y.Z" -Mensagem "descricao curta" -Auto
-```
+## Documentacao e progresso
 
-## Excecao ativa desta entrega
+Toda alteracao relevante deve atualizar:
+- `02-docs/LOG_PROGRESSO_MRP.txt`
+- relatorio da versao em `03-vs/relatorios`, quando aplicavel.
 
-Na entrega v0.1.033, o usuario solicitou commit manual. Portanto, nao executar fechamento automatico para este pacote.
+Documentacao obsoleta deve ir para:
+- `02-docs/obsolete/`
 
+Arquivo obsoleto de sistema dentro de `01-mrp` deve ir para:
+- `01-mrp/_obsolete/`
 
-Regra de infraestrutura v0.1.036:
-
-- Porta oficial frontend estatico: 8765
-- Bind oficial: 0.0.0.0
-- Tailscale para remoto, LAN como principal
-- Nao usar MEGA na arquitetura
-
-Observacao operacional v0.1.047:
-
-- pasta `portable` e area oficial auxiliar para deploy/teste/acesso externo;
-- `portable\CONFIGURAR_ACESSO_MRP_REDE.bat` permanece em `portable`;
-- nao mover nem copiar `CONFIGURAR_ACESSO_MRP_REDE.bat` para a raiz.
-
-Planejamento:
-
-- proxima etapa: validacao operacional no DEV casa com painel admin local;
-- etapa seguinte: watchdog/tarefa automatica/reboot.
-
-Diretriz estrategica v0.1.050:
-
-- registrar o objetivo futuro de instalador unico de distribuicao;
-- nao implementar instalador real nesta etapa;
-- nao escolher tecnologia de instalador nesta etapa;
-- manter local-first, raiz configuravel e sem hardcode de ambiente.
-
-Diretriz complementar v0.1.050 (dominio/proxy/IA futura):
-
-- registrar acesso futuro por nome amigavel/dominio interno/proxy, mantendo 8765 como porta interna;
-- registrar integracao IA futura via backend com ferramentas controladas e logs;
-- nao implementar proxy, DNS, Tailscale Serve, backend ou IA nesta etapa;
-- nao criar segredo/token/chave nesta etapa.
-
-Diretriz v0.1.051 (backend Produtos base):
-
-- iniciar base tecnica e contrato do modulo Produtos sem ativar API;
-- nao alterar frontend funcional;
-- nao criar banco real;
-- nao instalar dependencias nesta etapa.
-
-Diretriz documental - modelo futuro de programa Windows:
-
-- diferenciar repositorio DEV de artefato instalado/release;
-- DEV permanece modular e limpo;
-- `.exe`, `.dll`, `.bin`, runtime interno e empacotamento ficam para etapa especifica de release;
-- frente tecnica seguinte permanece backend Produtos.
+Sempre criar manifesto explicando origem, destino, motivo e substituto.

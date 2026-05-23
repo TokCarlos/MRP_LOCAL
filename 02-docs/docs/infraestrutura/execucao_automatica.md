@@ -1,22 +1,21 @@
-# Execucao Automatica Frontend
+# Execucao automatica - MRP_LOCAL
 
-Status atual: frontend estatico, sem backend FastAPI e sem PostgreSQL.
+Status atual: backend FastAPI existe para Produtos, mas execucao automatica ainda nao esta homologada.
 
-Comando manual antigo (descontinuado para operacao diaria):
+## Estado atual
 
-```powershell
-py -m http.server 8000 --bind 100.108.26.10 --directory "X:\01-mrp\front_end"
-```
+- Frontend: porta 8765.
+- Backend: porta 8876.
+- Painel local pode iniciar/parar/status/healthcheck.
+- Backend deve iniciar usando a venv em `01-mrp/runtime/venv_backend` quando existir.
 
-Comando operacional novo:
+## Pendente
 
-```powershell
-py -m http.server 8765 --bind 0.0.0.0 --directory "X:\01-mrp\front_end"
-```
+- watchdog continuo;
+- tarefa Windows;
+- reboot/logoff/logon;
+- queda de energia;
+- queda de rede;
+- validacao prolongada.
 
-Execucao automatica em teste:
-
-- Script watchdog: `X:\03-vs\scripts\servicos\mrp_frontend_watchdog.ps1`
-- Tarefa Windows: `MRP_LOCAL_FRONTEND`
-- Inicio no logon do usuario atual
-- Sem loop infinito: maximo 10 tentativas em janela maxima de 1 minuto por execucao do watchdog.
+Nao chamar de blindado/homologado ate essas validacoes serem feitas.

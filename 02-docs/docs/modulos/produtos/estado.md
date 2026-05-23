@@ -1,4 +1,4 @@
-# Modulo Produtos - Estado atual (v0.1.020)
+# Modulo Produtos - Estado atual
 
 - Fonte oficial inicial importada para seed local.
 - 147 produtos carregados da lista enviada pelo usuario.
@@ -13,11 +13,14 @@
 - Itens GOV. RIO com preview real (`imagem.status = REAL_ATA`).
 - Total atual no seed: 167 produtos.
 
-## Observacoes
+## Observacoes atuais
 
-- Imagens ainda sao DEMO e serao substituidas por imagens reais ATA por ATA.
-- Categoria atual e provisoria por inferencia textual.
-- Backend e banco continuam fora do escopo nesta etapa.
+- O backend Produtos existe e esta ativo em `01-mrp/back_end`.
+- O banco SQLite DEV e runtime/local, nao deve ser versionado.
+- O seed legado continua util para recriar dados iniciais.
+- Imagens oficiais/seed ficam em `01-mrp/front_end/img/produtos`.
+- Uploads de usuario ficam em `01-mrp/data/media/produtos`.
+- Registros antigos deste arquivo foram mantidos como historico, mas a fonte atual deve ser `02-docs/LOG_PROGRESSO_MRP.txt`.
 
 ## Atualizacao v0.1.058
 
@@ -26,4 +29,12 @@
 - `GET /api/produtos` corrigido para devolver os campos necessarios ao filtro e renderizacao.
 - Fichas de Nova Base ATA, Produto e Editar BOM alinhadas ao padrao visual branco translucido da tabela Produtos.
 - Produto passa a aceitar selecao de arquivo bruto para upload de imagem.
-- Upload salva arquivo em `assets/images/produtos` no frontend DEV e grava caminho relativo no SQLite.
+- Upload v0.1.058 salvava arquivo em `assets/images/produtos`; esse caminho foi substituido na v0.1.059.
+
+## Atualizacao v0.1.059
+
+- Upload real de imagem de Produto passa a salvar arquivo em `01-mrp/data/media/produtos`.
+- `produtos.imagem_path` passa a guardar caminho relativo no formato `media/produtos/{arquivo}`.
+- Backend expoe midia runtime em `/media/produtos/{arquivo}`.
+- Frontend resolve `media/...` pela API/backend e continua aceitando `img/produtos/...` para imagens oficiais do catalogo/seed.
+- Registro local testado do produto ID 110 foi migrado de `assets/images/produtos/...` para `media/produtos/...`.

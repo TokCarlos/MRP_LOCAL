@@ -1,40 +1,42 @@
 # back_end
 
-Direcao futura: backend FastAPI local/rede para o MRP_LOCAL.
+Backend oficial atual do MRP_LOCAL.
 
-Estado atual:
-- backend ainda nao e operacional;
-- frontend atual ainda nao depende de backend;
-- v0.1.045 nao cria API funcional;
-- v0.1.051 cria base tecnica e contrato do modulo Produtos sem ativar servidor.
+## Estado atual
 
-Regras:
-- nao implementar endpoints reais nesta etapa;
-- nao criar banco real nesta etapa;
-- concentrar validacao e persistencia na API futura, nao no frontend;
-- usar configuracao de ambiente e evitar caminho fisico fixo como regra de negocio.
+- Backend ativo: `01-mrp/back_end`.
+- Framework: FastAPI.
+- Porta DEV: `8876`.
+- Primeiro dominio real: Produtos.
+- Banco DEV/runtime: `01-mrp/data/db/mrp_local_dev.sqlite` quando gerado.
+- Upload de imagens de usuario: `01-mrp/data/media/produtos`.
+- Midia runtime servida por `/media/produtos/...`.
 
-v0.1.051:
+## Regras
 
-- primeiro dominio real do backend: Produtos;
-- seed atual segue como fonte temporaria de leitura;
-- sem FastAPI ativo, sem banco real e sem instalacao de dependencias.
+- Nao usar caminho absoluto de usuario como regra de negocio.
+- Usar resolver/configuracao do projeto.
+- Nao versionar banco SQLite runtime, logs, venv ou cache.
+- `01-mrp/app/backend` nao deve rodar como backend ativo nesta fase.
+- Produtos deve seguir camadas: routes -> services -> repositories -> database.
 
-v0.1.053:
+## Endpoints minimos validados
 
-- backend minimo FastAPI oficial em `01-mrp/back_end` com endpoints:
-  - `GET /health`
-  - `GET /api/status`
-  - `GET /api/produtos`
-- sem banco real;
-- sem CRUD completo;
-- sem autenticacao nova nesta etapa;
-- frontend Produtos com consumo prioritario da API e fallback documentado.
+- `GET /health`
+- `GET /api/status`
+- `GET /api/produtos`
+- `GET /api/produtos/bases`
 
-v0.1.053b:
+## Setup DEV
 
-- backend oficial consolidado em `01-mrp/back_end` com camadas:
-  - `routes` -> `services` -> `repositories/adapters` -> `domain/contracts`;
-- modulo Produtos definido como template para proximos dominios;
-- estrutura temporaria `01-mrp/backend` removida;
-- sem banco real, sem CRUD completo e sem alteracao de seed/imagens.
+Criar/validar venv:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\backend\setup_backend_dev_env.ps1
+```
+
+Iniciar backend:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\03-vs\scripts\servicos\mrp_backend_start.ps1
+```

@@ -150,6 +150,21 @@ _bkp/
 01-mrp/**/*.pyc
 01-mrp/**/__pycache__/
 
+# Midia runtime enviada pelo usuario
+01-mrp/data/media/**
+!01-mrp/data/media/
+!01-mrp/data/media/.gitkeep
+!01-mrp/data/media/produtos/
+!01-mrp/data/media/produtos/.gitkeep
+portable/data/media/**
+!portable/data/media/
+!portable/data/media/.gitkeep
+!portable/data/media/produtos/
+!portable/data/media/produtos/.gitkeep
+
+# Upload legado incorreto gerado antes da regra canonica de midia
+01-mrp/app/frontend/assets/images/produtos/**
+
 # Saneamento v0.1.054
 03-vs/quarentena/**
 !03-vs/quarentena/

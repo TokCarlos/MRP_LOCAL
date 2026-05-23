@@ -57,15 +57,22 @@ class Produto:
         )
 
     def to_contract(self) -> Dict[str, Any]:
+        empresa_nome = self.raw.get("empresa_nome") or self.raw.get("empresa") or self.empresa_key
+        if str(self.empresa_key or empresa_nome or "").strip().lower() in {"aco", "ao", "aço"}:
+            empresa_nome = "Aço"
         return {
             "id": self.id,
             "produto_key": self.produto_key,
-            "empresa_key": self.empresa_key,
+            "empresa_key": "aco" if str(self.empresa_key or "").strip().lower() in {"aco", "ao", "aço"} else self.empresa_key,
+            "empresa_nome": empresa_nome,
+            "empresa": empresa_nome,
             "ata_key": self.ata_key,
             "categoria_key": self.categoria_key,
             "item_ata": self.item_ata,
             "nome_oficial": self.nome_oficial,
             "nome_busca": self.nome_busca,
             "imagem_path": self.imagem_path,
+            "imagem_url": self.imagem_path,
+            "imagem": {"preview": self.imagem_path} if self.imagem_path else {"preview": None},
             "ativo": self.ativo,
         }

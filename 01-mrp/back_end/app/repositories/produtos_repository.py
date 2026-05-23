@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
+import json
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -22,16 +23,17 @@ class ProdutosRepository:
     def _conn(self):
         return get_connection(self._db_path)
 
-    def list_produtos(self) -> List[Produto]:
+    def list_produtos(self, include_inactive: bool = False) -> List[Produto]:
+        where_clause = "" if include_inactive else "WHERE p.ativo = 1"
         with self._conn() as conn:
             rows = conn.execute(
-                """
+                f"""
                 SELECT p.id, p.base_ata_id, p.produto_key, p.item_ata, p.nome_oficial, p.categoria, p.imagem_path,
                        p.ativo, p.created_at, p.updated_at,
                        b.ata_nome, b.ata_key, b.numero_ata, b.empresa_key, b.empresa_nome
                 FROM produtos p
                 INNER JOIN produto_base_ata b ON b.id = p.base_ata_id
-                WHERE p.ativo = 1
+                {where_clause}
                 ORDER BY p.id
                 """
             ).fetchall()
@@ -180,26 +182,161 @@ class ProdutosRepository:
             conn.commit()
         return cur.rowcount > 0
 
+    def _history_row_to_dict(self, row) -> Dict[str, Any]:
+        item = dict(row)
+        for key in ("dados_antes", "dados_depois"):
+            raw = item.get(key)
+            if isinstance(raw, str) and raw.strip():
+                try:
+                    item[key] = json.loads(raw)
+                except json.JSONDecodeError:
+                    pass
+        return item
+
+    def list_bom_historico(self, produto_id: int) -> List[Dict[str, Any]]:
+        with self._conn() as conn:
+            rows = conn.execute(
+                """
+                SELECT id, produto_id, bom_item_id, acao, grupo, cod, material,
+                       dados_antes, dados_depois, detalhe, created_at, created_by, ativo
+                FROM produto_bom_historico
+                WHERE produto_id = ? AND ativo = 1
+                ORDER BY id DESC
+                """,
+                (produto_id,),
+            ).fetchall()
+        return [self._history_row_to_dict(row) for row in rows]
+
+    def get_bom_ultima_atualizacao(self, produto_id: int) -> Optional[str]:
+        with self._conn() as conn:
+            row = conn.execute(
+                """
+                SELECT created_at
+                FROM produto_bom_historico
+                WHERE produto_id = ? AND ativo = 1
+                ORDER BY id DESC
+                LIMIT 1
+                """,
+                (produto_id,),
+            ).fetchone()
+        return str(row["created_at"]) if row else None
+
+    def add_bom_history_event(
+        self,
+        produto_id: int,
+        acao: str,
+        grupo: Optional[str] = None,
+        cod: Optional[str] = None,
+        material: Optional[str] = None,
+        bom_item_id: Optional[int] = None,
+        dados_antes: Optional[Dict[str, Any]] = None,
+        dados_depois: Optional[Dict[str, Any]] = None,
+        detalhe: Optional[str] = None,
+        created_by: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        now = self._now_iso()
+        before_json = json.dumps(dados_antes, ensure_ascii=False, sort_keys=True) if dados_antes is not None else None
+        after_json = json.dumps(dados_depois, ensure_ascii=False, sort_keys=True) if dados_depois is not None else None
+        with self._conn() as conn:
+            cur = conn.execute(
+                """
+                INSERT INTO produto_bom_historico (
+                    produto_id, bom_item_id, acao, grupo, cod, material,
+                    dados_antes, dados_depois, detalhe, created_at, created_by, ativo
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
+                """,
+                (
+                    produto_id,
+                    bom_item_id,
+                    acao,
+                    grupo,
+                    cod,
+                    material,
+                    before_json,
+                    after_json,
+                    detalhe,
+                    now,
+                    created_by,
+                ),
+            )
+            history_id = int(cur.lastrowid)
+            row = conn.execute(
+                """
+                SELECT id, produto_id, bom_item_id, acao, grupo, cod, material,
+                       dados_antes, dados_depois, detalhe, created_at, created_by, ativo
+                FROM produto_bom_historico
+                WHERE id = ?
+                """,
+                (history_id,),
+            ).fetchone()
+            conn.commit()
+        return self._history_row_to_dict(row) if row else {}
+
+    def add_bom_history_events(self, produto_id: int, events: List[Dict[str, Any]]) -> None:
+        for event in events:
+            self.add_bom_history_event(produto_id=produto_id, **event)
+
+    def clear_bom_history(self, produto_id: int, created_by: Optional[str] = None) -> Dict[str, Any]:
+        now = self._now_iso()
+        with self._conn() as conn:
+            cur = conn.execute(
+                "UPDATE produto_bom_historico SET ativo = 0 WHERE produto_id = ? AND ativo = 1",
+                (produto_id,),
+            )
+            deleted = int(cur.rowcount or 0)
+            conn.execute(
+                """
+                INSERT INTO produto_bom_historico (
+                    produto_id, bom_item_id, acao, grupo, cod, material,
+                    dados_antes, dados_depois, detalhe, created_at, created_by, ativo
+                )
+                VALUES (?, NULL, 'HISTORICO_LIMPO', NULL, NULL, NULL, NULL, NULL, ?, ?, ?, 1)
+                """,
+                (produto_id, f"Histórico da BOM limpo. Eventos anteriores arquivados: {deleted}", now, created_by),
+            )
+            conn.commit()
+        return {"produto_id": produto_id, "eventos_arquivados": deleted, "ultima_atualizacao_bom": now}
+
     def list_bom(self, produto_id: int) -> List[Dict[str, Any]]:
         with self._conn() as conn:
             rows = conn.execute(
                 """
-                SELECT id, produto_id, grupo, item_nome, quantidade, unidade, observacao, ordem_item, ativo, created_at, updated_at
+                SELECT id, produto_id, grupo,
+                       cod, material, dim1, dim2, espessura, revestimento, tamanho,
+                       quantidade, unidade,
+                       item_nome, observacao, ordem_item, ativo, created_at, updated_at
                 FROM produto_bom
                 WHERE produto_id = ? AND ativo = 1
                 ORDER BY grupo, ordem_item, id
                 """,
                 (produto_id,),
             ).fetchall()
-        return [dict(r) for r in rows]
+        out: List[Dict[str, Any]] = []
+        for row in rows:
+            item = dict(row)
+            # Compatibilidade para registros anteriores a estrutura nova.
+            if not item.get("material"):
+                item["material"] = item.get("item_nome")
+            if not item.get("dim1"):
+                item["dim1"] = item.get("observacao")
+            out.append(item)
+        return out
 
     def add_bom_item(
         self,
         produto_id: int,
         grupo: str,
-        item_nome: str,
+        cod: Optional[str],
+        material: str,
+        dim1: Optional[str],
+        dim2: Optional[str],
+        espessura: Optional[str],
+        revestimento: Optional[str],
+        tamanho: Optional[str],
         quantidade: Optional[float],
         unidade: Optional[str],
+        item_nome: str,
         observacao: Optional[str],
         ordem_item: Optional[int],
     ) -> Dict[str, Any]:
@@ -208,16 +345,37 @@ class ProdutosRepository:
             cur = conn.execute(
                 """
                 INSERT INTO produto_bom (
-                    produto_id, grupo, item_nome, quantidade, unidade, observacao, ordem_item, ativo, created_at, updated_at
+                    produto_id, grupo, cod, material, dim1, dim2, espessura, revestimento, tamanho,
+                    quantidade, unidade, item_nome, observacao, ordem_item, ativo, created_at, updated_at
                 )
-                VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?)
                 """,
-                (produto_id, grupo, item_nome, quantidade, unidade, observacao, ordem_item, now, now),
+                (
+                    produto_id,
+                    grupo,
+                    cod,
+                    material,
+                    dim1,
+                    dim2,
+                    espessura,
+                    revestimento,
+                    tamanho,
+                    quantidade,
+                    unidade,
+                    item_nome,
+                    observacao,
+                    ordem_item,
+                    now,
+                    now,
+                ),
             )
             bom_id = int(cur.lastrowid)
             row = conn.execute(
                 """
-                SELECT id, produto_id, grupo, item_nome, quantidade, unidade, observacao, ordem_item, ativo, created_at, updated_at
+                SELECT id, produto_id, grupo,
+                       cod, material, dim1, dim2, espessura, revestimento, tamanho,
+                       quantidade, unidade,
+                       item_nome, observacao, ordem_item, ativo, created_at, updated_at
                 FROM produto_bom WHERE id = ?
                 """,
                 (bom_id,),
@@ -236,17 +394,25 @@ class ProdutosRepository:
                 conn.execute(
                     """
                     INSERT INTO produto_bom (
-                        produto_id, grupo, item_nome, quantidade, unidade, observacao, ordem_item, ativo, created_at, updated_at
+                        produto_id, grupo, cod, material, dim1, dim2, espessura, revestimento, tamanho,
+                        quantidade, unidade, item_nome, observacao, ordem_item, ativo, created_at, updated_at
                     )
-                    VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?, ?)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?)
                     """,
                     (
                         produto_id,
                         item["grupo"],
-                        item["item_nome"],
+                        item.get("cod"),
+                        item.get("material"),
+                        item.get("dim1"),
+                        item.get("dim2"),
+                        item.get("espessura"),
+                        item.get("revestimento"),
+                        item.get("tamanho"),
                         item.get("quantidade"),
                         item.get("unidade"),
-                        item.get("observacao"),
+                        item.get("item_nome") or item.get("material"),
+                        item.get("observacao") or item.get("dim1"),
                         item.get("ordem") if item.get("ordem") is not None else idx + 1,
                         now,
                         now,

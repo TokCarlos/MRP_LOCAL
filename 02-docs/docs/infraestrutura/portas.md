@@ -1,20 +1,20 @@
-# Portas Oficiais
+# Portas - MRP_LOCAL
 
-Porta descontinuada:
+Status atual: v0.1.060.
 
-- 8000
+## Portas oficiais DEV
 
-Porta oficial inicial do frontend MRP_LOCAL:
+- Frontend web: `8765`
+- Backend FastAPI/API: `8876`
 
-- 8765/TCP
+## Endpoints backend principais
 
-Servidor atual:
+- `GET http://<host>:8876/health`
+- `GET http://<host>:8876/api/status`
+- `GET http://<host>:8876/api/produtos`
+- `GET http://<host>:8876/api/produtos/bases`
+- `GET http://<host>:8876/media/produtos/<arquivo>`
 
-- Frontend estatico servido por `py -m http.server`
-- Sem backend API ativo nesta etapa.
+## Regra
 
-Diretriz futura:
-
-- `8765` deve continuar como porta interna/configuravel do frontend;
-- acesso visual ao usuario final deve evoluir para nome amigavel/proxy (80/443), quando a infraestrutura estiver madura;
-- essa camada nao altera regra de negocio e nao esta implementada nesta etapa.
+O frontend pode ser acessado por localhost, hostname, IP LAN ou Tailscale. O JS deve montar a API usando o mesmo host da pagina e porta `8876`, evitando `127.0.0.1` fixo quando acessado por outro PC.

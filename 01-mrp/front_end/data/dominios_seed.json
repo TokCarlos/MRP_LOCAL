@@ -6,7 +6,7 @@
                                  "status":  "ATIVA_COM_DADOS"
                              },
                              {
-                                 "nome":  "AÇO",
+                                 "nome":  "Aço",
                                  "key":  "aco",
                                  "status":  "ATIVA_COM_DADOS"
                              },
@@ -26,12 +26,12 @@
                    "empresa_descricao":  "Empresa interna/real do dominio operacional. Nao representa cliente, orgao publico ou origem de ata.",
                    "empresas_permitidas":  [
                                                "JPL",
-                                               "AÇO",
+                                               "Aço",
                                                "TCR"
                                            ],
                    "empresas_com_dados_atuais":  [
                                                      "JPL",
-                                                     "AÇO"
+                                                     "Aço"
                                                  ],
                    "empresas_sem_dados_atuais":  "TCR",
                    "gov_rio_nao_e_empresa":  true,

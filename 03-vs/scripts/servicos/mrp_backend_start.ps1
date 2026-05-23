@@ -108,9 +108,27 @@ $args = @($pythonSelecionado.BaseArgs + @(
     "--port",
     [string]$port,
     "--app-dir",
-    "`"$backendRootDir`""
+    $backendRootDir
 ))
-$proc = Start-Process -FilePath $pythonSelecionado.Comando -ArgumentList ([string]::Join(" ", $args)) -WindowStyle Hidden -PassThru
+$argLine = ($args | ForEach-Object {
+    $arg = [string]$_
+    if ($arg -match "\s") {
+        '"' + ($arg -replace '"', '\"') + '"'
+    } else {
+        $arg
+    }
+}) -join " "
+
+$psi = New-Object System.Diagnostics.ProcessStartInfo
+$psi.FileName = $pythonSelecionado.Comando
+$psi.Arguments = $argLine
+$psi.WorkingDirectory = $backendRootDir
+$psi.UseShellExecute = $true
+$psi.CreateNoWindow = $true
+$psi.WindowStyle = [System.Diagnostics.ProcessWindowStyle]::Hidden
+$proc = New-Object System.Diagnostics.Process
+$proc.StartInfo = $psi
+[void]$proc.Start()
 Set-Content -Path $pidFile -Value $proc.Id -Encoding UTF8
 
 for ($i = 1; $i -le 15; $i++) {

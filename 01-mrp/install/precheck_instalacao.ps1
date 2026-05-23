@@ -67,7 +67,7 @@ foreach ($target in $writableTargets) {
 
 $pythonCmd = Get-Command py -ErrorAction SilentlyContinue
 if (-not $pythonCmd) {
-    Add-Issue -Issues $issues -Id "python_not_detected" -Level "RECOMENDADO" -Title "Python nao detectado" -BlocksExecution $false -Message "Aceitavel nesta etapa sem backend, mas sera necessario quando backend FastAPI for ativado."
+    Add-Issue -Issues $issues -Id "python_not_detected" -Level "RECOMENDADO" -Title "Python nao detectado" -BlocksExecution $false -Message "Backend FastAPI ja existe para Produtos; Python e recomendado para operacao completa do backend DEV."
 }
 
 $nodeCmd = Get-Command node -ErrorAction SilentlyContinue

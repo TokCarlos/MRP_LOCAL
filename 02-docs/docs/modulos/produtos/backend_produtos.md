@@ -1,4 +1,4 @@
-# Backend Produtos - v0.1.051
+# Backend Produtos - estado acumulado
 
 ## Papel do modulo Produtos
 
@@ -18,10 +18,13 @@ Produtos e o cadastro-mestre que sera referenciado por materiais, tubos, chapas,
 
 ## Fonte atual e fonte futura
 
-- Fonte atual temporaria: `01-mrp/front_end/data/produtos_seed.json`.
-- Imagens atuais: `01-mrp/front_end/img/produtos`.
-- Fonte futura real: PostgreSQL.
-- Banco/API devem guardar referencia de imagem (caminho), mantendo arquivo fisico separado.
+- Fonte backend atual em DEV: SQLite runtime em `01-mrp/data/db/mrp_local_dev.sqlite`.
+- Seed ativo/legado ainda usado para recriacao inicial: `01-mrp/front_end/data/produtos_seed.json`.
+- Imagens oficiais/seed: `01-mrp/front_end/img/produtos`.
+- Uploads do usuario: `01-mrp/data/media/produtos`.
+- Caminho salvo no banco para upload: `media/produtos/{arquivo}`.
+- Fonte futura para producao: PostgreSQL ou outro banco definido em etapa propria.
+- Banco/API guardam referencia relativa de imagem, mantendo arquivo fisico separado.
 
 ## Escopo da v0.1.051
 
@@ -53,5 +56,14 @@ Produtos e o cadastro-mestre que sera referenciado por materiais, tubos, chapas,
 - Extensoes permitidas: `.png`, `.jpg`, `.jpeg`, `.webp`, `.svg`.
 - Limite inicial: 5 MB.
 - Upload gera nome tecnico seguro baseado no `produto_key`.
-- O caminho relativo salvo no banco passa a apontar para `assets/images/produtos/...`.
+- O caminho relativo salvo no banco passa a apontar para `assets/images/produtos/...` na v0.1.058; esse destino foi substituido na v0.1.059.
 - `python-multipart` passa a ser dependencia obrigatoria do backend FastAPI.
+
+## Etapa v0.1.059
+
+- Upload real passa a salvar arquivo em `01-mrp/data/media/produtos`.
+- `produtos.imagem_path` passa a usar o padrao canonico `media/produtos/{arquivo}`.
+- Backend monta `StaticFiles` em `/media` para servir midia runtime.
+- Frontend Produtos converte `media/...` para URL do backend em `http(s)://host:8876/media/...`.
+- Imagens oficiais do seed continuam em `01-mrp/front_end/img/produtos`.
+- `01-mrp/app/frontend` permanece estrutura alvo futura e nao deve receber uploads no DEV atual.

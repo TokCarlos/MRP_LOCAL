@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from fastapi import APIRouter, File, HTTPException, UploadFile
+from fastapi import APIRouter, File, HTTPException, Query, UploadFile
 
 from app.config import AppConfig
 from app.domain.produtos_models import (
@@ -33,9 +33,9 @@ def build_router(cfg: AppConfig) -> APIRouter:
     service.bootstrap_seed_if_needed()
 
     @router.get("/produtos")
-    def produtos() -> dict[str, object]:
+    def produtos(include_inactive: bool = Query(False)) -> dict[str, object]:
         try:
-            rows = [service.make_contract_item(p.raw) for p in service.list_produtos()]
+            rows = [service.make_contract_item(p.raw) for p in service.list_produtos(include_inactive=include_inactive)]
             return {"ok": True, "data": rows}
         except ValueError as exc:
             raise _err("validation_error", str(exc), 400) from exc
@@ -156,6 +156,27 @@ def build_router(cfg: AppConfig) -> APIRouter:
     def get_bom(produto_id: int) -> dict[str, object]:
         try:
             return {"ok": True, "data": service.list_bom(produto_id)}
+        except ValueError as exc:
+            raise _err("not_found", str(exc), 404) from exc
+
+    @router.get("/produtos/{produto_id:int}/bom/ultima-atualizacao")
+    def get_bom_ultima_atualizacao(produto_id: int) -> dict[str, object]:
+        try:
+            return {"ok": True, "data": {"ultima_atualizacao_bom": service.get_bom_ultima_atualizacao(produto_id)}}
+        except ValueError as exc:
+            raise _err("not_found", str(exc), 404) from exc
+
+    @router.get("/produtos/{produto_id:int}/bom/historico")
+    def get_bom_historico(produto_id: int) -> dict[str, object]:
+        try:
+            return {"ok": True, "data": service.list_bom_historico(produto_id)}
+        except ValueError as exc:
+            raise _err("not_found", str(exc), 404) from exc
+
+    @router.delete("/produtos/{produto_id:int}/bom/historico")
+    def clear_bom_historico(produto_id: int) -> dict[str, object]:
+        try:
+            return {"ok": True, "data": service.clear_bom_historico(produto_id)}
         except ValueError as exc:
             raise _err("not_found", str(exc), 404) from exc
 

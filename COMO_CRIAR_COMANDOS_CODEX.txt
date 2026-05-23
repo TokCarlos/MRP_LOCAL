@@ -1,0 +1,171 @@
+# COMO CRIAR COMANDOS PARA CODEX / REVISAO DO SISTEMA
+
+## 1. Regra principal
+
+Todo comando deve ser direto, fechado e com escopo claro.
+
+Antes de qualquer codificacao, o Codex deve ler:
+1. 02-docs/REGRAS_ATUAIS_MRP.txt
+2. 02-docs/LOG_PROGRESSO_MRP.txt
+
+Se necessario, depois ler:
+3. 02-docs/docs/MANUAL_DEV_COMPLETO.txt
+4. 02-docs/docs/RESUMO_OPERACIONAL_DO_SISTEMA.txt
+5. documentacao especifica do modulo.
+
+Regras definem COMO o sistema deve ser.
+Log de progresso define O QUE ja foi feito, o que funciona, o que esta quebrado e o que esta pendente.
+
+## 2. Estrutura obrigatoria de comando
+
+Todo comando deve conter:
+1. Chave, quando mexer em area restrita.
+2. Objetivo.
+3. Escopo permitido.
+4. O que nao pode fazer.
+5. Arquivos/pastas provaveis.
+6. Problema observado.
+7. Resultado esperado.
+8. Validacoes obrigatorias.
+9. Documentacao/relatorio a atualizar.
+10. Formato da resposta final.
+
+## 3. Chave de area restrita
+
+Para alterar 01-mrp ou .git, a mensagem deve conter:
+
+LIBERADO
+
+Sem essa chave:
+- pode ler;
+- pode diagnosticar;
+- pode gerar plano;
+- nao pode alterar 01-mrp;
+- nao pode alterar .git.
+
+Mesmo com LIBERADO:
+- nao pode tocar na pasta PCP;
+- nao pode fazer commit se nao for pedido;
+- nao pode apagar sem registrar;
+- nao pode mudar modulo fora do escopo;
+- nao pode criar sujeira.
+
+## 4. Pasta proibida absoluta
+
+Nunca tocar:
+C:\Users\carlo\Desktop\PCP SERVIDOR\PCP
+
+A pasta PCP so pode aparecer em regra/validador como bloqueio explicito.
+
+## 5. Comando bom
+
+LIBERADO
+
+TAREFA: CORRIGIR FILTRO DO MODULO PRODUTOS
+
+Objetivo:
+Descobrir e corrigir por que o filtro da pagina Produtos nao funciona apos migracao para backend SQLite.
+
+Escopo:
+- Pode alterar frontend Produtos.
+- Pode alterar backend Produtos se o problema for contrato da API.
+- Pode alterar relatorio da versao.
+- Nao mexer em portable agora.
+- Nao mexer em .git.
+- Nao fazer commit.
+- Nao tocar PCP.
+
+Problema observado:
+O sistema esta funcional, mas os filtros da tela Produtos nao filtram os dados carregados do banco.
+
+Verificar:
+1. Campos esperados pelo filtro.
+2. Campos retornados por GET /api/produtos.
+3. Se dados mock/seed foram migrados corretamente.
+4. Se frontend usa lista antiga em vez da lista da API.
+
+Resultado esperado:
+- Filtro por nome funciona.
+- Filtro por empresa funciona.
+- Filtro por ATA funciona.
+- Filtro por categoria funciona.
+- Nenhum fallback mock deve ser usado como fonte principal.
+
+Validacoes:
+- node --check no JS alterado.
+- GET /api/produtos retorna campos necessarios.
+- Teste manual dos filtros.
+- git diff --check.
+
+Documentar:
+03-vs/relatorios/RELATORIO_BACKEND_PRODUTOS_v0.1.057.md
+
+Responder:
+- causa encontrada;
+- arquivos alterados;
+- validacoes OK/falhas;
+- pendencias.
+
+## 6. Comando ruim
+
+Evitar:
+- Arruma tudo.
+- Revisa geral.
+- Melhora o sistema.
+- Faz funcionar.
+- Organiza as pastas.
+
+Comando vago gera regressao, mudanca ampla e sujeira.
+
+## 7. Tipos de comando
+
+[AVALIAR APENAS]
+Usar quando nao queremos alteracao.
+
+[CORRECAO CIRURGICA]
+Usar quando ha bug especifico.
+
+[IMPLEMENTACAO CONTROLADA]
+Usar quando vamos criar funcao nova.
+
+[SANEAMENTO]
+Usar para limpar cache, logs reais, BOM, temporarios, duplicidades e obsoletos.
+
+[DOCUMENTACAO]
+Usar para regras, log de progresso, status e obsoletos.
+
+## 8. Validacoes padrao
+
+Sempre que aplicavel, exigir:
+- git diff --check
+- python -m compileall nos Python ativos
+- node --check nos JS ativos
+- busca por __pycache__/.pyc
+- busca por logs reais
+- busca por BOM
+- busca por caminhos proibidos
+- teste de endpoints
+- teste manual da UI
+- atualizacao de relatorio
+
+## 9. Resposta final padrao
+
+O Codex deve responder:
+1. Arquivos alterados.
+2. O que foi corrigido.
+3. O que foi preservado.
+4. Validacoes OK.
+5. Validacoes pendentes/falhas.
+6. Pendencias.
+7. Proximo passo recomendado.
+
+## 10. Regra final
+
+Comando bom e aquele que:
+- limita escopo;
+- protege o que ja funciona;
+- exige validacao;
+- documenta resultado;
+- nao cria sujeira;
+- nao mexe no que nao foi pedido;
+- permite rastrear e reverter.

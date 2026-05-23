@@ -1,8 +1,17 @@
 # Status Geral - MRP_LOCAL
 
+## Fonte atual obrigatoria
+
+Antes de usar este documento para decisao, ler:
+
+1. `02-docs/REGRAS_ATUAIS_MRP.txt`
+2. `02-docs/LOG_PROGRESSO_MRP.txt`
+
+Este status contem historico e pode manter registros antigos por rastreabilidade.
+
 ## Versao documental atual
 
-`v0.1.058-produtos-filtro-ui-upload`
+`v0.1.059-produtos-upload-midia-canonica`
 
 ## Base funcional anterior
 
@@ -23,8 +32,8 @@ Commit base funcional:
 - Start/stop/status corrigidos e validados.
 - O sistema ainda NAO esta blindado.
 - O sistema ainda NAO esta homologado.
-- Ainda nao ha backend FastAPI funcional.
-- Ainda nao ha banco real.
+- Backend FastAPI local existe para Produtos na porta `8876`.
+- Banco SQLite local existe para Produtos em `01-mrp/data/db/mrp_local_dev.sqlite`.
 - Nao ha PostgreSQL instalado/configurado pelo sistema.
 - Nao ha Python portable baixado/ativado pelo sistema.
 - Nao ha instalador real criado nesta etapa.
@@ -94,6 +103,15 @@ Ainda precisam validacao real:
 - Registro de foto evoluiu de caminho manual para upload real via backend.
 - Backend passa a depender de `python-multipart`.
 - Validacao tecnica executada com TestClient e API em subprocesso.
+
+## Atualizacao Produtos v0.1.059
+
+- Corrigida a divergencia de upload em que imagem real era gravada em `assets/images/produtos` ou `01-mrp/app/frontend/assets`.
+- Upload real de imagem de Produto passa a usar a raiz canonica `01-mrp/data/media/produtos`.
+- Banco passa a salvar caminho relativo canonico no formato `media/produtos/{arquivo}`.
+- Backend serve midia runtime pelo caminho `/media/produtos/{arquivo}`.
+- Frontend Produtos resolve `media/...` pela origem do backend na porta `8876`, mantendo `img/produtos/...` para imagens oficiais do seed.
+- Regras de dados e midia runtime registradas em `02-docs/docs/geral/regras_do_projeto.md`.
 
 A pasta `portable` e area oficial de apoio operacional para deploy/teste/acesso em maquinas clientes.
 

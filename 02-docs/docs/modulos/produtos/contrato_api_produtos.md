@@ -34,4 +34,7 @@
 - Upload de imagem permitido: `.png`, `.jpg`, `.jpeg`, `.webp`, `.svg`.
 - Limite inicial: 5 MB.
 - O banco guarda caminho relativo em `produtos.imagem_path`.
-- No DEV atual, upload salva em caminho publico do frontend: `assets/images/produtos/...`.
+- A partir da v0.1.059, upload salva em `01-mrp/data/media/produtos` e o banco guarda `media/produtos/{arquivo}`.
+- O backend disponibiliza a midia por `/media/produtos/{arquivo}`.
+- O frontend deve montar URL de backend para caminhos iniciados por `media/`.
+- `assets/images/produtos` nao e destino valido para upload real de usuario.

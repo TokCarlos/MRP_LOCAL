@@ -60,6 +60,11 @@
     min-height: 164px;
 }
 
+.produtos-table .col-preview .produto-preview-item-numero {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .produtos-table .produto-preview {
     width: 96px;
     max-width: 96px;
@@ -68,6 +73,17 @@
     display: block;
     margin: 0 auto;
     cursor: pointer;
+}
+
+.produtos-table .produto-preview-item-numero {
+    display: block;
+    margin-top: 4px;
+    font-size: 11px;
+    line-height: 1.1;
+    font-weight: 700;
+    color: #111;
+    text-align: center;
+    white-space: nowrap;
 }
 
 .produtos-table .col-acao {
@@ -298,12 +314,176 @@
     margin-top: 14px;
 }
 
-.modal-bom {
-    width: min(960px, 94vw);
+.modal-floating {
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
-.modal-bom .table-responsive {
+.modal-floating .modal-content {
+    position: fixed;
+    left: 50%;
+    top: 48px;
+    transform: translateX(-50%);
+}
+
+.modal-bom {
+    width: min(1180px, 96vw);
+    padding: 0;
+    overflow: hidden;
+}
+
+.modal-drag-handle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 18px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+    background: rgba(255, 255, 255, 0.88);
+    cursor: move;
+    user-select: none;
+}
+
+.modal-drag-handle h3 {
+    margin: 0;
+}
+
+
+.modal-bom.is-dragging,
+.modal-bom.is-dragging * {
+    cursor: move !important;
+}
+
+.modal-bom .bom-edit-responsive {
     overflow-x: auto;
+    padding: 16px 18px 0;
+}
+
+.bom-edit-table {
+    min-width: 1120px;
+}
+
+.bom-edit-table th,
+.bom-edit-table td {
+    font-size: 12px;
+    vertical-align: top;
+}
+
+.bom-edit-table input,
+.bom-edit-table select {
+    min-width: 92px;
+    padding: 7px 8px;
+    font-size: 12px;
+}
+
+.bom-edit-table .bom-material {
+    min-width: 180px;
+}
+
+
+.modal-bom .modal-actions {
+    padding: 0 18px 18px;
+}
+
+
+/* BOM edit modal: campos técnicos isolados e compactos */
+.bom-edit-table {
+    table-layout: fixed;
+    min-width: 1040px;
+}
+
+.bom-edit-table th,
+.bom-edit-table td {
+    padding: 8px 6px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.bom-edit-table input,
+.bom-edit-table select {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    height: 36px;
+    box-sizing: border-box;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.bom-edit-table .bom-material {
+    min-width: 0;
+}
+
+.bom-edit-table th:nth-child(1),
+.bom-edit-table td:nth-child(1) { width: 110px; }
+.bom-edit-table th:nth-child(2),
+.bom-edit-table td:nth-child(2) { width: 100px; }
+.bom-edit-table th:nth-child(3),
+.bom-edit-table td:nth-child(3) { width: 170px; }
+.bom-edit-table th:nth-child(4),
+.bom-edit-table td:nth-child(4) { width: 105px; }
+.bom-edit-table th:nth-child(5),
+.bom-edit-table td:nth-child(5) { width: 105px; }
+.bom-edit-table th:nth-child(6),
+.bom-edit-table td:nth-child(6) { width: 115px; }
+.bom-edit-table th:nth-child(7),
+.bom-edit-table td:nth-child(7) { width: 130px; }
+.bom-edit-table th:nth-child(8),
+.bom-edit-table td:nth-child(8) { width: 105px; }
+.bom-edit-table th:nth-child(9),
+.bom-edit-table td:nth-child(9) { width: 110px; }
+.bom-edit-table th:nth-child(10),
+.bom-edit-table td:nth-child(10) { width: 105px; }
+
+
+.bom-edit-table .bom-medida {
+    height: 34px;
+}
+
+/* BOM histórico / última atualização */
+.bom-update-button {
+    font-weight: 700;
+    min-width: 260px;
+}
+
+.modal-bom-historico {
+    width: min(980px, 94vw);
+    padding: 0;
+    overflow: hidden;
+}
+
+.modal-bom-historico.is-dragging,
+.modal-bom-historico.is-dragging * {
+    cursor: move !important;
+}
+
+.bom-historico-produto {
+    padding: 12px 18px 0;
+    font-size: 12px;
+    font-weight: 700;
+    color: #243044;
+}
+
+.bom-historico-responsive {
+    max-height: 430px;
+    overflow: auto;
+    padding: 14px 18px 18px;
+}
+
+.bom-historico-table {
+    min-width: 860px;
+}
+
+.bom-historico-table th,
+.bom-historico-table td {
+    font-size: 12px;
+    vertical-align: top;
+}
+
+.bom-historico-table td:nth-child(6) {
+    min-width: 300px;
 }
 
 @media (max-width: 768px) {
@@ -359,7 +539,7 @@
         grid-template-areas:
             "preview produto acao"
             "preview ata acao"
-            "preview id empresa";
+            "preview empresa empresa";
         column-gap: 10px;
         row-gap: 4px;
         align-items: center;
@@ -389,6 +569,7 @@
     .produtos-table .col-preview {
         grid-area: preview;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         min-height: 140px;
@@ -400,6 +581,17 @@
         height: 58px;
         object-fit: contain;
         display: block;
+    }
+
+    .produtos-table .produto-preview-item-numero {
+        display: block;
+        margin-top: 4px;
+        font-size: 11px;
+        line-height: 1.1;
+        font-weight: 700;
+        color: #111;
+        text-align: center;
+        white-space: nowrap;
     }
 
     .produtos-table .col-produto {
@@ -441,8 +633,7 @@
     }
 
     .produtos-table .col-id {
-        grid-area: id;
-        text-align: left;
+        display: none;
     }
 
     .produtos-table .col-empresa {
@@ -486,6 +677,22 @@
         padding: 18px;
     }
 
+    .modal-floating .modal-content {
+        left: 12px;
+        right: 12px;
+        top: 12px;
+        width: auto;
+        transform: none;
+    }
+
+    .modal-bom {
+        padding: 0;
+    }
+
+    .modal-drag-handle {
+        padding: 12px 14px;
+    }
+
     .bom-table {
         min-width: 100%;
         table-layout: auto;
@@ -508,6 +715,29 @@
         padding: 0;
         background: transparent;
     }
+
+    .bom-historico-table {
+        min-width: 760px;
+        table-layout: auto;
+    }
+
+    .bom-historico-table thead {
+        display: table-header-group;
+    }
+
+    .bom-historico-table,
+    .bom-historico-table tbody,
+    .bom-historico-table tr,
+    .bom-historico-table td,
+    .bom-historico-table th {
+        display: table-cell;
+    }
+
+    .bom-historico-table tr {
+        display: table-row;
+        padding: 0;
+        background: transparent;
+    }
 }
 
 @media (max-width: 480px) {
@@ -521,4 +751,30 @@
             "preview ata acao"
             "preview empresa empresa";
     }
+}
+
+/* Produto desativado: opacidade 0.40 para Admin, com botao Ativar visivel. */
+.produtos-table tr.produto-desativado td:not(.col-acao) {
+    opacity: 0.40;
+}
+
+.produtos-table tr.produto-desativado .col-acao,
+.produtos-table tr.produto-desativado .btn-row-action {
+    opacity: 1;
+}
+
+.produto-status-desativado {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.12);
+    color: #111;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.btn-toggle-produto {
+    min-width: 76px;
 }

@@ -1,8 +1,8 @@
 {
-  "version": "v0.1.051",
+  "version": "v0.1.081",
   "module": "produtos",
-  "status": "planned_not_active",
-  "note": "Contrato planejado. API ainda nao esta ativa nesta etapa.",
+  "status": "planned_contract_with_bom_history_and_backend_images",
+  "note": "Contrato conservador: mantem o escopo planejado original, BOM estruturada, histórico e imagem oficial controlada pelo backend.",
   "endpoints": {
     "ativos_planejados": [
       "GET /api/health",
@@ -13,12 +13,22 @@
       "GET /api/atas",
       "GET /api/categorias"
     ],
+    "bom_estruturado": [
+      "GET /api/produtos/{produto_id}/bom",
+      "POST /api/produtos/{produto_id}/bom",
+      "PUT /api/produtos/{produto_id}/bom",
+      "DELETE /api/produtos/{produto_id}/bom/{bom_item_id}",
+      "GET /api/produtos/{produto_id}/bom/ultima-atualizacao",
+      "GET /api/produtos/{produto_id}/bom/historico",
+      "DELETE /api/produtos/{produto_id}/bom/historico"
+    ],
     "fora_de_escopo_agora": [
       "POST /api/produtos",
       "PUT /api/produtos/{produto_key}",
-      "POST /api/atas",
-      "POST /api/produtos/{produto_key}/imagem",
-      "POST /api/produtos/{produto_key}/bom"
+      "POST /api/atas"
+    ],
+    "imagem_oficial_backend": [
+      "POST /api/produtos/{produto_id}/imagem/upload"
     ]
   },
   "produto_schema_conceitual": {
@@ -34,5 +44,79 @@
     "ativo": "bool",
     "created_at": "datetime_iso_optional",
     "updated_at": "datetime_iso_optional"
-  }
+  },
+  "bom_grupos": {
+    "tubos": {
+      "descricao": "PEÇAS TUBULARES",
+      "colunas": [
+        "cod",
+        "material",
+        "dim1",
+        "dim2",
+        "espessura",
+        "revestimento",
+        "tamanho",
+        "quantidade"
+      ]
+    },
+    "chapas": {
+      "descricao": "PEÇAS DE CHAPARIA",
+      "colunas": [
+        "cod",
+        "material",
+        "dim1",
+        "dim2",
+        "espessura",
+        "revestimento",
+        "tamanho",
+        "quantidade"
+      ]
+    },
+    "insumos": {
+      "descricao": "MONTAGEM, INSTALAÇÃO E ACABAMENTO",
+      "colunas": [
+        "cod",
+        "material",
+        "dim1",
+        "dim2",
+        "espessura",
+        "revestimento",
+        "unidade",
+        "quantidade"
+      ]
+    }
+  },
+  "bom_item_schema": {
+    "grupo": "tubos|chapas|insumos",
+    "cod": "string_optional",
+    "material": "string_required",
+    "dim1": "string_optional",
+    "dim2": "string_optional",
+    "espessura": "string_optional",
+    "revestimento": "string_optional",
+    "tamanho": "string_optional_para_tubos_e_chapas",
+    "unidade": "string_optional_para_insumos",
+    "quantidade": "number_optional",
+    "ordem": "int_optional",
+    "item_nome": "string_legacy_compat",
+    "observacao": "string_legacy_compat"
+  },
+  "bom_historico_schema": {
+    "id": "int",
+    "produto_id": "int",
+    "bom_item_id": "int_optional",
+    "acao": "ADICIONADO|MODIFICADO|REMOVIDO|BOM_ATUALIZADA|HISTORICO_LIMPO",
+    "grupo": "tubos|chapas|insumos|null",
+    "cod": "string_optional",
+    "material": "string_optional",
+    "dados_antes": "object_optional",
+    "dados_depois": "object_optional",
+    "detalhe": "string_optional",
+    "created_at": "datetime_iso",
+    "created_by": "string_optional",
+    "ativo": "bool"
+  },
+  "bom_historico_regra_limpeza": "A limpeza fica fora da UI comum da BOM e deve ser acionada somente pelo Painel do Sistema Local/Admin.",
+  "imagem_regra": "Imagem oficial unica por produto: upload substitui a anterior, backend grava imagem_path e frontend usa preview local apenas como fallback.",
+  "empresa_regra": "Chave tecnica: aco. Nome visual: Aço. Nao usar ao/acento em chave/path tecnico."
 }

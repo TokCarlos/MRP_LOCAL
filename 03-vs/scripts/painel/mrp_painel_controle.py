@@ -9,9 +9,11 @@ import socket
 import subprocess
 import threading
 import webbrowser
+import urllib.error
+import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
-from tkinter import Canvas, END, Tk, Toplevel, messagebox
+from tkinter import Canvas, END, Tk, Toplevel, messagebox, simpledialog
 from tkinter import ttk
 from tkinter.scrolledtext import ScrolledText
 
@@ -209,6 +211,7 @@ class MrpPainel:
         add_admin_btn("Desativar Modo Automatico", lambda: self.admin_action("AUTO_OFF", lambda: self.update_auto_mode(False, "stopped", False, False, "Desativacao admin local")))
         add_admin_btn("Entrar em Manutencao", lambda: self.admin_action("MANUT_ON", lambda: self.update_auto_mode(False, "maintenance", True, False, "Manutencao admin local")))
         add_admin_btn("Sair da Manutencao", lambda: self.admin_action("MANUT_OFF", lambda: self.update_auto_mode(False, "stopped", False, False, "Fim manutencao admin local")))
+        add_admin_btn("Limpar Histórico BOM", lambda: self.admin_action("BOM_HISTORICO_CLEAR", self.clear_bom_history_by_product))
 
         self.output = ScrolledText(right, font=("Consolas", 10), wrap="word", bg="#0f151d", fg="#dbe8f9", insertbackground="#dbe8f9", borderwidth=0)
         self.output.pack(fill="both", expand=True)
@@ -517,6 +520,34 @@ class MrpPainel:
         self.log_admin("AUTO_MODE_UPDATE", "OK", f"{desired_state}|auto={auto_enabled}|maint={maintenance_mode}|locked={locked}")
         self.refresh_status_card()
         return True, "ok"
+
+
+    def clear_bom_history_by_product(self) -> tuple[bool, str]:
+        produto_id = simpledialog.askinteger(
+            "Limpar Histórico BOM",
+            "Informe o ID do produto para limpar o histórico da BOM:",
+            parent=self.root,
+            minvalue=1,
+        )
+        if not produto_id:
+            return False, "operacao_cancelada"
+        url = f"http://127.0.0.1:{self.backend_port}/api/produtos/{produto_id}/bom/historico"
+        req = urllib.request.Request(url, method="DELETE")
+        self.append(f"> DELETE {url}")
+        try:
+            with urllib.request.urlopen(req, timeout=10) as response:
+                body = response.read().decode("utf-8", errors="replace")
+        except urllib.error.HTTPError as exc:
+            body = exc.read().decode("utf-8", errors="replace")
+            msg = f"HTTP {exc.code}: {body}"
+            self.log_admin("BOM_HISTORICO_CLEAR", "ERRO", msg.replace("\n", " | "))
+            return False, msg
+        except Exception as exc:
+            msg = f"Falha ao limpar histórico BOM: {exc}"
+            self.log_admin("BOM_HISTORICO_CLEAR", "ERRO", msg)
+            return False, msg
+        self.log_admin("BOM_HISTORICO_CLEAR", "OK", f"produto_id={produto_id}")
+        return True, body or "ok"
 
     def log_admin(self, action: str, status: str, result: str) -> None:
         self.logs_admin_dir.mkdir(parents=True, exist_ok=True)

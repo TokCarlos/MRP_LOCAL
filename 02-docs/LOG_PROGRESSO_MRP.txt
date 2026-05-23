@@ -1,0 +1,91 @@
+# LOG_PROGRESSO_MRP
+
+Status: FONTE OFICIAL DE PROGRESSO
+Versao de referencia: v0.1.060
+
+Formato:
+[FEITO] implementado.
+[FUNCIONAL] testado/funcionando no fluxo atual.
+[CORRIGIDO] problema corrigido.
+[PENDENTE] falta executar/validar.
+[ALERTA] risco conhecido.
+[REGRA] decisao permanente.
+[ATIVO] fonte oficial atual.
+[OBSOLETO] nao usar como fonte ativa.
+
+## Estado atual sintetico
+
+[FUNCIONAL] Sistema local abre e opera no frontend.
+[FUNCIONAL] Produtos, BOM e Zoom voltaram a funcionar depois da regressao de listeners/navegacao.
+[FUNCIONAL] Backend Produtos DEV responde em FastAPI quando iniciado pela venv_backend.
+[FUNCIONAL] Banco Produtos foi validado em ambiente DEV com 5 bases ATA e 163 produtos ativos.
+[FUNCIONAL] Endpoints /health, /api/status, /api/produtos e /api/produtos/bases foram validados no DEV.
+[FUNCIONAL] Painel local controla frontend e backend quando os scripts usam a venv correta.
+
+## Produtos / Backend / Banco
+
+[FEITO] Backend Produtos criado em 01-mrp/back_end com FastAPI.
+[FEITO] SQLite DEV de Produtos definido em 01-mrp/data/db/mrp_local_dev.sqlite.
+[FEITO] Tabelas de Produtos/Base ATA/BOM criadas na implementacao v0.1.057.
+[FEITO] Requirements do backend definidos em 01-mrp/back_end/requirements.txt.
+[FEITO] Ambiente backend DEV usa 01-mrp/runtime/venv_backend.
+[CORRIGIDO] Erro importlib/dataclass corrigido em config/seed scripts.
+[CORRIGIDO] Rota /api/produtos/bases deixou de ser engolida por /api/produtos/{id}.
+[PENDENTE] Commit seletivo ainda nao foi fechado nesta entrega.
+[PENDENTE] PostgreSQL ainda nao foi implementado.
+
+## Produtos / UI
+
+[FEITO] Formulario de Base ATA, Produto e BOM foi implementado no frontend.
+[FUNCIONAL] Fluxo Produtos/BOM/Zoom esta utilizavel no DEV apos correcoes.
+[CORRIGIDO] init() de Produtos deixou de chamar funcoes inexistentes.
+[CORRIGIDO] Eventos de Produtos/BOM/Zoom foram ajustados para nao travar ao sair do BOM por outra aba.
+[CORRIGIDO] Frontend passou a montar API pelo host atual na porta 8876.
+[CORRIGIDO] Ativar/Inativar normaliza campo ativo.
+[PENDENTE] Teste manual amplo de CRUD completo ainda deve ser repetido antes de fechar versao.
+
+## Produtos / Imagens e Upload
+
+[FEITO] Upload real de imagem em Produtos implementado pelo backend.
+[CORRIGIDO] Upload de usuario nao deve salvar em app/frontend/assets.
+[REGRA] Upload de usuario deve salvar em 01-mrp/data/media/produtos.
+[REGRA] Banco deve salvar caminho relativo media/produtos/{arquivo}.
+[REGRA] Backend deve servir uploads por /media/produtos/{arquivo}.
+[REGRA] Imagens oficiais/seed continuam em 01-mrp/front_end/img/produtos.
+[ALERTA] Foi encontrada imagem antiga em 01-mrp/app/frontend/assets/images/produtos; movida para 01-mrp/_obsolete.
+[PENDENTE] Validar upload de imagem em outro PC da rede.
+
+## Estrutura ativa
+
+[ATIVO] Backend oficial atual: 01-mrp/back_end.
+[ATIVO] Frontend oficial atual: 01-mrp/front_end.
+[OBSOLETO] 01-mrp/app/backend nao deve rodar como backend ativo.
+[OBSOLETO] 01-mrp/app/frontend nao e fonte ativa nesta fase.
+[REGRA] Estrutura app/core/infrastructure/operations continua como alvo parcial, nao migracao final.
+
+## Documentacao e saneamento
+
+[FEITO] Criado 02-docs/REGRAS_ATUAIS_MRP.txt.
+[FEITO] Criado 02-docs/LOG_PROGRESSO_MRP.txt.
+[FEITO] Criado COMO_CRIAR_COMANDOS_CODEX.txt.
+[FEITO] Criadas areas 02-docs/obsolete e 01-mrp/_obsolete.
+[CORRIGIDO] AGENTS.md atualizado para nao mandar auto-commit/push automatico.
+[CORRIGIDO] README.md e Readme.txt atualizados para estado atual.
+[PENDENTE] Revisar documentos historicos restantes em lotes menores.
+
+## Portable
+
+[ATIVO] Portable fica pausado por enquanto.
+[PENDENTE] Validar portable em outro PC.
+[PENDENTE] Validar runtime Python portable.
+[PENDENTE] Sincronizar portable com backend completo em etapa propria.
+
+## Blindagem futura
+
+[PENDENTE] Watchdog continuo.
+[PENDENTE] Tarefa Windows.
+[PENDENTE] Reboot/logoff/logon.
+[PENDENTE] Queda de energia.
+[PENDENTE] Queda de rede.
+[PENDENTE] Instalador.
+[PENDENTE] PostgreSQL.

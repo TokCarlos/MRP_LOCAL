@@ -17,6 +17,7 @@ class AppConfig:
     backend_root: Path
     produtos_seed_path: Path
     produtos_image_root: Path
+    media_root: Path
     produtos_upload_root: Path
     produtos_upload_public_prefix: str
     db_path: Path
@@ -49,9 +50,10 @@ def load_config() -> AppConfig:
 
     backend_root = project_root / "01-mrp" / "back_end"
     seed_path = project_root / "01-mrp" / "data" / "seed" / "produtos_seed.json"
-    image_root = project_root / "01-mrp" / "assets" / "images"
-    upload_root = project_root / "01-mrp" / "front_end" / "assets" / "images" / "produtos"
-    upload_public_prefix = "assets/images/produtos"
+    image_root = project_root / "01-mrp" / "front_end"
+    media_root = project_root / "01-mrp" / "data" / "media"
+    upload_root = media_root / "produtos"
+    upload_public_prefix = "media/produtos"
     db_path = project_root / "01-mrp" / "data" / "db" / "mrp_local_dev.sqlite"
     migration_path = (
         project_root / "01-mrp" / "infrastructure" / "persistence" / "migrations" / "001_produtos.sql"
@@ -64,8 +66,9 @@ def load_config() -> AppConfig:
         fallback_seed = resolved.frontend_root / "data" / "produtos_seed.json"
         seed_path = preferred_seed if preferred_seed.exists() else fallback_seed
         image_root = resolved.frontend_root
-        upload_root = resolved.frontend_root / "assets" / "images" / "produtos"
-        upload_public_prefix = "assets/images/produtos"
+        media_root = resolved.data_root / "media"
+        upload_root = media_root / "produtos"
+        upload_public_prefix = "media/produtos"
         db_path = resolved.data_root / "db" / "mrp_local_dev.sqlite"
 
     host = (os.getenv("MRP_BACKEND_HOST") or "127.0.0.1").strip() or "127.0.0.1"
@@ -78,7 +81,7 @@ def load_config() -> AppConfig:
         port = 8876
 
     return AppConfig(
-        version="v0.1.053b",
+        version="v0.1.059",
         environment=env,
         host=host,
         port=port,
@@ -86,6 +89,7 @@ def load_config() -> AppConfig:
         backend_root=backend_root,
         produtos_seed_path=seed_path,
         produtos_image_root=image_root,
+        media_root=media_root,
         produtos_upload_root=upload_root,
         produtos_upload_public_prefix=upload_public_prefix,
         db_path=db_path,
