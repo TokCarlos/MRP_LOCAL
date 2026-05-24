@@ -1,0 +1,191 @@
+{
+  "version": "v0.1.083",
+  "module": "ordens_producao",
+  "status": "kanban_operacional_sem_drag_drop",
+  "preservacao_produtos": {
+    "consulta_permitida": [
+      "produto_id",
+      "produto_key",
+      "item_ata",
+      "nome_oficial",
+      "empresa_key",
+      "empresa_nome",
+      "ata_key",
+      "ata_nome",
+      "numero_ata",
+      "imagem_path",
+      "bom_ativa"
+    ],
+    "alteracao_proibida": [
+      "cadastro_produtos",
+      "status_ativo_produto",
+      "imagem_produto",
+      "bom_padrao_produto",
+      "historico_bom_produto"
+    ]
+  },
+  "rotas": {
+    "op": [
+      "GET /api/ordens-producao",
+      "POST /api/ordens-producao",
+      "GET /api/ordens-producao/{op_id}",
+      "PUT /api/ordens-producao/{op_id}",
+      "DELETE /api/ordens-producao/{op_id}"
+    ],
+    "kanban": [
+      "GET /api/ordens-producao/kanban",
+      "POST /api/ordens-producao/{op_id}/kanban/status",
+      "POST /api/ordens-producao/{op_id}/kanban/mover-proximo",
+      "POST /api/ordens-producao/{op_id}/kanban/pular"
+    ],
+    "produtos_op": [
+      "GET /api/ordens-producao/{op_id}/produtos",
+      "POST /api/ordens-producao/{op_id}/produtos",
+      "PUT /api/ordens-producao/{op_id}/produtos/{op_produto_id}",
+      "DELETE /api/ordens-producao/{op_id}/produtos/{op_produto_id}"
+    ],
+    "bom_op": [
+      "GET /api/ordens-producao/{op_id}/bom",
+      "PUT /api/ordens-producao/{op_id}/bom"
+    ],
+    "processos_op": [
+      "GET /api/ordens-producao/{op_id}/processos",
+      "PUT /api/ordens-producao/{op_id}/processos/{processo_id}"
+    ],
+    "historico_op": [
+      "GET /api/ordens-producao/{op_id}/historico"
+    ]
+  },
+  "kanban_payload": {
+    "shape": {
+      "processos": [
+        {
+          "processo_key": "corte",
+          "processo_nome": "Corte",
+          "ordem": 1,
+          "status": [
+            {
+              "status_key": "NAO_INICIADO",
+              "status_nome": "Não Iniciado",
+              "ordens": [
+                {
+                  "id": 1,
+                  "numero_op": "001-26",
+                  "cliente": "CLIENTE",
+                  "obra": "OBRA",
+                  "data_entrega_tipo": "DATA",
+                  "data_entrega_data": "2026-06-20",
+                  "data_entrega_valor": "20/06/2026",
+                  "prazo_label": "Faltam 28 dias",
+                  "prazo_status": "ok",
+                  "processo_macro_key": "corte",
+                  "processo_macro_nome": "Corte",
+                  "processo_macro_ordem": 1,
+                  "status_processo_macro": "NAO_INICIADO",
+                  "updated_at": "2026-05-23T10:00:00+00:00"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "prazo_status_validos": [
+      "ok",
+      "hoje",
+      "atrasado",
+      "indefinido"
+    ],
+    "status_processo_validos": [
+      "NAO_INICIADO",
+      "EM_ANDAMENTO",
+      "CONCLUIDO"
+    ],
+    "compatibilidade_status_legado": {
+      "PENDENTE": "NAO_INICIADO",
+      "PAUSADO": "EM_ANDAMENTO",
+      "CONCLUIDO": "CONCLUIDO",
+      "CONCLUÍDO": "CONCLUIDO"
+    }
+  },
+  "kanban_movimento": {
+    "status_payload": {
+      "status_destino": "NAO_INICIADO|EM_ANDAMENTO|CONCLUIDO",
+      "processo_key": "opcional; default processo macro da OP",
+      "op_produto_id": "opcional; se ausente aplica no processo macro",
+      "observacao": "opcional"
+    },
+    "mover_proximo_payload": {
+      "processo_origem": "opcional; default processo macro da OP",
+      "op_produto_id": "opcional",
+      "status_destino": "NAO_INICIADO|EM_ANDAMENTO|CONCLUIDO",
+      "observacao": "opcional"
+    },
+    "pular_payload": {
+      "processo_origem": "opcional; default processo macro da OP",
+      "processo_destino": "obrigatorio",
+      "op_produto_id": "opcional",
+      "status_destino": "NAO_INICIADO|EM_ANDAMENTO|CONCLUIDO",
+      "observacao": "opcional"
+    }
+  },
+  "numeracao_op": {
+    "padrao": "NNN-AA",
+    "fonte": "op_contadores",
+    "regra": "sequencia anual com reinicio por ano"
+  },
+  "status_op_validos": [
+    "RASCUNHO",
+    "PLANEJADA",
+    "EM_PRODUCAO",
+    "PAUSADA",
+    "CONCLUIDA",
+    "CANCELADA"
+  ],
+  "data_entrega": {
+    "campos": [
+      "data_entrega_tipo",
+      "data_entrega_data",
+      "data_entrega_valor"
+    ],
+    "tipos": [
+      "DATA",
+      "TEXTO"
+    ],
+    "textos_rapidos": [
+      "NAO DEFINIDO",
+      "A DEFINIR",
+      "URGENTE",
+      "AGUARDANDO CLIENTE",
+      "SEM DATA"
+    ]
+  },
+  "processos_padrao_kanban": [
+    { "ordem": 1, "processo_key": "corte", "processo_nome": "Corte" },
+    { "ordem": 2, "processo_key": "dobra", "processo_nome": "Dobra" },
+    { "ordem": 3, "processo_key": "montagem_solda", "processo_nome": "Montagem Solda" },
+    { "ordem": 4, "processo_key": "solda", "processo_nome": "Soldagem" },
+    { "ordem": 5, "processo_key": "acabamento", "processo_nome": "Acabamento" },
+    { "ordem": 6, "processo_key": "pintura", "processo_nome": "Pintura" },
+    { "ordem": 7, "processo_key": "sublimacao", "processo_nome": "Sublimação" },
+    { "ordem": 8, "processo_key": "montagem", "processo_nome": "Montagem" },
+    { "ordem": 9, "processo_key": "teste", "processo_nome": "Teste" },
+    { "ordem": 10, "processo_key": "expedicao", "processo_nome": "Expedição" }
+  ],
+  "regras_criticas": [
+    "Banco e API sao fonte oficial de estado do Kanban",
+    "Processo macro da OP e calculado pelo gargalo de menor ordem nao concluida",
+    "Se todos os processos estiverem concluídos, macro final fica em Expedição/CONCLUIDO",
+    "Prazo_label e prazo_status devem vir do backend",
+    "Editar/mover no Kanban nao altera cadastro de Produtos",
+    "Sem drag-and-drop nesta versao"
+  ],
+  "fora_de_escopo_nesta_versao": [
+    "drag_and_drop",
+    "exportacao_pdf",
+    "exportacao_excel",
+    "integracao_whatsapp",
+    "integracao_estoque",
+    "portable"
+  ]
+}

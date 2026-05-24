@@ -75,10 +75,24 @@ def _normalize_produtos_core_data(conn: sqlite3.Connection) -> None:
         if not collisions:
             conn.execute("UPDATE produtos SET produto_key = lower(produto_key)")
 
+
+def _iter_migration_files(migration_path: Path) -> list[Path]:
+    if migration_path.is_dir():
+        files = [path for path in migration_path.glob("*.sql") if path.is_file()]
+        return sorted(files, key=lambda item: item.name)
+    migration_dir = migration_path.parent
+    if migration_dir.exists():
+        files = [path for path in migration_dir.glob("*.sql") if path.is_file()]
+        if files:
+            return sorted(files, key=lambda item: item.name)
+    return [migration_path]
+
+
 def init_schema(db_path: Path, migration_path: Path) -> None:
-    sql = migration_path.read_text(encoding="utf-8")
+    migration_files = _iter_migration_files(migration_path)
     with get_connection(db_path) as conn:
-        conn.executescript(sql)
+        for sql_path in migration_files:
+            conn.executescript(sql_path.read_text(encoding="utf-8"))
         _ensure_produto_bom_columns(conn)
         _normalize_produtos_core_data(conn)
         conn.commit()

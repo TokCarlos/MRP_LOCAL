@@ -1,0 +1,32 @@
+{
+  "version": "v0.1.082",
+  "module": "ordens_producao_portable",
+  "status": "base_funcional_reduzida",
+  "persistencia": {
+    "tipo": "json_runtime",
+    "arquivo": "portable/runtime/ordens_producao.json"
+  },
+  "rotas": [
+    "GET /api/ordens-producao",
+    "POST /api/ordens-producao",
+    "GET /api/ordens-producao/{op_id}",
+    "PUT /api/ordens-producao/{op_id}",
+    "DELETE /api/ordens-producao/{op_id}",
+    "GET /api/ordens-producao/{op_id}/produtos",
+    "POST /api/ordens-producao/{op_id}/produtos",
+    "PUT /api/ordens-producao/{op_id}/produtos/{op_produto_id}",
+    "DELETE /api/ordens-producao/{op_id}/produtos/{op_produto_id}",
+    "GET /api/ordens-producao/{op_id}/bom",
+    "PUT /api/ordens-producao/{op_id}/bom",
+    "GET /api/ordens-producao/{op_id}/processos",
+    "PUT /api/ordens-producao/{op_id}/processos/{processo_id}",
+    "GET /api/ordens-producao/{op_id}/historico"
+  ],
+  "regras_essenciais": [
+    "Produto somente consulta",
+    "Snapshot da BOM ao adicionar produto na OP",
+    "BOM da OP nao altera BOM de Produto",
+    "Processos padrao criados automaticamente",
+    "Historico minimo de eventos da OP"
+  ]
+}

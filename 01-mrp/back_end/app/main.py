@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
 from app.config import load_config
-from app.routes import health, produtos, status
+from app.routes import health, ordens_producao, produtos, status
 
 cfg = load_config()
 app = FastAPI(title="MRP Backend", version=cfg.version)
@@ -24,4 +24,5 @@ app.add_middleware(
 app.include_router(health.build_router(cfg))
 app.include_router(status.build_router(cfg))
 app.include_router(produtos.build_router(cfg))
+app.include_router(ordens_producao.build_router(cfg))
 app.mount("/media", StaticFiles(directory=str(cfg.media_root)), name="media")

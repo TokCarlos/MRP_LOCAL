@@ -1,0 +1,218 @@
+<section id="ordensProducaoSection">
+    <h2>Ordens de Produção</h2>
+
+    <div class="ordens-toolbar">
+        <button id="btnNovaOp" class="btn-add" type="button">+ Nova OP</button>
+    </div>
+
+    <div class="page-filtros ordens-filtros">
+        <input id="filtroOpTexto" type="text" placeholder="Pesquisar OP, cliente, obra ou status...">
+        <select id="filtroOpStatus">
+            <option value="">Todos os status</option>
+        </select>
+        <select id="filtroOpEmpresa">
+            <option value="">Todas as empresas</option>
+        </select>
+        <button id="btnLimparFiltrosOp" class="btn-row-action" type="button">Limpar</button>
+    </div>
+
+    <div id="opContador" class="page-contador">Exibindo 0 de 0 ordens de produção</div>
+
+    <div class="table-responsive">
+        <table class="preview-table sistema-table ordens-table" id="tblOrdensProducao">
+            <thead>
+                <tr>
+                    <th>OP</th>
+                    <th>EMPRESA</th>
+                    <th>CLIENTE / OBRA</th>
+                    <th>ENTREGA</th>
+                    <th>STATUS</th>
+                    <th>PRODUTOS / UN.</th>
+                    <th>AÇÕES</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</section>
+
+<div id="modalOpCabecalho" class="modal hidden" aria-hidden="true">
+    <div class="modal-content modal-op-cabecalho">
+        <h3 id="tituloModalOp">Nova OP</h3>
+        <input id="opId" type="hidden">
+
+        <div class="op-grid-2">
+            <div>
+                <label>Cliente</label>
+                <input id="opCliente" type="text">
+            </div>
+            <div>
+                <label>Obra</label>
+                <input id="opObra" type="text">
+            </div>
+        </div>
+
+        <div class="op-grid-3">
+            <div>
+                <label>Modelo</label>
+                <input id="opModelo" type="text">
+            </div>
+            <div>
+                <label>Tipo</label>
+                <input id="opTipo" type="text">
+            </div>
+            <div>
+                <label>Material</label>
+                <input id="opMaterial" type="text">
+            </div>
+        </div>
+
+        <div class="op-grid-3">
+            <div>
+                <label>Solicitante</label>
+                <input id="opSolicitante" type="text">
+            </div>
+            <div>
+                <label>Status</label>
+                <select id="opStatus">
+                    <option value="RASCUNHO">RASCUNHO</option>
+                    <option value="PLANEJADA">PLANEJADA</option>
+                    <option value="EM_PRODUCAO">EM_PRODUCAO</option>
+                    <option value="PAUSADA">PAUSADA</option>
+                    <option value="CONCLUIDA">CONCLUIDA</option>
+                    <option value="CANCELADA">CANCELADA</option>
+                </select>
+            </div>
+            <div>
+                <label>Entrega (tipo)</label>
+                <select id="opEntregaTipo">
+                    <option value="TEXTO">TEXTO</option>
+                    <option value="DATA">DATA</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="op-grid-2">
+            <div id="blocoEntregaData" class="hidden">
+                <label>Data de Entrega</label>
+                <input id="opEntregaData" type="date">
+            </div>
+            <div id="blocoEntregaTexto">
+                <label>Entrega (texto)</label>
+                <input id="opEntregaValor" type="text" placeholder="NÃO DEFINIDO">
+            </div>
+        </div>
+
+        <label>Observações</label>
+        <textarea id="opObservacoes" rows="3"></textarea>
+
+        <div class="modal-actions">
+            <button id="btnSalvarOp" class="btn-row-action" type="button">Salvar</button>
+            <button class="btn-row-action" data-close-modal="modalOpCabecalho" type="button">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<div id="modalOpProdutos" class="modal hidden" aria-hidden="true">
+    <div class="modal-content modal-op-wide">
+        <h3>Produtos da OP</h3>
+        <input id="opProdutosId" type="hidden">
+        <div class="op-grid-add-produto">
+            <select id="opProdutoCatalogo"></select>
+            <input id="opProdutoQuantidade" type="number" min="0.01" step="0.01" value="1">
+            <button id="btnAdicionarProdutoOp" class="btn-row-action" type="button">Adicionar Produto</button>
+        </div>
+        <div class="table-responsive">
+            <table class="preview-table sistema-table">
+                <thead>
+                    <tr>
+                        <th>PRODUTO</th>
+                        <th>ITEM ATA</th>
+                        <th>QTD</th>
+                        <th>AÇÕES</th>
+                    </tr>
+                </thead>
+                <tbody id="opProdutosRows"></tbody>
+            </table>
+        </div>
+        <div class="modal-actions">
+            <button class="btn-row-action" data-close-modal="modalOpProdutos" type="button">Fechar</button>
+        </div>
+    </div>
+</div>
+
+<div id="modalOpBom" class="modal hidden" aria-hidden="true">
+    <div class="modal-content modal-op-wide">
+        <h3>BOM da OP</h3>
+        <input id="opBomId" type="hidden">
+        <div class="table-responsive">
+            <table class="preview-table sistema-table">
+                <thead>
+                    <tr>
+                        <th>PRODUTO</th>
+                        <th>GRUPO</th>
+                        <th>COD</th>
+                        <th>MATERIAL</th>
+                        <th>QTD UNIT.</th>
+                        <th>QTD PROD.</th>
+                        <th>QTD TOTAL</th>
+                    </tr>
+                </thead>
+                <tbody id="opBomRows"></tbody>
+            </table>
+        </div>
+        <div class="modal-actions">
+            <button id="btnSalvarBomOp" class="btn-row-action" type="button">Salvar BOM</button>
+            <button class="btn-row-action" data-close-modal="modalOpBom" type="button">Fechar</button>
+        </div>
+    </div>
+</div>
+
+<div id="modalOpProcessos" class="modal hidden" aria-hidden="true">
+    <div class="modal-content modal-op-wide">
+        <h3>Processos da OP</h3>
+        <input id="opProcessosId" type="hidden">
+        <div class="table-responsive">
+            <table class="preview-table sistema-table">
+                <thead>
+                    <tr>
+                        <th>PRODUTO</th>
+                        <th>PROCESSO</th>
+                        <th>PLANEJADA</th>
+                        <th>CONCLUÍDA</th>
+                        <th>FALTA</th>
+                        <th>STATUS</th>
+                        <th>AÇÃO</th>
+                    </tr>
+                </thead>
+                <tbody id="opProcessosRows"></tbody>
+            </table>
+        </div>
+        <div class="modal-actions">
+            <button class="btn-row-action" data-close-modal="modalOpProcessos" type="button">Fechar</button>
+        </div>
+    </div>
+</div>
+
+<div id="modalOpHistorico" class="modal hidden" aria-hidden="true">
+    <div class="modal-content modal-op-wide">
+        <h3>Histórico da OP</h3>
+        <input id="opHistoricoId" type="hidden">
+        <div class="table-responsive">
+            <table class="preview-table sistema-table">
+                <thead>
+                    <tr>
+                        <th>DATA/HORA</th>
+                        <th>AÇÃO</th>
+                        <th>ENTIDADE</th>
+                        <th>DETALHE</th>
+                    </tr>
+                </thead>
+                <tbody id="opHistoricoRows"></tbody>
+            </table>
+        </div>
+        <div class="modal-actions">
+            <button class="btn-row-action" data-close-modal="modalOpHistorico" type="button">Fechar</button>
+        </div>
+    </div>
+</div>

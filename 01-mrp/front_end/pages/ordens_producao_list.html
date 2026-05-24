@@ -1,0 +1,237 @@
+<section id="ordensProducaoSection">
+    <h2>Ordens de Produção</h2>
+
+    <div class="ordens-toolbar">
+        <button id="btnNovaOp" class="btn-add" type="button">+ Nova OP</button>
+    </div>
+
+    <div class="page-filtros ordens-filtros">
+        <input id="filtroOpTexto" type="text" placeholder="Pesquisar OP, cliente, obra ou status...">
+        <select id="filtroOpStatus">
+            <option value="">Todos os status</option>
+        </select>
+        <select id="filtroOpEmpresa">
+            <option value="">Todas as empresas</option>
+        </select>
+        <button id="btnLimparFiltrosOp" class="btn-row-action" type="button">Limpar</button>
+    </div>
+
+    <div id="opContador" class="page-contador">Exibindo 0 de 0 ordens no Kanban</div>
+
+    <div id="opKanbanBoard" class="op-kanban-board">
+        <div class="op-kanban-empty">Carregando Kanban...</div>
+    </div>
+
+    <div class="table-responsive op-fallback-table hidden">
+        <table class="preview-table sistema-table ordens-table" id="tblOrdensProducao">
+            <thead>
+                <tr>
+                    <th>OP</th>
+                    <th>EMPRESA</th>
+                    <th>CLIENTE / OBRA</th>
+                    <th>ENTREGA</th>
+                    <th>STATUS</th>
+                    <th>PRODUTOS / UN.</th>
+                    <th>AÇÕES</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</section>
+
+<div id="modalOpCabecalho" class="modal hidden" aria-hidden="true">
+    <div class="modal-content modal-op-cabecalho modal-op-wide">
+        <h3 id="tituloModalOp">Nova OP</h3>
+        <input id="opId" type="hidden">
+
+        <div class="op-form-section">
+            <h4>CLIENTE</h4>
+            <input id="opCliente" type="text" placeholder="Cliente">
+        </div>
+
+        <div class="op-form-section">
+            <h4>OBRA</h4>
+            <input id="opObra" type="text" placeholder="Obra">
+        </div>
+
+        <div class="op-grid-2 op-form-section">
+            <div>
+                <h4>SOLICITANTE</h4>
+                <input id="opSolicitante" type="text" placeholder="Solicitante">
+            </div>
+            <div>
+                <h4>DATA DE ENTREGA</h4>
+                <input id="opDataEntregaInput" type="text" value="NÃO DEFINIDO" placeholder="NÃO DEFINIDO, URGENTE ou DD/MM/AAAA">
+            </div>
+        </div>
+
+        <div class="op-form-section">
+            <h4>MODELO ATA</h4>
+            <select id="opModeloAta"></select>
+        </div>
+
+        <div id="opBlocoProdutosGuiados" class="op-form-section">
+            <div id="opProdutosSelecionados" class="op-produtos-selecionados"></div>
+
+            <h4>PRODUTOS DISPONÍVEIS</h4>
+            <input id="opProdutoBusca" type="text" placeholder="Filtrar por item ATA, aparelho ou código...">
+            <div id="opProdutoLista" class="op-produto-lista"></div>
+        </div>
+
+        <div class="op-grid-2 op-form-section op-final-section">
+            <div class="op-status-section">
+                <h4>STATUS</h4>
+                <select id="opStatus">
+                    <option value="RASCUNHO">RASCUNHO</option>
+                    <option value="PLANEJADA">PLANEJADA</option>
+                    <option value="EM_PRODUCAO">EM_PRODUCAO</option>
+                    <option value="PAUSADA">PAUSADA</option>
+                    <option value="CONCLUIDA">CONCLUIDA</option>
+                    <option value="CANCELADA">CANCELADA</option>
+                </select>
+            </div>
+            <div>
+                <h4>OBSERVAÇÕES</h4>
+                <textarea id="opObservacoes" rows="2"></textarea>
+            </div>
+        </div>
+
+        <div class="modal-actions">
+            <button id="btnSalvarOp" class="btn-row-action" type="button">Salvar OP</button>
+            <button class="btn-row-action" data-close-modal="modalOpCabecalho" type="button">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="modalOpAcoesCard" class="modal hidden" aria-hidden="true">
+    <div class="modal-content modal-op-acoes-card">
+        <div class="op-modal-title-row">
+            <div>
+                <h3 id="opAcoesTitulo">Ações da OP</h3>
+                <p id="opAcoesResumo" class="op-modal-subtitle"></p>
+            </div>
+            <button class="op-modal-x" data-close-modal="modalOpAcoesCard" type="button" aria-label="Fechar">×</button>
+        </div>
+        <div id="opAcoesCardBody" class="op-acoes-card-body"></div>
+    </div>
+</div>
+
+<div id="modalOpCancelarConfirm" class="modal hidden" aria-hidden="true">
+    <div class="modal-content modal-op-confirmacao">
+        <h3>Cancelar OP</h3>
+        <p id="opCancelarMensagem">Esta OP sairá do Kanban ativo e ficará registrada como CANCELADA.</p>
+        <div class="op-confirm-alerta">
+            Esta ação não apaga o histórico. Ela apenas inativa a OP operacionalmente.
+        </div>
+        <div class="modal-actions">
+            <button id="btnConfirmarCancelamentoOp" class="btn-row-action op-btn-danger" type="button">Cancelar OP</button>
+            <button id="btnVoltarCancelamentoOp" class="btn-row-action" data-close-modal="modalOpCancelarConfirm" type="button">Voltar</button>
+        </div>
+    </div>
+</div>
+
+<div id="modalOpProdutos" class="modal hidden" aria-hidden="true">
+    <div class="modal-content modal-op-wide">
+        <h3>Produtos da OP</h3>
+        <input id="opProdutosId" type="hidden">
+        <div class="op-grid-add-produto">
+            <select id="opProdutoCatalogo"></select>
+            <input id="opProdutoQuantidade" type="number" min="1" step="1" inputmode="numeric" pattern="\d+" value="1">
+            <button id="btnAdicionarProdutoOp" class="btn-row-action" type="button">Adicionar Produto</button>
+        </div>
+        <div class="table-responsive">
+            <table class="preview-table sistema-table">
+                <thead>
+                    <tr>
+                        <th>PRODUTO</th>
+                        <th>ITEM ATA</th>
+                        <th>QTD</th>
+                        <th>AÇÕES</th>
+                    </tr>
+                </thead>
+                <tbody id="opProdutosRows"></tbody>
+            </table>
+        </div>
+        <div class="modal-actions">
+            <button class="btn-row-action" data-close-modal="modalOpProdutos" type="button">Fechar</button>
+        </div>
+    </div>
+</div>
+
+<div id="modalOpBom" class="modal hidden" aria-hidden="true">
+    <div class="modal-content modal-op-wide">
+        <h3>BOM da OP</h3>
+        <input id="opBomId" type="hidden">
+        <div class="table-responsive">
+            <table class="preview-table sistema-table">
+                <thead>
+                    <tr>
+                        <th>PRODUTO</th>
+                        <th>GRUPO</th>
+                        <th>COD</th>
+                        <th>MATERIAL</th>
+                        <th>QTD UNIT.</th>
+                        <th>QTD PROD.</th>
+                        <th>QTD TOTAL</th>
+                    </tr>
+                </thead>
+                <tbody id="opBomRows"></tbody>
+            </table>
+        </div>
+        <div class="modal-actions">
+            <button id="btnSalvarBomOp" class="btn-row-action" type="button">Salvar BOM</button>
+            <button class="btn-row-action" data-close-modal="modalOpBom" type="button">Fechar</button>
+        </div>
+    </div>
+</div>
+
+<div id="modalOpProcessos" class="modal hidden" aria-hidden="true">
+    <div class="modal-content modal-op-wide">
+        <h3>Processos da OP</h3>
+        <input id="opProcessosId" type="hidden">
+        <div class="table-responsive">
+            <table class="preview-table sistema-table">
+                <thead>
+                    <tr>
+                        <th>PRODUTO</th>
+                        <th>PROCESSO</th>
+                        <th>PLANEJADA</th>
+                        <th>CONCLUÍDA</th>
+                        <th>FALTA</th>
+                        <th>STATUS</th>
+                        <th>AÇÃO</th>
+                    </tr>
+                </thead>
+                <tbody id="opProcessosRows"></tbody>
+            </table>
+        </div>
+        <div class="modal-actions">
+            <button class="btn-row-action" data-close-modal="modalOpProcessos" type="button">Fechar</button>
+        </div>
+    </div>
+</div>
+
+<div id="modalOpHistorico" class="modal hidden" aria-hidden="true">
+    <div class="modal-content modal-op-wide">
+        <h3>Histórico da OP</h3>
+        <input id="opHistoricoId" type="hidden">
+        <div class="table-responsive">
+            <table class="preview-table sistema-table">
+                <thead>
+                    <tr>
+                        <th>DATA/HORA</th>
+                        <th>AÇÃO</th>
+                        <th>ENTIDADE</th>
+                        <th>DETALHE</th>
+                    </tr>
+                </thead>
+                <tbody id="opHistoricoRows"></tbody>
+            </table>
+        </div>
+        <div class="modal-actions">
+            <button class="btn-row-action" data-close-modal="modalOpHistorico" type="button">Fechar</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1131 @@
+const API_HOST = window.location.hostname || "127.0.0.1";
+const API_PROTOCOL = window.location.protocol === "http:" || window.location.protocol === "https:" ? window.location.protocol : "http:";
+const API_ORIGIN = `${API_PROTOCOL}//${API_HOST}:8876`;
+const API_OP = `${API_ORIGIN}/api/ordens-producao`;
+const API_OP_KANBAN = `${API_OP}/kanban`;
+const API_PRODUTOS = `${API_ORIGIN}/api/produtos`;
+const API_PRODUTOS_BASES = `${API_PRODUTOS}/bases`;
+
+const STATUS_PROCESSO_OPTIONS = ["PENDENTE", "EM_ANDAMENTO", "CONCLUIDO", "PAUSADO"];
+
+const state = {
+    kanban: null,
+    produtosCatalogo: [],
+    basesCatalogo: [],
+    opProdutosSelecionados: [],
+    filtros: { texto: "", status: "", empresa: "" }
+};
+
+function parseQuantidadeProduto(value) {
+    const raw = String(value ?? "").trim();
+    if (!/^\d+$/.test(raw)) return null;
+    const qtd = Number.parseInt(raw, 10);
+    return qtd > 0 ? qtd : null;
+}
+
+function sanitizeQuantidadeProdutoInput(input) {
+    if (!input) return;
+    const onlyDigits = String(input.value || "").replace(/\D+/g, "");
+    if (input.value !== onlyDigits) input.value = onlyDigits;
+}
+
+export async function init() {
+    bindBaseEvents();
+    await Promise.all([loadKanban(), loadProdutosCatalogo(), loadBasesCatalogo()]);
+    renderKanban();
+}
+
+function bindBaseEvents() {
+    const btnNovaOp = document.getElementById("btnNovaOp");
+    const filtroTexto = document.getElementById("filtroOpTexto");
+    const filtroStatus = document.getElementById("filtroOpStatus");
+    const filtroEmpresa = document.getElementById("filtroOpEmpresa");
+    const btnLimpar = document.getElementById("btnLimparFiltrosOp");
+    const kanbanBoard = document.getElementById("opKanbanBoard");
+
+    if (btnNovaOp) btnNovaOp.addEventListener("click", () => openModalOpCabecalho());
+
+    if (filtroTexto) {
+        filtroTexto.addEventListener("input", (event) => {
+            state.filtros.texto = event.target.value || "";
+            renderKanban();
+        });
+    }
+    if (filtroStatus) {
+        filtroStatus.addEventListener("change", (event) => {
+            state.filtros.status = event.target.value || "";
+            renderKanban();
+        });
+    }
+    if (filtroEmpresa) {
+        filtroEmpresa.addEventListener("change", (event) => {
+            state.filtros.empresa = event.target.value || "";
+            renderKanban();
+        });
+    }
+    if (btnLimpar) {
+        btnLimpar.addEventListener("click", () => {
+            state.filtros = { texto: "", status: "", empresa: "" };
+            if (filtroTexto) filtroTexto.value = "";
+            if (filtroStatus) filtroStatus.value = "";
+            if (filtroEmpresa) filtroEmpresa.value = "";
+            renderKanban();
+        });
+    }
+
+    if (kanbanBoard) {
+        kanbanBoard.addEventListener("click", async (event) => {
+            const actionButton = event.target.closest("button[data-action]");
+            const card = event.target.closest(".op-kanban-card");
+            const opId = Number((actionButton?.dataset.opId || card?.dataset.opId || 0));
+            if (!opId) return;
+
+            try {
+                if (!actionButton && card) {
+                    await openModalOpProdutos(opId);
+                    return;
+                }
+                if (!actionButton) return;
+
+                const action = actionButton.dataset.action;
+                if (action === "menu-toggle") {
+                    openModalOpAcoesCard(card);
+                    return;
+                }
+                await handleOpAction(action, opId);
+            } catch (err) {
+                alert(getErrorMessage(err));
+            }
+        });
+    }
+
+    bindModalEvents();
+}
+
+function bindModalEvents() {
+    document.querySelectorAll("[data-close-modal]").forEach((button) => {
+        button.addEventListener("click", () => closeModal(button.getAttribute("data-close-modal")));
+    });
+
+    const opModeloAta = document.getElementById("opModeloAta");
+    if (opModeloAta) opModeloAta.addEventListener("change", () => {
+        syncAtaEmpresaUi();
+        renderProdutosDisponiveisOp();
+    });
+    const opProdutoBusca = document.getElementById("opProdutoBusca");
+    if (opProdutoBusca) opProdutoBusca.addEventListener("input", renderProdutosDisponiveisOp);
+
+    const btnSalvarOp = document.getElementById("btnSalvarOp");
+    if (btnSalvarOp) btnSalvarOp.addEventListener("click", saveModalOpCabecalho);
+
+    const opAcoesCardBody = document.getElementById("opAcoesCardBody");
+    if (opAcoesCardBody) {
+        opAcoesCardBody.addEventListener("click", async (event) => {
+            const button = event.target.closest("button[data-action]");
+            if (!button) return;
+            const opId = Number(button.dataset.opId || 0);
+            if (!opId) return;
+            try {
+                closeModal("modalOpAcoesCard");
+                await handleOpAction(button.dataset.action, opId);
+            } catch (err) {
+                alert(getErrorMessage(err));
+            }
+        });
+    }
+
+    const btnConfirmarCancelamento = document.getElementById("btnConfirmarCancelamentoOp");
+    if (btnConfirmarCancelamento) {
+        btnConfirmarCancelamento.addEventListener("click", () => resolverConfirmacaoCancelamento(true));
+    }
+    const btnVoltarCancelamento = document.getElementById("btnVoltarCancelamentoOp");
+    if (btnVoltarCancelamento) {
+        btnVoltarCancelamento.addEventListener("click", () => resolverConfirmacaoCancelamento(false));
+    }
+
+    const opProdutoLista = document.getElementById("opProdutoLista");
+    if (opProdutoLista) {
+        opProdutoLista.addEventListener("click", (event) => {
+            const button = event.target.closest("button[data-action='adicionar-produto-guiado']");
+            if (!button) return;
+            const produtoId = Number(button.dataset.produtoId || 0);
+            const input = document.getElementById(`opQtdProduto_${produtoId}`);
+            sanitizeQuantidadeProdutoInput(input);
+            const qtd = parseQuantidadeProduto(input?.value);
+            if (qtd === null) {
+                alert("Quantidade do produto deve ser um número inteiro maior que zero.");
+                return;
+            }
+            addProdutoSelecionadoGuiado(produtoId, qtd);
+        });
+    }
+    const opProdutosSelecionados = document.getElementById("opProdutosSelecionados");
+    if (opProdutosSelecionados) {
+        opProdutosSelecionados.addEventListener("click", (event) => {
+            const toggle = event.target.closest("button[data-action='toggle-selecionados']");
+            if (toggle) {
+                toggleProdutosSelecionados(toggle);
+                return;
+            }
+            const button = event.target.closest("button[data-action='remover-produto-guiado']");
+            if (!button) return;
+            removeProdutoSelecionadoGuiado(Number(button.dataset.produtoId || 0));
+        });
+        opProdutosSelecionados.addEventListener("input", (event) => {
+            const input = event.target.closest("input[data-action='qtd-produto-guiado']");
+            if (!input) return;
+            sanitizeQuantidadeProdutoInput(input);
+            const qtd = parseQuantidadeProduto(input.value);
+            if (qtd !== null) updateProdutoSelecionadoQtd(Number(input.dataset.produtoId || 0), qtd);
+        });
+    }
+
+    const btnAdicionarProduto = document.getElementById("btnAdicionarProdutoOp");
+    if (btnAdicionarProduto) btnAdicionarProduto.addEventListener("click", addProdutoNaOpAtual);
+
+    const btnSalvarBom = document.getElementById("btnSalvarBomOp");
+    if (btnSalvarBom) btnSalvarBom.addEventListener("click", saveBomDaOpAtual);
+
+    const produtosRows = document.getElementById("opProdutosRows");
+    if (produtosRows) {
+        produtosRows.addEventListener("click", async (event) => {
+            const button = event.target.closest("button[data-action]");
+            if (!button) return;
+            const action = button.dataset.action;
+            const opId = Number(document.getElementById("opProdutosId")?.value || 0);
+            const opProdutoId = Number(button.dataset.opProdutoId || 0);
+            if (!opId || !opProdutoId) return;
+            try {
+                if (action === "salvar-produto-op") {
+                    const qtyInput = document.getElementById(`opProdutoQtd_${opProdutoId}`);
+                    sanitizeQuantidadeProdutoInput(qtyInput);
+                    const quantidade = parseQuantidadeProduto(qtyInput?.value);
+                    if (quantidade === null) throw new Error("Quantidade do produto deve ser um número inteiro maior que zero.");
+                    await apiPut(`${API_OP}/${opId}/produtos/${opProdutoId}`, { quantidade });
+                    await refreshModalProdutos(opId);
+                    await refreshKanban();
+                } else if (action === "remover-produto-op") {
+                    if (!window.confirm("Remover este produto da OP?")) return;
+                    await apiDelete(`${API_OP}/${opId}/produtos/${opProdutoId}`);
+                    await refreshModalProdutos(opId);
+                    await refreshKanban();
+                }
+            } catch (err) {
+                alert(getErrorMessage(err));
+            }
+        });
+    }
+
+    const processosRows = document.getElementById("opProcessosRows");
+    if (processosRows) {
+        processosRows.addEventListener("click", async (event) => {
+            const button = event.target.closest("button[data-action='salvar-processo-op']");
+            if (!button) return;
+            const opId = Number(document.getElementById("opProcessosId")?.value || 0);
+            const processoId = Number(button.dataset.processoId || 0);
+            if (!opId || !processoId) return;
+            try {
+                const qtd = Number(document.getElementById(`opProcessoQtd_${processoId}`)?.value || 0);
+                const status = document.getElementById(`opProcessoStatus_${processoId}`)?.value || "PENDENTE";
+                const observacao = document.getElementById(`opProcessoObs_${processoId}`)?.value || null;
+                await apiPut(`${API_OP}/${opId}/processos/${processoId}`, {
+                    quantidade_concluida: qtd,
+                    status,
+                    observacao
+                });
+                await openModalOpProcessos(opId);
+                await refreshKanban();
+            } catch (err) {
+                alert(getErrorMessage(err));
+            }
+        });
+    }
+}
+
+async function loadKanban() {
+    const data = await apiGet(API_OP_KANBAN);
+    state.kanban = data && typeof data === "object" ? data : { processos: [] };
+    syncFiltroOptions();
+}
+
+async function loadProdutosCatalogo() {
+    const data = await apiGet(API_PRODUTOS);
+    state.produtosCatalogo = Array.isArray(data) ? data : [];
+    syncProdutosCatalogoSelect();
+}
+
+async function loadBasesCatalogo() {
+    const data = await apiGet(API_PRODUTOS_BASES);
+    state.basesCatalogo = Array.isArray(data) ? data : [];
+    syncAtaOptions();
+}
+
+async function refreshKanban() {
+    await loadKanban();
+    renderKanban();
+}
+
+function getAllKanbanCards() {
+    const processos = Array.isArray(state.kanban?.processos) ? state.kanban.processos : [];
+    const flat = [];
+    processos.forEach((processo) => {
+        const statusRows = Array.isArray(processo.status) ? processo.status : [];
+        statusRows.forEach((statusRow) => {
+            const ordens = Array.isArray(statusRow.ordens) ? statusRow.ordens : [];
+            ordens.forEach((ordem) => {
+                flat.push({
+                    ...ordem,
+                    _processo_key: processo.processo_key,
+                    _processo_nome: processo.processo_nome,
+                    _status_key: statusRow.status_key
+                });
+            });
+        });
+    });
+    return flat;
+}
+
+function syncFiltroOptions() {
+    const allCards = getAllKanbanCards();
+    const statusSelect = document.getElementById("filtroOpStatus");
+    const empresaSelect = document.getElementById("filtroOpEmpresa");
+    if (statusSelect) {
+        setSelectOptions(
+            statusSelect,
+            "Todos os status",
+            [...new Set(allCards.map((card) => card.status_op).filter(Boolean))]
+        );
+        statusSelect.value = state.filtros.status || "";
+    }
+    if (empresaSelect) {
+        setSelectOptions(
+            empresaSelect,
+            "Todas as empresas",
+            [...new Set(allCards.map((card) => card.empresa_nome).filter(Boolean))]
+        );
+        empresaSelect.value = state.filtros.empresa || "";
+    }
+}
+
+function syncProdutosCatalogoSelect() {
+    const select = document.getElementById("opProdutoCatalogo");
+    if (!select) return;
+    select.innerHTML = "";
+    const defaultOpt = document.createElement("option");
+    defaultOpt.value = "";
+    defaultOpt.textContent = "Selecione um produto";
+    select.appendChild(defaultOpt);
+
+    state.produtosCatalogo.forEach((item) => {
+        const option = document.createElement("option");
+        option.value = String(item.id);
+        option.textContent = `${item.produto_key || item.id} - ${item.nome_oficial || "-"}`;
+        select.appendChild(option);
+    });
+    renderProdutosDisponiveisOp();
+}
+
+function syncAtaOptions() {
+    const select = document.getElementById("opModeloAta");
+    if (!select) return;
+    const previous = select.value || "";
+    select.innerHTML = "";
+    const opts = [{ value: "", label: "Selecione a ATA" }, { value: "especial", label: "ESPECIAL - Todos os produtos" }];
+    state.basesCatalogo
+        .filter((base) => base.ativo !== false && Number(base.ativo ?? 1) !== 0)
+        .forEach((base) => {
+            opts.push({
+                value: String(base.ata_key || ""),
+                label: `${base.ata_nome || base.ata_key || "ATA"} | ${base.empresa_nome || base.empresa_key || ""}`,
+                empresa: base.empresa_nome || base.empresa_key || "",
+                numero_ata: base.numero_ata || ""
+            });
+        });
+    opts.forEach((item) => {
+        const opt = document.createElement("option");
+        opt.value = item.value;
+        opt.textContent = item.label;
+        if (item.empresa) opt.dataset.empresa = item.empresa;
+        if (item.numero_ata) opt.dataset.numeroAta = item.numero_ata;
+        select.appendChild(opt);
+    });
+    if ([...select.options].some((opt) => opt.value === previous)) select.value = previous;
+    syncAtaEmpresaUi();
+}
+
+function getSelectedAtaOption() {
+    const select = document.getElementById("opModeloAta");
+    return select?.options?.[select.selectedIndex] || null;
+}
+
+function syncAtaEmpresaUi() {
+    // Empresa permanece automática no backend pela ATA selecionada; não existe campo visual para preenchimento.
+}
+
+function getProdutosFiltradosParaOp() {
+    const ataKey = String(document.getElementById("opModeloAta")?.value || "").toLowerCase();
+    const termo = normalizeSearchText(document.getElementById("opProdutoBusca")?.value || "");
+    if (!ataKey) return [];
+    return state.produtosCatalogo.filter((produto) => {
+        if (!produto || produto.ativo === false) return false;
+        const produtoAta = String(produto.ata_key || "").toLowerCase();
+        const matchAta = ataKey === "especial" || produtoAta === ataKey;
+        const hay = normalizeSearchText(`${produto.item_ata || ""} ${produto.nome_oficial || ""} ${produto.produto_key || ""} ${produto.empresa || ""}`);
+        return matchAta && (!termo || hay.includes(termo));
+    });
+}
+
+function renderProdutosDisponiveisOp() {
+    const container = document.getElementById("opProdutoLista");
+    if (!container) return;
+    const ataKey = String(document.getElementById("opModeloAta")?.value || "").toLowerCase();
+    if (!ataKey) {
+        container.innerHTML = `<div class="op-kanban-empty op-produto-lista-vazia">Selecione uma ATA para listar os produtos.</div>`;
+        renderProdutosSelecionadosOp();
+        return;
+    }
+    const produtos = getProdutosFiltradosParaOp();
+    if (!produtos.length) {
+        container.innerHTML = `<div class="op-kanban-empty op-produto-lista-vazia">Nenhum produto para a ATA/filtro atual.</div>`;
+        renderProdutosSelecionadosOp();
+        return;
+    }
+    container.innerHTML = produtos.map((produto) => {
+        const jaSelecionado = state.opProdutosSelecionados.some((item) => Number(item.produto_id) === Number(produto.id));
+        const img = produto.imagem_path || produto.imagem_url || produto.imagem?.preview || "";
+        const imgHtml = img ? `<img src="${escapeHtml(resolveMediaUrl(img))}" alt="" loading="lazy">` : `<div class="op-produto-card-sem-img">SEM IMAGEM</div>`;
+        const ataInfo = ataKey === "especial"
+            ? `<div class="op-produto-card-ata">${escapeHtml(produto.arp || produto.ata_key || "-")} | ${escapeHtml(produto.empresa || "-")}</div>`
+            : "";
+        return `
+            <article class="op-produto-card ${jaSelecionado ? "selecionado" : ""}">
+                <div class="op-produto-card-img">${imgHtml}<span>${escapeHtml(produto.item_ata || "-")}</span></div>
+                <div class="op-produto-card-body">
+                    <strong>${escapeHtml(produto.nome_oficial || produto.produto_key || "-")}</strong>
+                    ${ataInfo}
+                    <div class="op-produto-card-actions">
+                        <input id="opQtdProduto_${produto.id}" type="number" min="1" step="1" inputmode="numeric" pattern="\\d+" value="1">
+                        <button class="btn-row-action" type="button" data-action="adicionar-produto-guiado" data-produto-id="${produto.id}">${jaSelecionado ? "Atualizar" : "Adicionar"}</button>
+                    </div>
+                </div>
+            </article>`;
+    }).join("");
+    renderProdutosSelecionadosOp();
+}
+
+function renderProdutosSelecionadosOp() {
+    const container = document.getElementById("opProdutosSelecionados");
+    if (!container) return;
+    const totalItens = state.opProdutosSelecionados.length;
+    const totalQtd = state.opProdutosSelecionados.reduce((acc, item) => acc + (parseQuantidadeProduto(item.quantidade) || 0), 0);
+    if (!totalItens) {
+        container.innerHTML = `
+            <div class="op-selecionados-compacto vazio">
+                <button class="op-selecionados-toggle" type="button" data-action="toggle-selecionados" aria-expanded="false">
+                    <span>Itens adicionados na OP</span>
+                    <strong>0 itens</strong>
+                </button>
+                <div class="op-selecionados-hint">Adicione produtos pela tabela abaixo após selecionar a ATA.</div>
+            </div>`;
+        return;
+    }
+    container.innerHTML = `
+        <div class="op-selecionados-compacto" data-expanded="false">
+            <button class="op-selecionados-toggle" type="button" data-action="toggle-selecionados" aria-expanded="false">
+                <span>Itens adicionados na OP</span>
+                <strong>${totalItens} item(ns) | ${totalQtd} un.</strong>
+            </button>
+            <div class="table-responsive op-selecionados-tabela-wrap hidden">
+                <table class="preview-table sistema-table op-selecionados-tabela">
+                    <thead>
+                        <tr>
+                            <th>ITEM</th>
+                            <th>IMAGEM</th>
+                            <th>PRODUTO</th>
+                            <th>ATA</th>
+                            <th>QTD</th>
+                            <th>AÇÃO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${state.opProdutosSelecionados.map((item) => {
+                            const imgHtml = item.imagem_src
+                                ? `<img src="${escapeHtml(resolveMediaUrl(item.imagem_src))}" alt="" loading="lazy">`
+                                : `<span class="op-sem-img-mini">SEM IMAGEM</span>`;
+                            return `
+                                <tr>
+                                    <td>${escapeHtml(item.item_ata || "-")}</td>
+                                    <td class="op-selecionado-img">${imgHtml}</td>
+                                    <td class="col-principal">${escapeHtml(item.nome_oficial || item.produto_key || "-")}</td>
+                                    <td>${escapeHtml(item.ata_label || item.ata_key || "-")}</td>
+                                    <td><input type="number" min="1" step="1" inputmode="numeric" pattern="\\d+" value="${escapeHtml(item.quantidade || 1)}" data-action="qtd-produto-guiado" data-produto-id="${item.produto_id}"></td>
+                                    <td><button class="btn-row-action" type="button" data-action="remover-produto-guiado" data-produto-id="${item.produto_id}">Remover</button></td>
+                                </tr>`;
+                        }).join("")}
+                    </tbody>
+                </table>
+            </div>
+        </div>`;
+}
+
+function toggleProdutosSelecionados(button) {
+    const box = button.closest(".op-selecionados-compacto");
+    if (!box || box.classList.contains("vazio")) return;
+    const wrap = box.querySelector(".op-selecionados-tabela-wrap");
+    const expanded = box.dataset.expanded === "true";
+    box.dataset.expanded = expanded ? "false" : "true";
+    button.setAttribute("aria-expanded", expanded ? "false" : "true");
+    if (wrap) wrap.classList.toggle("hidden", expanded);
+}
+
+function addProdutoSelecionadoGuiado(produtoId, quantidade) {
+    if (!produtoId) return;
+    const produto = state.produtosCatalogo.find((item) => Number(item.id) === Number(produtoId));
+    if (!produto) return;
+    const qtd = Number.isInteger(quantidade) && quantidade > 0 ? quantidade : 1;
+    const current = state.opProdutosSelecionados.find((item) => Number(item.produto_id) === Number(produtoId));
+    if (current) {
+        current.quantidade = qtd;
+    } else {
+        state.opProdutosSelecionados.push({
+            produto_id: Number(produto.id),
+            produto_key: produto.produto_key || "",
+            item_ata: produto.item_ata || "",
+            nome_oficial: produto.nome_oficial || "",
+            ata_key: produto.ata_key || "",
+            ata_label: produto.arp || produto.ata_key || "",
+            imagem_src: produto.imagem_path || produto.imagem_url || produto.imagem?.preview || "",
+            quantidade: qtd
+        });
+    }
+    renderProdutosDisponiveisOp();
+}
+
+function removeProdutoSelecionadoGuiado(produtoId) {
+    state.opProdutosSelecionados = state.opProdutosSelecionados.filter((item) => Number(item.produto_id) !== Number(produtoId));
+    renderProdutosDisponiveisOp();
+}
+
+function updateProdutoSelecionadoQtd(produtoId, quantidade) {
+    const current = state.opProdutosSelecionados.find((item) => Number(item.produto_id) === Number(produtoId));
+    if (current && Number.isInteger(quantidade) && quantidade > 0) current.quantidade = quantidade;
+}
+
+function resolveMediaUrl(path) {
+    const raw = String(path || "").trim().replace(/\\/g, "/");
+    if (!raw) return "";
+    if (/^(https?:)?\/\//i.test(raw) || raw.startsWith("data:")) return raw;
+    const clean = raw.replace(/^\/+/, "");
+    if (clean.startsWith("media/")) return `${API_ORIGIN}/${clean}`;
+    return clean;
+}
+
+function setSelectOptions(select, defaultLabel, values) {
+    select.innerHTML = "";
+    const defaultOpt = document.createElement("option");
+    defaultOpt.value = "";
+    defaultOpt.textContent = defaultLabel;
+    select.appendChild(defaultOpt);
+
+    [...values].sort().forEach((value) => {
+        const opt = document.createElement("option");
+        opt.value = String(value);
+        opt.textContent = String(value);
+        select.appendChild(opt);
+    });
+}
+
+function normalizeSearchText(value) {
+    return String(value || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .trim();
+}
+
+function applyFiltros(cards) {
+    const texto = normalizeSearchText(state.filtros.texto);
+    return cards.filter((card) => {
+        const termo = normalizeSearchText(`${card.numero_op || ""} ${card.cliente || ""} ${card.obra || ""}`);
+        const matchTexto = !texto || termo.includes(texto);
+        const matchStatus = !state.filtros.status || String(card.status_op || "") === state.filtros.status;
+        const matchEmpresa = !state.filtros.empresa || String(card.empresa_nome || "") === state.filtros.empresa;
+        return matchTexto && matchStatus && matchEmpresa;
+    });
+}
+
+function renderKanban() {
+    const container = document.getElementById("opKanbanBoard");
+    if (!container) return;
+
+    const processos = Array.isArray(state.kanban?.processos) ? state.kanban.processos : [];
+    if (!processos.length) {
+        container.innerHTML = `<div class="op-kanban-empty">Nenhuma OP disponivel para o Kanban.</div>`;
+        updateContador(0, 0);
+        return;
+    }
+
+    const allCards = getAllKanbanCards();
+    const filtered = applyFiltros(allCards);
+    const allowedIds = new Set(filtered.map((item) => Number(item.id || 0)));
+
+    const html = processos.map((processo) => renderKanbanProcess(processo, allowedIds)).join("");
+    container.innerHTML = html || `<div class="op-kanban-empty">Nenhuma OP encontrada com os filtros atuais.</div>`;
+
+    updateContador(filtered.length, allCards.length);
+}
+
+function renderKanbanProcess(processo, allowedIds) {
+    const statusRows = Array.isArray(processo.status) ? processo.status : [];
+    let totalProcesso = 0;
+
+    const statusHtml = statusRows.map((statusRow) => {
+        const rawCards = Array.isArray(statusRow.ordens) ? statusRow.ordens : [];
+        const cards = rawCards.filter((card) => allowedIds.has(Number(card.id || 0)));
+        totalProcesso += cards.length;
+
+        const cardsHtml = cards.length
+            ? cards.map((card) => renderCard(card)).join("")
+            : `<div class="op-kanban-empty">Sem cards</div>`;
+
+        return `
+            <div class="op-kanban-status-row" data-status="${escapeHtml(statusRow.status_key || "")}">
+                <div class="op-kanban-status-label">${escapeHtml(statusRow.status_nome || "-")}</div>
+                <div class="op-kanban-cards-row">
+                    ${cardsHtml}
+                </div>
+            </div>
+        `;
+    }).join("");
+
+    return `
+        <section class="op-kanban-process" data-processo-key="${escapeHtml(processo.processo_key || "")}">
+            <header class="op-kanban-process-header">
+                <h3>${escapeHtml(processo.processo_nome || "-")}</h3>
+                <span class="op-kanban-process-count">${totalProcesso} OP(s)</span>
+            </header>
+            ${statusHtml}
+        </section>
+    `;
+}
+
+function renderCard(card) {
+    const prazoClass = getPrazoClass(card.prazo_status);
+    const entrega = card.data_entrega_valor || "NAO DEFINIDO";
+    const prazo = card.prazo_label ? `<div class="op-card-prazo ${prazoClass}">${escapeHtml(card.prazo_label)}</div>` : "";
+    const statusLabel = getStatusLabel(card.status_processo_macro);
+    const statusClass = getStatusClass(card.status_processo_macro);
+
+    return `
+        <article class="op-kanban-card" data-op-id="${Number(card.id || 0)}">
+            <div class="op-card-header">
+                <div class="op-card-numero">OP ${escapeHtml(card.numero_op || "-")}</div>
+                <button class="op-card-menu-btn" type="button" aria-label="Ações" data-action="menu-toggle" data-op-id="${card.id}">⋯</button>
+            </div>
+            <div class="op-card-cliente">${escapeHtml(card.cliente || "-")}</div>
+            <div class="op-card-obra">${escapeHtml(card.obra || "-")}</div>
+            <div class="op-card-entrega">Entrega: ${escapeHtml(entrega)}</div>
+            ${prazo}
+            <span class="op-card-status-pill ${statusClass}">${escapeHtml(statusLabel)}</span>
+
+            <div class="op-card-status-actions">
+                <button class="btn-row-action" type="button" data-action="status-nao-iniciado" data-op-id="${card.id}">Não Iniciado</button>
+                <button class="btn-row-action" type="button" data-action="status-em-andamento" data-op-id="${card.id}">Em Andamento</button>
+                <button class="btn-row-action" type="button" data-action="menu-concluir" data-op-id="${card.id}">Concluído</button>
+                <button class="btn-row-action" type="button" data-action="mover-proximo" data-op-id="${card.id}">Mover Próximo</button>
+                <button class="btn-row-action" type="button" data-action="pular-processo" data-op-id="${card.id}">Pular</button>
+            </div>
+
+            <div class="op-kanban-concluir-menu hidden">
+                <button class="btn-row-action" type="button" data-action="concluir-manter" data-op-id="${card.id}">Manter aqui</button>
+                <button class="btn-row-action" type="button" data-action="concluir-proximo" data-op-id="${card.id}">Concluir e mover</button>
+            </div>
+
+            <div class="op-card-links">
+                <button class="btn-row-action" type="button" data-action="abrir" data-op-id="${card.id}">Abrir</button>
+                <button class="btn-row-action" type="button" data-action="editar" data-op-id="${card.id}">Editar</button>
+                <button class="btn-row-action" type="button" data-action="produtos" data-op-id="${card.id}">Produtos</button>
+                <button class="btn-row-action" type="button" data-action="bom" data-op-id="${card.id}">BOM</button>
+                <button class="btn-row-action" type="button" data-action="processos" data-op-id="${card.id}">Processos</button>
+                <button class="btn-row-action" type="button" data-action="historico" data-op-id="${card.id}">Histórico</button>
+            </div>
+        </article>
+    `;
+}
+
+function getPrazoClass(prazoStatus) {
+    if (prazoStatus === "ok") return "op-prazo-ok";
+    if (prazoStatus === "hoje") return "op-prazo-hoje";
+    if (prazoStatus === "atrasado") return "op-prazo-atrasado";
+    return "op-prazo-indefinido";
+}
+
+function getStatusLabel(statusKey) {
+    if (statusKey === "EM_ANDAMENTO") return "Em Andamento";
+    if (statusKey === "CONCLUIDO") return "Concluído";
+    return "Não Iniciado";
+}
+
+function getStatusClass(statusKey) {
+    if (statusKey === "EM_ANDAMENTO") return "status-em-andamento";
+    if (statusKey === "CONCLUIDO") return "status-concluido";
+    return "status-nao-iniciado";
+}
+
+
+async function handleOpAction(action, opId) {
+    if (action === "abrir" || action === "produtos") {
+        await openModalOpProdutos(opId);
+    } else if (action === "editar") {
+        await openModalOpCabecalho(opId);
+    } else if (action === "bom") {
+        await openModalOpBom(opId);
+    } else if (action === "processos") {
+        await openModalOpProcessos(opId);
+    } else if (action === "historico") {
+        await openModalOpHistorico(opId);
+    } else if (action === "cancelar-op") {
+        await cancelarOp(opId);
+    } else if (action === "status-nao-iniciado") {
+        await setKanbanStatus(opId, "NAO_INICIADO");
+    } else if (action === "status-em-andamento") {
+        await setKanbanStatus(opId, "EM_ANDAMENTO");
+    } else if (action === "status-concluido" || action === "concluir-manter") {
+        await setKanbanStatus(opId, "CONCLUIDO");
+    } else if (action === "concluir-proximo") {
+        await setKanbanStatus(opId, "CONCLUIDO");
+        await moverKanbanProximo(opId);
+    } else if (action === "mover-proximo") {
+        await moverKanbanProximo(opId);
+    } else if (action === "pular-processo") {
+        await promptPularProcesso(opId);
+    }
+}
+
+function openModalOpAcoesCard(cardElement) {
+    if (!cardElement) return;
+    const opId = Number(cardElement.dataset.opId || 0);
+    if (!opId) return;
+    const card = getAllKanbanCards().find((item) => Number(item.id || 0) === opId) || {};
+    const titulo = document.getElementById("opAcoesTitulo");
+    const resumo = document.getElementById("opAcoesResumo");
+    const body = document.getElementById("opAcoesCardBody");
+    if (titulo) titulo.textContent = `OP ${card.numero_op || opId}`;
+    if (resumo) resumo.textContent = `${card.cliente || "-"} | ${card.obra || "-"} | Entrega: ${card.data_entrega_valor || "NÃO DEFINIDO"}`;
+    if (body) {
+        body.innerHTML = `
+            <table class="preview-table sistema-table op-acoes-table">
+                <tbody>
+                    <tr><th>OP</th><td>${escapeHtml(card.numero_op || "-")}</td><th>Status</th><td>${escapeHtml(getStatusLabel(card.status_processo_macro))}</td></tr>
+                    <tr><th>Cliente</th><td>${escapeHtml(card.cliente || "-")}</td><th>Obra</th><td>${escapeHtml(card.obra || "-")}</td></tr>
+                    <tr><th>Empresa</th><td>${escapeHtml(card.empresa_nome || "-")}</td><th>Entrega</th><td>${escapeHtml(card.data_entrega_valor || "NÃO DEFINIDO")}</td></tr>
+                    <tr><th>Processo</th><td>${escapeHtml(card._processo_nome || "-")}</td><th>Prazo</th><td>${escapeHtml(card.prazo_label || "-")}</td></tr>
+                </tbody>
+            </table>
+            <div class="op-acoes-grupo">
+                <h4>Cadastro e detalhes</h4>
+                <div class="op-acoes-grid">
+                    <button class="btn-row-action" type="button" data-action="abrir" data-op-id="${opId}">Abrir produtos</button>
+                    <button class="btn-row-action" type="button" data-action="editar" data-op-id="${opId}">Editar cabeçalho</button>
+                    <button class="btn-row-action" type="button" data-action="bom" data-op-id="${opId}">BOM</button>
+                    <button class="btn-row-action" type="button" data-action="processos" data-op-id="${opId}">Processos</button>
+                    <button class="btn-row-action" type="button" data-action="historico" data-op-id="${opId}">Histórico</button>
+                </div>
+            </div>
+            <div class="op-acoes-grupo">
+                <h4>Movimentação do Kanban</h4>
+                <div class="op-acoes-grid">
+                    <button class="btn-row-action" type="button" data-action="status-nao-iniciado" data-op-id="${opId}">Não Iniciado</button>
+                    <button class="btn-row-action" type="button" data-action="status-em-andamento" data-op-id="${opId}">Em Andamento</button>
+                    <button class="btn-row-action" type="button" data-action="status-concluido" data-op-id="${opId}">Concluído</button>
+                    <button class="btn-row-action" type="button" data-action="mover-proximo" data-op-id="${opId}">Mover Próximo</button>
+                    <button class="btn-row-action" type="button" data-action="pular-processo" data-op-id="${opId}">Pular Etapa</button>
+                    <button class="btn-row-action" type="button" data-action="concluir-proximo" data-op-id="${opId}">Concluir e Mover</button>
+                </div>
+            </div>
+            <div class="op-acoes-danger-zone">
+                <button class="btn-row-action op-btn-danger" type="button" data-action="cancelar-op" data-op-id="${opId}">Cancelar OP</button>
+            </div>`;
+    }
+    openModal("modalOpAcoesCard");
+}
+
+let resolverCancelamentoOp = null;
+let opCancelamentoPendente = 0;
+
+function confirmarCancelamentoOp(opId) {
+    opCancelamentoPendente = Number(opId || 0);
+    const mensagem = document.getElementById("opCancelarMensagem");
+    if (mensagem) mensagem.textContent = `Cancelar a OP ${opCancelamentoPendente}? Ela sairá do Kanban ativo e ficará registrada como CANCELADA.`;
+    openModal("modalOpCancelarConfirm");
+    return new Promise((resolve) => {
+        resolverCancelamentoOp = resolve;
+    });
+}
+
+function resolverConfirmacaoCancelamento(confirmado) {
+    closeModal("modalOpCancelarConfirm");
+    const resolver = resolverCancelamentoOp;
+    resolverCancelamentoOp = null;
+    opCancelamentoPendente = 0;
+    if (typeof resolver === "function") resolver(Boolean(confirmado));
+}
+
+async function setKanbanStatus(opId, statusDestino) {
+    await apiPost(`${API_OP}/${opId}/kanban/status`, { status_destino: statusDestino });
+    await refreshKanban();
+}
+
+async function moverKanbanProximo(opId) {
+    await apiPost(`${API_OP}/${opId}/kanban/mover-proximo`, { status_destino: "NAO_INICIADO" });
+    await refreshKanban();
+}
+
+async function cancelarOp(opId) {
+    const confirmado = await confirmarCancelamentoOp(opId);
+    if (!confirmado) return;
+    await apiDelete(`${API_OP}/${opId}`);
+    await refreshKanban();
+}
+
+async function promptPularProcesso(opId) {
+    const processoDestino = window.prompt(
+        "Informe a key do processo destino:\n" +
+        "corte | dobra | montagem_solda | solda | acabamento | pintura | sublimacao | montagem | teste | expedicao",
+        "pintura"
+    );
+    if (!processoDestino) return;
+    await apiPost(`${API_OP}/${opId}/kanban/pular`, {
+        processo_destino: String(processoDestino).trim().toLowerCase(),
+        status_destino: "NAO_INICIADO"
+    });
+    await refreshKanban();
+}
+
+function updateContador(exibidos, total) {
+    const contador = document.getElementById("opContador");
+    if (!contador) return;
+    contador.textContent = exibidos
+        ? `Exibindo ${exibidos} de ${total} ordens no Kanban`
+        : "0 ordens encontradas no Kanban";
+}
+
+function openModal(id) {
+    const modal = document.getElementById(id);
+    if (!modal) return;
+    modal.classList.remove("hidden");
+    modal.setAttribute("aria-hidden", "false");
+}
+
+function closeModal(id) {
+    const modal = document.getElementById(id);
+    if (!modal) return;
+    modal.classList.add("hidden");
+    modal.setAttribute("aria-hidden", "true");
+}
+
+async function openModalOpCabecalho(opId = null) {
+    clearModalOpCabecalho();
+    if (opId) {
+        const detail = await apiGet(`${API_OP}/${opId}`);
+        const cabecalho = detail?.cabecalho || {};
+        document.getElementById("tituloModalOp").textContent = `Editar OP ${cabecalho.numero_op || opId}`;
+        document.getElementById("opId").value = String(opId);
+        document.getElementById("opCliente").value = cabecalho.cliente || "";
+        document.getElementById("opObra").value = cabecalho.obra || "";
+        document.getElementById("opSolicitante").value = cabecalho.solicitante || "";
+        document.getElementById("opStatus").value = cabecalho.status || "RASCUNHO";
+        document.getElementById("opDataEntregaInput").value = cabecalho.data_entrega_valor || "NÃO DEFINIDO";
+        document.getElementById("opObservacoes").value = cabecalho.observacoes || "";
+        const ataSelect = document.getElementById("opModeloAta");
+        if (ataSelect && cabecalho.ata_key) ataSelect.value = cabecalho.ata_key;
+        state.opProdutosSelecionados = [];
+        document.getElementById("opBlocoProdutosGuiados")?.classList.add("hidden");
+    } else {
+        document.getElementById("opBlocoProdutosGuiados")?.classList.remove("hidden");
+    }
+    syncAtaOptions();
+    syncAtaEmpresaUi();
+    renderProdutosDisponiveisOp();
+    openModal("modalOpCabecalho");
+}
+
+function clearModalOpCabecalho() {
+    document.getElementById("tituloModalOp").textContent = "Nova OP";
+    document.getElementById("opId").value = "";
+    document.getElementById("opCliente").value = "";
+    document.getElementById("opObra").value = "";
+    document.getElementById("opSolicitante").value = "";
+    document.getElementById("opStatus").value = "RASCUNHO";
+    document.getElementById("opDataEntregaInput").value = "NÃO DEFINIDO";
+    document.getElementById("opObservacoes").value = "";
+    const ata = document.getElementById("opModeloAta");
+    if (ata) ata.value = "";
+    const busca = document.getElementById("opProdutoBusca");
+    if (busca) busca.value = "";
+    state.opProdutosSelecionados = [];
+    syncAtaEmpresaUi();
+    renderProdutosSelecionadosOp();
+}
+
+async function saveModalOpCabecalho() {
+    try {
+        const opId = Number(document.getElementById("opId").value || 0);
+        const ataSelect = document.getElementById("opModeloAta");
+        const selectedAtaOption = getSelectedAtaOption();
+        const payload = {
+            cliente: fieldValue("opCliente"),
+            obra: fieldValue("opObra"),
+            solicitante: fieldValue("opSolicitante"),
+            status: fieldValue("opStatus") || "RASCUNHO",
+            data_entrega_input: fieldValue("opDataEntregaInput") || "NÃO DEFINIDO",
+            observacoes: fieldValue("opObservacoes"),
+            ata_key: ataSelect?.value || null,
+            ata_nome: selectedAtaOption?.textContent?.split("|")[0]?.replace("ESPECIAL - Todos os produtos", "ESPECIAL")?.trim() || null,
+            numero_ata: selectedAtaOption?.dataset?.numeroAta || null,
+            produtos: state.opProdutosSelecionados.map((item) => ({
+                produto_id: Number(item.produto_id),
+                quantidade: parseQuantidadeProduto(item.quantidade) || 1
+            }))
+        };
+        if (!opId && !payload.ata_key) throw new Error("Selecione o MODELO ATA.");
+        if (!opId && !payload.produtos.length) throw new Error("Selecione ao menos um item/aparelho.");
+
+        if (opId) await apiPut(`${API_OP}/${opId}`, payload);
+        else await apiPost(API_OP, payload);
+
+        closeModal("modalOpCabecalho");
+        await refreshKanban();
+    } catch (err) {
+        alert(getErrorMessage(err));
+    }
+}
+
+async function openModalOpProdutos(opId) {
+    document.getElementById("opProdutosId").value = String(opId);
+    await refreshModalProdutos(opId);
+    openModal("modalOpProdutos");
+}
+
+async function refreshModalProdutos(opId) {
+    const detail = await apiGet(`${API_OP}/${opId}`);
+    const rows = Array.isArray(detail?.produtos) ? detail.produtos : [];
+    const tbody = document.getElementById("opProdutosRows");
+    if (!tbody) return;
+    tbody.innerHTML = "";
+    if (!rows.length) {
+        tbody.innerHTML = `<tr class="sistema-empty-row"><td colspan="4" class="sistema-empty-msg">Nenhum produto vinculado nesta OP.</td></tr>`;
+        return;
+    }
+    rows.forEach((item) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td class="col-principal">${escapeHtml(item.nome_produto || item.produto_key || "-")}</td>
+            <td class="col-meta-2">${escapeHtml(item.item_ata || "-")}</td>
+            <td class="col-meta-2"><input id="opProdutoQtd_${item.id}" type="number" min="1" step="1" inputmode="numeric" pattern="\\d+" value="${escapeHtml(item.quantidade || 1)}"></td>
+            <td class="col-acao">
+                <div class="op-row-actions">
+                    <button class="btn-row-action" type="button" data-action="salvar-produto-op" data-op-produto-id="${item.id}">Salvar</button>
+                    <button class="btn-row-action" type="button" data-action="remover-produto-op" data-op-produto-id="${item.id}">Remover</button>
+                </div>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+async function addProdutoNaOpAtual() {
+    try {
+        const opId = Number(document.getElementById("opProdutosId")?.value || 0);
+        const produtoId = Number(document.getElementById("opProdutoCatalogo")?.value || 0);
+        const qtdInput = document.getElementById("opProdutoQuantidade");
+        sanitizeQuantidadeProdutoInput(qtdInput);
+        const quantidade = parseQuantidadeProduto(qtdInput?.value);
+        if (!opId) throw new Error("OP invalida.");
+        if (!produtoId) throw new Error("Selecione um produto.");
+        if (quantidade === null) throw new Error("Quantidade do produto deve ser um número inteiro maior que zero.");
+        await apiPost(`${API_OP}/${opId}/produtos`, { produto_id: produtoId, quantidade });
+        await refreshModalProdutos(opId);
+        await refreshKanban();
+    } catch (err) {
+        alert(getErrorMessage(err));
+    }
+}
+
+async function openModalOpBom(opId) {
+    document.getElementById("opBomId").value = String(opId);
+    const rows = await apiGet(`${API_OP}/${opId}/bom`);
+    const tbody = document.getElementById("opBomRows");
+    if (!tbody) return;
+    tbody.innerHTML = "";
+    const list = Array.isArray(rows) ? rows : [];
+    if (!list.length) {
+        tbody.innerHTML = `<tr class="sistema-empty-row"><td colspan="7" class="sistema-empty-msg">BOM nao encontrada para esta OP.</td></tr>`;
+    } else {
+        list.forEach((item) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td class="col-principal">${escapeHtml(item.nome_produto || "-")}</td>
+                <td class="col-meta-2">${escapeHtml((item.grupo || "").toUpperCase())}</td>
+                <td class="col-meta-2">${escapeHtml(item.cod || "-")}</td>
+                <td class="col-principal">${escapeHtml(item.material || "-")}</td>
+                <td class="col-meta-2"><input class="opBomQtdUnit" data-bom-id="${item.id}" type="number" min="0" step="0.0001" value="${escapeHtml(item.quantidade_unitaria || 0)}"></td>
+                <td class="col-meta-2">${escapeHtml(item.quantidade_produto || 0)}</td>
+                <td class="col-meta-2">${escapeHtml(item.quantidade_total || 0)}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+    openModal("modalOpBom");
+}
+
+async function saveBomDaOpAtual() {
+    try {
+        const opId = Number(document.getElementById("opBomId")?.value || 0);
+        if (!opId) throw new Error("OP invalida.");
+        const itens = [...document.querySelectorAll(".opBomQtdUnit")]
+            .map((input) => ({
+                id: Number(input.getAttribute("data-bom-id") || 0),
+                quantidade_unitaria: Number(input.value || 0)
+            }))
+            .filter((item) => item.id > 0);
+        await apiPut(`${API_OP}/${opId}/bom`, { itens });
+        await openModalOpBom(opId);
+        await refreshKanban();
+    } catch (err) {
+        alert(getErrorMessage(err));
+    }
+}
+
+async function openModalOpProcessos(opId) {
+    document.getElementById("opProcessosId").value = String(opId);
+    const rows = await apiGet(`${API_OP}/${opId}/processos`);
+    const tbody = document.getElementById("opProcessosRows");
+    if (!tbody) return;
+    tbody.innerHTML = "";
+    const list = Array.isArray(rows) ? rows : [];
+    if (!list.length) {
+        tbody.innerHTML = `<tr class="sistema-empty-row"><td colspan="7" class="sistema-empty-msg">Nenhum processo registrado.</td></tr>`;
+    } else {
+        list.forEach((item) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td class="col-principal">${escapeHtml(item.nome_produto || "-")}</td>
+                <td class="col-meta-2">${escapeHtml(item.processo_nome || "-")}</td>
+                <td class="col-meta-2">${escapeHtml(item.quantidade_planejada || 0)}</td>
+                <td class="col-meta-2"><input id="opProcessoQtd_${item.id}" type="number" min="0" step="0.01" value="${escapeHtml(item.quantidade_concluida || 0)}"></td>
+                <td class="col-meta-2">${escapeHtml(item.quantidade_falta || 0)}</td>
+                <td class="col-meta-2">
+                    <select id="opProcessoStatus_${item.id}">
+                        ${buildStatusProcessoOptions(item.status)}
+                    </select>
+                    <input id="opProcessoObs_${item.id}" type="text" value="${escapeHtml(item.observacao || "")}" placeholder="Observacao">
+                </td>
+                <td class="col-acao">
+                    <button class="btn-row-action" type="button" data-action="salvar-processo-op" data-processo-id="${item.id}">Salvar</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+    openModal("modalOpProcessos");
+}
+
+function buildStatusProcessoOptions(selected) {
+    return STATUS_PROCESSO_OPTIONS
+        .map((value) => `<option value="${value}" ${value === selected ? "selected" : ""}>${value}</option>`)
+        .join("");
+}
+
+async function openModalOpHistorico(opId) {
+    document.getElementById("opHistoricoId").value = String(opId);
+    const rows = await apiGet(`${API_OP}/${opId}/historico`);
+    const tbody = document.getElementById("opHistoricoRows");
+    if (!tbody) return;
+    tbody.innerHTML = "";
+    const list = Array.isArray(rows) ? rows : [];
+    if (!list.length) {
+        tbody.innerHTML = `<tr class="sistema-empty-row"><td colspan="4" class="sistema-empty-msg">Sem historico para esta OP.</td></tr>`;
+    } else {
+        list.forEach((item) => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td class="col-meta-2">${escapeHtml(formatDateTime(item.created_at))}</td>
+                <td class="col-meta-2">${escapeHtml(item.acao || "-")}</td>
+                <td class="col-meta-2">${escapeHtml(item.entidade || "-")}</td>
+                <td class="col-principal">${escapeHtml(item.detalhe || "-")}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+    openModal("modalOpHistorico");
+}
+
+function fieldValue(id) {
+    const element = document.getElementById(id);
+    return element ? (element.value || "").trim() : "";
+}
+
+function formatDateTime(value) {
+    if (!value) return "-";
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return String(value);
+    const dd = String(date.getDate()).padStart(2, "0");
+    const mm = String(date.getMonth() + 1).padStart(2, "0");
+    const yyyy = String(date.getFullYear());
+    const hh = String(date.getHours()).padStart(2, "0");
+    const min = String(date.getMinutes()).padStart(2, "0");
+    return `${dd}/${mm}/${yyyy} ${hh}:${min}`;
+}
+
+function escapeHtml(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+function getErrorMessage(error) {
+    const fallback = "Falha ao processar a operacao.";
+    if (!error) return fallback;
+    if (typeof error === "string") return error;
+    if (error.message) return error.message;
+    return fallback;
+}
+
+async function apiGet(url) {
+    return request(url, { method: "GET" });
+}
+
+async function apiPost(url, body) {
+    return request(url, { method: "POST", body });
+}
+
+async function apiPut(url, body) {
+    return request(url, { method: "PUT", body });
+}
+
+async function apiDelete(url) {
+    return request(url, { method: "DELETE" });
+}
+
+async function request(url, { method, body } = {}) {
+    const response = await fetch(url, {
+        method: method || "GET",
+        headers: { "Content-Type": "application/json" },
+        body: body ? JSON.stringify(body) : undefined
+    });
+    let payload = null;
+    try {
+        payload = await response.json();
+    } catch {
+        payload = null;
+    }
+    if (!response.ok || !payload || payload.ok !== true) {
+        const detail = payload?.detail?.error?.message || payload?.error?.message || payload?.detail || response.statusText;
+        throw new Error(detail || "Erro de integracao com backend.");
+    }
+    return payload.data;
+}

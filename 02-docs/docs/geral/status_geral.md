@@ -11,7 +11,21 @@ Este status contem historico e pode manter registros antigos por rastreabilidade
 
 ## Versao documental atual
 
-`v0.1.059-produtos-upload-midia-canonica`
+`v0.1.091-op-guiada-kanban-ui-itens`
+
+## Atualizacao OP v0.1.091 (consolidacao documental)
+
+- Sequencia documental consolidada dos patches OP v0.1.085 ate v0.1.091.
+- Marco registrado: OP GUIADA + KANBAN SIMPLIFICADO + UI DE ITENS.
+- Relatorio consolidado: `03-vs/relatorios/RELATORIO_OP_CONSOLIDADO_v0.1.091.md`.
+- Validacao de sintaxe executada nesta consolidacao:
+  - `python -m compileall 01-mrp/back_end/app`
+  - `node --check 01-mrp/front_end/js/pages/ordens_producao_list.js`
+  - `node --check portable/app/frontend/js/pages/ordens_producao_list.js`
+- Verificacao de conformidade no estado atual:
+  - pendente remocao de `window.prompt` no fluxo de pular etapa;
+  - pendente remocao de `alert/confirm` nativos no fluxo de OP;
+  - pendente remocao dos textos antigos "Mover Proximo" e "Concluir e Mover" no JS oficial.
 
 ## Base funcional anterior
 

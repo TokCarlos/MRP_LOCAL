@@ -89,3 +89,41 @@ Formato:
 [PENDENTE] Queda de rede.
 [PENDENTE] Instalador.
 [PENDENTE] PostgreSQL.
+
+## OP 002 - Ordens de Producao base
+
+[FEITO] Modulo novo de Ordens de Producao criado no backend oficial (domain/repository/service/routes).
+[FEITO] Rotas oficiais /api/ordens-producao e subrotas de produtos/BOM/processos/historico criadas.
+[FEITO] Numeracao OP no padrao NNN-AA via op_contadores.
+[FEITO] Snapshot da BOM ao adicionar produto na OP com recalculo de quantidade_total.
+[FEITO] Processos padrao da OP criados automaticamente por produto.
+[FEITO] Historico operacional minimo da OP ativo (OP_CRIADA, OP_EDITADA, PRODUTO_ADICIONADO, PRODUTO_REMOVIDO, QUANTIDADE_ALTERADA, STATUS_ALTERADO, PROCESSO_ATUALIZADO, BOM_OP_EDITADA).
+[FEITO] Frontend oficial da OP criado em arquivos proprios ordens_producao_list (html/js/css) sem alterar produtos_list.
+[FEITO] Portable reduzido da OP implementado com persistencia JSON runtime e rotas equivalentes basicas.
+[REGRA] Produto continua somente consulta no modulo OP. BOM de Produto e Historico BOM de Produto permanecem preservados.
+[PENDENTE] Exportacao PDF/Excel, estoque e WhatsApp continuam fora do escopo desta fase.
+
+## OP 003 - Kanban principal de Ordens de Producao
+
+[FEITO] Endpoint oficial GET /api/ordens-producao/kanban criado para retorno estruturado por processo/status.
+[FEITO] Calculo de processo macro da OP implementado no backend por gargalo de menor ordem nao concluida.
+[FEITO] Calculo oficial de prazo no backend (Faltam X dias / Hoje / Atrasado X dias / indefinido).
+[FEITO] Rotas de acao sem drag-and-drop criadas: kanban/status, kanban/mover-proximo, kanban/pular.
+[FEITO] Tela principal de OP convertida para Kanban operacional como visao padrao.
+[FEITO] Cards resumidos do Kanban com foco em OP/cliente/obra/entrega/prazo.
+[REGRA] Esta fase nao altera Produtos, BOM de Produto, Historico BOM, imagens/upload ou portable.
+[PENDENTE] Drag-and-drop permanece fora do escopo desta versao.
+
+## OP 004 - Consolidacao documental v0.1.091
+
+[FEITO] Consolidada a trilha de patches OP v0.1.085 ate v0.1.091 em relatorio unico de versao.
+[FEITO] Marco registrado: OP GUIADA + KANBAN SIMPLIFICADO + UI DE ITENS.
+[FEITO] Fluxo de Nova OP guiada consolidado com empresa automatica por ATA, status inicial RASCUNHO e criacao transacional (OP + produtos + BOM snapshot + processos + historico).
+[FEITO] Motor de data de entrega consolidado com parse de formatos data e normalizacao de texto operacional.
+[FEITO] Regras de produtos na Nova OP consolidadas (filtro por ATA/ESPECIAL, imagem multi-origem e quantidade inteira positiva obrigatoria).
+[FEITO] UI de itens adicionados consolidada com bloco compacto, tabela rolavel e cabecalho sticky.
+[FEITO] Bloco final de STATUS + OBSERVACOES consolidado com alinhamento visual equivalente.
+[FEITO] Ajustes de Kanban/card consolidam opacidade 65%, modal operacional com itens e seletor unico de status, menu de tres pontos administrativo e cancelamento via soft delete.
+[FUNCIONAL] Validacao de sintaxe executada com sucesso: compileall backend OP e node --check no JS oficial e espelho portable.
+[ALERTA] Verificacao de conformidade apontou pendencias no estado atual: ainda existe window.prompt no fluxo de pular etapa e ainda existem textos antigos "Mover Proximo" e "Concluir e Mover" no JS oficial.
+[ALERTA] Verificacao de conformidade apontou uso remanescente de alert/confirm nativo no JS oficial e no espelho portable.
