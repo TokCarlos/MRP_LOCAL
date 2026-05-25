@@ -534,12 +534,20 @@
 
 .op-modal-title-row h3 {
     margin: 0 0 4px 0;
+    font-size: 21px;
 }
 
 .op-modal-subtitle {
     margin: 0;
     font-size: 12px;
     opacity: 0.78;
+}
+
+.op-modal-context {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+    opacity: 0.96;
 }
 
 .op-modal-x {
@@ -629,6 +637,7 @@
     display: block;
 }
 
+.op-selecionados-tabela td input[type="text"],
 .op-selecionados-tabela td input[type="number"] {
     max-width: 82px;
 }
@@ -714,6 +723,28 @@
 .op-kanban-oper-actions {
     display: flex;
     justify-content: flex-end;
+}
+
+.op-kanban-produtos-tabela {
+    min-width: 760px;
+}
+
+.op-kanban-produtos-tabela td input[type="text"] {
+    width: 84px;
+}
+
+.op-kanban-produto-img img,
+.op-kanban-produto-img .op-sem-img-mini {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    background: #fff;
+    color: #333;
+    object-fit: contain;
+    display: inline-grid;
+    place-items: center;
+    font-size: 9px;
+    font-weight: 700;
 }
 
 .op-kanban-produtos-lista {

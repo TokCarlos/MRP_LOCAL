@@ -127,3 +127,16 @@ Formato:
 [FUNCIONAL] Validacao de sintaxe executada com sucesso: compileall backend OP e node --check no JS oficial e espelho portable.
 [ALERTA] Verificacao de conformidade apontou pendencias no estado atual: ainda existe window.prompt no fluxo de pular etapa e ainda existem textos antigos "Mover Proximo" e "Concluir e Mover" no JS oficial.
 [ALERTA] Verificacao de conformidade apontou uso remanescente de alert/confirm nativo no JS oficial e no espelho portable.
+
+## OP 005 - Ajuste edicao da OP e BOM consultiva v0.1.093
+
+[FEITO] Modal operacional do card passou a exibir itens da OP em tabela (IMAGEM/ITEM/PRODUTO/ATA/QTD), com QTD editavel e persistencia via endpoint existente.
+[FEITO] Linha de contexto do modal operacional (cliente/obra/entrega) reforcada visualmente para melhor legibilidade.
+[FEITO] Botao "Editar OP" adicionado ao rodape do modal operacional.
+[FEITO] Fluxo de "Editar OP" consolidado para edicao completa: cabecalho + itens atuais + adicionar/remover/alterar quantidade.
+[FEITO] Salvamento em edicao sincroniza itens da OP com endpoints existentes (POST/PUT/DELETE de produtos da OP), mantendo validacao de inteiro positivo.
+[FEITO] Menu "..." administrativo removido de "Editar cabecalho", mantendo consultas/acoes administrativas (Produtos da OP, BOM, Processos, Historico, Cancelar OP).
+[FEITO] BOM da OP convertida para fluxo consultivo em duas telas: lista de aparelhos da OP e BOM detalhada por aparelho, ambas somente leitura.
+[FUNCIONAL] Validacao de sintaxe executada com sucesso: compileall backend OP e node --check no JS oficial.
+[FUNCIONAL] Buscas de conformidade sem ocorrencia: window.prompt, Mover Proximo, Concluir e Mover, Movimentacao do Kanban, Editar cabecalho.
+[REGRA] Portable permanece sem sincronizacao nesta etapa.
