@@ -151,3 +151,16 @@ Formato:
 [FUNCIONAL] Buscas de conformidade sem ocorrencia: `window.prompt`, `Mover Próximo`, `Concluir e Mover`, `Movimentação do Kanban`, `Editar cabeçalho`, `addProdutoNaOpAtual`, `saveBomDaOpAtual`, `btnAdicionarProdutoOp`, `btnSalvarBomOp`.
 [ALERTA] Validacao manual A-K em navegador ficou pendente por indisponibilidade dos servicos locais durante esta execucao.
 [REGRA] Portable nao sincronizado nesta etapa.
+
+## OP 007 - BOM consultiva da OP em 3 tabelas v0.1.095
+
+[FEITO] BOM detalhada da OP ajustada para 3 blocos consultivos: TUBOS, CHAPAS e INSUMOS.
+[FEITO] Renderizacao da BOM da OP reaproveita a mesma regra de classificacao do modulo Produtos por campo `grupo` normalizado.
+[FEITO] Fallback de classificacao mantido igual ao modulo Produtos: grupo invalido/ausente cai em `tubos`.
+[FEITO] Campos exibidos por tabela: CODIGO, DESCRICAO, UNIDADE, QTD UNITARIA, QTD PRODUTO OP e TOTAL OP.
+[FEITO] Totalizacao aplicada quando possivel por `quantidade_unitaria * quantidade_produto`; sem dado confiavel, usa `quantidade_total` da API ou `-`.
+[REGRA] BOM da OP permanece somente leitura, sem edicao/remocao/salvamento.
+[FUNCIONAL] Validacao de sintaxe executada com sucesso: `python -m compileall 01-mrp/back_end/app` e `node --check 01-mrp/front_end/js/pages/ordens_producao_list.js`.
+[FUNCIONAL] Buscas de seguranca sem ocorrencia: `window.prompt`, `Mover Próximo`, `Concluir e Mover`, `Movimentação do Kanban`, `Editar cabeçalho`.
+[ALERTA] Validacao manual de navegador permaneceu pendente nesta execucao.
+[REGRA] Portable nao sincronizado nesta etapa.

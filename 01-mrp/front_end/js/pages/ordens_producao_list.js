@@ -1256,6 +1256,46 @@ async function openModalOpBom(opId) {
     openModal("modalOpBom");
 }
 
+function normalizeOpBomGrupo(value) {
+    const grupo = String(value || "").trim().toLowerCase();
+    if (grupo === "tubos" || grupo === "chapas" || grupo === "insumos") return grupo;
+    return "tubos";
+}
+
+function parseOpBomNumero(value) {
+    if (value === null || value === undefined || value === "") return null;
+    const n = Number(value);
+    return Number.isFinite(n) ? n : null;
+}
+
+function renderOpBomGrupoRows(tbodyId, rows, qtdProdutoOp) {
+    const tbody = document.getElementById(tbodyId);
+    if (!tbody) return;
+    tbody.innerHTML = "";
+    if (!rows.length) {
+        tbody.innerHTML = `<tr class="sistema-empty-row"><td colspan="6" class="sistema-empty-msg">Sem itens</td></tr>`;
+        return;
+    }
+    rows.forEach((item) => {
+        const qtdUnit = parseOpBomNumero(item.quantidade_unitaria);
+        const qtdLinhaProdutoOp = parseOpBomNumero(item.quantidade_produto);
+        const qtdProduto = qtdLinhaProdutoOp ?? qtdProdutoOp;
+        const totalCalculado = qtdUnit !== null && qtdProduto !== null ? (qtdUnit * qtdProduto) : null;
+        const total = totalCalculado ?? parseOpBomNumero(item.quantidade_total);
+        const unidade = item.unidade || item.tamanho || "-";
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${escapeHtml(item.cod || item.codigo || "-")}</td>
+            <td class="col-principal">${escapeHtml(item.material || item.item_nome || item.descricao || "-")}</td>
+            <td>${escapeHtml(unidade)}</td>
+            <td>${escapeHtml(qtdUnit ?? "-")}</td>
+            <td>${escapeHtml(qtdProduto ?? "-")}</td>
+            <td>${escapeHtml(total ?? "-")}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
 async function openModalOpBomDetalhe(opProdutoId) {
     const ctx = state.opBomCtx;
     if (!ctx?.opId) throw new Error("Contexto da BOM nao carregado.");
@@ -1267,29 +1307,19 @@ async function openModalOpBomDetalhe(opProdutoId) {
     const titulo = document.getElementById("opBomDetalheTitulo");
     if (titulo) titulo.textContent = `BOM detalhada - ${produto?.nome_produto || produto?.produto_key || "Produto"}`;
 
-    const tbody = document.getElementById("opBomRows");
-    if (!tbody) return;
     const rows = (Array.isArray(ctx.bomRows) ? ctx.bomRows : []).filter((item) => Number(item.op_produto_id || 0) === Number(opProdutoId));
-    tbody.innerHTML = "";
-    if (!rows.length) {
-        tbody.innerHTML = `<tr class="sistema-empty-row"><td colspan="6" class="sistema-empty-msg">Sem itens de BOM para este aparelho.</td></tr>`;
-    } else {
-        rows.forEach((item) => {
-            const qtdUnit = Number(item.quantidade_unitaria);
-            const qtdOp = Number(item.quantidade_produto);
-            const total = Number.isFinite(qtdUnit) && Number.isFinite(qtdOp) ? (qtdUnit * qtdOp) : item.quantidade_total;
-            const tr = document.createElement("tr");
-            tr.innerHTML = `
-                <td>${escapeHtml(item.cod || "-")}</td>
-                <td class="col-principal">${escapeHtml(item.material || "-")}</td>
-                <td>${escapeHtml(item.unidade || "-")}</td>
-                <td>${escapeHtml(item.quantidade_unitaria ?? "-")}</td>
-                <td>${escapeHtml(qtdProduto)}</td>
-                <td>${escapeHtml(total ?? "-")}</td>
-            `;
-            tbody.appendChild(tr);
-        });
-    }
+    const rowsByGrupo = {
+        tubos: [],
+        chapas: [],
+        insumos: [],
+    };
+    rows.forEach((row) => {
+        rowsByGrupo[normalizeOpBomGrupo(row.grupo)].push(row);
+    });
+    renderOpBomGrupoRows("opBomTubosRows", rowsByGrupo.tubos, qtdProduto);
+    renderOpBomGrupoRows("opBomChapasRows", rowsByGrupo.chapas, qtdProduto);
+    renderOpBomGrupoRows("opBomInsumosRows", rowsByGrupo.insumos, qtdProduto);
+
     toggleBomViews(true);
 }
 
