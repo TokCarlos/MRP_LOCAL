@@ -140,3 +140,14 @@ Formato:
 [FUNCIONAL] Validacao de sintaxe executada com sucesso: compileall backend OP e node --check no JS oficial.
 [FUNCIONAL] Buscas de conformidade sem ocorrencia: window.prompt, Mover Proximo, Concluir e Mover, Movimentacao do Kanban, Editar cabecalho.
 [REGRA] Portable permanece sem sincronizacao nesta etapa.
+
+## OP 006 - Saneamento JS de OP v0.1.094
+
+[FEITO] Removidas duplicidades de funcoes no frontend oficial de OP, mantendo apenas o fluxo ativo consolidado.
+[FEITO] Removido listener legado de `opProdutosRows` que mantinha salvar/remover produto por fluxo antigo de modal.
+[FEITO] Removidas funcoes legadas fora do desenho ativo: `addProdutoNaOpAtual` e `saveBomDaOpAtual`.
+[FEITO] Mantidas funcoes unicas para card operacional, edicao OP e BOM consultiva (`openModalOpKanbanOperacional`, `openModalOpCabecalho`, `saveModalOpCabecalho`, `openModalOpAcoesCard`, `openModalOpBom`, `openModalOpProdutos`).
+[FUNCIONAL] Validacao de sintaxe executada com sucesso: `python -m compileall 01-mrp/back_end/app` e `node --check 01-mrp/front_end/js/pages/ordens_producao_list.js`.
+[FUNCIONAL] Buscas de conformidade sem ocorrencia: `window.prompt`, `Mover Próximo`, `Concluir e Mover`, `Movimentação do Kanban`, `Editar cabeçalho`, `addProdutoNaOpAtual`, `saveBomDaOpAtual`, `btnAdicionarProdutoOp`, `btnSalvarBomOp`.
+[ALERTA] Validacao manual A-K em navegador ficou pendente por indisponibilidade dos servicos locais durante esta execucao.
+[REGRA] Portable nao sincronizado nesta etapa.
