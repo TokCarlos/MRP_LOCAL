@@ -7,13 +7,28 @@ const API_PRODUTOS = `${API_ORIGIN}/api/produtos`;
 const API_PRODUTOS_BASES = `${API_PRODUTOS}/bases`;
 
 const STATUS_PROCESSO_OPTIONS = ["PENDENTE", "EM_ANDAMENTO", "CONCLUIDO", "PAUSADO"];
+const STATUS_KANBAN_OPTIONS = ["NAO_INICIADO", "EM_ANDAMENTO", "CONCLUIDO"];
+const PROCESSOS_OP_OPTIONS = [
+    { key: "corte", nome: "Corte" },
+    { key: "dobra", nome: "Dobra" },
+    { key: "montagem_solda", nome: "Montagem/Solda" },
+    { key: "solda", nome: "Solda" },
+    { key: "acabamento", nome: "Acabamento" },
+    { key: "pintura", nome: "Pintura" },
+    { key: "sublimacao", nome: "Sublimação" },
+    { key: "montagem", nome: "Montagem" },
+    { key: "teste", nome: "Teste" },
+    { key: "expedicao", nome: "Expedição" },
+];
 
 const state = {
     kanban: null,
     produtosCatalogo: [],
     basesCatalogo: [],
     opProdutosSelecionados: [],
-    filtros: { texto: "", status: "", empresa: "" }
+    filtros: { texto: "", status: "", empresa: "" },
+    opKanbanCtx: null,
+    opPularCtx: null,
 };
 
 function parseQuantidadeProduto(value) {
@@ -82,7 +97,7 @@ function bindBaseEvents() {
 
             try {
                 if (!actionButton && card) {
-                    await openModalOpProdutos(opId);
+                    await openModalOpKanbanOperacional(opId);
                     return;
                 }
                 if (!actionButton) return;
@@ -94,7 +109,7 @@ function bindBaseEvents() {
                 }
                 await handleOpAction(action, opId);
             } catch (err) {
-                alert(getErrorMessage(err));
+                setInlineError("opKanbanFeedback", getErrorMessage(err));
             }
         });
     }
@@ -126,12 +141,45 @@ function bindModalEvents() {
             const opId = Number(button.dataset.opId || 0);
             if (!opId) return;
             try {
+                clearInlineError("opAcoesErro");
                 closeModal("modalOpAcoesCard");
                 await handleOpAction(button.dataset.action, opId);
             } catch (err) {
-                alert(getErrorMessage(err));
+                setInlineError("opKanbanFeedback", getErrorMessage(err));
             }
         });
+    }
+
+    const opCardStatusSelect = document.getElementById("opCardStatusSelect");
+    if (opCardStatusSelect) {
+        opCardStatusSelect.addEventListener("change", async (event) => {
+            const statusDestino = String(event.target.value || "");
+            if (!STATUS_KANBAN_OPTIONS.includes(statusDestino)) return;
+            const ctx = state.opKanbanCtx;
+            if (!ctx?.opId) return;
+            try {
+                clearInlineError("opKanbanErro");
+                await setKanbanStatus(ctx.opId, statusDestino, ctx.processoKey);
+                await refreshKanban();
+                await openModalOpKanbanOperacional(ctx.opId);
+            } catch (err) {
+                setInlineError("opKanbanErro", getErrorMessage(err));
+            }
+        });
+    }
+
+    const btnOpCardPularEtapa = document.getElementById("btnOpCardPularEtapa");
+    if (btnOpCardPularEtapa) {
+        btnOpCardPularEtapa.addEventListener("click", () => {
+            const ctx = state.opKanbanCtx;
+            if (!ctx?.opId) return;
+            openModalOpPularEtapa(ctx.opId, ctx.processoKey);
+        });
+    }
+
+    const btnConfirmarPuloEtapa = document.getElementById("btnConfirmarPuloEtapa");
+    if (btnConfirmarPuloEtapa) {
+        btnConfirmarPuloEtapa.addEventListener("click", confirmPularEtapaModal);
     }
 
     const btnConfirmarCancelamento = document.getElementById("btnConfirmarCancelamentoOp");
@@ -392,7 +440,7 @@ function renderProdutosDisponiveisOp() {
     }
     container.innerHTML = produtos.map((produto) => {
         const jaSelecionado = state.opProdutosSelecionados.some((item) => Number(item.produto_id) === Number(produto.id));
-        const img = produto.imagem_path || produto.imagem_url || produto.imagem?.preview || "";
+        const img = resolveProdutoImagemFonte(produto);
         const imgHtml = img ? `<img src="${escapeHtml(resolveMediaUrl(img))}" alt="" loading="lazy">` : `<div class="op-produto-card-sem-img">SEM IMAGEM</div>`;
         const ataInfo = ataKey === "especial"
             ? `<div class="op-produto-card-ata">${escapeHtml(produto.arp || produto.ata_key || "-")} | ${escapeHtml(produto.empresa || "-")}</div>`
@@ -494,7 +542,7 @@ function addProdutoSelecionadoGuiado(produtoId, quantidade) {
             nome_oficial: produto.nome_oficial || "",
             ata_key: produto.ata_key || "",
             ata_label: produto.arp || produto.ata_key || "",
-            imagem_src: produto.imagem_path || produto.imagem_url || produto.imagem?.preview || "",
+            imagem_src: resolveProdutoImagemFonte(produto),
             quantidade: qtd
         });
     }
@@ -518,6 +566,35 @@ function resolveMediaUrl(path) {
     const clean = raw.replace(/^\/+/, "");
     if (clean.startsWith("media/")) return `${API_ORIGIN}/${clean}`;
     return clean;
+}
+
+function resolveProdutoImagemFonte(item) {
+    if (!item || typeof item !== "object") return "";
+    const imagemObj = item.imagem;
+    const imagemFromObj = imagemObj && typeof imagemObj === "object"
+        ? (imagemObj.preview || imagemObj.url || imagemObj.path || "")
+        : "";
+    const imagemRaw = item.imagem_path
+        || item.produto_imagem_path
+        || item.imagem_url
+        || imagemFromObj
+        || (typeof imagemObj === "string" ? imagemObj : "")
+        || "";
+    return String(imagemRaw || "").trim();
+}
+
+function clearInlineError(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = "";
+    el.classList.add("hidden");
+}
+
+function setInlineError(id, message) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = message || "Falha ao processar a operação.";
+    el.classList.remove("hidden");
 }
 
 function setSelectOptions(select, defaultLabel, values) {
@@ -627,28 +704,6 @@ function renderCard(card) {
             <div class="op-card-entrega">Entrega: ${escapeHtml(entrega)}</div>
             ${prazo}
             <span class="op-card-status-pill ${statusClass}">${escapeHtml(statusLabel)}</span>
-
-            <div class="op-card-status-actions">
-                <button class="btn-row-action" type="button" data-action="status-nao-iniciado" data-op-id="${card.id}">Não Iniciado</button>
-                <button class="btn-row-action" type="button" data-action="status-em-andamento" data-op-id="${card.id}">Em Andamento</button>
-                <button class="btn-row-action" type="button" data-action="menu-concluir" data-op-id="${card.id}">Concluído</button>
-                <button class="btn-row-action" type="button" data-action="mover-proximo" data-op-id="${card.id}">Mover Próximo</button>
-                <button class="btn-row-action" type="button" data-action="pular-processo" data-op-id="${card.id}">Pular</button>
-            </div>
-
-            <div class="op-kanban-concluir-menu hidden">
-                <button class="btn-row-action" type="button" data-action="concluir-manter" data-op-id="${card.id}">Manter aqui</button>
-                <button class="btn-row-action" type="button" data-action="concluir-proximo" data-op-id="${card.id}">Concluir e mover</button>
-            </div>
-
-            <div class="op-card-links">
-                <button class="btn-row-action" type="button" data-action="abrir" data-op-id="${card.id}">Abrir</button>
-                <button class="btn-row-action" type="button" data-action="editar" data-op-id="${card.id}">Editar</button>
-                <button class="btn-row-action" type="button" data-action="produtos" data-op-id="${card.id}">Produtos</button>
-                <button class="btn-row-action" type="button" data-action="bom" data-op-id="${card.id}">BOM</button>
-                <button class="btn-row-action" type="button" data-action="processos" data-op-id="${card.id}">Processos</button>
-                <button class="btn-row-action" type="button" data-action="historico" data-op-id="${card.id}">Histórico</button>
-            </div>
         </article>
     `;
 }
@@ -686,19 +741,6 @@ async function handleOpAction(action, opId) {
         await openModalOpHistorico(opId);
     } else if (action === "cancelar-op") {
         await cancelarOp(opId);
-    } else if (action === "status-nao-iniciado") {
-        await setKanbanStatus(opId, "NAO_INICIADO");
-    } else if (action === "status-em-andamento") {
-        await setKanbanStatus(opId, "EM_ANDAMENTO");
-    } else if (action === "status-concluido" || action === "concluir-manter") {
-        await setKanbanStatus(opId, "CONCLUIDO");
-    } else if (action === "concluir-proximo") {
-        await setKanbanStatus(opId, "CONCLUIDO");
-        await moverKanbanProximo(opId);
-    } else if (action === "mover-proximo") {
-        await moverKanbanProximo(opId);
-    } else if (action === "pular-processo") {
-        await promptPularProcesso(opId);
     }
 }
 
@@ -710,6 +752,7 @@ function openModalOpAcoesCard(cardElement) {
     const titulo = document.getElementById("opAcoesTitulo");
     const resumo = document.getElementById("opAcoesResumo");
     const body = document.getElementById("opAcoesCardBody");
+    clearInlineError("opAcoesErro");
     if (titulo) titulo.textContent = `OP ${card.numero_op || opId}`;
     if (resumo) resumo.textContent = `${card.cliente || "-"} | ${card.obra || "-"} | Entrega: ${card.data_entrega_valor || "NÃO DEFINIDO"}`;
     if (body) {
@@ -730,17 +773,6 @@ function openModalOpAcoesCard(cardElement) {
                     <button class="btn-row-action" type="button" data-action="bom" data-op-id="${opId}">BOM</button>
                     <button class="btn-row-action" type="button" data-action="processos" data-op-id="${opId}">Processos</button>
                     <button class="btn-row-action" type="button" data-action="historico" data-op-id="${opId}">Histórico</button>
-                </div>
-            </div>
-            <div class="op-acoes-grupo">
-                <h4>Movimentação do Kanban</h4>
-                <div class="op-acoes-grid">
-                    <button class="btn-row-action" type="button" data-action="status-nao-iniciado" data-op-id="${opId}">Não Iniciado</button>
-                    <button class="btn-row-action" type="button" data-action="status-em-andamento" data-op-id="${opId}">Em Andamento</button>
-                    <button class="btn-row-action" type="button" data-action="status-concluido" data-op-id="${opId}">Concluído</button>
-                    <button class="btn-row-action" type="button" data-action="mover-proximo" data-op-id="${opId}">Mover Próximo</button>
-                    <button class="btn-row-action" type="button" data-action="pular-processo" data-op-id="${opId}">Pular Etapa</button>
-                    <button class="btn-row-action" type="button" data-action="concluir-proximo" data-op-id="${opId}">Concluir e Mover</button>
                 </div>
             </div>
             <div class="op-acoes-danger-zone">
@@ -771,35 +803,135 @@ function resolverConfirmacaoCancelamento(confirmado) {
     if (typeof resolver === "function") resolver(Boolean(confirmado));
 }
 
-async function setKanbanStatus(opId, statusDestino) {
-    await apiPost(`${API_OP}/${opId}/kanban/status`, { status_destino: statusDestino });
-    await refreshKanban();
+function getProcessoNomeByKey(processoKey) {
+    const raw = String(processoKey || "").trim().toLowerCase();
+    const found = PROCESSOS_OP_OPTIONS.find((item) => item.key === raw);
+    return found?.nome || raw || "-";
 }
 
-async function moverKanbanProximo(opId) {
-    await apiPost(`${API_OP}/${opId}/kanban/mover-proximo`, { status_destino: "NAO_INICIADO" });
-    await refreshKanban();
+function getKanbanStatusFromCard(card) {
+    const value = String(card?._status_key || card?.status_processo_macro || "").trim().toUpperCase();
+    return STATUS_KANBAN_OPTIONS.includes(value) ? value : "NAO_INICIADO";
+}
+
+function getKanbanStatusLabel(statusKey) {
+    if (statusKey === "EM_ANDAMENTO") return "Em Andamento";
+    if (statusKey === "CONCLUIDO") return "Concluído";
+    return "Não Iniciado";
+}
+
+async function renderOpKanbanProdutos(opId) {
+    const container = document.getElementById("opKanbanProdutosLista");
+    if (!container) return;
+    const detail = await apiGet(`${API_OP}/${opId}`);
+    const rows = Array.isArray(detail?.produtos) ? detail.produtos : [];
+    if (!rows.length) {
+        container.innerHTML = `<div class="op-kanban-empty">Nenhum produto vinculado nesta OP.</div>`;
+        return;
+    }
+    container.innerHTML = rows.map((item) => {
+        const imgSource = resolveProdutoImagemFonte(item);
+        const imgHtml = imgSource
+            ? `<img src="${escapeHtml(resolveMediaUrl(imgSource))}" alt="" loading="lazy">`
+            : `<span class="op-sem-img-mini">SEM IMAGEM</span>`;
+        return `
+            <div class="op-kanban-produto-item">
+                ${imgHtml}
+                <div>
+                    <strong>${escapeHtml(item.nome_produto || item.produto_key || "-")}</strong>
+                    <div class="op-kanban-produto-meta">
+                        ITEM: ${escapeHtml(item.item_ata || "-")} | ATA: ${escapeHtml(item.ata_nome || item.ata_key || "-")} | QTD: ${escapeHtml(item.quantidade || 0)}
+                    </div>
+                </div>
+            </div>`;
+    }).join("");
+}
+
+async function openModalOpKanbanOperacional(opId) {
+    const card = getAllKanbanCards().find((item) => Number(item.id || 0) === Number(opId));
+    if (!card) throw new Error("OP não encontrada no Kanban.");
+    const processoKey = String(card._processo_key || card.processo_macro_key || "corte").toLowerCase();
+    state.opKanbanCtx = { opId: Number(opId), processoKey };
+
+    const titulo = document.getElementById("opKanbanTitulo");
+    const resumo = document.getElementById("opKanbanResumo");
+    const processoAtual = document.getElementById("opKanbanProcessoAtual");
+    const statusSelect = document.getElementById("opCardStatusSelect");
+    if (titulo) titulo.textContent = `Operação da OP ${card.numero_op || opId}`;
+    if (resumo) resumo.textContent = `${card.cliente || "-"} | ${card.obra || "-"} | Entrega: ${card.data_entrega_valor || "NÃO DEFINIDO"}`;
+    if (processoAtual) processoAtual.textContent = `Processo atual: ${getProcessoNomeByKey(processoKey)}`;
+    if (statusSelect) statusSelect.value = getKanbanStatusFromCard(card);
+    clearInlineError("opKanbanErro");
+    await renderOpKanbanProdutos(opId);
+    openModal("modalOpKanbanOperacional");
+}
+
+function openModalOpPularEtapa(opId, processoOrigem) {
+    const processoAtual = String(processoOrigem || "").trim().toLowerCase();
+    state.opPularCtx = { opId: Number(opId), processoOrigem: processoAtual };
+    const resumo = document.getElementById("opPularResumo");
+    const inputAtual = document.getElementById("opPularProcessoAtual");
+    const selectDestino = document.getElementById("opPularProcessoDestino");
+    if (resumo) resumo.textContent = `Selecione a próxima etapa da OP ${opId}.`;
+    if (inputAtual) inputAtual.value = getProcessoNomeByKey(processoAtual);
+    if (selectDestino) {
+        selectDestino.innerHTML = "";
+        PROCESSOS_OP_OPTIONS
+            .filter((item) => item.key !== processoAtual)
+            .forEach((item) => {
+                const opt = document.createElement("option");
+                opt.value = item.key;
+                opt.textContent = item.nome;
+                selectDestino.appendChild(opt);
+            });
+    }
+    clearInlineError("opPularErro");
+    openModal("modalOpPularProcesso");
+}
+
+async function confirmPularEtapaModal() {
+    const ctx = state.opPularCtx;
+    if (!ctx?.opId || !ctx?.processoOrigem) return;
+    const selectDestino = document.getElementById("opPularProcessoDestino");
+    const processoDestino = String(selectDestino?.value || "").trim().toLowerCase();
+    if (!processoDestino) {
+        setInlineError("opPularErro", "Selecione a próxima etapa.");
+        return;
+    }
+    if (processoDestino === ctx.processoOrigem) {
+        setInlineError("opPularErro", "A próxima etapa deve ser diferente da etapa atual.");
+        return;
+    }
+    try {
+        clearInlineError("opPularErro");
+        await apiPost(`${API_OP}/${ctx.opId}/kanban/pular`, {
+            processo_origem: ctx.processoOrigem,
+            processo_destino: processoDestino,
+            status_destino: "NAO_INICIADO",
+        });
+        closeModal("modalOpPularProcesso");
+        await refreshKanban();
+        await openModalOpKanbanOperacional(ctx.opId);
+    } catch (err) {
+        setInlineError("opPularErro", getErrorMessage(err));
+    }
+}
+
+async function setKanbanStatus(opId, statusDestino, processoKey = null) {
+    const payload = { status_destino: statusDestino };
+    if (processoKey) payload.processo_key = String(processoKey).toLowerCase();
+    await apiPost(`${API_OP}/${opId}/kanban/status`, payload);
 }
 
 async function cancelarOp(opId) {
     const confirmado = await confirmarCancelamentoOp(opId);
     if (!confirmado) return;
-    await apiDelete(`${API_OP}/${opId}`);
-    await refreshKanban();
-}
-
-async function promptPularProcesso(opId) {
-    const processoDestino = window.prompt(
-        "Informe a key do processo destino:\n" +
-        "corte | dobra | montagem_solda | solda | acabamento | pintura | sublimacao | montagem | teste | expedicao",
-        "pintura"
-    );
-    if (!processoDestino) return;
-    await apiPost(`${API_OP}/${opId}/kanban/pular`, {
-        processo_destino: String(processoDestino).trim().toLowerCase(),
-        status_destino: "NAO_INICIADO"
-    });
-    await refreshKanban();
+    try {
+        await apiDelete(`${API_OP}/${opId}`);
+        await refreshKanban();
+    } catch (err) {
+        setInlineError("opKanbanFeedback", getErrorMessage(err));
+    }
 }
 
 function updateContador(exibidos, total) {

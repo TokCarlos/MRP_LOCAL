@@ -17,6 +17,7 @@
     </div>
 
     <div id="opContador" class="page-contador">Exibindo 0 de 0 ordens no Kanban</div>
+    <div id="opKanbanFeedback" class="op-inline-feedback hidden" role="status" aria-live="polite"></div>
 
     <div id="opKanbanBoard" class="op-kanban-board">
         <div class="op-kanban-empty">Carregando Kanban...</div>
@@ -114,7 +115,64 @@
             </div>
             <button class="op-modal-x" data-close-modal="modalOpAcoesCard" type="button" aria-label="Fechar">×</button>
         </div>
+        <div id="opAcoesErro" class="op-inline-feedback hidden" role="status" aria-live="polite"></div>
         <div id="opAcoesCardBody" class="op-acoes-card-body"></div>
+    </div>
+</div>
+
+<div id="modalOpKanbanOperacional" class="modal hidden" aria-hidden="true">
+    <div class="modal-content modal-op-acoes-card">
+        <div class="op-modal-title-row">
+            <div>
+                <h3 id="opKanbanTitulo">Operação da OP</h3>
+                <p id="opKanbanResumo" class="op-modal-subtitle"></p>
+            </div>
+            <button class="op-modal-x" data-close-modal="modalOpKanbanOperacional" type="button" aria-label="Fechar">×</button>
+        </div>
+        <div id="opKanbanErro" class="op-inline-feedback hidden" role="status" aria-live="polite"></div>
+        <div class="op-acoes-grupo">
+            <h4>Status da etapa atual</h4>
+            <div class="op-kanban-oper-grid">
+                <div>
+                    <label for="opCardStatusSelect">Status</label>
+                    <select id="opCardStatusSelect">
+                        <option value="NAO_INICIADO">Não Iniciado</option>
+                        <option value="EM_ANDAMENTO">Em Andamento</option>
+                        <option value="CONCLUIDO">Concluído</option>
+                    </select>
+                </div>
+                <div class="op-kanban-oper-actions">
+                    <button id="btnOpCardPularEtapa" class="btn-row-action" type="button">Pular etapa</button>
+                </div>
+            </div>
+            <p id="opKanbanProcessoAtual" class="op-modal-subtitle"></p>
+        </div>
+        <div class="op-acoes-grupo">
+            <h4>Itens / produtos da OP</h4>
+            <div id="opKanbanProdutosLista" class="op-kanban-produtos-lista"></div>
+        </div>
+    </div>
+</div>
+
+<div id="modalOpPularProcesso" class="modal hidden" aria-hidden="true">
+    <div class="modal-content modal-op-confirmacao">
+        <h3>Pular etapa da OP</h3>
+        <p id="opPularResumo">Selecione a próxima etapa para os itens da OP.</p>
+        <div class="op-grid-2 op-pular-grid">
+            <div>
+                <label for="opPularProcessoAtual">Processo atual</label>
+                <input id="opPularProcessoAtual" type="text" readonly>
+            </div>
+            <div>
+                <label for="opPularProcessoDestino">Próxima etapa</label>
+                <select id="opPularProcessoDestino"></select>
+            </div>
+        </div>
+        <div id="opPularErro" class="op-inline-feedback hidden" role="status" aria-live="polite"></div>
+        <div class="modal-actions">
+            <button id="btnVoltarPularEtapa" class="btn-row-action" type="button" data-close-modal="modalOpPularProcesso">Voltar</button>
+            <button id="btnConfirmarPuloEtapa" class="btn-row-action" type="button">Confirmar pulo de etapa</button>
+        </div>
     </div>
 </div>
 
